@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth antialiased">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bezel Studio - App Store Screenshot Maker</title>
+  <link rel="icon" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      if (event.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
+  </script>
+</head>
+
+<body class="font-sans bg-zinc-50 dark:bg-[#0A0A0A] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+
+  <!-- Ambient background glow -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]"></div>
+  </div>
+
+  <div class="relative z-10 w-full flex justify-center pt-8 reveal">
+    <!-- Floating Capsule Navbar -->
+    <header class="flex items-center justify-between px-6 py-3 bg-black/5 dark:bg-white/5 backdrop-blur-2xl border border-black/5 dark:border-white/10 rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
+      <a href="/" class="flex items-center gap-3">
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/logo.png" alt="Logo">
+        <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
+        <a href="#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
+        <a href="#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hidden sm:flex items-center justify-center px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
+        Get the App
+      </a>
+    </header>
+  </div>
+
+  <main class="relative z-10">
+
+    <!-- HERO SECTION -->
+    <section class="pt-32 pb-24 px-6 md:px-12 flex flex-col items-center text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider mb-8 reveal hover:border-blue-500/40 transition-colors">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 dark:bg-blue-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600 dark:bg-blue-500"></span>
+        </span>
+        Special Offer: Use code BEZELSTUDIO50 for 50% Off
+      </div>
+
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-zinc-900 dark:text-white max-w-5xl leading-[1.1] mb-8 reveal [text-wrap:balance]">
+        Pixels that convert. <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">Made effortless.</span>
+      </h1>
+      
+      <p class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mb-12 font-medium leading-relaxed reveal">
+        The ultimate studio on your iPhone and iPad. Build breathtaking App Store screenshots, device mockups, and marketing assets in seconds.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 mb-24 reveal">
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="flex items-center justify-center gap-2 px-8 py-4 bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black rounded-full font-bold text-lg transition-transform hover:scale-105 active:scale-95">
+          <img src="/appstore-logo.svg" alt="App Store" class="w-5 h-5 dark:invert filter">
+          Download for iOS
+        </a>
+      </div>
+
+      <!-- Hero Video / App Interface Mockup (Transparent styling) -->
+      <div class="w-full max-w-6xl mx-auto relative reveal flex justify-center">
+        <!-- Optional glow behind the transparent video -->
+        <div class="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-purple-500/10 blur-3xl transform rounded-[40px] scale-95 opacity-50 pointer-events-none"></div>
+        
+        <div class="relative w-full max-w-5xl flex justify-center items-center">
+          <video class="w-full object-contain md:h-[600px]" autoplay muted loop playsinline>
+            <source src="/hero.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENTO BOX FEATURES (Light/Dark Mode) -->
+    <section id="features" class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+      <div class="mb-16 md:mb-24 text-center md:text-left reveal">
+        <h2 class="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white tracking-tight mb-4">Everything you need to ship.</h2>
+        <p class="text-xl text-zinc-600 dark:text-zinc-400">A unified workspace for device framing, typography, and styling.</p>
+      </div>
+
+      <!-- Grid layout -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto">
+        
+        <!-- Bento item: Device frames (large) -->
+        <a href="/features/device-frames.html" class="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer flex flex-col h-full min-h-[400px]">
+          <div class="p-8 md:p-10 sticky top-0 z-10 flex-shrink-0">
+            <h3 class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Photorealistic Frames</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-lg max-w-md">Drop screenshots or video recordings into exact iPhone, iPad, Mac, and Apple Watch bezels.</p>
+          </div>
+          <div class="mt-auto relative w-full flex-grow flex items-end justify-center pt-10 px-8">
+            <img src="/f1.PNG" alt="Frames" class="w-full max-w-[80%] object-contain transform transition-transform duration-700 group-hover:translate-y-[-2%]">
+          </div>
+        </a>
+
+        <!-- Bento item: Typography -->
+        <a href="/features/typography.html" class="group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
+          <div class="p-8 z-10">
+            <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Pro Typography</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-base">Rich text formatting, gradient fills, and pinpoint shadows.</p>
+          </div>
+          <div class="absolute -bottom-10 -right-10 w-2/3 rotate-12 opacity-90 group-hover:rotate-6 transition-transform duration-700 group-hover:scale-105">
+            <img src="/f3.PNG" alt="Typography" class="w-full object-contain">
+          </div>
+        </a>
+
+        <!-- Bento item: Canvas Styling -->
+        <a href="/features/canvas-styling.html" class="group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
+          <div class="p-8 z-10">
+            <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Dynamic Canvas</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-base">Control backdrops, intense lighting effects, and patterns.</p>
+          </div>
+          <div class="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[85%] transition-transform duration-700 group-hover:-translate-y-4">
+            <img src="/f2.PNG" alt="Canvas" class="w-full object-contain">
+          </div>
+        </a>
+
+        <!-- Bento item: Translation (wide) -->
+        <a href="/features/translation.html" class="md:col-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col md:flex-row items-center">
+          <div class="p-8 md:p-10 w-full md:w-1/2 z-10">
+            <h3 class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">Global Translation</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-lg">On-device, instant text translation across all your screenshot canvases. Ship globally with a single tap.</p>
+          </div>
+          <div class="w-full md:w-1/2 relative h-[250px] md:h-full flex items-center justify-end md:pr-8 overflow-visible">
+            <img src="/f6.PNG" alt="Translation" class="absolute -right-4 md:right-[-10%] w-[110%] max-w-none object-contain transition-transform duration-700 group-hover:-translate-x-2">
+          </div>
+        </a>
+
+        <!-- Bento item: Stickers -->
+        <a href="/features/images-stickers.html" class="group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
+          <div class="p-8 z-10">
+            <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Stickers & Cutouts</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-base">Instantly remove backgrounds and build pop-out stickers.</p>
+          </div>
+          <div class="mt-auto p-6 flex justify-center">
+             <img src="/f4.PNG" alt="Stickers" class="w-3/4 object-contain rotate-[-4deg] group-hover:rotate-0 transition-transform duration-500">
+          </div>
+        </a>
+
+        <!-- Bento item: Draw & Doodle -->
+        <a href="/features/draw-doodle.html" class="md:col-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col md:flex-row items-center">
+          <div class="p-8 md:p-10 w-full md:w-1/2 z-10">
+            <h3 class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-pink-500 dark:group-hover:text-pink-400 transition-colors">Draw & Annotate</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-lg">Use Apple PencilKit to draw directly on your iOS mockups. Add handcrafted annotations organically.</p>
+          </div>
+          <div class="w-full md:w-1/2 relative h-[250px] md:h-full flex items-center justify-end overflow-visible">
+            <img src="/f5.PNG" alt="Draw and Doodle" class="absolute right-[-10%] bottom-[-20%] w-[120%] max-w-none object-contain transition-transform duration-700 group-hover:-translate-y-4">
+          </div>
+        </a>
+
+        <!-- Bento item: Layers & Precision -->
+        <a href="/features/layers-precision.html" class="md:col-span-1 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
+          <div class="p-8 z-10">
+            <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors">Layer Precision</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-base">True drag-and-drop hierarchy and snap-to guides.</p>
+          </div>
+          <div class="mt-auto relative w-full flex items-end justify-center pt-8 overflow-hidden">
+            <img src="/f7.PNG" alt="Layers" class="w-[120%] max-w-none object-contain translate-y-8 transition-transform duration-700 group-hover:translate-y-4">
+          </div>
+        </a>
+
+        <!-- Bento item: Projects & Presets -->
+        <a href="/features/projects-presets.html" class="md:col-span-1 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
+          <div class="p-8 z-10">
+            <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">Templates</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-base">Save styles, multi-canvas projects, and custom presets.</p>
+          </div>
+          <div class="mt-auto relative w-full flex items-end justify-center pt-8 overflow-hidden">
+            <img src="/f6.PNG" alt="Projects" class="w-[90%] object-contain translate-y-12 transition-transform duration-700 group-hover:translate-y-6 opacity-80">
+          </div>
+        </a>
+
+        <!-- Bento item: Export & Share -->
+        <a href="/features/export-share.html" class="md:col-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col md:flex-row items-center">
+          <div class="p-8 md:p-10 w-full md:w-1/2 z-10">
+            <h3 class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors">Instant Export</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-lg">Generate ultra-high fidelity images and video assets in massive batches natively on device.</p>
+          </div>
+          <div class="w-full md:w-1/2 relative h-[250px] md:h-full flex items-center justify-end overflow-visible pr-8">
+            <img src="/f1.PNG" alt="Export" class="w-full object-contain scale-125 origin-right transition-transform duration-700 group-hover:scale-110">
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- PREMIUM STICKY SHOWCASE CAROUSEL -->
+    <section id="showcase" class="relative">
+      <!-- Spacer to provide scroll depth -->
+      <div id="showcase-height" class="h-[500vh]">
+        <!-- Sticky Wrapper: Locks the content in the viewport -->
+        <div class="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+          
+          <div class="max-w-7xl mx-auto w-full px-6 md:px-12 mb-12 reveal text-center md:text-left">
+            <h2 class="text-4xl md:text-6xl font-black text-zinc-900 dark:text-white tracking-tight mb-4">Designed for details.</h2>
+            <p class="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl">A closer look at the advanced capabilities of Bezel Studio.</p>
+            <p class="text-3xl md:text-4xl font-handwritten text-indigo-600 dark:text-indigo-400 mt-6 -rotate-2">a powerful mockup studio in your pocket</p>
+          </div>
+
+          <!-- Carousel Container -->
+          <div class="relative w-full">
+            <div id="showcase-carousel" class="flex gap-6 px-6 md:px-[max(1.5rem,calc((100vw-80rem)/2))] overflow-x-hidden pb-8 cursor-default">
+              
+              <!-- 1. iCloud Syncing -->
+              <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal">
+                <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase/icloud-bg.png" alt="iCloud Sync" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">iCloud continuity</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Sync projects seamlessly across iPhone and iPad.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 2. Dynamic Backgrounds -->
+              <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal" style="animation-delay: 100ms;">
+                <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase/backgrounds-bg.png" alt="Backgrounds" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Custom backgrounds</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Patterns, gradients, or AI-powered emoji backdrops.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 3. Bezel AI -->
+              <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal" style="animation-delay: 200ms;">
+                <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase/bezelAI-bg.png" alt="Bezel AI" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Bezel AI</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Conversational design. Tell the AI what you want.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 4. Canvas Management -->
+              <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal" style="animation-delay: 300ms;">
+                <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase/canvasMangement-bg.png" alt="Canvas Management" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Project workspace</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Manage multiple frames in a single project grid.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 5. Image Playground -->
+              <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal" style="animation-delay: 400ms;">
+                <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase/imagePlayground-bg.png" alt="Image Playground" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Apple Intelligence</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Generate custom stickers with Image Playground.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 6. Layer Hierarchy -->
+              <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal" style="animation-delay: 500ms;">
+                <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase/layers-bg.png" alt="Layers" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Precision layers</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Full control over every element in your stack.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 7. Pro Layouts -->
+              <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal" style="animation-delay: 600ms;">
+                <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase/prolayput-bg.png" alt="Pro Layouts" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Ecosystem frames</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    iPhone, iPad, and Apple Watch in one shot.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 8. Canvas Motion -->
+              <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal" style="animation-delay: 700ms;">
+                <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase/CanvasMotion-bg.png" alt="Canvas Motion" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Motion & Keyframes</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Add bounce and ease for professional video.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 9. Typography -->
+              <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal" style="animation-delay: 800ms;">
+                <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase/typography-bg.png" alt="Typography" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Elite Typography</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Choose from a curated list of premium fonts and styles.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 10. Translate -->
+              <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal" style="animation-delay: 900ms;">
+                <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase/translate-bg.png" alt="Translate" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Global Translation</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Instantly translate your screenshots into multiple languages.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STICKY IPAD SHOWCASE (Reverse Scroll) -->
+      <div id="showcase-ipad-height" class="h-[500vh] mt-32">
+        <div class="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+          
+          <div class="max-w-7xl mx-auto w-full px-6 md:px-12 mb-12 reveal text-center md:text-right">
+            <h2 class="text-4xl md:text-6xl font-black text-zinc-900 dark:text-white tracking-tight mb-4">Pixel-perfect precision.</h2>
+            <p class="text-lg text-zinc-600 dark:text-zinc-400 ml-auto max-w-2xl">Maximum canvas for your pro workflow on iPad.</p>
+            <p class="text-3xl md:text-4xl font-handwritten text-purple-600 dark:text-purple-400 mt-6 rotate-1">make you design pixel perfect on ipad</p>
+          </div>
+
+          <!-- Carousel Container -->
+          <div class="relative w-full">
+            <div id="showcase-ipad-carousel" class="flex gap-6 px-6 md:px-[max(1.5rem,calc((100vw-80rem)/2))] overflow-x-hidden pb-8 cursor-default">
+              
+              <!-- 1. iCloud Syncing -->
+              <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
+                <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase-ipad/icloud-ipad.png" alt="iPad iCloud Sync" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1 text-right">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Desktop-class workspace</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Sync projects seamlessly across iPhone and iPad.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 2. Dynamic Backgrounds -->
+              <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
+                <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase-ipad/backgrounds-ipad.png" alt="iPad Backgrounds" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1 text-right">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Infinite canvas backdrops</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Patterns, gradients, or AI-powered emoji backdrops.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 3. Bezel AI -->
+              <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
+                <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase-ipad/bezelAI-ipad.png" alt="iPad Bezel AI" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1 text-right">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Conversational AI</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Tell the AI what you want to design or animate.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 4. Image Playground -->
+              <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
+                <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase-ipad/imagePlayground-ipad.png" alt="iPad Image Playground" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1 text-right">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Apple Intelligence</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Generate custom stickers with Image Playground.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 5. Layer Hierarchy -->
+              <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
+                <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase-ipad/layers-ipad.png" alt="iPad Layers" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1 text-right">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Pro layer stack</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Full control over every element in your pro stack.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 6. Pro Layouts -->
+              <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
+                <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase-ipad/prolayput-ipad.png" alt="iPad Pro Layouts" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1 text-right">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Multi-device ecosystem</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    iPhone, iPad, and Apple Watch in one pro layout.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 7. Typography -->
+              <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
+                <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase-ipad/typography-ipad.png" alt="iPad Typography" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1 text-right">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Premium typography</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Choose from a curated list of elite fonts and styles.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 8. Translate -->
+              <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
+                <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase-ipad/translate-ipad.png" alt="iPad Translate" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1 text-right">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Global localization</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Instantly translate your screenshots into dozens of languages.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 9. Canvas Motion -->
+              <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
+                <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl border border-zinc-200/50 dark:border-white/5">
+                  <img src="/showcase-ipad/CanvasMotion-ipad.png" alt="iPad Canvas Motion" class="w-full h-auto object-contain">
+                </div>
+                <div class="px-1 text-right">
+                  <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Motion & Keyframes</h3>
+                  <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+                    Add bounce and ease for high-end video mockups.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKFLOW (Horizontal timeline approach) -->
+    <section id="workflow" class="py-32 relative overflow-hidden border-t border-zinc-200 dark:border-white/5">
+      <div class="max-w-7xl mx-auto px-6 md:px-12 reveal text-center md:text-left">
+        <h2 class="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white tracking-tight mb-16">Design. Refine. Ship.</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative">
+          <!-- Connector line -->
+          <div class="hidden md:block absolute top-[28px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-blue-500/0 via-blue-500/20 to-blue-500/0 z-0"></div>
+
+          <div class="relative z-10 flex flex-col items-center md:items-start text-center md:text-left">
+            <div class="w-14 h-14 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-xl mb-6 dark:shadow-[0_0_30px_rgba(59,130,246,0.2)]">1</div>
+            <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-3">Frame it up</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-lg">Select exactly which Apple hardware matches your app and inject your screenshot instantly.</p>
+          </div>
+
+          <div class="relative z-10 flex flex-col items-center md:items-start text-center md:text-left">
+            <div class="w-14 h-14 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold text-xl mb-6 dark:shadow-[0_0_30px_rgba(99,102,241,0.2)]">2</div>
+            <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-3">Compose the scene</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-lg">Adjust the lighting, slap on precision shadows, layer typography, and draw annotations.</p>
+          </div>
+
+          <div class="relative z-10 flex flex-col items-center md:items-start text-center md:text-left">
+            <div class="w-14 h-14 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 font-bold text-xl mb-6 dark:shadow-[0_0_30px_rgba(168,85,247,0.2)]">3</div>
+            <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-3">Export to App Store</h3>
+            <p class="text-zinc-600 dark:text-zinc-400 text-lg">Generate ultra-high resolution batches simultaneously. Ready to upload to App Store Connect.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION (Sleek minimalist accordion) -->
+    <section id="faq" class="py-32 px-6 md:px-12 border-t border-zinc-200 dark:border-white/5 bg-white dark:bg-zinc-950">
+      <div class="max-w-4xl mx-auto reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-12 text-center">Frequently asked questions</h2>
+        
+        <div class="space-y-4">
+          <details class="group border-b border-zinc-200 dark:border-white/10 pb-4 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex items-center justify-between cursor-pointer py-4 font-medium text-xl text-zinc-800 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors">
+              What is Bezel Studio?
+              <span class="transition-transform duration-300 group-open:rotate-180 text-zinc-400 dark:text-zinc-500">
+                <svg fill="none" height="24" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </summary>
+            <p class="pt-2 pb-6 text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed">
+              An elite App Store screenshot maker and iPhone mockup generator for creating polished, high-conversion Apple device visuals without relying on sluggish electron apps.
+            </p>
+          </details>
+
+          <details class="group border-b border-zinc-200 dark:border-white/10 pb-4 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex items-center justify-between cursor-pointer py-4 font-medium text-xl text-zinc-800 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors">
+              Can I make iPad, Mac, and Apple Watch mockups too?
+              <span class="transition-transform duration-300 group-open:rotate-180 text-zinc-400 dark:text-zinc-500">
+                <svg fill="none" height="24" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </summary>
+            <p class="pt-2 pb-6 text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed">
+              Absolutely. Bezel Studio ships with comprehensive device frame libraries encompassing every tier of the Apple hardware ecosystem.
+            </p>
+          </details>
+
+          <details class="group border-b border-zinc-200 dark:border-white/10 pb-4 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex items-center justify-between cursor-pointer py-4 font-medium text-xl text-zinc-800 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors">
+              Does this support motion and video?
+              <span class="transition-transform duration-300 group-open:rotate-180 text-zinc-400 dark:text-zinc-500">
+                <svg fill="none" height="24" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </summary>
+            <p class="pt-2 pb-6 text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed">
+              Yes. You can drop screen recordings directly into iPad and iPhone frames and export them as pristine `.mp4` files for video App Store Previews.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUGE CTA FOOTER -->
+    <section class="py-32 px-6 md:px-12 relative overflow-hidden border-t border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-[#0A0A0A]">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_center,rgba(59,130,246,0.1),transparent_50%)] pointer-events-none"></div>
+      <div class="max-w-5xl mx-auto text-center reveal relative z-10">
+        <h2 class="text-5xl md:text-7xl font-extrabold text-zinc-900 dark:text-white tracking-tighter mb-8 leading-tight">
+          Ready to reframe <br/> your app?
+        </h2>
+        <p class="text-xl text-zinc-600 dark:text-zinc-400 mb-12 max-w-2xl mx-auto">
+          Stop struggling with web-based layout generators. Get the native powerhouse built specifically for App Store creatives.
+        </p>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black rounded-full font-bold text-xl transition-all shadow-lg dark:shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95">
+          <img src="/appstore-logo.svg" alt="App Store" class="w-6 h-6 dark:invert filter">
+          Download Bezel Studio
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-zinc-200 dark:border-white/10 pt-16 pb-12 px-6 md:px-12 bg-white dark:bg-black">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex items-center gap-4">
+        <img class="w-8 h-8 rounded-lg" src="/logo.png" alt="Bezel Studio">
+        <span class="text-zinc-900 dark:text-white font-semibold flex items-center gap-2">
+          Bezel Studio
+          <span class="text-xs bg-black/5 dark:bg-white/10 text-zinc-600 dark:text-white/70 px-2 py-0.5 rounded uppercase tracking-wider">iOS App</span>
+        </span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hover:text-black dark:hover:text-white transition-colors">App Store</a>
+        <a href="https://parthant.com" class="hover:text-black dark:hover:text-white transition-colors">Built by @parth.ant</a>
+        <a href="/privacy.html" class="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
+        <a href="mailto:support@parthant.com" class="hover:text-black dark:hover:text-white transition-colors">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
