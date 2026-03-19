@@ -60,40 +60,132 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePromoTimer();
     setInterval(updatePromoTimer, 1000);
   
-    // 4. Unified Sticky Horizontal Scroll Logic
-    const setupStickyScroll = (containerId, spacerId, reverse = false) => {
-      const container = document.querySelector(containerId);
-      const spacer = document.querySelector(spacerId);
-      
-      if (container && spacer) {
-        const onScroll = () => {
-          const spacerRect = spacer.getBoundingClientRect();
-          
-          // Calculate progress (0 to 1) based on vertical scroll depth through the spacer
-          const start = spacerRect.top + window.scrollY;
-          const end = spacerRect.bottom + window.scrollY - window.innerHeight;
-          const current = window.scrollY;
-          
-          let progress = (current - start) / (end - start);
-          progress = Math.max(0, Math.min(1, progress));
-          
-          const maxScroll = container.scrollWidth - container.clientWidth;
-          
-          if (reverse) {
-            // Right-to-Left: Start at maxScroll, end at 0
-            container.scrollLeft = (1 - progress) * maxScroll;
-          } else {
-            // Left-to-Right: Start at 0, end at maxScroll
-            container.scrollLeft = progress * maxScroll;
-          }
-        };
-        
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onScroll);
-        onScroll();
-      }
+    // 4. Sticky horizontal showcase logic
+    const showcaseSpacer = document.querySelector('#showcase-height');
+    const showcaseConfigs = {
+      iphone: {
+        container: document.querySelector('#showcase-carousel'),
+        reverse: false,
+      },
+      ipad: {
+        container: document.querySelector('#showcase-ipad-carousel'),
+        reverse: true,
+      },
+    };
+    let activeShowcaseDevice = 'iphone';
+
+    const setShowcasePosition = (device, progress) => {
+      const config = showcaseConfigs[device];
+      if (!config?.container) return;
+
+      const maxScroll = Math.max(0, config.container.scrollWidth - config.container.clientWidth);
+      config.container.scrollLeft = config.reverse
+        ? (1 - progress) * maxScroll
+        : progress * maxScroll;
     };
 
-    setupStickyScroll('#showcase-carousel', '#showcase-height', false);
-    setupStickyScroll('#showcase-ipad-carousel', '#showcase-ipad-height', true);
+    const updateShowcaseSpacerHeight = () => {
+      if (!showcaseSpacer) return;
+
+      const activeConfig = showcaseConfigs[activeShowcaseDevice];
+      if (!activeConfig?.container) return;
+
+      const maxScroll = Math.max(0, activeConfig.container.scrollWidth - activeConfig.container.clientWidth);
+      const minimumScreens = 3.5;
+      const targetHeight = Math.max(
+        window.innerHeight * minimumScreens,
+        maxScroll + window.innerHeight
+      );
+
+      showcaseSpacer.style.height = `${Math.ceil(targetHeight)}px`;
+    };
+
+    const syncActiveShowcaseScroll = () => {
+      if (!showcaseSpacer) return;
+
+      const spacerRect = showcaseSpacer.getBoundingClientRect();
+      const start = spacerRect.top + window.scrollY;
+      const end = spacerRect.bottom + window.scrollY - window.innerHeight;
+      const current = window.scrollY;
+      const range = Math.max(1, end - start);
+      let progress = (current - start) / range;
+      progress = Math.max(0, Math.min(1, progress));
+
+      Object.keys(showcaseConfigs).forEach((device) => {
+        if (device === activeShowcaseDevice) {
+          setShowcasePosition(device, progress);
+          return;
+        }
+
+        setShowcasePosition(device, 0);
+      });
+    };
+
+    window.addEventListener('scroll', syncActiveShowcaseScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      updateShowcaseSpacerHeight();
+      syncActiveShowcaseScroll();
+    });
+
+    // 5. Device segmented toggle for the showcase gallery
+    const toggle = document.querySelector('[data-showcase-toggle]');
+    const toggleButtons = Array.from(document.querySelectorAll('[data-device-trigger]'));
+    const showcasePanels = Array.from(document.querySelectorAll('[data-showcase-panel]'));
+    const showcaseCopies = Array.from(document.querySelectorAll('[data-showcase-copy]'));
+    const getDefaultShowcaseDevice = () => (
+      window.matchMedia('(max-width: 767px)').matches ? 'iphone' : 'ipad'
+    );
+
+    const setActiveShowcase = (device) => {
+      if (!toggle) return;
+
+      activeShowcaseDevice = device;
+      toggle.dataset.activeDevice = device;
+      toggle.style.setProperty('--toggle-index', device === 'ipad' ? '1' : '0');
+
+      toggleButtons.forEach((button) => {
+        const isActive = button.dataset.deviceTrigger === device;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-selected', String(isActive));
+        button.setAttribute('tabindex', isActive ? '0' : '-1');
+      });
+
+      showcasePanels.forEach((panel) => {
+        const isActive = panel.dataset.showcasePanel === device;
+        panel.classList.toggle('is-active', isActive);
+        panel.setAttribute('aria-hidden', String(!isActive));
+      });
+
+      showcaseCopies.forEach((copy) => {
+        copy.classList.toggle('is-active', copy.dataset.showcaseCopy === device);
+      });
+
+      updateShowcaseSpacerHeight();
+      syncActiveShowcaseScroll();
+    };
+
+    if (toggle && toggleButtons.length) {
+      setActiveShowcase(getDefaultShowcaseDevice());
+
+      toggleButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setActiveShowcase(button.dataset.deviceTrigger);
+          button.focus();
+        });
+      });
+
+      toggle.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+
+        event.preventDefault();
+        const currentIndex = toggleButtons.findIndex((button) => button.classList.contains('is-active'));
+        const nextIndex = event.key === 'ArrowRight'
+          ? (currentIndex + 1) % toggleButtons.length
+          : (currentIndex - 1 + toggleButtons.length) % toggleButtons.length;
+
+        const nextButton = toggleButtons[nextIndex];
+        setActiveShowcase(nextButton.dataset.deviceTrigger);
+        nextButton.focus();
+      });
+    }
   });
