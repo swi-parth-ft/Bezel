@@ -24,6 +24,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <meta name="color-scheme" content="light dark">
   <script>
+    if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      document.documentElement.classList.add('bezel-intro-pending');
+    }
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       document.documentElement.classList.add('dark');
     }
@@ -58,8 +61,8 @@
 
   <!-- Ambient background glow -->
   <div class="fixed inset-0 pointer-events-none z-0">
-    <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]"></div>
+    <div class="ambient-orb ambient-orb--blue absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]"></div>
+    <div class="ambient-orb ambient-orb--indigo absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]"></div>
     <div class="bezel-aura bezel-aura--phone-left">
       <img src="./iPhoneWebAssests/transparentBezels/iphoneBezel.png" alt="" aria-hidden="true">
     </div>
@@ -77,9 +80,9 @@
     </div>
   </div>
 
-  <div class="relative z-10 w-full flex justify-center pt-8 reveal">
+  <div class="app-shell relative z-10 w-full flex justify-center pt-8 reveal">
     <!-- Floating Capsule Navbar -->
-    <header class="flex items-center justify-between px-6 py-3 bg-black/5 dark:bg-white/5 backdrop-blur-2xl border border-black/5 dark:border-white/10 rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
+    <header class="site-header flex items-center justify-between px-6 py-3 bg-black/5 dark:bg-white/5 backdrop-blur-2xl border border-black/5 dark:border-white/10 rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
       <a href="./" class="flex items-center gap-3">
         <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="./logo.png" alt="Logo">
         <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
@@ -89,17 +92,17 @@
         <a href="#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
         <a href="#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
       </nav>
-      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hidden sm:flex items-center justify-center px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="cta-button cta-button--nav hidden sm:flex items-center justify-center px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
         Get the App
       </a>
     </header>
   </div>
 
-  <main class="relative z-10">
+  <main class="app-shell relative z-10">
 
     <!-- HERO SECTION -->
-    <section class="pt-32 pb-24 px-6 md:px-12 flex flex-col items-center text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider mb-8 reveal hover:border-blue-500/40 transition-colors">
+    <section class="hero-section pt-32 pb-24 px-6 md:px-12 flex flex-col items-center text-center">
+      <div data-reveal-delay="40ms" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider mb-8 reveal hover:border-blue-500/40 transition-colors">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 dark:bg-blue-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600 dark:bg-blue-500"></span>
@@ -107,26 +110,35 @@
         Native App Store Creative Studio
       </div>
 
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-zinc-900 dark:text-white max-w-5xl leading-[1.1] mb-8 reveal [text-wrap:balance]">
+      <h1 data-reveal-delay="110ms" class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-zinc-900 dark:text-white max-w-5xl leading-[1.1] mb-8 reveal [text-wrap:balance]">
         App Store screenshot maker <br>
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">for Apple mockups, motion, and localization.</span>
       </h1>
       
-      <p class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-4xl mb-12 font-medium leading-relaxed reveal">
+      <p data-reveal-delay="180ms" class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-4xl mb-8 font-medium leading-relaxed reveal">
         Bezel Studio gives indie developers, growth teams, and product marketers one native workspace for iPhone mockups, iPad screenshots, Apple Watch layouts, typography, stickers, keyframe animation, offline translation, Quick Mockups, and high-resolution App Store export.
       </p>
 
-      <div class="flex flex-col sm:flex-row gap-4 mb-24 reveal">
-        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="flex items-center justify-center gap-2 px-8 py-4 bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black rounded-full font-bold text-lg transition-transform hover:scale-105 active:scale-95">
+      <div data-reveal-delay="250ms" class="promo-banner reveal mb-10">
+        <div class="promo-banner__glow" aria-hidden="true"></div>
+        <div class="promo-banner__copy">
+          <p class="promo-banner__eyebrow">Limited-Time Lifetime Offer</p>
+          <p class="promo-banner__title">Get 50% off the lifetime subscription with code <span class="promo-code-chip">BEZELSTUDIO50</span></p>
+          <p class="promo-banner__subcopy">Redeem the code inside Bezel Studio when you upgrade.</p>
+        </div>
+      </div>
+
+      <div data-reveal-delay="320ms" class="flex flex-col sm:flex-row gap-4 mb-24 reveal">
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="cta-button cta-button--primary flex items-center justify-center gap-2 px-8 py-4 bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black rounded-full font-bold text-lg transition-transform hover:scale-105 active:scale-95">
           <img src="./appstore-logo.svg" alt="App Store" class="w-5 h-5 dark:invert filter">
           Download for iOS
         </a>
-        <a href="#workflow" class="flex items-center justify-center gap-2 px-8 py-4 bg-white/70 dark:bg-white/6 border border-zinc-200 dark:border-white/10 text-zinc-900 dark:text-white rounded-full font-bold text-lg backdrop-blur-xl transition-transform hover:scale-105 active:scale-95">
+        <a href="#workflow" class="cta-button cta-button--secondary flex items-center justify-center gap-2 px-8 py-4 bg-white/70 dark:bg-white/6 border border-zinc-200 dark:border-white/10 text-zinc-900 dark:text-white rounded-full font-bold text-lg backdrop-blur-xl transition-transform hover:scale-105 active:scale-95">
           Explore the workflow
         </a>
       </div>
 
-      <div class="flex flex-wrap items-center justify-center gap-3 max-w-5xl mb-20 reveal">
+      <div data-reveal-delay="400ms" class="flex flex-wrap items-center justify-center gap-3 max-w-5xl mb-20 reveal">
         <span class="px-4 py-2 rounded-full bg-black/5 dark:bg-white/6 border border-black/5 dark:border-white/10 text-sm font-medium text-zinc-700 dark:text-zinc-300">Multi-canvas projects</span>
         <span class="px-4 py-2 rounded-full bg-black/5 dark:bg-white/6 border border-black/5 dark:border-white/10 text-sm font-medium text-zinc-700 dark:text-zinc-300">iPhone, iPad, Watch, Mac frames</span>
         <span class="px-4 py-2 rounded-full bg-black/5 dark:bg-white/6 border border-black/5 dark:border-white/10 text-sm font-medium text-zinc-700 dark:text-zinc-300">Images and videos in frames</span>
@@ -137,11 +149,11 @@
       </div>
 
       <!-- Hero Video / App Interface Mockup (Transparent styling) -->
-      <div class="w-full max-w-6xl mx-auto relative reveal flex justify-center">
+      <div data-reveal-delay="480ms" class="hero-media-shell w-full max-w-6xl mx-auto relative reveal flex justify-center">
         <!-- Optional glow behind the transparent video -->
         <div class="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-purple-500/10 blur-3xl transform rounded-[40px] scale-95 opacity-50 pointer-events-none"></div>
         
-        <div class="relative w-full max-w-5xl flex justify-center items-center">
+        <div class="hero-media-frame relative w-full max-w-5xl flex justify-center items-center">
           <video class="w-full object-contain md:h-[600px]" autoplay muted loop playsinline>
             <source src="./hero.mp4" type="video/mp4">
           </video>
@@ -160,7 +172,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto">
         
         <!-- Bento item: Device frames (large) -->
-        <a href="./features/device-frames.html" class="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer flex flex-col h-full min-h-[400px]">
+        <a href="./features/device-frames.html" class="motion-card md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer flex flex-col h-full min-h-[400px]">
           <div class="p-8 md:p-10 sticky top-0 z-10 flex-shrink-0">
             <h3 class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Photorealistic Frames</h3>
             <p class="text-zinc-600 dark:text-zinc-400 text-lg max-w-md">Build iPhone mockups, iPad screenshots, Apple Watch layouts, and multi-device campaign visuals with screenshots or screen recordings placed directly inside precise Apple bezels.</p>
@@ -171,7 +183,7 @@
         </a>
 
         <!-- Bento item: Typography -->
-        <a href="./features/typography.html" class="group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
+        <a href="./features/typography.html" class="motion-card group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
           <div class="p-8 z-10">
             <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Pro Typography</h3>
             <p class="text-zinc-600 dark:text-zinc-400 text-base">Fonts, gradients, shadows, strokes, and glass-backed captions built for conversion-focused screenshot copy.</p>
@@ -182,7 +194,7 @@
         </a>
 
         <!-- Bento item: Canvas Styling -->
-        <a href="./features/canvas-styling.html" class="group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
+        <a href="./features/canvas-styling.html" class="motion-card group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
           <div class="p-8 z-10">
             <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Dynamic Canvas</h3>
             <p class="text-zinc-600 dark:text-zinc-400 text-base">Preset themes, transparent backgrounds, gradients, emoji patterns, animated textures, and studio-style lighting.</p>
@@ -193,7 +205,7 @@
         </a>
 
         <!-- Bento item: Translation (wide) -->
-        <a href="./features/translation.html" class="md:col-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col md:flex-row items-center">
+        <a href="./features/translation.html" class="motion-card md:col-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col md:flex-row items-center">
           <div class="p-8 md:p-10 w-full md:w-1/2 z-10">
             <h3 class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">Global Translation</h3>
             <p class="text-zinc-600 dark:text-zinc-400 text-lg">Translate the current canvas or an entire screenshot project with Apple Translate so localized App Store assets stop being a manual rebuild.</p>
@@ -204,7 +216,7 @@
         </a>
 
         <!-- Bento item: Stickers -->
-        <a href="./features/images-stickers.html" class="group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
+        <a href="./features/images-stickers.html" class="motion-card group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
           <div class="p-8 z-10">
             <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Stickers & Cutouts</h3>
             <p class="text-zinc-600 dark:text-zinc-400 text-base">Remove backgrounds, create bordered cutouts, save reusable assets, and generate new stickers with Image Playground.</p>
@@ -215,7 +227,7 @@
         </a>
 
         <!-- Bento item: Draw & Doodle -->
-        <a href="./features/draw-doodle.html" class="md:col-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col md:flex-row items-center">
+        <a href="./features/draw-doodle.html" class="motion-card md:col-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col md:flex-row items-center">
           <div class="p-8 md:p-10 w-full md:w-1/2 z-10">
             <h3 class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-pink-500 dark:group-hover:text-pink-400 transition-colors">Draw & Annotate</h3>
             <p class="text-zinc-600 dark:text-zinc-400 text-lg">Use PencilKit to circle features, sketch arrows, and add hand-drawn callouts that still behave like editable canvas elements.</p>
@@ -226,7 +238,7 @@
         </a>
 
         <!-- Bento item: Layers & Precision -->
-        <a href="./features/layers-precision.html" class="md:col-span-1 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
+        <a href="./features/layers-precision.html" class="motion-card md:col-span-1 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
           <div class="p-8 z-10">
             <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors">Layer Precision</h3>
             <p class="text-zinc-600 dark:text-zinc-400 text-base">True layer ordering for text, images, drawings, and frames with gesture controls and precision alignment.</p>
@@ -237,7 +249,7 @@
         </a>
 
         <!-- Bento item: Projects & Presets -->
-        <a href="./features/projects-presets.html" class="md:col-span-1 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
+        <a href="./features/projects-presets.html" class="motion-card md:col-span-1 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col">
           <div class="p-8 z-10">
             <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">Projects, Presets & Quick Mockups</h3>
             <p class="text-zinc-600 dark:text-zinc-400 text-base">Save size presets, gradients, reusable assets, and automation-ready Quick Mockup templates for Shortcuts.</p>
@@ -248,7 +260,7 @@
         </a>
 
         <!-- Bento item: Export & Share -->
-        <a href="./features/export-share.html" class="md:col-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col md:flex-row items-center">
+        <a href="./features/export-share.html" class="motion-card md:col-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 border border-zinc-200 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-500 reveal cursor-pointer min-h-[300px] flex flex-col md:flex-row items-center">
           <div class="p-8 md:p-10 w-full md:w-1/2 z-10">
             <h3 class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors">Instant Export</h3>
             <p class="text-zinc-600 dark:text-zinc-400 text-lg">Render high-resolution screenshot sets, localized campaigns, and video preview assets from the same project without leaving the app.</p>
@@ -913,7 +925,11 @@
         <p class="text-xl text-zinc-600 dark:text-zinc-400 mb-12 max-w-2xl mx-auto">
           Create screenshot sets, Apple device mockups, localized campaigns, and preview videos from the same project, then export when your release is ready.
         </p>
-        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black rounded-full font-bold text-xl transition-all shadow-lg dark:shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95">
+        <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full border border-blue-500/20 bg-blue-500/[0.07] dark:bg-blue-400/[0.08] text-blue-700 dark:text-blue-300 text-sm font-semibold tracking-[0.02em] mb-8">
+          <span class="inline-flex w-2.5 h-2.5 rounded-full bg-blue-500 dark:bg-blue-400"></span>
+          50% off lifetime subscription with code <span class="promo-code-chip promo-code-chip--inline">BEZELSTUDIO50</span>
+        </div>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="cta-button cta-button--primary inline-flex items-center justify-center gap-3 px-10 py-5 bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black rounded-full font-bold text-xl transition-all shadow-lg dark:shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95">
           <img src="./appstore-logo.svg" alt="App Store" class="w-6 h-6 dark:invert filter">
           Download Bezel Studio
         </a>
@@ -922,7 +938,7 @@
 
   </main>
 
-  <footer class="border-t border-zinc-200 dark:border-white/10 pt-16 pb-12 px-6 md:px-12 bg-white dark:bg-black">
+  <footer class="app-shell border-t border-zinc-200 dark:border-white/10 pt-16 pb-12 px-6 md:px-12 bg-white dark:bg-black">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
       <div class="flex items-center gap-4">
         <img class="w-8 h-8 rounded-lg" src="./logo.png" alt="Bezel Studio">
