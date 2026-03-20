@@ -754,6 +754,313 @@ html.bezel-intro-lineup .app-shell {
   }
 }
 
+@media (max-width: 767px) {
+  .site-chrome {
+    padding-top: 1rem;
+    padding-inline: 0.75rem;
+  }
+
+  .site-header {
+    width: 100%;
+    max-width: none;
+    padding: 0.85rem 1rem;
+    border-radius: 1.5rem;
+  }
+
+  .site-header > a {
+    min-width: 0;
+  }
+
+  .site-header > a span {
+    font-size: 0.95rem;
+  }
+
+  .site-header > a[href*="apps.apple.com"],
+  body > div.relative.z-10.w-full.flex.justify-center.pt-8.reveal:not(.site-chrome) > header > a[href*="apps.apple.com"] {
+    display: inline-flex;
+    padding: 0.72rem 0.95rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .hero-section {
+    padding-top: 7.25rem;
+    padding-bottom: 4.75rem;
+    padding-inline: 1.25rem;
+  }
+
+  .hero-kicker {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+    font-size: clamp(2.85rem, 12.4vw, 4.25rem);
+    line-height: 0.98;
+  }
+
+  .hero-lead {
+    max-width: 22rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+
+  .promo-banner {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1rem 1.05rem;
+    border-radius: 1.5rem;
+    text-align: left;
+  }
+
+  .promo-banner__title {
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .promo-banner__subcopy {
+    font-size: 0.9rem;
+  }
+
+  .hero-actions {
+    width: 100%;
+    margin-bottom: 3rem;
+  }
+
+  .hero-actions .cta-button {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  .hero-highlights {
+    gap: 0.65rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-highlights span {
+    padding: 0.7rem 0.95rem;
+    font-size: 0.83rem;
+  }
+
+  .hero-media-shell {
+    width: calc(100% + 0.5rem);
+  }
+
+  .hero-media-frame {
+    width: 100%;
+    border-radius: 1.6rem;
+    animation-duration: 10s;
+  }
+
+  main > section.py-32 {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+  }
+
+  #showcase-height {
+    height: auto !important;
+  }
+
+  .showcase-shell {
+    --showcase-gap: 1.5rem;
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    padding-top: 3.75rem;
+    padding-bottom: 5rem;
+  }
+
+  .showcase-header {
+    margin-bottom: 1rem;
+    padding-inline: 1.25rem;
+  }
+
+  .showcase-header-card h2 {
+    margin-bottom: 0.85rem;
+    font-size: clamp(2.2rem, 10.2vw, 3rem);
+    line-height: 1.02;
+  }
+
+  .showcase-header-card p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .showcase-header-card .font-handwritten {
+    display: block;
+    margin-top: 0.85rem;
+    font-size: 1.55rem;
+    line-height: 1.1;
+  }
+
+  .showcase-toggle-wrap {
+    margin-top: 1rem;
+  }
+
+  .device-toggle {
+    min-width: 11rem;
+    max-width: 100%;
+  }
+
+  .device-toggle__button {
+    padding: 0.75rem 0.95rem;
+    font-size: 0.9rem;
+  }
+
+  .showcase-content,
+  .showcase-stage {
+    display: block;
+    height: auto;
+  }
+
+  .showcase-panel,
+  .showcase-panel.is-active {
+    position: relative;
+    inset: auto;
+    display: none;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .showcase-panel.is-active {
+    display: block;
+  }
+
+  .showcase-track {
+    align-items: flex-start;
+    gap: 1rem;
+    min-height: auto;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 0.25rem 1rem 1rem;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .showcase-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .showcase-track > div {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+  }
+
+  .showcase-panel[data-showcase-panel="iphone"] .showcase-track > div {
+    width: min(72vw, 18rem) !important;
+  }
+
+  .showcase-panel[data-showcase-panel="ipad"] .showcase-track > div {
+    width: min(88vw, 32rem) !important;
+  }
+
+  .showcase-panel .showcase-track > div h3 {
+    font-size: 1rem;
+  }
+
+  .showcase-panel .showcase-track > div p {
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+
+  body > div.relative.z-10.w-full.flex.justify-center.pt-8.reveal:not(.site-chrome) {
+    padding-top: 1rem;
+    padding-inline: 0.75rem;
+  }
+
+  body > div.relative.z-10.w-full.flex.justify-center.pt-8.reveal:not(.site-chrome) > header {
+    width: 100%;
+    max-width: none;
+    padding: 0.85rem 1rem;
+    border-radius: 1.5rem;
+  }
+
+  main.relative.z-10.pt-32.pb-24.flex.flex-col.items-center {
+    padding-top: 7.75rem;
+    padding-bottom: 4.75rem;
+  }
+
+  main.relative.z-10.pt-32.pb-24.flex.flex-col.items-center > section:first-child {
+    width: calc(100% - 1.5rem);
+    margin-bottom: 2.5rem;
+  }
+
+  main.relative.z-10.pt-32.pb-24.flex.flex-col.items-center > section:first-child > div:first-child {
+    margin-bottom: 1.25rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+  }
+
+  main.relative.z-10.pt-32.pb-24.flex.flex-col.items-center > section:first-child h1 {
+    margin-bottom: 1.25rem;
+    font-size: clamp(3rem, 13vw, 4.6rem);
+    line-height: 0.96;
+  }
+
+  main.relative.z-10.pt-32.pb-24.flex.flex-col.items-center > section:first-child p {
+    margin-bottom: 1.75rem;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  main.relative.z-10.pt-32.pb-24.flex.flex-col.items-center > section:first-child > div:last-child {
+    gap: 0.85rem;
+  }
+
+  main.relative.z-10.pt-32.pb-24.flex.flex-col.items-center > section:first-child > div:last-child a:first-child {
+    width: 100%;
+  }
+
+  main.relative.z-10.pt-32.pb-24.flex.flex-col.items-center > section:nth-child(2) {
+    padding-inline: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  main.relative.z-10.pt-32.pb-24.flex.flex-col.items-center > section:nth-child(2) img {
+    width: 100%;
+    max-height: none;
+  }
+
+  .premium-content {
+    width: 100%;
+    padding-inline: 1.25rem;
+  }
+
+  .premium-content h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+
+  .premium-content h3 {
+    margin-top: 2rem;
+    font-size: 1.3rem;
+  }
+
+  .premium-content p,
+  .premium-content li {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .premium-content li {
+    padding-left: 2rem;
+  }
+
+  .premium-content li::before {
+    top: 0.35rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     transition: none;

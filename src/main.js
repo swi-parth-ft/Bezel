@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   };
   let activeShowcaseDevice = 'iphone';
+  const isMobileShowcase = () => window.matchMedia('(max-width: 767px)').matches;
 
   const setShowcasePosition = (device, progress) => {
     const config = showcaseConfigs[device];
@@ -134,6 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const updateShowcaseSpacerHeight = () => {
     if (!showcaseSpacer) return;
+
+    if (isMobileShowcase()) {
+      showcaseSpacer.style.height = 'auto';
+      return;
+    }
 
     const activeConfig = showcaseConfigs[activeShowcaseDevice];
     if (!activeConfig?.container) return;
@@ -150,6 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const syncActiveShowcaseScroll = () => {
     if (!showcaseSpacer) return;
+
+    if (isMobileShowcase()) {
+      Object.keys(showcaseConfigs).forEach((device) => {
+        setShowcasePosition(device, 0);
+      });
+      return;
+    }
 
     const spacerRect = showcaseSpacer.getBoundingClientRect();
     const start = spacerRect.top + window.scrollY;
