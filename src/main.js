@@ -1,16 +1,59 @@
 // Main JavaScript for interactions
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Header scroll logic
+  const headerChrome = document.querySelector('.site-chrome');
   const header = document.querySelector('.site-header');
+  const headerMenuToggle = document.querySelector('[data-header-menu-toggle]');
+  const headerMenuPanel = document.querySelector('[data-header-menu-panel]');
+  const isDesktopHeader = () => window.matchMedia('(min-width: 768px)').matches;
+
+  const setHeaderMenuOpen = (open) => {
+    if (!headerChrome || !headerMenuToggle || !headerMenuPanel) return;
+
+    headerChrome.classList.toggle('is-menu-open', open);
+    headerMenuToggle.setAttribute('aria-expanded', String(open));
+    headerMenuPanel.setAttribute('aria-hidden', String(!open));
+  };
   
   const onScroll = () => {
     if (header) {
       header.classList.toggle('is-scrolled', window.scrollY > 8);
     }
+
+    if (headerChrome) {
+      const shouldCollapse = isDesktopHeader() && window.scrollY > 8;
+      headerChrome.classList.toggle('is-collapsed', shouldCollapse);
+
+      if (!shouldCollapse) {
+        setHeaderMenuOpen(false);
+      }
+    }
   };
   
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('load', onScroll);
+
+  if (headerMenuToggle && headerChrome) {
+    headerMenuToggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (!headerChrome.classList.contains('is-collapsed')) return;
+
+      const isOpen = headerChrome.classList.contains('is-menu-open');
+      setHeaderMenuOpen(!isOpen);
+    });
+  }
+
+  document.addEventListener('click', (event) => {
+    if (!headerChrome || !headerChrome.classList.contains('is-menu-open')) return;
+    if (headerChrome.contains(event.target)) return;
+    setHeaderMenuOpen(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    setHeaderMenuOpen(false);
+  });
 
   // 2. Intersection Observer for Reveal Animations
   const revealTargets = document.querySelectorAll('.reveal');

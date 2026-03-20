@@ -21,7 +21,7 @@ const features = [
         <li><strong>No Watermarks:</strong> Generate pristine, 4K device mockups ready for App Store Connect.</li>
       </ul>
     `,
-    img: "/f1.PNG"
+    img: "/assets/feature-covers/device-frames.webp"
   },
   {
     id: "canvas-styling",
@@ -41,7 +41,7 @@ const features = [
         <li><strong>Pattern Overlays:</strong> Use subtle geometric or noise patterns to add premium texture to your iOS app mockups.</li>
       </ul>
     `,
-    img: "/f2.PNG"
+    img: "/assets/feature-covers/canvas-styling.webp"
   },
   {
     id: "typography",
@@ -61,7 +61,7 @@ const features = [
         <li><strong>Apple-Native Fonts:</strong> Native integration with iOS fonts to maintain a professional, ecosystem-aligned aesthetic.</li>
       </ul>
     `,
-    img: "/f3.PNG"
+    img: "/assets/feature-covers/typography.webp"
   },
   {
     id: "images-stickers",
@@ -81,7 +81,7 @@ const features = [
         <li><strong>Callout Arrows & Badges:</strong> Direct the user's eye exactly where you want it.</li>
       </ul>
     `,
-    img: "/f4.PNG"
+    img: "/assets/feature-covers/images-stickers.webp"
   },
   {
     id: "draw-doodle",
@@ -101,7 +101,7 @@ const features = [
         <li><strong>Organic Annotations:</strong> Break away from rigid corporate templates with custom, hand-drawn highlights.</li>
       </ul>
     `,
-    img: "/f5.PNG"
+    img: "/assets/feature-covers/draw-doodle.webp"
   },
   {
     id: "translation",
@@ -121,7 +121,7 @@ const features = [
         <li><strong>Auto-Resizing Text:</strong> Our typography engine automatically adjusts font sizes to accommodate longer translated phrases.</li>
       </ul>
     `,
-    img: "/f6.PNG"
+    img: "/assets/feature-covers/translation.webp"
   },
   {
     id: "layers-precision",
@@ -141,7 +141,7 @@ const features = [
         <li><strong>Zoom & Pan:</strong> Dive deep into the details with fluid, gesture-based canvas navigation.</li>
       </ul>
     `,
-    img: "/f7.PNG"
+    img: "/assets/feature-covers/layers-precision.webp"
   },
   {
     id: "projects-presets",
@@ -161,7 +161,7 @@ const features = [
         <li><strong>Duplicate & Iterate:</strong> Need to run an A/B test? Duplicate an entire project instantly and tweak the copy.</li>
       </ul>
     `,
-    img: "/f6.PNG"
+    img: "/assets/feature-covers/projects-presets.webp"
   },
   {
     id: "export-share",
@@ -181,7 +181,7 @@ const features = [
         <li><strong>Native Share Sheet:</strong> Save directly to your iOS Photos app, Files app, or AirDrop instantly to your Mac.</li>
       </ul>
     `,
-    img: "/f1.PNG"
+    img: "/assets/feature-covers/export-share.webp"
   }
 ];
 
@@ -194,8 +194,8 @@ const template = (data) => `<!doctype html>
   <meta name="description" content="${data.desc}">
   <meta name="keywords" content="${data.seo_keywords}">
   <link rel="canonical" href="https://bezelstudio.parthant.com/features/${data.id}.html">
-  <link rel="icon" href="/logo.png">
-  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="icon" href="/assets/brand/favicon.svg">
+  <link rel="apple-touch-icon" href="/assets/brand/bezel-studio-logo.png">
   <link rel="stylesheet" href="/src/style.css">
   <meta name="color-scheme" content="light dark">
   <script>
@@ -276,9 +276,9 @@ const template = (data) => `<!doctype html>
   </div>
 
   <div class="relative z-10 w-full flex justify-center pt-8 reveal">
-    <header class="flex items-center justify-between px-6 py-3 bg-black/5 dark:bg-white/5 backdrop-blur-3xl border border-black/5 dark:border-white/10 rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
+    <header class="flex items-center justify-between px-6 py-3 bg-black/5 dark:bg-white/5 glass-blur border border-black/5 dark:border-white/10 rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
       <a href="/" class="flex items-center gap-3">
-        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/logo.png" alt="Logo">
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Logo">
         <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
@@ -309,7 +309,7 @@ const template = (data) => `<!doctype html>
       <!-- Call to action cluster in hero -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
         <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/25 hover:-translate-y-1">
-          <img src="/appstore-logo.svg" alt="App Store" class="w-5 h-5 invert filter">
+          <img src="/assets/brand/app-store-logo.svg" alt="App Store" class="w-5 h-5 invert filter">
           Start building for free
         </a>
         <a href="/#features" class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white font-medium flex items-center transition-colors">
@@ -339,7 +339,7 @@ const template = (data) => `<!doctype html>
   <footer class="border-t border-zinc-200 dark:border-white/10 pt-16 pb-12 px-6 md:px-12 bg-zinc-50 dark:bg-[#020202] mt-24">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
       <div class="flex items-center gap-4">
-        <img class="w-8 h-8 rounded-lg" src="/logo.png" alt="Bezel Studio">
+        <img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio">
         <span class="text-zinc-900 dark:text-white font-semibold flex items-center gap-2">
           Bezel Studio
           <span class="text-xs bg-black/5 dark:bg-white/10 text-zinc-600 dark:text-white/70 px-2 py-0.5 rounded uppercase tracking-wider">iOS App</span>
