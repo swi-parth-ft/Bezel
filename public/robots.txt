@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.bezelstudio.app/sitemap.xml
+Sitemap: https://bezelstudio.app/sitemap.xml
