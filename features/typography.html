@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth antialiased dark">
+<html lang="en" class="scroll-smooth antialiased">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>App Store Screenshot Typography, Captions & Glass Text | Bezel Studio</title>
-  <meta name="description" content="Create conversion-focused screenshot captions with custom fonts, gradients, shadows, strokes, borders, and glass-backed text treatments.">
-  <meta name="keywords" content="screenshot captions, App Store screenshot typography, text overlays on screenshots, gradient text, glass text, marketing captions, professional app screenshots">
+  <title>App Store Screenshot Typography & Captions | Bezel Studio</title>
+  <meta name="description" content="Add beautiful text overlays, gradient fills, and pinpoint shadows to your App Store screenshots to increase app downloads.">
+  <meta name="keywords" content="screenshot captions, text overlays on screenshots, professional app screenshots, increase app downloads">
   <link rel="canonical" href="https://bezelstudio.parthant.com/features/typography.html">
   <link rel="icon" href="/assets/brand/favicon.svg">
   <link rel="apple-touch-icon" href="/assets/brand/bezel-studio-logo.png">
-  <link rel="stylesheet" href="../src/style.css">
+  <link rel="stylesheet" href="/src/style.css">
   <meta name="color-scheme" content="light dark">
   <script>
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -24,6 +24,67 @@
     });
   </script>
   <style>
+    .feature-page-shell {
+      position: relative;
+      width: min(100%, 78rem);
+      padding-inline: 1rem;
+    }
+    .feature-visual-stage {
+      position: relative;
+      width: min(100%, 70rem);
+      height: clamp(20rem, 40vw, 31rem);
+      margin: 0 auto 4rem;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .feature-visual-stage::before {
+      content: "";
+      position: absolute;
+      inset: 8% 7% 10%;
+      border-radius: 2.75rem;
+      background:
+        radial-gradient(circle at 22% 64%, rgba(96, 165, 250, 0.14), transparent 28%),
+        radial-gradient(circle at 78% 28%, rgba(244, 114, 182, 0.1), transparent 22%),
+        radial-gradient(circle at 54% 82%, rgba(99, 102, 241, 0.14), transparent 30%);
+      filter: blur(16px);
+      opacity: 0.9;
+    }
+    .feature-visual-stage::after {
+      content: "";
+      position: absolute;
+      inset: auto 12% 0;
+      height: 36%;
+      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.08), transparent 66%);
+      filter: blur(28px);
+    }
+    .dark .feature-visual-stage::after {
+      background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3), transparent 66%);
+    }
+    .feature-visual-stage__device {
+      position: absolute;
+      height: auto;
+      object-fit: contain;
+      transform-origin: center center;
+      filter: drop-shadow(0 30px 70px rgba(15, 23, 42, 0.18));
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .feature-visual-stage__device--ipad {
+      width: min(63%, 50rem);
+      right: clamp(5%, 9vw, 11%);
+      top: clamp(1rem, 3vw, 2rem);
+      z-index: 1;
+      opacity: 0.98;
+      transform: rotate(6deg);
+    }
+    .feature-visual-stage__device--iphone {
+      width: min(20%, 13.5rem);
+      left: clamp(6%, 10vw, 12%);
+      top: clamp(6.5rem, 14vw, 10rem);
+      z-index: 2;
+      opacity: 0.98;
+      transform: rotate(-8deg);
+    }
     /* Premium markdown overrides for generated body content */
     .premium-content h2 {
       font-size: 2.5rem;
@@ -77,6 +138,48 @@
       background-size: contain;
       background-repeat: no-repeat;
     }
+    @media (max-width: 1023px) {
+      .feature-page-shell {
+        width: min(100%, 68rem);
+      }
+      .feature-visual-stage {
+        height: clamp(18rem, 46vw, 25rem);
+      }
+      .feature-visual-stage__device--ipad {
+        width: min(66%, 38rem);
+        right: clamp(1%, 4vw, 6%);
+      }
+      .feature-visual-stage__device--iphone {
+        width: min(22%, 10.5rem);
+        left: clamp(3%, 7vw, 10%);
+        top: clamp(6rem, 16vw, 8.6rem);
+      }
+    }
+    @media (max-width: 767px) {
+      .feature-page-shell {
+        padding-inline: 0.75rem;
+      }
+      .feature-visual-stage {
+        height: clamp(14rem, 66vw, 18rem);
+        margin-bottom: 2.2rem;
+      }
+      .feature-visual-stage::before {
+        inset: 10% 2% 14%;
+      }
+      .feature-visual-stage__device--ipad {
+        width: min(70%, 19rem);
+        right: 2%;
+        left: auto;
+        top: 0.6rem;
+        transform: rotate(5deg);
+      }
+      .feature-visual-stage__device--iphone {
+        width: min(24%, 6.5rem);
+        left: 4%;
+        top: 4.4rem;
+        transform: rotate(-7deg);
+      }
+    }
   </style>
 </head>
 
@@ -90,14 +193,14 @@
 
   <div class="relative z-10 w-full flex justify-center pt-8 reveal">
     <header class="flex items-center justify-between px-6 py-3 bg-black/5 dark:bg-white/5 glass-blur border border-black/5 dark:border-white/10 rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
-      <a href="../" class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
         <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Logo">
         <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="../#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
-        <a href="../#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
-        <a href="../#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+        <a href="/#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
+        <a href="/#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
+        <a href="/#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
       </nav>
       <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hidden sm:flex items-center justify-center px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
         Get the App
@@ -106,17 +209,17 @@
   </div>
 
   <main class="relative z-10 pt-32 pb-24 flex flex-col items-center">
-    
+    <div class="feature-page-shell mb-24">
     <!-- Massive Centered Hero Section -->
-    <section class="max-w-5xl w-[90%] mx-auto text-center mb-16 reveal">
+    <section class="relative z-10 max-w-5xl w-[90%] mx-auto text-center mb-16 reveal">
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-bold uppercase tracking-widest mb-8">
         Feature Deep Dive
       </div>
       <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-8 text-transparent bg-clip-text bg-gradient-to-b from-zinc-900 to-zinc-500 dark:from-white dark:to-zinc-500 [text-wrap:balance]">
-        Typography, Captions & Glass Text
+        Pro Typography & Captions
       </h1>
       <p class="text-xl md:text-2xl font-light text-zinc-600 dark:text-zinc-300 max-w-3xl mx-auto leading-relaxed mb-12 [text-wrap:balance]">
-        Build conversion-focused screenshot captions with fonts, gradients, shadows, strokes, and layered glass text treatments.
+        Add beautiful text overlays, gradient fills, and pinpoint shadows to your App Store screenshots to increase app downloads.
       </p>
       
       <!-- Call to action cluster in hero -->
@@ -125,47 +228,36 @@
           <img src="/assets/brand/app-store-logo.svg" alt="App Store" class="w-5 h-5 invert filter">
           Start building for free
         </a>
-        <a href="../#features" class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white font-medium flex items-center transition-colors">
+        <a href="/#features" class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white font-medium flex items-center transition-colors">
           <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
           Back to all features
         </a>
       </div>
     </section>
 
-    <!-- Fully Transparent Image Container -->
-    <section class="w-full max-w-6xl px-4 md:px-8 mb-32 reveal" style="animation-delay: 200ms;">
-      <div class="flex items-end justify-center gap-5 md:gap-10">
-        <div class="w-[26%] md:w-[22%] lg:w-[20%] shrink-0">
-          <img class="block w-full h-auto object-contain" src="/assets/feature-platforms/iphone/typography.webp" alt="Typography styling on iPhone">
-        </div>
-        <div class="w-[56%] md:w-[48%] lg:w-[44%] shrink-0">
-          <img class="block w-full h-auto object-contain" src="/assets/feature-platforms/ipad/typography.webp" alt="Typography styling on iPad">
-        </div>
+      <div class="feature-visual-stage reveal" style="animation-delay: 200ms;" aria-hidden="true">
+        <img class="feature-visual-stage__device feature-visual-stage__device--iphone" src="/assets/feature-platforms/iphone/typography.webp" alt="">
+        <img class="feature-visual-stage__device feature-visual-stage__device--ipad" src="/assets/feature-platforms/ipad/typography.webp" alt="">
       </div>
-    </section>
 
     <!-- Seamless Content Layout -->
-    <section class="w-full max-w-3xl px-6 mx-auto premium-content reveal" style="animation-delay: 300ms;">
+    <section class="relative z-10 w-full max-w-3xl px-6 mx-auto premium-content reveal" style="animation-delay: 300ms;">
       <div class="prose prose-lg dark:prose-invert max-w-none text-zinc-900 dark:text-white">
         
-      <h2 class="text-3xl font-bold mb-6 text-zinc-900 dark:text-white tracking-tight">Treat copy like a design system, not an afterthought.</h2>
+      <h2 class="text-3xl font-bold mb-6 text-zinc-900 dark:text-white tracking-tight">Text Overlays That Drive Downloads</h2>
       <p class="mb-6">
-        Strong <strong>App Store screenshot typography</strong> does more than label a feature. It sets hierarchy, improves scan speed, and helps the right message land in a fraction of a second. Bezel Studio gives captions, headlines, and supporting copy enough control to actually carry that weight.
+        The best <strong>app store screenshots</strong> use clear, compelling copy to communicate value instantly. With Bezel Studio's advanced typography engine, adding <strong>screenshot captions</strong> and robust text overlays is effortless, helping you <strong>increase app downloads</strong>.
       </p>
-      <p class="mb-6">
-        Typography stays fully editable inside the same project as frames, backgrounds, stickers, and motion. That means you can refine marketing copy, localize it, or restyle it without rebuilding the rest of the scene.
-      </p>
-      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Typography controls built for marketing</h3>
+      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Typography Features</h3>
       <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
-        <li><strong>Expressive Font Choices:</strong> Use playful, bold, or premium type styles depending on the story the screenshot needs to tell.</li>
-        <li><strong>Solid and Gradient Fills:</strong> Build brighter, more branded headlines with directional color control.</li>
-        <li><strong>Shadows, Strokes, and Borders:</strong> Keep text legible over device frames, images, and detailed backgrounds.</li>
-        <li><strong>Glass Effect Behind Text:</strong> Add a polished layered surface behind copy for richer marketing compositions.</li>
-        <li><strong>Localization-Ready Captions:</strong> Keep text editable so translated variants and late copy changes stay manageable.</li>
+        <li><strong>Gradient Text Fills:</strong> Make your headlines stand out with vibrant, multi-color gradient text.</li>
+        <li><strong>Drop Shadows & Strokes:</strong> Ensure your text is perfectly legible against any background with precision shadow controls.</li>
+        <li><strong>Apple-Native Fonts:</strong> Native integration with iOS fonts to maintain a professional, ecosystem-aligned aesthetic.</li>
       </ul>
     
       </div>
     </section>
+    </div>
     
   </main>
 
@@ -180,12 +272,12 @@
       </div>
       <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">
         <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hover:text-black dark:hover:text-white transition-colors">App Store</a>
-        <a href="../" class="hover:text-black dark:hover:text-white transition-colors">Home</a>
-        <a href="../privacy.html" class="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
+        <a href="/" class="hover:text-black dark:hover:text-white transition-colors">Home</a>
+        <a href="/privacy.html" class="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
       </div>
     </div>
   </footer>
 
-  <script type="module" src="../src/main.js"></script>
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html>

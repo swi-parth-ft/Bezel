@@ -195,7 +195,7 @@ const features = [
 ];
 
 const template = (data) => `<!doctype html>
-<html lang="en" class="scroll-smooth antialiased dark">
+<html lang="en" class="scroll-smooth antialiased">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -220,6 +220,67 @@ const template = (data) => `<!doctype html>
     });
   </script>
   <style>
+    .feature-page-shell {
+      position: relative;
+      width: min(100%, 78rem);
+      padding-inline: 1rem;
+    }
+    .feature-visual-stage {
+      position: relative;
+      width: min(100%, 70rem);
+      height: clamp(20rem, 40vw, 31rem);
+      margin: 0 auto 4rem;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .feature-visual-stage::before {
+      content: "";
+      position: absolute;
+      inset: 8% 7% 10%;
+      border-radius: 2.75rem;
+      background:
+        radial-gradient(circle at 22% 64%, rgba(96, 165, 250, 0.14), transparent 28%),
+        radial-gradient(circle at 78% 28%, rgba(244, 114, 182, 0.1), transparent 22%),
+        radial-gradient(circle at 54% 82%, rgba(99, 102, 241, 0.14), transparent 30%);
+      filter: blur(16px);
+      opacity: 0.9;
+    }
+    .feature-visual-stage::after {
+      content: "";
+      position: absolute;
+      inset: auto 12% 0;
+      height: 36%;
+      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.08), transparent 66%);
+      filter: blur(28px);
+    }
+    .dark .feature-visual-stage::after {
+      background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3), transparent 66%);
+    }
+    .feature-visual-stage__device {
+      position: absolute;
+      height: auto;
+      object-fit: contain;
+      transform-origin: center center;
+      filter: drop-shadow(0 30px 70px rgba(15, 23, 42, 0.18));
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .feature-visual-stage__device--ipad {
+      width: min(63%, 50rem);
+      right: clamp(5%, 9vw, 11%);
+      top: clamp(1rem, 3vw, 2rem);
+      z-index: 1;
+      opacity: 0.98;
+      transform: rotate(6deg);
+    }
+    .feature-visual-stage__device--iphone {
+      width: min(20%, 13.5rem);
+      left: clamp(6%, 10vw, 12%);
+      top: clamp(6.5rem, 14vw, 10rem);
+      z-index: 2;
+      opacity: 0.98;
+      transform: rotate(-8deg);
+    }
     /* Premium markdown overrides for generated body content */
     .premium-content h2 {
       font-size: 2.5rem;
@@ -273,6 +334,48 @@ const template = (data) => `<!doctype html>
       background-size: contain;
       background-repeat: no-repeat;
     }
+    @media (max-width: 1023px) {
+      .feature-page-shell {
+        width: min(100%, 68rem);
+      }
+      .feature-visual-stage {
+        height: clamp(18rem, 46vw, 25rem);
+      }
+      .feature-visual-stage__device--ipad {
+        width: min(66%, 38rem);
+        right: clamp(1%, 4vw, 6%);
+      }
+      .feature-visual-stage__device--iphone {
+        width: min(22%, 10.5rem);
+        left: clamp(3%, 7vw, 10%);
+        top: clamp(6rem, 16vw, 8.6rem);
+      }
+    }
+    @media (max-width: 767px) {
+      .feature-page-shell {
+        padding-inline: 0.75rem;
+      }
+      .feature-visual-stage {
+        height: clamp(14rem, 66vw, 18rem);
+        margin-bottom: 2.2rem;
+      }
+      .feature-visual-stage::before {
+        inset: 10% 2% 14%;
+      }
+      .feature-visual-stage__device--ipad {
+        width: min(70%, 19rem);
+        right: 2%;
+        left: auto;
+        top: 0.6rem;
+        transform: rotate(5deg);
+      }
+      .feature-visual-stage__device--iphone {
+        width: min(24%, 6.5rem);
+        left: 4%;
+        top: 4.4rem;
+        transform: rotate(-7deg);
+      }
+    }
   </style>
 </head>
 
@@ -302,9 +405,9 @@ const template = (data) => `<!doctype html>
   </div>
 
   <main class="relative z-10 pt-32 pb-24 flex flex-col items-center">
-    
+    <div class="feature-page-shell mb-24">
     <!-- Massive Centered Hero Section -->
-    <section class="max-w-5xl w-[90%] mx-auto text-center mb-16 reveal">
+    <section class="relative z-10 max-w-5xl w-[90%] mx-auto text-center mb-16 reveal">
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-bold uppercase tracking-widest mb-8">
         Feature Deep Dive
       </div>
@@ -328,23 +431,18 @@ const template = (data) => `<!doctype html>
       </div>
     </section>
 
-    <section class="w-full max-w-6xl px-4 md:px-8 mb-32 reveal" style="animation-delay: 200ms;">
-      <div class="flex items-end justify-center gap-5 md:gap-10">
-        <div class="w-[26%] md:w-[22%] lg:w-[20%] shrink-0">
-          <img class="block w-full h-auto object-contain" src="${data.iphone_shot}" alt="${data.headline} on iPhone">
-        </div>
-        <div class="w-[56%] md:w-[48%] lg:w-[44%] shrink-0">
-          <img class="block w-full h-auto object-contain" src="${data.ipad_shot}" alt="${data.headline} on iPad">
-        </div>
+      <div class="feature-visual-stage reveal" style="animation-delay: 200ms;" aria-hidden="true">
+        <img class="feature-visual-stage__device feature-visual-stage__device--iphone" src="${data.iphone_shot}" alt="">
+        <img class="feature-visual-stage__device feature-visual-stage__device--ipad" src="${data.ipad_shot}" alt="">
       </div>
-    </section>
 
     <!-- Seamless Content Layout -->
-    <section class="w-full max-w-3xl px-6 mx-auto premium-content reveal" style="animation-delay: 300ms;">
+    <section class="relative z-10 w-full max-w-3xl px-6 mx-auto premium-content reveal" style="animation-delay: 300ms;">
       <div class="prose prose-lg dark:prose-invert max-w-none text-zinc-900 dark:text-white">
         ${data.body}
       </div>
     </section>
+    </div>
     
   </main>
 
