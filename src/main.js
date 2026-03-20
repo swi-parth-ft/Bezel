@@ -35,7 +35,280 @@ document.addEventListener('DOMContentLoaded', () => {
 
   revealTargets.forEach((el) => observer.observe(el));
 
-  // 3. Bezel intro transition
+  // 3. Shared device family default
+  const getDefaultDeviceFamily = () => (
+    window.matchMedia('(max-width: 767px)').matches ? 'iphone' : 'ipad'
+  );
+
+  // 4. Sticky horizontal power-features logic
+  const powerFeaturesSpacer = document.querySelector('#power-features-height');
+  const powerFeaturesViewport = document.querySelector('#power-features-viewport');
+  const powerFeatureSlides = Array.from(document.querySelectorAll('[data-power-slide]'));
+  const isMobilePowerFeatures = () => window.matchMedia('(max-width: 767px)').matches;
+  const easeOutCubic = (value) => 1 - Math.pow(1 - value, 3);
+  let targetPowerProgress = 0;
+  let renderedPowerProgress = 0;
+  let powerAnimationFrame = null;
+  let powerScrollIdleTimeout = null;
+  const hidePowerSlide = (slide, index) => {
+    slide.style.setProperty('--power-opacity', '0');
+    slide.style.setProperty('--power-blur', '10px');
+    slide.style.setProperty('--power-translate-y', '12px');
+    slide.style.setProperty('--power-copy-y', '10px');
+    slide.style.setProperty('--power-media-y', '6px');
+    slide.style.setProperty('--power-scale', '0.992');
+    slide.style.zIndex = '0';
+  };
+  const showPowerSlide = (slide, index, strength) => {
+    const clamped = Math.max(0, Math.min(1, strength));
+    const opacity = clamped;
+    const blur = (1 - clamped) * 8;
+    const translateY = (1 - clamped) * 10;
+    const copyY = (1 - clamped) * 8;
+    const mediaY = (1 - clamped) * 4;
+    const scale = 1 - ((1 - clamped) * 0.012);
+
+    slide.style.setProperty('--power-opacity', opacity.toFixed(4));
+    slide.style.setProperty('--power-blur', `${blur.toFixed(2)}px`);
+    slide.style.setProperty('--power-translate-y', `${translateY.toFixed(2)}px`);
+    slide.style.setProperty('--power-copy-y', `${copyY.toFixed(2)}px`);
+    slide.style.setProperty('--power-media-y', `${mediaY.toFixed(2)}px`);
+    slide.style.setProperty('--power-scale', scale.toFixed(4));
+    slide.style.zIndex = String(100 + Math.round(clamped * 10) - index);
+  };
+  const resetPowerFeaturesStage = () => {
+    if (powerAnimationFrame) {
+      window.cancelAnimationFrame(powerAnimationFrame);
+      powerAnimationFrame = null;
+    }
+
+    powerFeatureSlides.forEach((slide, index) => {
+      slide.style.removeProperty('--power-opacity');
+      slide.style.removeProperty('--power-blur');
+      slide.style.removeProperty('--power-translate-y');
+      slide.style.removeProperty('--power-copy-y');
+      slide.style.removeProperty('--power-media-y');
+      slide.style.removeProperty('--power-scale');
+      slide.style.zIndex = String(powerFeatureSlides.length - index);
+    });
+  };
+
+  const renderPowerFeaturesStage = () => {
+    powerAnimationFrame = null;
+    renderedPowerProgress += (targetPowerProgress - renderedPowerProgress) * 0.14;
+
+    if (Math.abs(targetPowerProgress - renderedPowerProgress) < 0.0008) {
+      renderedPowerProgress = targetPowerProgress;
+    }
+
+    setPowerFeaturesStage(renderedPowerProgress);
+
+    if (Math.abs(targetPowerProgress - renderedPowerProgress) >= 0.0008) {
+      powerAnimationFrame = window.requestAnimationFrame(renderPowerFeaturesStage);
+    }
+  };
+
+  const schedulePowerFeaturesRender = () => {
+    if (powerAnimationFrame) return;
+    powerAnimationFrame = window.requestAnimationFrame(renderPowerFeaturesStage);
+  };
+
+  const snapPowerFeaturesToNearestSlide = () => {
+    if (!powerFeatureSlides.length) return;
+
+    const lastIndex = Math.max(0, powerFeatureSlides.length - 1);
+    if (lastIndex === 0) {
+      targetPowerProgress = 0;
+      renderedPowerProgress = 0;
+      setPowerFeaturesStage(0);
+      return;
+    }
+
+    const snappedIndex = Math.round(targetPowerProgress * lastIndex);
+    targetPowerProgress = snappedIndex / lastIndex;
+    schedulePowerFeaturesRender();
+  };
+
+  const setPowerFeaturesStage = (progress) => {
+    if (!powerFeatureSlides.length) return;
+
+    const lastIndex = Math.max(0, powerFeatureSlides.length - 1);
+    if (lastIndex === 0) {
+      showPowerSlide(powerFeatureSlides[0], 0, 1);
+      return;
+    }
+
+    const stageProgress = progress * lastIndex;
+    const baseIndex = Math.min(lastIndex, Math.floor(stageProgress));
+    const nextIndex = Math.min(lastIndex, baseIndex + 1);
+    const localProgress = stageProgress - baseIndex;
+    const transitionStart = 0.18;
+    const transitionEnd = 0.9;
+
+    powerFeatureSlides.forEach(hidePowerSlide);
+
+    if (baseIndex === nextIndex) {
+      showPowerSlide(powerFeatureSlides[baseIndex], baseIndex, 1);
+      return;
+    }
+
+    if (localProgress <= transitionStart) {
+      showPowerSlide(powerFeatureSlides[baseIndex], baseIndex, 1);
+      return;
+    }
+
+    if (localProgress >= transitionEnd) {
+      showPowerSlide(powerFeatureSlides[nextIndex], nextIndex, 1);
+      return;
+    }
+
+    const transitionProgress = easeOutCubic(
+      (localProgress - transitionStart) / (transitionEnd - transitionStart)
+    );
+
+    showPowerSlide(powerFeatureSlides[baseIndex], baseIndex, 1 - transitionProgress);
+    showPowerSlide(powerFeatureSlides[nextIndex], nextIndex, transitionProgress);
+  };
+
+  const updatePowerFeaturesSpacerHeight = () => {
+    if (!powerFeaturesSpacer || !powerFeaturesViewport || !powerFeatureSlides.length) return;
+
+    if (isMobilePowerFeatures()) {
+      powerFeaturesSpacer.style.height = 'auto';
+      resetPowerFeaturesStage();
+      return;
+    }
+
+    const slideScreens = Math.max(3.6, powerFeatureSlides.length * 0.62);
+    const targetHeight = window.innerHeight * slideScreens;
+
+    powerFeaturesSpacer.style.height = `${Math.ceil(targetHeight)}px`;
+  };
+
+  const updatePowerFeaturesTargetProgress = () => {
+    if (!powerFeaturesSpacer || !powerFeaturesViewport) return;
+
+    if (isMobilePowerFeatures()) {
+      targetPowerProgress = 0;
+      resetPowerFeaturesStage();
+      return;
+    }
+
+    const spacerRect = powerFeaturesSpacer.getBoundingClientRect();
+    const start = spacerRect.top + window.scrollY;
+    const end = spacerRect.bottom + window.scrollY - window.innerHeight;
+    const current = window.scrollY;
+    const range = Math.max(1, end - start);
+    let progress = (current - start) / range;
+    progress = Math.max(0, Math.min(1, progress));
+    targetPowerProgress = progress;
+    schedulePowerFeaturesRender();
+  };
+
+  const syncPowerFeaturesScroll = () => {
+    if (!powerFeaturesSpacer || !powerFeaturesViewport) return;
+
+    if (isMobilePowerFeatures()) {
+      if (powerScrollIdleTimeout) {
+        window.clearTimeout(powerScrollIdleTimeout);
+        powerScrollIdleTimeout = null;
+      }
+      targetPowerProgress = 0;
+      renderedPowerProgress = 0;
+      resetPowerFeaturesStage();
+      return;
+    }
+
+    updatePowerFeaturesTargetProgress();
+
+    if (powerScrollIdleTimeout) {
+      window.clearTimeout(powerScrollIdleTimeout);
+    }
+
+    powerScrollIdleTimeout = window.setTimeout(() => {
+      powerScrollIdleTimeout = null;
+      snapPowerFeaturesToNearestSlide();
+    }, 120);
+  };
+
+  if (powerFeaturesSpacer && powerFeaturesViewport && powerFeatureSlides.length) {
+    updatePowerFeaturesSpacerHeight();
+    renderedPowerProgress = targetPowerProgress = 0;
+    syncPowerFeaturesScroll();
+
+    window.addEventListener('scroll', syncPowerFeaturesScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      updatePowerFeaturesSpacerHeight();
+      syncPowerFeaturesScroll();
+    });
+    window.addEventListener('load', () => {
+      updatePowerFeaturesSpacerHeight();
+      syncPowerFeaturesScroll();
+    });
+  }
+
+  // 5. Power feature device toggle
+  const powerToggle = document.querySelector('[data-power-toggle]');
+  const powerToggleButtons = Array.from(document.querySelectorAll('[data-power-device-trigger]'));
+  const powerImages = Array.from(document.querySelectorAll('[data-power-image]'));
+  const powerMediaFrames = Array.from(document.querySelectorAll('[data-power-media]'));
+
+  const setActivePowerDevice = (device) => {
+    if (!powerToggle) return;
+
+    powerToggle.dataset.activeDevice = device;
+    powerToggle.style.setProperty('--toggle-index', device === 'ipad' ? '1' : '0');
+    powerFeaturesViewport?.classList.toggle('is-ipad', device === 'ipad');
+    powerFeaturesViewport?.classList.toggle('is-iphone', device !== 'ipad');
+
+    powerToggleButtons.forEach((button) => {
+      const isActive = button.dataset.powerDeviceTrigger === device;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-selected', String(isActive));
+      button.setAttribute('tabindex', isActive ? '0' : '-1');
+    });
+
+    powerImages.forEach((image) => {
+      const nextSrc = image.dataset[device === 'ipad' ? 'ipadSrc' : 'iphoneSrc'];
+      if (nextSrc && image.getAttribute('src') !== nextSrc) {
+        image.setAttribute('src', nextSrc);
+      }
+    });
+
+    powerMediaFrames.forEach((frame) => {
+      frame.classList.toggle('is-ipad', device === 'ipad');
+    });
+
+    updatePowerFeaturesSpacerHeight();
+    syncPowerFeaturesScroll();
+  };
+
+  if (powerToggle && powerToggleButtons.length) {
+    setActivePowerDevice(getDefaultDeviceFamily());
+
+    powerToggleButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        setActivePowerDevice(button.dataset.powerDeviceTrigger);
+        button.focus();
+      });
+    });
+
+    powerToggle.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+
+      event.preventDefault();
+      const currentIndex = powerToggleButtons.findIndex((button) => button.classList.contains('is-active'));
+      const nextIndex = event.key === 'ArrowRight'
+        ? (currentIndex + 1) % powerToggleButtons.length
+        : (currentIndex - 1 + powerToggleButtons.length) % powerToggleButtons.length;
+
+      const nextButton = powerToggleButtons[nextIndex];
+      setActivePowerDevice(nextButton.dataset.powerDeviceTrigger);
+      nextButton.focus();
+    });
+  }
+
+  // 6. Bezel intro transition
   const root = document.documentElement;
   const bezelAuras = Array.from(document.querySelectorAll('.bezel-aura'));
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -108,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 4. Sticky horizontal showcase logic
+  // 7. Sticky horizontal showcase logic
   const showcaseSpacer = document.querySelector('#showcase-height');
   const showcaseConfigs = {
     iphone: {
@@ -188,14 +461,12 @@ document.addEventListener('DOMContentLoaded', () => {
     syncActiveShowcaseScroll();
   });
 
-  // 5. Device segmented toggle for the showcase gallery
+  // 8. Device segmented toggle for the showcase gallery
   const toggle = document.querySelector('[data-showcase-toggle]');
   const toggleButtons = Array.from(document.querySelectorAll('[data-device-trigger]'));
   const showcasePanels = Array.from(document.querySelectorAll('[data-showcase-panel]'));
   const showcaseCopies = Array.from(document.querySelectorAll('[data-showcase-copy]'));
-  const getDefaultShowcaseDevice = () => (
-    window.matchMedia('(max-width: 767px)').matches ? 'iphone' : 'ipad'
-  );
+  const getDefaultShowcaseDevice = () => getDefaultDeviceFamily();
 
   const setActiveShowcase = (device) => {
     if (!toggle) return;
@@ -249,4 +520,5 @@ document.addEventListener('DOMContentLoaded', () => {
       nextButton.focus();
     });
   }
+
 });
