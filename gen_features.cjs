@@ -199,6 +199,13 @@ const template = (data) => `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H5EW5KWZC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4H5EW5KWZC');
+  </script>
   <title>${data.title}</title>
   <meta name="description" content="${data.desc}">
   <meta name="keywords" content="${data.seo_keywords}">
