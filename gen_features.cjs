@@ -202,7 +202,7 @@ const template = (data) => `<!doctype html>
   <title>${data.title}</title>
   <meta name="description" content="${data.desc}">
   <meta name="keywords" content="${data.seo_keywords}">
-  <link rel="canonical" href="https://bezelstudio.parthant.com/features/${data.id}.html">
+  <link rel="canonical" href="https://www.bezelstudio.app/features/${data.id}.html">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/assets/brand/favicon-32x32.png" sizes="32x32">
@@ -216,13 +216,13 @@ const template = (data) => `<!doctype html>
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="${data.title}">
   <meta property="og:description" content="${data.desc}">
-  <meta property="og:url" content="https://bezelstudio.parthant.com/features/${data.id}.html">
-  <meta property="og:image" content="https://bezelstudio.parthant.com${data.ipad_shot}">
+  <meta property="og:url" content="https://www.bezelstudio.app/features/${data.id}.html">
+  <meta property="og:image" content="https://www.bezelstudio.app${data.ipad_shot}">
   <meta property="og:image:alt" content="${data.headline} on iPad">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${data.title}">
   <meta name="twitter:description" content="${data.desc}">
-  <meta name="twitter:image" content="https://bezelstudio.parthant.com${data.ipad_shot}">
+  <meta name="twitter:image" content="https://www.bezelstudio.app${data.ipad_shot}">
   <meta name="twitter:image:alt" content="${data.headline} on iPad">
   <meta name="color-scheme" content="light dark">
   <script>
