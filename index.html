@@ -248,17 +248,17 @@
           <use href="#icon-menu"></use>
         </svg>
       </button>
-      <div id="site-header-menu" class="site-header__menu-panel" data-header-menu-panel aria-hidden="true">
-        <nav class="site-header__menu-links">
-          <a href="#features">Features</a>
-          <a href="#workflow">Workflow</a>
-          <a href="#faq">FAQ</a>
-        </nav>
-        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="site-header__menu-cta">
-          Get the App
-        </a>
-      </div>
     </header>
+    <div id="site-header-menu" class="site-header__menu-panel" data-header-menu-panel aria-hidden="true">
+      <nav class="site-header__menu-links">
+        <a href="#features">Features</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="site-header__menu-cta">
+        Get the App
+      </a>
+    </div>
   </div>
 
   <main class="app-shell relative z-10">
@@ -333,12 +333,17 @@
               <div id="features-track" class="features-track">
 
                 <!-- Bento item: Device frames (large) -->
-                <a href="./features/device-frames.html"
-                  class="feature-card feature-card--frames motion-card group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 transition-all duration-500 reveal cursor-pointer flex flex-col h-full min-h-[420px]">
+                <article
+                  class="feature-card feature-card--frames motion-card group relative overflow-hidden rounded-3xl transition-all duration-500 reveal flex flex-col h-full min-h-[420px]">
                   <div class="p-7 md:p-8 z-10 flex-shrink-0">
-                    <h3
-                      class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      Photorealistic Frames</h3>
+                    <div class="feature-card__heading mb-2">
+                      <h3
+                        class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white transition-colors">
+                        Photorealistic Frames</h3>
+                      <a href="./features/device-frames.html" class="feature-card__link" aria-label="Open Photorealistic Frames feature page">
+                        <span aria-hidden="true">›</span>
+                      </a>
+                    </div>
                     <p class="text-zinc-600 dark:text-zinc-400 text-lg max-w-md">Build iPhone mockups, iPad screenshots,
                       Apple Watch layouts, and multi-device campaign visuals with screenshots or screen recordings
                       placed directly inside precise Apple bezels.</p>
@@ -355,15 +360,20 @@
                     <img src="/assets/devices/bezels/apple-watch.webp" alt="Apple Watch bezel placeholder"
                       class="feature-stack__device feature-stack__device--watch">
                   </div>
-                </a>
+                </article>
 
                 <!-- Bento item: Typography -->
-                <a href="./features/typography.html"
-                  class="feature-card feature-card--typography motion-card group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 transition-all duration-500 reveal cursor-pointer min-h-[320px] flex flex-col">
+                <article
+                  class="feature-card feature-card--typography motion-card group relative overflow-hidden rounded-3xl transition-all duration-500 reveal min-h-[320px] flex flex-col">
                   <div class="p-7 md:p-8 z-10">
-                    <h3
-                      class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      Pro Typography</h3>
+                    <div class="feature-card__heading mb-2">
+                      <h3
+                        class="text-2xl font-bold text-zinc-900 dark:text-white transition-colors">
+                        Pro Typography</h3>
+                      <a href="./features/typography.html" class="feature-card__link" aria-label="Open Pro Typography feature page">
+                        <span aria-hidden="true">›</span>
+                      </a>
+                    </div>
                     <p class="text-zinc-600 dark:text-zinc-400 text-base">Fonts, gradients, shadows, strokes, and
                       glass-backed captions built for conversion-focused screenshot copy.</p>
                   </div>
@@ -371,15 +381,20 @@
                     <img src="/assets/stickers/typography.png" alt="Typography sticker"
                       class="feature-typography-scene__art">
                   </div>
-                </a>
+                </article>
 
                 <!-- Bento item: Translation (wide) -->
-                <a href="./features/translation.html"
-                  class="feature-card feature-card--translation motion-card group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 transition-all duration-500 reveal cursor-pointer min-h-[320px] flex flex-col">
+                <article
+                  class="feature-card feature-card--translation motion-card group relative overflow-hidden rounded-3xl transition-all duration-500 reveal min-h-[320px] flex flex-col">
                   <div class="p-7 md:p-8 w-full z-10">
-                    <h3
-                      class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">
-                      Global Translation</h3>
+                    <div class="feature-card__heading mb-2">
+                      <h3
+                        class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white transition-colors">
+                        Global Translation</h3>
+                      <a href="./features/translation.html" class="feature-card__link" aria-label="Open Global Translation feature page">
+                        <span aria-hidden="true">›</span>
+                      </a>
+                    </div>
                     <p class="text-zinc-600 dark:text-zinc-400 text-lg">Translate the current canvas or an entire
                       screenshot project with Apple Translate so localized App Store assets stop being a manual rebuild.
                     </p>
@@ -394,15 +409,20 @@
                     <span class="feature-lang-pill feature-lang-pill--bottom-right feature-lang-pill--it">Ciao</span>
                     <span class="feature-lang-pill feature-lang-pill--center-bottom feature-lang-pill--hi">नमस्ते</span>
                   </div>
-                </a>
+                </article>
 
                 <!-- Bento item: Stickers -->
-                <a href="./features/images-stickers.html"
-                  class="feature-card feature-card--stickers motion-card group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 transition-all duration-500 reveal cursor-pointer min-h-[320px] flex flex-col">
+                <article
+                  class="feature-card feature-card--stickers motion-card group relative overflow-hidden rounded-3xl transition-all duration-500 reveal min-h-[320px] flex flex-col">
                   <div class="p-7 md:p-8 z-10">
-                    <h3
-                      class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      Stickers & Cutouts</h3>
+                    <div class="feature-card__heading mb-2">
+                      <h3
+                        class="text-2xl font-bold text-zinc-900 dark:text-white transition-colors">
+                        Stickers & Cutouts</h3>
+                      <a href="./features/images-stickers.html" class="feature-card__link" aria-label="Open Stickers and Cutouts feature page">
+                        <span aria-hidden="true">›</span>
+                      </a>
+                    </div>
                     <p class="text-zinc-600 dark:text-zinc-400 text-base">Remove backgrounds, create bordered cutouts,
                       save reusable assets, and generate new stickers with Image Playground.</p>
                   </div>
@@ -420,15 +440,20 @@
                     <img src="/assets/stickers/dog.png" alt="Dog sticker"
                       class="feature-sticker feature-sticker--dog">
                   </div>
-                </a>
+                </article>
 
                 <!-- Bento item: Draw & Doodle -->
-                <a href="./features/draw-doodle.html"
-                  class="feature-card feature-card--draw motion-card group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 transition-all duration-500 reveal cursor-pointer min-h-[320px] flex flex-col">
+                <article
+                  class="feature-card feature-card--draw motion-card group relative overflow-hidden rounded-3xl transition-all duration-500 reveal min-h-[320px] flex flex-col">
                   <div class="p-7 md:p-8 w-full z-10">
-                    <h3
-                      class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-pink-500 dark:group-hover:text-pink-400 transition-colors">
-                      Draw & Annotate</h3>
+                    <div class="feature-card__heading mb-2">
+                      <h3
+                        class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white transition-colors">
+                        Draw & Annotate</h3>
+                      <a href="./features/draw-doodle.html" class="feature-card__link" aria-label="Open Draw and Annotate feature page">
+                        <span aria-hidden="true">›</span>
+                      </a>
+                    </div>
                     <p class="text-zinc-600 dark:text-zinc-400 text-lg">Use PencilKit to circle features, sketch arrows,
                       and add hand-drawn callouts that still behave like editable canvas elements.</p>
                   </div>
@@ -436,15 +461,20 @@
                     class="feature-draw-scene w-full mt-auto h-[15rem] md:h-[16rem] flex items-center justify-center px-4 md:px-8 py-4 md:py-6 overflow-visible">
                     <img src="/assets/stickers/draw.png" alt="Draw sticker" class="feature-draw-scene__art">
                   </div>
-                </a>
+                </article>
 
                 <!-- Bento item: Layers & Precision -->
-                <a href="./features/layers-precision.html"
-                  class="feature-card feature-card--layers motion-card group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/80 transition-all duration-500 reveal cursor-pointer min-h-[320px] flex flex-col">
+                <article
+                  class="feature-card feature-card--layers motion-card group relative overflow-hidden rounded-3xl transition-all duration-500 reveal min-h-[320px] flex flex-col">
                   <div class="p-7 md:p-8 z-10">
-                    <h3
-                      class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors">
-                      Layer Precision</h3>
+                    <div class="feature-card__heading mb-2">
+                      <h3
+                        class="text-2xl font-bold text-zinc-900 dark:text-white transition-colors">
+                        Layer Precision</h3>
+                      <a href="./features/layers-precision.html" class="feature-card__link" aria-label="Open Layer Precision feature page">
+                        <span aria-hidden="true">›</span>
+                      </a>
+                    </div>
                     <p class="text-zinc-600 dark:text-zinc-400 text-base">True layer ordering for text, images,
                       drawings, and frames with gesture controls and precision alignment.</p>
                   </div>
@@ -452,7 +482,7 @@
                     <img src="/assets/stickers/layers.png" alt="Layers artwork"
                       class="feature-layers-scene__art">
                   </div>
-                </a>
+                </article>
 
               </div>
             </div>
