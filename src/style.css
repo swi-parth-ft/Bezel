@@ -33,11 +33,6 @@
 
 /* Removed hardcoded body styles to allow dynamic Tailwind light/dark variants */
 
-html.bezel-intro-pending body,
-html.bezel-intro-lineup body {
-  overflow: hidden;
-}
-
 .app-shell {
   opacity: 1;
   filter: blur(0);
@@ -46,15 +41,6 @@ html.bezel-intro-lineup body {
     opacity 720ms var(--ease-apple),
     transform 900ms var(--ease-apple),
     filter 900ms var(--ease-apple);
-}
-
-html.bezel-intro-pending .app-shell,
-html.bezel-intro-lineup .app-shell {
-  opacity: 0;
-  filter: blur(10px);
-  transform: translate3d(0, 24px, 0);
-  pointer-events: none;
-  user-select: none;
 }
 
 /* Reveal Animation */
@@ -847,11 +833,19 @@ html.bezel-intro-lineup .app-shell {
 }
 
 .hero-media-frame--image {
+  position: static;
   background: transparent;
   border: 0;
+  border-radius: 0;
   padding: 0;
   box-shadow: none;
   animation: none;
+  overflow: visible;
+  transform: none;
+}
+
+.hero-media-frame--image::before {
+  content: none;
 }
 
 .hero-media-image {
@@ -860,6 +854,9 @@ html.bezel-intro-lineup .app-shell {
   height: auto;
   object-fit: contain;
   border-radius: 0;
+  box-shadow: none;
+  filter: none;
+  transform: none;
 }
 
 .motion-card {
