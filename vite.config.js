@@ -14,6 +14,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
+        404: resolve(__dirname, '404.html'),
         privacy: resolve(__dirname, 'privacy.html'),
         'features/device-frames': resolve(__dirname, 'features/device-frames.html'),
         'features/canvas-styling': resolve(__dirname, 'features/canvas-styling.html'),

@@ -203,9 +203,27 @@ const template = (data) => `<!doctype html>
   <meta name="description" content="${data.desc}">
   <meta name="keywords" content="${data.seo_keywords}">
   <link rel="canonical" href="https://bezelstudio.parthant.com/features/${data.id}.html">
-  <link rel="icon" href="/assets/brand/favicon.svg">
-  <link rel="apple-touch-icon" href="/assets/brand/bezel-studio-logo.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
   <link rel="stylesheet" href="/src/style.css">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Bezel Studio">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="${data.title}">
+  <meta property="og:description" content="${data.desc}">
+  <meta property="og:url" content="https://bezelstudio.parthant.com/features/${data.id}.html">
+  <meta property="og:image" content="https://bezelstudio.parthant.com${data.ipad_shot}">
+  <meta property="og:image:alt" content="${data.headline} on iPad">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${data.title}">
+  <meta name="twitter:description" content="${data.desc}">
+  <meta name="twitter:image" content="https://bezelstudio.parthant.com${data.ipad_shot}">
+  <meta name="twitter:image:alt" content="${data.headline} on iPad">
   <meta name="color-scheme" content="light dark">
   <script>
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
