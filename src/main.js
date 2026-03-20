@@ -491,4 +491,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 9. GA4 tracking for App Store CTA clicks
+  const trackEvent = (name, params = {}) => {
+    if (typeof window.gtag !== 'function') return;
+    window.gtag('event', name, params);
+  };
+
+  const normalizeLabel = (value) => (
+    (value || '')
+      .trim()
+      .replace(/\s+/g, ' ')
+      .toLowerCase()
+  );
+
+  const getAppStoreSection = (link) => {
+    const sectionRoot = link.closest('[data-power-slide], section[id], header, footer, nav, main');
+    if (!sectionRoot) return 'page';
+    if (sectionRoot.matches('header')) return 'header';
+    if (sectionRoot.matches('footer')) return 'footer';
+    if (sectionRoot.matches('nav')) return 'nav';
+    if (sectionRoot.matches('main')) return 'main';
+    if (sectionRoot.hasAttribute('data-power-slide')) {
+      return `power-${sectionRoot.getAttribute('data-power-slide')}`;
+    }
+    return sectionRoot.id || 'section';
+  };
+
+  const appStoreLinks = Array.from(document.querySelectorAll('a[href*="apps.apple.com"]'));
+  appStoreLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      const text = normalizeLabel(link.textContent);
+      const pathname = window.location.pathname;
+      const pageType = pathname.includes('/features/') ? 'feature' : 'site';
+      const section = getAppStoreSection(link);
+
+      trackEvent('app_store_click', {
+        page_type: pageType,
+        page_path: pathname,
+        link_text: text || 'app store',
+        section,
+        destination_host: 'apps.apple.com',
+      });
+
+      if (pageType === 'feature') {
+        trackEvent('feature_cta_click', {
+          feature_slug: pathname.split('/').pop()?.replace(/\.html$/, '') || 'feature',
+          link_text: text || 'app store',
+          section,
+        });
+      }
+    });
+  });
+
 });
