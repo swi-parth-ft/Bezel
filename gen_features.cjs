@@ -21,7 +21,8 @@ const features = [
         <li><strong>No Watermarks:</strong> Generate pristine, 4K device mockups ready for App Store Connect.</li>
       </ul>
     `,
-    img: "/assets/feature-covers/device-frames.webp"
+    iphone_shot: "/assets/feature-platforms/iphone/export-share.webp",
+    ipad_shot: "/assets/feature-platforms/ipad/export-share.webp"
   },
   {
     id: "canvas-styling",
@@ -41,7 +42,8 @@ const features = [
         <li><strong>Pattern Overlays:</strong> Use subtle geometric or noise patterns to add premium texture to your iOS app mockups.</li>
       </ul>
     `,
-    img: "/assets/feature-covers/canvas-styling.webp"
+    iphone_shot: "/assets/feature-platforms/iphone/animated-patterns-lighting.webp",
+    ipad_shot: "/assets/feature-platforms/ipad/animated-patterns-lighting.webp"
   },
   {
     id: "typography",
@@ -61,7 +63,8 @@ const features = [
         <li><strong>Apple-Native Fonts:</strong> Native integration with iOS fonts to maintain a professional, ecosystem-aligned aesthetic.</li>
       </ul>
     `,
-    img: "/assets/feature-covers/typography.webp"
+    iphone_shot: "/assets/feature-platforms/iphone/typography.webp",
+    ipad_shot: "/assets/feature-platforms/ipad/typography.webp"
   },
   {
     id: "images-stickers",
@@ -81,7 +84,8 @@ const features = [
         <li><strong>Callout Arrows & Badges:</strong> Direct the user's eye exactly where you want it.</li>
       </ul>
     `,
-    img: "/assets/feature-covers/images-stickers.webp"
+    iphone_shot: "/assets/feature-platforms/iphone/images-stickers.webp",
+    ipad_shot: "/assets/feature-platforms/ipad/images-stickers.webp"
   },
   {
     id: "draw-doodle",
@@ -101,7 +105,8 @@ const features = [
         <li><strong>Organic Annotations:</strong> Break away from rigid corporate templates with custom, hand-drawn highlights.</li>
       </ul>
     `,
-    img: "/assets/feature-covers/draw-doodle.webp"
+    iphone_shot: "/assets/feature-platforms/iphone/images-stickers.webp",
+    ipad_shot: "/assets/feature-platforms/ipad/images-stickers.webp"
   },
   {
     id: "translation",
@@ -121,7 +126,8 @@ const features = [
         <li><strong>Auto-Resizing Text:</strong> Our typography engine automatically adjusts font sizes to accommodate longer translated phrases.</li>
       </ul>
     `,
-    img: "/assets/feature-covers/translation.webp"
+    iphone_shot: "/assets/feature-platforms/iphone/translation.webp",
+    ipad_shot: "/assets/feature-platforms/ipad/translation.webp"
   },
   {
     id: "layers-precision",
@@ -141,7 +147,8 @@ const features = [
         <li><strong>Zoom & Pan:</strong> Dive deep into the details with fluid, gesture-based canvas navigation.</li>
       </ul>
     `,
-    img: "/assets/feature-covers/layers-precision.webp"
+    iphone_shot: "/assets/feature-platforms/iphone/layers-precision.webp",
+    ipad_shot: "/assets/feature-platforms/ipad/layers-precision.webp"
   },
   {
     id: "projects-presets",
@@ -161,7 +168,8 @@ const features = [
         <li><strong>Duplicate & Iterate:</strong> Need to run an A/B test? Duplicate an entire project instantly and tweak the copy.</li>
       </ul>
     `,
-    img: "/assets/feature-covers/projects-presets.webp"
+    iphone_shot: "/assets/feature-platforms/iphone/projects-presets.webp",
+    ipad_shot: "/assets/feature-platforms/ipad/projects-presets.webp"
   },
   {
     id: "export-share",
@@ -181,7 +189,8 @@ const features = [
         <li><strong>Native Share Sheet:</strong> Save directly to your iOS Photos app, Files app, or AirDrop instantly to your Mac.</li>
       </ul>
     `,
-    img: "/assets/feature-covers/export-share.webp"
+    iphone_shot: "/assets/feature-platforms/iphone/export-share.webp",
+    ipad_shot: "/assets/feature-platforms/ipad/export-share.webp"
   }
 ];
 
@@ -319,11 +328,14 @@ const template = (data) => `<!doctype html>
       </div>
     </section>
 
-    <!-- Fully Transparent Image Container -->
-    <section class="w-full max-w-6xl px-4 md:px-8 mb-32 reveal flex justify-center" style="animation-delay: 200ms;">
-      <div class="relative w-full flex items-center justify-center group">
-        <!-- Pulse animation on the image itself, NO background or border -->
-        <img class="relative w-full md:w-4/5 max-h-[800px] object-contain transition-transform duration-1000 group-hover:scale-105 group-hover:-translate-y-2" src="${data.img}" alt="${data.headline}">
+    <section class="w-full max-w-6xl px-4 md:px-8 mb-32 reveal" style="animation-delay: 200ms;">
+      <div class="flex items-end justify-center gap-5 md:gap-10">
+        <div class="w-[26%] md:w-[22%] lg:w-[20%] shrink-0">
+          <img class="block w-full h-auto object-contain" src="${data.iphone_shot}" alt="${data.headline} on iPhone">
+        </div>
+        <div class="w-[56%] md:w-[48%] lg:w-[44%] shrink-0">
+          <img class="block w-full h-auto object-contain" src="${data.ipad_shot}" alt="${data.headline} on iPad">
+        </div>
       </div>
     </section>
 

@@ -17,6 +17,8 @@ The source archive has also been converted to WebP so the library remains future
 | `public/assets/showcase/ipad` | iPad workflow carousel assets used on the homepage |
 | `public/assets/power-features/iphone` | iPhone mode imagery for the Power Features section |
 | `public/assets/power-features/ipad` | iPad mode imagery for the Power Features section |
+| `public/assets/feature-platforms/iphone` | Dedicated iPhone screenshots used on feature detail pages |
+| `public/assets/feature-platforms/ipad` | Dedicated iPad screenshots used on feature detail pages |
 | `public/assets/feature-pages` | Feature-specific hero artwork for deep-dive feature pages |
 | `public/assets/feature-covers` | Reusable static cover art used by generated and hand-authored feature pages |
 | `public/assets/media` | Non-image media such as video |
@@ -28,7 +30,8 @@ The source archive has also been converted to WebP so the library remains future
 
 | File | Role | Current Usage |
 | --- | --- | --- |
-| `public/assets/brand/bezel-studio-logo.png` | Primary app/logo image | Header, footer, Apple touch icon, social metadata |
+| `public/assets/brand/bezel-studio-logo.webp` | Primary app/logo image | Header, footer, social metadata |
+| `public/assets/brand/bezel-studio-logo.png` | Apple touch icon source | Apple touch icon |
 | `public/assets/brand/app-store-logo.svg` | App Store badge icon | CTA buttons on homepage and feature pages |
 | `public/assets/brand/favicon.svg` | Browser favicon | Page favicon |
 
@@ -36,11 +39,11 @@ The source archive has also been converted to WebP so the library remains future
 
 | File | Role | Current Usage |
 | --- | --- | --- |
-| `public/assets/devices/bezels/iphone.png` | Transparent iPhone bezel | Ambient hero art and device-stack scene |
-| `public/assets/devices/bezels/ipad.png` | Transparent iPad bezel | Ambient hero art and device-stack scene |
-| `public/assets/devices/bezels/imac.png` | Transparent iMac bezel | Ambient hero art and device-stack scene |
-| `public/assets/devices/bezels/macbook.png` | Transparent MacBook bezel | Ambient hero art and device-stack scene |
-| `public/assets/devices/bezels/apple-watch.png` | Transparent Apple Watch bezel | Ambient hero art and device-stack scene |
+| `public/assets/devices/bezels/iphone.webp` | Transparent iPhone bezel | Ambient hero art and device-stack scene |
+| `public/assets/devices/bezels/ipad.webp` | Transparent iPad bezel | Ambient hero art and device-stack scene |
+| `public/assets/devices/bezels/imac.webp` | Transparent iMac bezel | Ambient hero art and device-stack scene |
+| `public/assets/devices/bezels/macbook.webp` | Transparent MacBook bezel | Ambient hero art and device-stack scene |
+| `public/assets/devices/bezels/apple-watch.webp` | Transparent Apple Watch bezel | Ambient hero art and device-stack scene |
 
 ### Stickers
 
@@ -107,25 +110,67 @@ These assets are switched at runtime based on the iPhone/iPad toggle in the home
 
 | File | Feature |
 | --- | --- |
-| `public/assets/power-features/iphone/canvas-motion.png` | Canvas motion |
-| `public/assets/power-features/iphone/transforms-3-axis.png` | 3-axis transforms |
-| `public/assets/power-features/iphone/copy-paste-projects.png` | Copy and paste across projects |
-| `public/assets/power-features/iphone/undo-redo.png` | Undo and redo everywhere |
-| `public/assets/power-features/iphone/glass-caption-styling.png` | Glass-backed caption styling |
-| `public/assets/power-features/iphone/animated-patterns-lighting.png` | Animated patterns and lighting |
-| `public/assets/power-features/iphone/bezel-ai-shortcuts.png` | BezelAI and Shortcuts |
+| `public/assets/power-features/iphone/canvas-motion.webp` | Canvas motion |
+| `public/assets/power-features/iphone/transforms-3-axis.webp` | 3-axis transforms |
+| `public/assets/power-features/iphone/copy-paste-projects.webp` | Copy and paste across projects |
+| `public/assets/power-features/iphone/undo-redo.webp` | Undo and redo everywhere |
+| `public/assets/power-features/iphone/glass-caption-styling.webp` | Glass-backed caption styling |
+| `public/assets/power-features/iphone/animated-patterns-lighting.webp` | Animated patterns and lighting |
+| `public/assets/power-features/iphone/bezel-ai-shortcuts.webp` | BezelAI and Shortcuts |
 
 #### iPad
 
 | File | Feature |
 | --- | --- |
-| `public/assets/power-features/ipad/canvas-motion.png` | Canvas motion |
-| `public/assets/power-features/ipad/transforms-3-axis.png` | 3-axis transforms |
-| `public/assets/power-features/ipad/copy-paste-projects.png` | Copy and paste across projects |
-| `public/assets/power-features/ipad/undo-redo.png` | Undo and redo everywhere |
-| `public/assets/power-features/ipad/glass-caption-styling.png` | Glass-backed caption styling |
-| `public/assets/power-features/ipad/animated-patterns-lighting.png` | Animated patterns and lighting |
-| `public/assets/power-features/ipad/bezel-ai-shortcuts.png` | BezelAI and Shortcuts |
+| `public/assets/power-features/ipad/canvas-motion.webp` | Canvas motion |
+| `public/assets/power-features/ipad/transforms-3-axis.webp` | 3-axis transforms |
+| `public/assets/power-features/ipad/copy-paste-projects.webp` | Copy and paste across projects |
+| `public/assets/power-features/ipad/undo-redo.webp` | Undo and redo everywhere |
+| `public/assets/power-features/ipad/glass-caption-styling.webp` | Glass-backed caption styling |
+| `public/assets/power-features/ipad/animated-patterns-lighting.webp` | Animated patterns and lighting |
+| `public/assets/power-features/ipad/bezel-ai-shortcuts.webp` | BezelAI and Shortcuts |
+
+### Feature Platform Screenshots
+
+These are the dedicated per-platform assets currently used by the feature detail pages.
+
+#### iPhone
+
+| File | Current Usage |
+| --- | --- |
+| `public/assets/feature-platforms/iphone/bezel-ai-shortcuts.webp` | `features/bezel-ai-shortcuts.html` |
+| `public/assets/feature-platforms/iphone/canvas-motion.webp` | `features/canvas-motion.html` |
+| `public/assets/feature-platforms/iphone/canvas-styling.webp` | `features/canvas-styling.html` |
+| `public/assets/feature-platforms/iphone/copy-paste-projects.webp` | `features/copy-paste-projects.html` |
+| `public/assets/feature-platforms/iphone/device-frames.webp` | `features/device-frames.html` |
+| `public/assets/feature-platforms/iphone/draw-doodle.webp` | `features/draw-doodle.html` |
+| `public/assets/feature-platforms/iphone/export-share.webp` | `features/export-share.html` |
+| `public/assets/feature-platforms/iphone/images-stickers.webp` | `features/images-stickers.html` |
+| `public/assets/feature-platforms/iphone/layers-precision.webp` | `features/layers-precision.html` |
+| `public/assets/feature-platforms/iphone/projects-presets.webp` | `features/projects-presets.html` |
+| `public/assets/feature-platforms/iphone/transforms-3-axis.webp` | `features/transforms-3-axis.html` |
+| `public/assets/feature-platforms/iphone/translation.webp` | `features/translation.html` |
+| `public/assets/feature-platforms/iphone/typography.webp` | `features/typography.html` |
+| `public/assets/feature-platforms/iphone/undo-redo.webp` | `features/undo-redo.html` |
+
+#### iPad
+
+| File | Current Usage |
+| --- | --- |
+| `public/assets/feature-platforms/ipad/bezel-ai-shortcuts.webp` | `features/bezel-ai-shortcuts.html` |
+| `public/assets/feature-platforms/ipad/canvas-motion.webp` | `features/canvas-motion.html` |
+| `public/assets/feature-platforms/ipad/canvas-styling.webp` | `features/canvas-styling.html` |
+| `public/assets/feature-platforms/ipad/copy-paste-projects.webp` | `features/copy-paste-projects.html` |
+| `public/assets/feature-platforms/ipad/device-frames.webp` | `features/device-frames.html` |
+| `public/assets/feature-platforms/ipad/draw-doodle.webp` | `features/draw-doodle.html` |
+| `public/assets/feature-platforms/ipad/export-share.webp` | `features/export-share.html` |
+| `public/assets/feature-platforms/ipad/images-stickers.webp` | `features/images-stickers.html` |
+| `public/assets/feature-platforms/ipad/layers-precision.webp` | `features/layers-precision.html` |
+| `public/assets/feature-platforms/ipad/projects-presets.webp` | `features/projects-presets.html` |
+| `public/assets/feature-platforms/ipad/transforms-3-axis.webp` | `features/transforms-3-axis.html` |
+| `public/assets/feature-platforms/ipad/translation.webp` | `features/translation.html` |
+| `public/assets/feature-platforms/ipad/typography.webp` | `features/typography.html` |
+| `public/assets/feature-platforms/ipad/undo-redo.webp` | `features/undo-redo.html` |
 
 ### Feature Page Hero Art
 
@@ -133,11 +178,11 @@ These are the feature-specific image assets used by deep-dive pages.
 
 | File | Page |
 | --- | --- |
-| `public/assets/feature-pages/canvas-motion.png` | `features/canvas-motion.html` |
-| `public/assets/feature-pages/transforms-3-axis.png` | `features/transforms-3-axis.html` |
-| `public/assets/feature-pages/copy-paste-projects.png` | `features/copy-paste-projects.html` |
-| `public/assets/feature-pages/undo-redo.png` | `features/undo-redo.html` |
-| `public/assets/feature-pages/bezel-ai-shortcuts.png` | `features/bezel-ai-shortcuts.html` |
+| `public/assets/feature-pages/canvas-motion.webp` | Legacy deep-dive page art |
+| `public/assets/feature-pages/transforms-3-axis.webp` | Legacy deep-dive page art |
+| `public/assets/feature-pages/copy-paste-projects.webp` | Legacy deep-dive page art |
+| `public/assets/feature-pages/undo-redo.webp` | Legacy deep-dive page art |
+| `public/assets/feature-pages/bezel-ai-shortcuts.webp` | Legacy deep-dive page art |
 
 ### Feature Covers
 
@@ -173,11 +218,11 @@ These are broader promotional cover images used by generated or semi-generated f
 
 These folders contain source or older showcase exports, now standardized as WebP, including raw variants such as:
 
-- `backgrounds-raw.png`
-- `icloud-sync-raw.png`
-- `image-playground-raw.png`
-- `translation-raw.png`
-- `typography-raw.png`
+- `backgrounds-raw.webp`
+- `icloud-sync-raw.webp`
+- `image-playground-raw.webp`
+- `translation-raw.webp`
+- `typography-raw.webp`
 - `canvas-motion-legacy.webp`
 
 ### Source Showcase WebP Archive
@@ -185,6 +230,20 @@ These folders contain source or older showcase exports, now standardized as WebP
 - `public/assets/source/showcase/webp/iphone`
 
 This folder holds older WebP exports that are no longer the canonical runtime files after the `public/assets/showcase/...` rename cleanup.
+
+### Imported iPad Feature Page Source Files
+
+- `public/assets/source/imports/ipad-feature-pages`
+
+These are the original PNG imports moved from `~/Downloads` and kept as source originals for the latest feature-page iPad screenshots.
+
+| File | Feeds |
+| --- | --- |
+| `public/assets/source/imports/ipad-feature-pages/device-frames.png` | `public/assets/feature-platforms/ipad/device-frames.webp` |
+| `public/assets/source/imports/ipad-feature-pages/translation.png` | `public/assets/feature-platforms/ipad/translation.webp` |
+| `public/assets/source/imports/ipad-feature-pages/images-stickers.png` | `public/assets/feature-platforms/ipad/images-stickers.webp` |
+| `public/assets/source/imports/ipad-feature-pages/typography.png` | `public/assets/feature-platforms/ipad/typography.webp` |
+| `public/assets/source/imports/ipad-feature-pages/layers-precision.png` | `public/assets/feature-platforms/ipad/layers-precision.webp` |
 
 ### Notes
 
@@ -207,4 +266,5 @@ Use these rules for future additions:
 - The website now reads from `public/assets/` instead of the old mixed folders.
 - The old `iPhoneWebAssests` location is no longer the canonical website asset path.
 - The source archive has been converted from PNG-heavy exports to WebP to keep future-use assets much lighter.
+- The latest five iPad feature screenshots from Downloads were imported into `public/assets/source/imports/ipad-feature-pages` and converted into the live `public/assets/feature-platforms/ipad` set.
 - This file should be updated whenever assets are moved, renamed, added, or deprecated.
