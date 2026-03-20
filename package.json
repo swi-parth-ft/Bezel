@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seo:report": "/Users/parthantala/.pyenv/versions/3.11.5/bin/python3 scripts/seo_operator.py"
   },
   "devDependencies": {
     "vite": "^7.3.1"

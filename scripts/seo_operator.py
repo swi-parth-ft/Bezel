@@ -1,0 +1,514 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import re
+from collections import defaultdict
+from dataclasses import dataclass
+from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
+from typing import Any
+
+import requests
+from google.auth.transport.requests import Request
+from google.oauth2 import service_account
+
+
+DEFAULT_KEY_PATH = "keys/seo-automation.json"
+DEFAULT_SITE_URL = "https://bezelstudio.app/"
+DEFAULT_GA4_PROPERTY_ID = "529323990"
+APP_STORE_HOST = "apps.apple.com"
+
+
+@dataclass
+class ApiClient:
+    key_path: Path
+
+    def _token(self, scopes: list[str]) -> str:
+        creds = service_account.Credentials.from_service_account_file(
+            self.key_path,
+            scopes=scopes,
+        )
+        creds.refresh(Request())
+        return str(creds.token)
+
+    def post(self, url: str, scopes: list[str], payload: dict[str, Any]) -> dict[str, Any]:
+        token = self._token(scopes)
+        response = requests.post(
+            url,
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+            },
+            data=json.dumps(payload),
+            timeout=60,
+        )
+        response.raise_for_status()
+        return response.json()
+
+    def get(self, url: str, scopes: list[str]) -> dict[str, Any]:
+        token = self._token(scopes)
+        response = requests.get(
+            url,
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=60,
+        )
+        response.raise_for_status()
+        return response.json()
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Generate an SEO operations report for Bezel Studio.")
+    parser.add_argument("--key", default=DEFAULT_KEY_PATH, help="Path to the Google service account JSON key.")
+    parser.add_argument("--site-url", default=DEFAULT_SITE_URL, help="Search Console site URL.")
+    parser.add_argument("--ga4-property-id", default=DEFAULT_GA4_PROPERTY_ID, help="GA4 property ID.")
+    parser.add_argument(
+        "--output",
+        default="reports/seo/latest.md",
+        help="Markdown report output path.",
+    )
+    return parser.parse_args()
+
+
+def iso_day(offset_days: int) -> str:
+    return (date.today() + timedelta(days=offset_days)).isoformat()
+
+
+def percent_change(current: float, previous: float) -> str:
+    if previous == 0:
+        if current == 0:
+            return "0%"
+        return "new"
+    delta = ((current - previous) / previous) * 100
+    return f"{delta:+.1f}%"
+
+
+def safe_div(numerator: float, denominator: float) -> float:
+    if denominator == 0:
+        return 0.0
+    return numerator / denominator
+
+
+def fmt_num(value: float | int) -> str:
+    if isinstance(value, float):
+        if value >= 100:
+            return f"{value:,.0f}"
+        return f"{value:.2f}"
+    return f"{value:,}"
+
+
+def clean_text(value: str) -> str:
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def fetch_search_console(
+    client: ApiClient,
+    site_url: str,
+    start_date: str,
+    end_date: str,
+    dimensions: list[str],
+    row_limit: int = 100,
+) -> list[dict[str, Any]]:
+    payload = {
+        "startDate": start_date,
+        "endDate": end_date,
+        "dimensions": dimensions,
+        "rowLimit": row_limit,
+    }
+    encoded_site = requests.utils.quote(site_url, safe="")
+    data = client.post(
+        f"https://www.googleapis.com/webmasters/v3/sites/{encoded_site}/searchAnalytics/query",
+        ["https://www.googleapis.com/auth/webmasters.readonly"],
+        payload,
+    )
+    return data.get("rows", [])
+
+
+def fetch_ga_report(
+    client: ApiClient,
+    property_id: str,
+    start_date: str,
+    end_date: str,
+    dimensions: list[str],
+    metrics: list[str],
+    limit: int = 50,
+    dimension_filter: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    payload: dict[str, Any] = {
+        "dateRanges": [{"startDate": start_date, "endDate": end_date}],
+        "dimensions": [{"name": name} for name in dimensions],
+        "metrics": [{"name": name} for name in metrics],
+        "limit": str(limit),
+    }
+    if dimension_filter:
+        payload["dimensionFilter"] = dimension_filter
+    return client.post(
+        f"https://analyticsdata.googleapis.com/v1beta/properties/{property_id}:runReport",
+        ["https://www.googleapis.com/auth/analytics.readonly"],
+        payload,
+    )
+
+
+def fetch_ga_realtime(client: ApiClient, property_id: str) -> int:
+    data = client.post(
+        f"https://analyticsdata.googleapis.com/v1beta/properties/{property_id}:runRealtimeReport",
+        ["https://www.googleapis.com/auth/analytics.readonly"],
+        {"metrics": [{"name": "activeUsers"}]},
+    )
+    rows = data.get("rows", [])
+    if not rows:
+        return 0
+    return int(rows[0]["metricValues"][0]["value"])
+
+
+def find_page_files(repo_root: Path) -> list[Path]:
+    pages = [repo_root / "index.html", repo_root / "privacy.html"]
+    pages.extend(sorted((repo_root / "features").glob("*.html")))
+    return [path for path in pages if path.exists()]
+
+
+def audit_page(page_path: Path, site_origin: str) -> dict[str, Any]:
+    relative = "/" if page_path.name == "index.html" else f"/{page_path.relative_to(page_path.parents[1]).as_posix()}"
+    if page_path.parent.name == "features":
+        relative = f"/features/{page_path.name}"
+    elif page_path.name == "privacy.html":
+        relative = "/privacy.html"
+
+    url = f"{site_origin.rstrip('/')}{relative}"
+    response = requests.get(url, timeout=60)
+    html = response.text
+
+    title_match = re.search(r"<title>(.*?)</title>", html, re.IGNORECASE | re.DOTALL)
+    desc_match = re.search(
+        r'<meta name="description"\s+content="([^"]*)"',
+        html,
+        re.IGNORECASE,
+    )
+    canonical_match = re.search(
+        r'<link rel="canonical"\s+href="([^"]*)"',
+        html,
+        re.IGNORECASE,
+    )
+    h1_matches = re.findall(r"<h1[^>]*>(.*?)</h1>", html, re.IGNORECASE | re.DOTALL)
+    app_store_links = len(re.findall(APP_STORE_HOST, html, re.IGNORECASE))
+
+    title = clean_text(title_match.group(1)) if title_match else ""
+    description = clean_text(desc_match.group(1)) if desc_match else ""
+    canonical = canonical_match.group(1) if canonical_match else ""
+    h1_count = len(h1_matches)
+
+    issues: list[str] = []
+    if not title:
+        issues.append("missing title")
+    elif len(title) > 65:
+        issues.append(f"title too long ({len(title)})")
+    if not description:
+        issues.append("missing meta description")
+    elif len(description) > 160:
+        issues.append(f"meta description too long ({len(description)})")
+    if canonical != url:
+        issues.append("canonical mismatch")
+    if h1_count != 1:
+        issues.append(f"unexpected h1 count ({h1_count})")
+    if app_store_links == 0:
+        issues.append("no App Store links")
+
+    return {
+        "path": relative,
+        "url": url,
+        "status_code": response.status_code,
+        "title": title,
+        "description": description,
+        "canonical": canonical,
+        "issues": issues,
+    }
+
+
+def top_pages_from_ga(report: dict[str, Any]) -> list[dict[str, Any]]:
+    pages: list[dict[str, Any]] = []
+    for row in report.get("rows", []):
+        dimension_values = row.get("dimensionValues", [])
+        metric_values = row.get("metricValues", [])
+        pages.append(
+            {
+                "pagePath": dimension_values[0]["value"] if dimension_values else "",
+                "screenPageViews": int(metric_values[0]["value"]) if metric_values else 0,
+                "sessions": int(metric_values[1]["value"]) if len(metric_values) > 1 else 0,
+                "totalUsers": int(metric_values[2]["value"]) if len(metric_values) > 2 else 0,
+            }
+        )
+    return pages
+
+
+def event_rows(report: dict[str, Any]) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    for row in report.get("rows", []):
+        dims = row.get("dimensionValues", [])
+        metrics = row.get("metricValues", [])
+        items.append(
+            {
+                "eventName": dims[0]["value"] if dims else "",
+                "eventCount": int(metrics[0]["value"]) if metrics else 0,
+            }
+        )
+    return items
+
+
+def build_query_growth(
+    current_rows: list[dict[str, Any]],
+    previous_rows: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    previous_map = {
+        row["keys"][0]: row
+        for row in previous_rows
+        if row.get("keys")
+    }
+    trends: list[dict[str, Any]] = []
+    for row in current_rows:
+        if not row.get("keys"):
+            continue
+        query = row["keys"][0]
+        previous = previous_map.get(query, {})
+        current_clicks = float(row.get("clicks", 0))
+        current_impressions = float(row.get("impressions", 0))
+        prev_clicks = float(previous.get("clicks", 0))
+        prev_impressions = float(previous.get("impressions", 0))
+        score = (current_clicks - prev_clicks) * 3 + (current_impressions - prev_impressions)
+        trends.append(
+            {
+                "query": query,
+                "current_clicks": current_clicks,
+                "current_impressions": current_impressions,
+                "prev_clicks": prev_clicks,
+                "prev_impressions": prev_impressions,
+                "click_change": percent_change(current_clicks, prev_clicks),
+                "impression_change": percent_change(current_impressions, prev_impressions),
+                "position": float(row.get("position", 0)),
+                "score": score,
+            }
+        )
+    trends.sort(key=lambda item: (item["score"], item["current_impressions"]), reverse=True)
+    return trends[:12]
+
+
+def build_page_opportunities(
+    current_rows: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    for row in current_rows:
+        if not row.get("keys"):
+            continue
+        page = row["keys"][0]
+        clicks = float(row.get("clicks", 0))
+        impressions = float(row.get("impressions", 0))
+        ctr = float(row.get("ctr", 0))
+        position = float(row.get("position", 0))
+        if impressions < 20:
+            continue
+        items.append(
+            {
+                "page": page,
+                "clicks": clicks,
+                "impressions": impressions,
+                "ctr": ctr,
+                "position": position,
+                "opportunity": (impressions * max(0, 0.03 - ctr)) + max(0, 12 - position),
+            }
+        )
+    items.sort(key=lambda item: item["opportunity"], reverse=True)
+    return items[:10]
+
+
+def render_report(
+    active_users: int,
+    ga_pages: list[dict[str, Any]],
+    ga_events: list[dict[str, Any]],
+    trending_keywords: list[dict[str, Any]],
+    page_opportunities: list[dict[str, Any]],
+    page_audits: list[dict[str, Any]],
+) -> str:
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    lines = [
+        "# SEO Operator Report",
+        "",
+        f"Generated: {timestamp}",
+        "",
+        "## Executive Summary",
+        "",
+        f"- GA4 realtime active users: `{active_users}`",
+        f"- Top GA4 page in the last 7 days: `{ga_pages[0]['pagePath']}` with `{ga_pages[0]['screenPageViews']}` page views" if ga_pages else "- No GA4 page view data yet",
+        f"- Search Console trending keyword leader: `{trending_keywords[0]['query']}`" if trending_keywords else "- No Search Console keyword data yet",
+        f"- Pages with on-page audit issues: `{sum(1 for audit in page_audits if audit['issues'])}` / `{len(page_audits)}`",
+        "",
+        "## GA4 Top Pages (Last 7 Days)",
+        "",
+        "| Page | Page Views | Sessions | Users |",
+        "| --- | ---: | ---: | ---: |",
+    ]
+    for item in ga_pages[:10]:
+        lines.append(
+            f"| `{item['pagePath']}` | {item['screenPageViews']} | {item['sessions']} | {item['totalUsers']} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Conversion Events (Last 7 Days)",
+            "",
+            "| Event | Count |",
+            "| --- | ---: |",
+        ]
+    )
+    if ga_events:
+        for item in ga_events:
+            lines.append(f"| `{item['eventName']}` | {item['eventCount']} |")
+    else:
+        lines.append("| _No tracked events yet_ | 0 |")
+
+    lines.extend(
+        [
+            "",
+            "## Trending Search Console Queries",
+            "",
+            "| Query | Clicks | Impressions | Click Change | Impression Change | Avg Position |",
+            "| --- | ---: | ---: | --- | --- | ---: |",
+        ]
+    )
+    for item in trending_keywords:
+        lines.append(
+            f"| `{item['query']}` | {fmt_num(item['current_clicks'])} | {fmt_num(item['current_impressions'])} | "
+            f"{item['click_change']} | {item['impression_change']} | {item['position']:.1f} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Search Opportunity Pages",
+            "",
+            "| Page | Clicks | Impressions | CTR | Avg Position |",
+            "| --- | ---: | ---: | ---: | ---: |",
+        ]
+    )
+    for item in page_opportunities:
+        lines.append(
+            f"| `{item['page']}` | {fmt_num(item['clicks'])} | {fmt_num(item['impressions'])} | "
+            f"{item['ctr'] * 100:.2f}% | {item['position']:.1f} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## On-Page Audit",
+            "",
+            "| Page | Status | Issues |",
+            "| --- | ---: | --- |",
+        ]
+    )
+    for audit in page_audits:
+        issue_text = ", ".join(audit["issues"]) if audit["issues"] else "ok"
+        lines.append(f"| `{audit['path']}` | {audit['status_code']} | {issue_text} |")
+
+    lines.extend(
+        [
+            "",
+            "## Next Actions",
+            "",
+        ]
+    )
+
+    if page_opportunities:
+        top_page = page_opportunities[0]["page"]
+        lines.append(f"- Improve title/description CTR for `{top_page}` first; it has the strongest impression opportunity.")
+    if trending_keywords:
+        lines.append(f"- Expand copy or internal links around `{trending_keywords[0]['query']}` while momentum is rising.")
+    audit_issues = [audit for audit in page_audits if audit["issues"]]
+    if audit_issues:
+        lines.append(f"- Fix on-page issues on `{audit_issues[0]['path']}` and related pages before the next crawl wave.")
+    if not (page_opportunities or trending_keywords or audit_issues):
+        lines.append("- Hold steady and gather more data; there is not enough signal yet for confident SEO changes.")
+
+    lines.append("")
+    return "\n".join(lines)
+
+
+def main() -> None:
+    args = parse_args()
+    repo_root = Path(__file__).resolve().parents[1]
+    key_path = (repo_root / args.key).resolve() if not Path(args.key).is_absolute() else Path(args.key)
+    output_path = (repo_root / args.output).resolve() if not Path(args.output).is_absolute() else Path(args.output)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    dated_output_path = output_path.parent / f"{date.today().isoformat()}.md"
+
+    client = ApiClient(key_path=key_path)
+
+    active_users = fetch_ga_realtime(client, args.ga4_property_id)
+    ga_pages_report = fetch_ga_report(
+        client,
+        args.ga4_property_id,
+        start_date="7daysAgo",
+        end_date="today",
+        dimensions=["pagePath"],
+        metrics=["screenPageViews", "sessions", "totalUsers"],
+        limit=10,
+    )
+    ga_event_report = fetch_ga_report(
+        client,
+        args.ga4_property_id,
+        start_date="7daysAgo",
+        end_date="today",
+        dimensions=["eventName"],
+        metrics=["eventCount"],
+        limit=10,
+        dimension_filter={
+            "filter": {
+                "fieldName": "eventName",
+                "inListFilter": {"values": ["app_store_click", "feature_cta_click"]},
+            }
+        },
+    )
+
+    current_queries = fetch_search_console(
+        client,
+        args.site_url,
+        iso_day(-28),
+        iso_day(-1),
+        ["query"],
+        row_limit=100,
+    )
+    previous_queries = fetch_search_console(
+        client,
+        args.site_url,
+        iso_day(-56),
+        iso_day(-29),
+        ["query"],
+        row_limit=100,
+    )
+    current_pages = fetch_search_console(
+        client,
+        args.site_url,
+        iso_day(-28),
+        iso_day(-1),
+        ["page"],
+        row_limit=100,
+    )
+
+    site_origin = args.site_url.rstrip("/")
+    page_audits = [audit_page(page_path, site_origin) for page_path in find_page_files(repo_root)]
+
+    report = render_report(
+        active_users=active_users,
+        ga_pages=top_pages_from_ga(ga_pages_report),
+        ga_events=event_rows(ga_event_report),
+        trending_keywords=build_query_growth(current_queries, previous_queries),
+        page_opportunities=build_page_opportunities(current_pages),
+        page_audits=page_audits,
+    )
+    output_path.write_text(report, encoding="utf-8")
+    dated_output_path.write_text(report, encoding="utf-8")
+    print(f"Wrote SEO report to {output_path}")
+    print(f"Wrote dated SEO report to {dated_output_path}")
+
+
+if __name__ == "__main__":
+    main()
