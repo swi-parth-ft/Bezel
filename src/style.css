@@ -3842,12 +3842,9 @@ html[data-runtime="live"] .guide-shot-placeholder {
     width: min(84%, 42rem);
     padding: 0.72rem 0.9rem;
   }
-
   .hero-section {
-    min-height: 100svh;
     padding-top: 6rem !important;
     padding-bottom: 3rem !important;
-    justify-content: center;
   }
 
   .hero-layout {
