@@ -223,10 +223,10 @@
     </div>
   </div>
 
-  <div class="site-chrome relative z-10 w-full flex justify-center pt-8">
+  <div class="site-chrome relative z-10 w-full flex justify-center pt-0 md:pt-8">
     <!-- Floating Capsule Navbar -->
     <header
-      class="site-header flex items-center justify-between px-6 py-3 bg-transparent rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
+      class="site-header flex items-center justify-between px-5 md:px-6 py-3 bg-transparent rounded-none md:rounded-full w-full md:w-[90%] max-w-5xl shadow-md md:shadow-xl dark:shadow-lg dark:md:shadow-2xl">
       <a href="./" class="flex items-center gap-3">
         <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Logo">
         <span class="site-header__brand-text text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel
@@ -276,8 +276,14 @@
         <div class="hero-copy">
 
 
-          <h1 data-reveal-delay="110ms"
-            class="hero-title text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-zinc-900 dark:text-white max-w-4xl leading-[1.05] mb-6 reveal [text-wrap:balance]">
+          <!-- MOBILE IMAGE -->
+          <div data-reveal-delay="110ms" class="flex lg:hidden w-full items-center justify-center mb-6 reveal">
+            <img src="/assets/hero/hero-homepage-2.webp" alt="Bezel Studio preview" 
+                 class="w-auto h-auto max-w-[90%] max-h-[32vh] object-contain drop-shadow-2xl translate-x-3">
+          </div>
+
+          <h1 data-reveal-delay="140ms"
+            class="hero-title text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-zinc-900 dark:text-white max-w-4xl leading-[1.05] mb-4 sm:mb-6 reveal [text-wrap:balance]">
             Design App Store screenshots <br>
             <span
               class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">on
@@ -285,17 +291,22 @@
           </h1>
 
           <p data-reveal-delay="180ms"
-            class="hero-lead text-base md:text-lg text-zinc-600 dark:text-zinc-400 max-w-3xl mb-6 font-medium leading-relaxed reveal">
+            class="hero-lead text-base md:text-lg text-zinc-600 dark:text-zinc-400 max-w-3xl mb-4 sm:mb-6 font-medium leading-relaxed reveal">
             Bezel Studio keeps mockups, typography, localization, motion, and export inside one native Apple-first
             workspace, so finished launch assets do not need three different tools.
           </p>
 
-          <ul data-reveal-delay="250ms"
-            class="hero-proof-list reveal flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-8 text-sm md:text-[0.95rem] text-zinc-700 dark:text-zinc-300">
-            <li class="hero-proof-pill">Native iPhone and iPad editor</li>
-            <li class="hero-proof-pill">Localization and motion in one file</li>
-            <li class="hero-proof-pill">Launch-ready export without rebuilds</li>
-          </ul>
+          <div class="relative w-[100vw] -ml-6 px-6 sm:w-auto sm:ml-0 sm:px-0 overflow-hidden mb-6 sm:mb-8 flex items-center">
+            <ul data-reveal-delay="250ms"
+              class="hero-proof-list reveal flex flex-nowrap sm:flex-wrap sm:justify-start lg:justify-center gap-2 sm:gap-3 w-max sm:w-auto text-[12px] sm:text-sm md:text-[0.95rem] text-zinc-700 dark:text-zinc-300">
+              <li class="hero-proof-pill">Native iPhone and iPad editor</li>
+              <li class="hero-proof-pill">Localization and motion in one file</li>
+              <li class="hero-proof-pill">Launch-ready export without rebuilds</li>
+              <li class="hero-proof-pill sm:hidden" aria-hidden="true">Native iPhone and iPad editor</li>
+              <li class="hero-proof-pill sm:hidden" aria-hidden="true">Localization and motion in one file</li>
+              <li class="hero-proof-pill sm:hidden" aria-hidden="true">Launch-ready export without rebuilds</li>
+            </ul>
+          </div>
 
           <div data-reveal-delay="320ms" class="hero-actions flex flex-col sm:flex-row gap-4 mb-6 reveal">
             <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"
@@ -306,8 +317,8 @@
 
           </div>
 
-          <div data-reveal-delay="350ms" class="flex items-center gap-3 mb-6 reveal">
-            <div class="flex -space-x-2">
+          <div data-reveal-delay="350ms" class="flex flex-row items-center justify-center lg:justify-start gap-3 mb-4 reveal">
+            <div class="flex -space-x-2 shrink-0">
               <img class="w-8 h-8 rounded-full border-2 border-zinc-50 dark:border-[#0A0A0A]"
                 src="https://i.pravatar.cc/100?img=33" alt="User avatar">
               <img class="w-8 h-8 rounded-full border-2 border-zinc-50 dark:border-[#0A0A0A]"
@@ -318,7 +329,7 @@
                 class="w-8 h-8 rounded-full border-2 border-zinc-50 dark:border-[#0A0A0A] bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-zinc-600 dark:text-zinc-300">
                 2k+</div>
             </div>
-            <div class="flex flex-col">
+            <div class="flex flex-col items-start">
               <div class="flex text-amber-500 gap-0.5">
                 <svg viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
                   <path fill-rule="evenodd"
@@ -346,22 +357,24 @@
                     clip-rule="evenodd" />
                 </svg>
               </div>
-              <p class="text-[13px] text-zinc-600 dark:text-zinc-400 font-medium mt-0.5">Trusted by <strong
+              <p class="text-[12px] text-zinc-600 dark:text-zinc-400 font-medium mt-0.5 !text-left">Trusted by <strong
                   class="text-zinc-900 dark:text-white font-bold">2000+</strong> indie iOS developers</p>
             </div>
           </div>
 
           <div data-reveal-delay="390ms"
-            class="hero-offer-note reveal inline-flex flex-col sm:flex-row items-center gap-2 px-4 py-2 mt-2 rounded-full border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-white/[0.02] text-[13px] text-zinc-500 dark:text-zinc-400 backdrop-blur-md shadow-sm">
+            class="hero-offer-note reveal inline-flex flex-col sm:flex-row items-center gap-1.5 px-3 py-1.5 mt-1 rounded-full border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-white/[0.02] text-[11px] text-zinc-500 dark:text-zinc-400 backdrop-blur-md shadow-sm">
             <span>Lifetime plan is currently <strong class="text-zinc-800 dark:text-zinc-200 font-semibold">50%
                 off</strong> with code</span>
             <span
-              class="px-2 py-1 sm:py-0.5 rounded-md bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white font-mono text-[11px] font-bold tracking-widest select-all shadow-sm">BEZELSTUDIO50</span>
+              class="px-2 py-0.5 rounded-md bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white font-mono text-[9px] font-bold tracking-widest select-all shadow-sm">BEZELSTUDIO50</span>
           </div>
         </div>
 
-        <div data-reveal-delay="220ms" class="reveal relative w-full flex items-center justify-center lg:justify-end mt-12 lg:mt-0">
-          <img src="/assets/hero/hero-homepage-2.webp" alt="Bezel Studio hero preview" class="w-full lg:w-[115%] max-w-none h-auto origin-center lg:origin-top-left transform lg:translate-x-6 xl:translate-x-10 object-contain">
+        <div data-reveal-delay="220ms"
+          class="reveal relative hidden w-full lg:flex items-center justify-center lg:justify-end mt-12 lg:mt-0">
+          <img src="/assets/hero/hero-homepage-2.webp" alt="Bezel Studio hero preview"
+            class="w-full lg:w-[115%] max-w-none h-auto origin-center lg:origin-top-left transform lg:translate-x-6 xl:translate-x-10 object-contain">
         </div>
       </div>
     </section>
@@ -590,7 +603,7 @@
                 role="tabpanel" aria-labelledby="showcase-tab-iphone">
                 <div id="showcase-carousel"
                   class="showcase-track flex gap-6 px-6 md:px-[max(1.5rem,calc((100vw-80rem)/2))] overflow-x-hidden cursor-default">
-                  <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal">
+                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal">
                     <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
                       <img src="/assets/showcase/iphone/icloud-sync.webp" alt="iCloud Sync"
                         class="w-full h-auto object-contain">
@@ -603,7 +616,7 @@
                     </div>
                   </div>
 
-                  <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal"
+                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
                     style="animation-delay: 100ms;">
                     <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
                       <img src="/assets/showcase/iphone/custom-backgrounds.webp" alt="Backgrounds"
@@ -617,7 +630,7 @@
                     </div>
                   </div>
 
-                  <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal"
+                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
                     style="animation-delay: 200ms;">
                     <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
                       <img src="/assets/showcase/iphone/bezel-ai.webp" alt="Bezel AI"
@@ -631,7 +644,7 @@
                     </div>
                   </div>
 
-                  <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal"
+                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
                     style="animation-delay: 300ms;">
                     <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
                       <img src="/assets/showcase/iphone/canvas-management.webp" alt="Canvas Management"
@@ -645,7 +658,7 @@
                     </div>
                   </div>
 
-                  <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal"
+                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
                     style="animation-delay: 400ms;">
                     <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
                       <img src="/assets/showcase/iphone/image-playground.webp" alt="Image Playground"
@@ -659,7 +672,7 @@
                     </div>
                   </div>
 
-                  <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal"
+                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
                     style="animation-delay: 500ms;">
                     <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
                       <img src="/assets/showcase/iphone/precision-layers.webp" alt="Layers"
@@ -673,7 +686,7 @@
                     </div>
                   </div>
 
-                  <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal"
+                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
                     style="animation-delay: 600ms;">
                     <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
                       <img src="/assets/showcase/iphone/pro-layouts.webp" alt="Pro Layouts"
@@ -687,7 +700,7 @@
                     </div>
                   </div>
 
-                  <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal"
+                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
                     style="animation-delay: 700ms;">
                     <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
                       <img src="/assets/showcase/iphone/canvas-motion.webp" alt="Canvas Motion"
@@ -701,7 +714,7 @@
                     </div>
                   </div>
 
-                  <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal"
+                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
                     style="animation-delay: 800ms;">
                     <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
                       <img src="/assets/showcase/iphone/typography.webp" alt="Typography"
@@ -715,7 +728,7 @@
                     </div>
                   </div>
 
-                  <div class="flex-shrink-0 w-[200px] md:w-[280px] flex flex-col gap-4 reveal"
+                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
                     style="animation-delay: 900ms;">
                     <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
                       <img src="/assets/showcase/iphone/translation.webp" alt="Translate"
