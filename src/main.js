@@ -370,6 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
     powerFeaturesViewport.addEventListener('pointerdown', (event) => {
       if (isMobilePowerFeatures()) return;
       if (event.pointerType === 'mouse' && event.button !== 0) return;
+      if (event.target instanceof Element && event.target.closest('a, button')) return;
 
       powerSwipeDragState = {
         pointerId: event.pointerId,
@@ -418,6 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
     powerFeaturesViewport.addEventListener('lostpointercapture', () => {
       powerSwipeDragState = null;
       powerFeaturesViewport.classList.remove('is-dragging');
+      powerSuppressClick = false;
     });
 
     powerFeaturesViewport.addEventListener('keydown', (event) => {
@@ -467,6 +469,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     powerFeaturesViewport.addEventListener('click', (event) => {
       if (!powerSuppressClick) return;
+
+      if (event.target instanceof Element && event.target.closest('a, button')) {
+        powerSuppressClick = false;
+        return;
+      }
 
       event.preventDefault();
       event.stopPropagation();

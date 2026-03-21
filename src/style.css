@@ -3300,6 +3300,10 @@ html[data-runtime="live"] .guide-shot-placeholder {
   backface-visibility: hidden;
 }
 
+.power-feature.is-active {
+  pointer-events: auto;
+}
+
 .power-feature__copy {
   grid-column: 2;
   display: flex;
@@ -3821,6 +3825,14 @@ html[data-runtime="live"] .guide-shot-placeholder {
 }
 
 @media (min-width: 1280px) and (max-width: 1599px) {
+  html {
+    font-size: 15px;
+  }
+
+  .max-w-7xl {
+    max-width: 72rem;
+  }
+
   .site-chrome {
     padding-top: 0.95rem;
   }
@@ -3905,8 +3917,14 @@ html[data-runtime="live"] .guide-shot-placeholder {
   }
 
   main > section.py-32 {
-    padding-top: 3.75rem;
-    padding-bottom: 3.75rem;
+    padding-top: 3.25rem;
+    padding-bottom: 3.25rem;
+  }
+
+  main > section.py-24,
+  main > section.py-28 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
   #features {
