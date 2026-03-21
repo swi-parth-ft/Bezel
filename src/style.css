@@ -9,6 +9,7 @@
 
 :root {
   --glass-backdrop-blur: 10px;
+  color-scheme: light;
 }
 
 @layer utilities {

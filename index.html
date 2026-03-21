@@ -24,8 +24,7 @@
   <link rel="icon" type="image/png" href="/assets/brand/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="/assets/brand/favicon-16x16.png" sizes="16x16">
   <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
-  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fafafa">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Bezel Studio">
   <meta property="og:locale" content="en_US">
@@ -49,19 +48,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <meta name="color-scheme" content="light dark">
-  <script>
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.classList.add('dark');
-    }
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-      if (event.matches) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    });
-  </script>
+  <meta name="color-scheme" content="light">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",

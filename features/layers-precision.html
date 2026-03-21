@@ -20,8 +20,7 @@
   <link rel="icon" type="image/png" href="/assets/brand/favicon-16x16.png" sizes="16x16">
   <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
   <link rel="stylesheet" href="/src/style.css">
-  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fafafa">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Bezel Studio">
   <meta property="og:locale" content="en_US">
@@ -35,19 +34,7 @@
   <meta name="twitter:description" content="A true drag-and-drop editor for app screenshots. Reorder layers, use snap guides, and build layouts with absolute precision.">
   <meta name="twitter:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/layers-precision.webp">
   <meta name="twitter:image:alt" content="Precision App Screenshot Layouts & Layers | Bezel Studio">
-  <meta name="color-scheme" content="light dark">
-  <script>
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.classList.add('dark');
-    }
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-      if (event.matches) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    });
-  </script>
+  <meta name="color-scheme" content="light">
   <style>
     .feature-page-shell {
       position: relative;
