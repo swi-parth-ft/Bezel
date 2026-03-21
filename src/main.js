@@ -85,26 +85,102 @@ document.addEventListener('DOMContentLoaded', () => {
     window.matchMedia('(max-width: 767px)').matches ? 'iphone' : 'ipad'
   );
 
-  // 4. Sticky horizontal power-features logic
-  const powerFeaturesSpacer = document.querySelector('#power-features-height');
+  // 4. Swipeable power-features logic
   const powerFeaturesViewport = document.querySelector('#power-features-viewport');
   const powerFeatureSlides = Array.from(document.querySelectorAll('[data-power-slide]'));
+  const powerPrevButton = document.querySelector('[data-power-nav="prev"]');
+  const powerNextButton = document.querySelector('[data-power-nav="next"]');
+  const powerDotButtons = Array.from(document.querySelectorAll('[data-power-dot]'));
   const isMobilePowerFeatures = () => window.matchMedia('(max-width: 767px)').matches;
   const easeOutCubic = (value) => 1 - Math.pow(1 - value, 3);
-  let targetPowerProgress = 0;
-  let renderedPowerProgress = 0;
   let powerAnimationFrame = null;
-  let powerScrollIdleTimeout = null;
-  const hidePowerSlide = (slide, index) => {
+  let powerSwipeDragState = null;
+  let powerSuppressClick = false;
+  let powerActiveSlideIndex = 0;
+  let powerVisibleSlideIndex = 0;
+  let powerDesktopTransition = null;
+  let powerWheelGesture = {
+    deltaX: 0,
+    deltaY: 0,
+    lastEventTime: 0,
+    isLocked: false,
+    resetTimer: null,
+  };
+
+  const resetPowerWheelGesture = () => {
+    if (powerWheelGesture.resetTimer) {
+      window.clearTimeout(powerWheelGesture.resetTimer);
+    }
+
+    powerWheelGesture.deltaX = 0;
+    powerWheelGesture.deltaY = 0;
+    powerWheelGesture.lastEventTime = 0;
+    powerWheelGesture.isLocked = false;
+    powerWheelGesture.resetTimer = null;
+  };
+
+  const schedulePowerWheelGestureReset = () => {
+    if (powerWheelGesture.resetTimer) {
+      window.clearTimeout(powerWheelGesture.resetTimer);
+    }
+
+    powerWheelGesture.resetTimer = window.setTimeout(() => {
+      resetPowerWheelGesture();
+    }, 180);
+  };
+
+  const clampPowerSlideIndex = (index) => (
+    Math.max(0, Math.min(powerFeatureSlides.length - 1, index))
+  );
+
+  const syncPowerControls = (index) => {
+    const clampedIndex = clampPowerSlideIndex(index);
+    powerVisibleSlideIndex = clampedIndex;
+
+    powerDotButtons.forEach((button, buttonIndex) => {
+      const isActive = buttonIndex === clampedIndex;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-selected', String(isActive));
+      button.setAttribute('tabindex', isActive ? '0' : '-1');
+    });
+
+    if (powerPrevButton) {
+      powerPrevButton.disabled = clampedIndex === 0;
+    }
+
+    if (powerNextButton) {
+      powerNextButton.disabled = clampedIndex === powerFeatureSlides.length - 1;
+    }
+  };
+
+  const scrollPowerSlideIntoView = (index) => {
+    if (!powerFeaturesViewport || !powerFeatureSlides.length) return;
+
+    const clampedIndex = clampPowerSlideIndex(index);
+    const targetSlide = powerFeatureSlides[clampedIndex];
+    if (!targetSlide) return;
+
+    const targetLeft = targetSlide.offsetLeft - ((powerFeaturesViewport.clientWidth - targetSlide.offsetWidth) / 2);
+    powerFeaturesViewport.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: 'smooth',
+    });
+    syncPowerControls(clampedIndex);
+  };
+
+  const hidePowerSlide = (slide) => {
     slide.style.setProperty('--power-opacity', '0');
     slide.style.setProperty('--power-blur', '10px');
     slide.style.setProperty('--power-translate-y', '12px');
+    slide.style.setProperty('--power-swipe-x', '0px');
     slide.style.setProperty('--power-copy-y', '10px');
     slide.style.setProperty('--power-media-y', '6px');
     slide.style.setProperty('--power-scale', '0.992');
     slide.style.zIndex = '0';
+    slide.classList.remove('is-active');
   };
-  const showPowerSlide = (slide, index, strength) => {
+
+  const showPowerSlide = (slide, index, strength, swipeX = 0) => {
     const clamped = Math.max(0, Math.min(1, strength));
     const opacity = clamped;
     const blur = (1 - clamped) * 8;
@@ -116,179 +192,306 @@ document.addEventListener('DOMContentLoaded', () => {
     slide.style.setProperty('--power-opacity', opacity.toFixed(4));
     slide.style.setProperty('--power-blur', `${blur.toFixed(2)}px`);
     slide.style.setProperty('--power-translate-y', `${translateY.toFixed(2)}px`);
+    slide.style.setProperty('--power-swipe-x', `${swipeX.toFixed(2)}px`);
     slide.style.setProperty('--power-copy-y', `${copyY.toFixed(2)}px`);
     slide.style.setProperty('--power-media-y', `${mediaY.toFixed(2)}px`);
     slide.style.setProperty('--power-scale', scale.toFixed(4));
     slide.style.zIndex = String(100 + Math.round(clamped * 10) - index);
-  };
-  const resetPowerFeaturesStage = () => {
-    if (powerAnimationFrame) {
-      window.cancelAnimationFrame(powerAnimationFrame);
-      powerAnimationFrame = null;
-    }
-
-    powerFeatureSlides.forEach((slide, index) => {
-      slide.style.removeProperty('--power-opacity');
-      slide.style.removeProperty('--power-blur');
-      slide.style.removeProperty('--power-translate-y');
-      slide.style.removeProperty('--power-copy-y');
-      slide.style.removeProperty('--power-media-y');
-      slide.style.removeProperty('--power-scale');
-      slide.style.zIndex = String(powerFeatureSlides.length - index);
-    });
+    slide.classList.toggle('is-active', clamped > 0.92);
   };
 
-  const renderPowerFeaturesStage = () => {
-    powerAnimationFrame = null;
-    renderedPowerProgress += (targetPowerProgress - renderedPowerProgress) * 0.14;
-
-    if (Math.abs(targetPowerProgress - renderedPowerProgress) < 0.0008) {
-      renderedPowerProgress = targetPowerProgress;
-    }
-
-    setPowerFeaturesStage(renderedPowerProgress);
-
-    if (Math.abs(targetPowerProgress - renderedPowerProgress) >= 0.0008) {
-      powerAnimationFrame = window.requestAnimationFrame(renderPowerFeaturesStage);
-    }
-  };
-
-  const schedulePowerFeaturesRender = () => {
-    if (powerAnimationFrame) return;
-    powerAnimationFrame = window.requestAnimationFrame(renderPowerFeaturesStage);
-  };
-
-  const snapPowerFeaturesToNearestSlide = () => {
+  const renderDesktopPowerState = (fromIndex, toIndex, progress = 1, direction = 1) => {
     if (!powerFeatureSlides.length) return;
-
-    const lastIndex = Math.max(0, powerFeatureSlides.length - 1);
-    if (lastIndex === 0) {
-      targetPowerProgress = 0;
-      renderedPowerProgress = 0;
-      setPowerFeaturesStage(0);
-      return;
-    }
-
-    const snappedIndex = Math.round(targetPowerProgress * lastIndex);
-    targetPowerProgress = snappedIndex / lastIndex;
-    schedulePowerFeaturesRender();
-  };
-
-  const setPowerFeaturesStage = (progress) => {
-    if (!powerFeatureSlides.length) return;
-
-    const lastIndex = Math.max(0, powerFeatureSlides.length - 1);
-    if (lastIndex === 0) {
-      showPowerSlide(powerFeatureSlides[0], 0, 1);
-      return;
-    }
-
-    const stageProgress = progress * lastIndex;
-    const baseIndex = Math.min(lastIndex, Math.floor(stageProgress));
-    const nextIndex = Math.min(lastIndex, baseIndex + 1);
-    const localProgress = stageProgress - baseIndex;
-    const transitionStart = 0.18;
-    const transitionEnd = 0.9;
 
     powerFeatureSlides.forEach(hidePowerSlide);
 
-    if (baseIndex === nextIndex) {
-      showPowerSlide(powerFeatureSlides[baseIndex], baseIndex, 1);
+    if (fromIndex === toIndex) {
+      showPowerSlide(powerFeatureSlides[toIndex], toIndex, 1, 0);
       return;
     }
 
-    if (localProgress <= transitionStart) {
-      showPowerSlide(powerFeatureSlides[baseIndex], baseIndex, 1);
+    const clampedProgress = Math.max(0, Math.min(1, progress));
+
+    if (clampedProgress <= 0.001) {
+      showPowerSlide(powerFeatureSlides[fromIndex], fromIndex, 1, 0);
+      syncPowerControls(fromIndex);
       return;
     }
 
-    if (localProgress >= transitionEnd) {
-      showPowerSlide(powerFeatureSlides[nextIndex], nextIndex, 1);
+    if (clampedProgress >= 0.999) {
+      showPowerSlide(powerFeatureSlides[toIndex], toIndex, 1, 0);
+      syncPowerControls(toIndex);
       return;
     }
 
-    const transitionProgress = easeOutCubic(
-      (localProgress - transitionStart) / (transitionEnd - transitionStart)
-    );
+    const eased = easeOutCubic(clampedProgress);
+    const viewportWidth = powerFeaturesViewport?.clientWidth || window.innerWidth;
+    const travel = Math.min(180, Math.max(96, viewportWidth * 0.12));
+    const outgoingX = -direction * travel * eased;
+    const incomingX = direction * travel * (1 - eased);
+    const outgoingStrength = 1 - eased;
+    const incomingStrength = eased;
 
-    showPowerSlide(powerFeatureSlides[baseIndex], baseIndex, 1 - transitionProgress);
-    showPowerSlide(powerFeatureSlides[nextIndex], nextIndex, transitionProgress);
+    showPowerSlide(powerFeatureSlides[fromIndex], fromIndex, outgoingStrength, outgoingX);
+    showPowerSlide(powerFeatureSlides[toIndex], toIndex, incomingStrength, incomingX);
+    syncPowerControls(clampedProgress >= 0.5 ? toIndex : fromIndex);
   };
 
-  const updatePowerFeaturesSpacerHeight = () => {
-    if (!powerFeaturesSpacer || !powerFeaturesViewport || !powerFeatureSlides.length) return;
+  const renderMobilePowerState = () => {
+    if (!powerFeaturesViewport || !powerFeatureSlides.length) return;
 
-    if (isMobilePowerFeatures()) {
-      powerFeaturesSpacer.style.height = 'auto';
-      resetPowerFeaturesStage();
+    if (powerFeatureSlides.length === 1) {
+      showPowerSlide(powerFeatureSlides[0], 0, 1);
+      syncPowerControls(0);
       return;
     }
 
-    const slideScreens = Math.max(3.6, powerFeatureSlides.length * 0.62);
-    const targetHeight = window.innerHeight * slideScreens;
+    const viewportRect = powerFeaturesViewport.getBoundingClientRect();
+    const viewportCenter = viewportRect.left + (viewportRect.width / 2);
+    let strongestIndex = 0;
+    let strongestStrength = -1;
 
-    powerFeaturesSpacer.style.height = `${Math.ceil(targetHeight)}px`;
-  };
+    powerFeatureSlides.forEach((slide, index) => {
+      const slideRect = slide.getBoundingClientRect();
+      const slideCenter = slideRect.left + (slideRect.width / 2);
+      const distanceRatio = Math.abs(slideCenter - viewportCenter) / Math.max(1, viewportRect.width);
+      const localStrength = Math.max(0, 1 - Math.min(distanceRatio, 1));
+      showPowerSlide(slide, index, easeOutCubic(localStrength));
 
-  const updatePowerFeaturesTargetProgress = () => {
-    if (!powerFeaturesSpacer || !powerFeaturesViewport) return;
-
-    if (isMobilePowerFeatures()) {
-      targetPowerProgress = 0;
-      resetPowerFeaturesStage();
-      return;
-    }
-
-    const spacerRect = powerFeaturesSpacer.getBoundingClientRect();
-    const start = spacerRect.top + window.scrollY;
-    const end = spacerRect.bottom + window.scrollY - window.innerHeight;
-    const current = window.scrollY;
-    const range = Math.max(1, end - start);
-    let progress = (current - start) / range;
-    progress = Math.max(0, Math.min(1, progress));
-    targetPowerProgress = progress;
-    schedulePowerFeaturesRender();
-  };
-
-  const syncPowerFeaturesScroll = () => {
-    if (!powerFeaturesSpacer || !powerFeaturesViewport) return;
-
-    if (isMobilePowerFeatures()) {
-      if (powerScrollIdleTimeout) {
-        window.clearTimeout(powerScrollIdleTimeout);
-        powerScrollIdleTimeout = null;
+      if (localStrength > strongestStrength) {
+        strongestStrength = localStrength;
+        strongestIndex = index;
       }
-      targetPowerProgress = 0;
-      renderedPowerProgress = 0;
-      resetPowerFeaturesStage();
+    });
+
+    syncPowerControls(strongestIndex);
+  };
+
+  const renderPowerFeatures = () => {
+    powerAnimationFrame = null;
+
+    if (!powerFeaturesViewport || !powerFeatureSlides.length) return;
+
+    if (isMobilePowerFeatures()) {
+      powerDesktopTransition = null;
+      renderMobilePowerState();
       return;
     }
 
-    updatePowerFeaturesTargetProgress();
-
-    if (powerScrollIdleTimeout) {
-      window.clearTimeout(powerScrollIdleTimeout);
-    }
-
-    powerScrollIdleTimeout = window.setTimeout(() => {
-      powerScrollIdleTimeout = null;
-      snapPowerFeaturesToNearestSlide();
-    }, 120);
+    if (powerDesktopTransition) return;
+    renderDesktopPowerState(powerActiveSlideIndex, powerActiveSlideIndex, 1);
+    syncPowerControls(powerActiveSlideIndex);
   };
 
-  if (powerFeaturesSpacer && powerFeaturesViewport && powerFeatureSlides.length) {
-    updatePowerFeaturesSpacerHeight();
-    renderedPowerProgress = targetPowerProgress = 0;
-    syncPowerFeaturesScroll();
+  const queuePowerFeaturesSwipeRender = () => {
+    if (powerAnimationFrame) return;
+    powerAnimationFrame = window.requestAnimationFrame(renderPowerFeatures);
+  };
 
-    window.addEventListener('scroll', syncPowerFeaturesScroll, { passive: true });
-    window.addEventListener('resize', () => {
-      updatePowerFeaturesSpacerHeight();
-      syncPowerFeaturesScroll();
+  const animatePowerSlideTo = (nextIndex) => {
+    if (!powerFeatureSlides.length) return;
+
+    const clampedIndex = clampPowerSlideIndex(nextIndex);
+
+    if (powerDesktopTransition) {
+      window.cancelAnimationFrame(powerAnimationFrame);
+      powerAnimationFrame = null;
+      powerActiveSlideIndex = powerDesktopTransition.toIndex;
+      powerDesktopTransition = null;
+    }
+
+    if (clampedIndex === powerActiveSlideIndex) {
+      queuePowerFeaturesSwipeRender();
+      return;
+    }
+
+    const fromIndex = powerActiveSlideIndex;
+    powerActiveSlideIndex = clampedIndex;
+    syncPowerControls(clampedIndex);
+    powerDesktopTransition = {
+      fromIndex,
+      toIndex: clampedIndex,
+      direction: clampedIndex > fromIndex ? 1 : -1,
+      startTime: performance.now(),
+      duration: 420,
+    };
+
+    const stepTransition = (now) => {
+      if (!powerDesktopTransition) {
+        powerAnimationFrame = null;
+        return;
+      }
+
+      const progress = Math.min(1, (now - powerDesktopTransition.startTime) / powerDesktopTransition.duration);
+      renderDesktopPowerState(
+        powerDesktopTransition.fromIndex,
+        powerDesktopTransition.toIndex,
+        progress,
+        powerDesktopTransition.direction
+      );
+
+      if (progress < 1) {
+        powerAnimationFrame = window.requestAnimationFrame(stepTransition);
+        return;
+      }
+
+      powerDesktopTransition = null;
+      powerAnimationFrame = null;
+      queuePowerFeaturesSwipeRender();
+    };
+
+    if (powerAnimationFrame) {
+      window.cancelAnimationFrame(powerAnimationFrame);
+    }
+
+    powerAnimationFrame = window.requestAnimationFrame(stepTransition);
+  };
+
+  const goToPowerSlide = (index) => {
+    const clampedIndex = clampPowerSlideIndex(index);
+
+    if (isMobilePowerFeatures()) {
+      scrollPowerSlideIntoView(clampedIndex);
+      return;
+    }
+
+    animatePowerSlideTo(clampedIndex);
+  };
+
+  if (powerFeaturesViewport && powerFeatureSlides.length) {
+    queuePowerFeaturesSwipeRender();
+    powerFeaturesViewport.addEventListener('scroll', () => {
+      if (!isMobilePowerFeatures()) return;
+      queuePowerFeaturesSwipeRender();
+    }, { passive: true });
+    window.addEventListener('resize', queuePowerFeaturesSwipeRender);
+    window.addEventListener('load', queuePowerFeaturesSwipeRender);
+
+    powerFeaturesViewport.addEventListener('pointerdown', (event) => {
+      if (isMobilePowerFeatures()) return;
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+      powerSwipeDragState = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        deltaX: 0,
+        deltaY: 0,
+        dragged: false,
+      };
+
+      powerFeaturesViewport.classList.add('is-dragging');
+      powerFeaturesViewport.setPointerCapture(event.pointerId);
     });
-    window.addEventListener('load', () => {
-      updatePowerFeaturesSpacerHeight();
-      syncPowerFeaturesScroll();
+
+    powerFeaturesViewport.addEventListener('pointermove', (event) => {
+      if (!powerSwipeDragState || event.pointerId !== powerSwipeDragState.pointerId) return;
+
+      powerSwipeDragState.deltaX = event.clientX - powerSwipeDragState.startX;
+      powerSwipeDragState.deltaY = event.clientY - powerSwipeDragState.startY;
+
+      if (Math.abs(powerSwipeDragState.deltaX) > 6) {
+        powerSwipeDragState.dragged = true;
+      }
+    });
+
+    const finishPowerSwipeDrag = (event) => {
+      if (!powerSwipeDragState || event.pointerId !== powerSwipeDragState.pointerId) return;
+
+      const { deltaX, deltaY, dragged } = powerSwipeDragState;
+      const passedThreshold = Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY);
+
+      powerSuppressClick = dragged;
+      powerSwipeDragState = null;
+      powerFeaturesViewport.classList.remove('is-dragging');
+
+      if (!isMobilePowerFeatures() && passedThreshold) {
+        animatePowerSlideTo(deltaX < 0 ? powerActiveSlideIndex + 1 : powerActiveSlideIndex - 1);
+        return;
+      }
+
+      queuePowerFeaturesSwipeRender();
+    };
+
+    powerFeaturesViewport.addEventListener('pointerup', finishPowerSwipeDrag);
+    powerFeaturesViewport.addEventListener('pointercancel', finishPowerSwipeDrag);
+    powerFeaturesViewport.addEventListener('lostpointercapture', () => {
+      powerSwipeDragState = null;
+      powerFeaturesViewport.classList.remove('is-dragging');
+    });
+
+    powerFeaturesViewport.addEventListener('keydown', (event) => {
+      if (isMobilePowerFeatures()) return;
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+
+      event.preventDefault();
+      animatePowerSlideTo(
+        event.key === 'ArrowRight' ? powerActiveSlideIndex + 1 : powerActiveSlideIndex - 1
+      );
+    });
+
+    powerFeaturesViewport.addEventListener('wheel', (event) => {
+      if (isMobilePowerFeatures()) return;
+
+      const now = performance.now();
+      const deltaX = event.deltaX;
+      const deltaY = event.deltaY;
+      const absX = Math.abs(deltaX);
+      const absY = Math.abs(deltaY);
+      const horizontalIntent = absX > 4 && absX > absY * 1.15;
+
+      if (!horizontalIntent) return;
+
+      event.preventDefault();
+
+      if (now - powerWheelGesture.lastEventTime > 180) {
+        powerWheelGesture.deltaX = 0;
+        powerWheelGesture.deltaY = 0;
+        powerWheelGesture.isLocked = false;
+      }
+
+      powerWheelGesture.deltaX += deltaX;
+      powerWheelGesture.deltaY += deltaY;
+      powerWheelGesture.lastEventTime = now;
+      schedulePowerWheelGestureReset();
+
+      if (powerWheelGesture.isLocked) return;
+
+      if (Math.abs(powerWheelGesture.deltaX) < 48) return;
+
+      powerWheelGesture.isLocked = true;
+      animatePowerSlideTo(
+        powerWheelGesture.deltaX > 0 ? powerActiveSlideIndex + 1 : powerActiveSlideIndex - 1
+      );
+    }, { passive: false });
+
+    powerFeaturesViewport.addEventListener('click', (event) => {
+      if (!powerSuppressClick) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      powerSuppressClick = false;
+    }, true);
+  }
+
+  if (powerPrevButton) {
+    powerPrevButton.addEventListener('click', () => {
+      goToPowerSlide(powerVisibleSlideIndex - 1);
+    });
+  }
+
+  if (powerNextButton) {
+    powerNextButton.addEventListener('click', () => {
+      goToPowerSlide(powerVisibleSlideIndex + 1);
+    });
+  }
+
+  if (powerDotButtons.length) {
+    powerDotButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        goToPowerSlide(index);
+        button.focus();
+      });
     });
   }
 
@@ -324,8 +527,14 @@ document.addEventListener('DOMContentLoaded', () => {
       frame.classList.toggle('is-ipad', device === 'ipad');
     });
 
-    updatePowerFeaturesSpacerHeight();
-    syncPowerFeaturesScroll();
+    if (!isMobilePowerFeatures()) {
+      powerActiveSlideIndex = 0;
+      powerDesktopTransition = null;
+      resetPowerWheelGesture();
+      syncPowerControls(0);
+    }
+
+    queuePowerFeaturesSwipeRender();
   };
 
   if (powerToggle && powerToggleButtons.length) {
