@@ -1,4 +1,6 @@
 // Main JavaScript for interactions
+document.documentElement.dataset.runtime = import.meta.env.DEV ? 'local' : 'live';
+
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Header scroll logic
   const headerChrome = document.querySelector('.site-chrome');

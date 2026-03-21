@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://bezelstudio.app/</loc></url>
+  <url><loc>https://bezelstudio.app/guides/</loc></url>
+  <url><loc>https://bezelstudio.app/guides/create-first-app-store-screenshot-project.html</loc></url>
+  <url><loc>https://bezelstudio.app/guides/make-clean-iphone-mockup.html</loc></url>
+  <url><loc>https://bezelstudio.app/guides/build-full-app-store-screenshot-set.html</loc></url>
+  <url><loc>https://bezelstudio.app/guides/localize-screenshot-sets-apple-translate.html</loc></url>
+  <url><loc>https://bezelstudio.app/guides/create-app-store-preview-visuals-canvas-motion.html</loc></url>
+  <url><loc>https://bezelstudio.app/guides/make-instant-mockups-with-shortcuts.html</loc></url>
   <url><loc>https://bezelstudio.app/privacy.html</loc></url>
   <url><loc>https://bezelstudio.app/features/bezel-ai-shortcuts.html</loc></url>
   <url><loc>https://bezelstudio.app/features/canvas-motion.html</loc></url>

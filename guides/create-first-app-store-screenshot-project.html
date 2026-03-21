@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth antialiased">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Create Your First App Store Screenshot Project on iPhone | Bezel Studio</title>
+  <meta name="description" content="Learn how to create your first Bezel Studio project on iPhone, from frame and canvas setup to headline styling and export.">
+  <link rel="canonical" href="https://bezelstudio.app/guides/create-first-app-store-screenshot-project.html">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      if (event.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
+  </script>
+</head>
+<body class="font-sans bg-zinc-50 dark:bg-[#0A0A0A] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="ambient-orb ambient-orb--blue absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]"></div>
+    <div class="ambient-orb ambient-orb--indigo absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]"></div>
+  </div>
+
+  <div class="guide-page-chrome relative z-10 pt-8 reveal">
+    <header class="guide-page-nav">
+      <a href="/" class="guide-page-nav__brand">
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio logo">
+        <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+      </a>
+      <nav class="guide-page-nav__links text-zinc-600 dark:text-zinc-400">
+        <a href="/#features">Features</a>
+        <a href="/guides/index.html">Guides</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="guide-page-nav__cta">Get the App</a>
+    </header>
+  </div>
+
+  <main class="guide-page-main">
+    <article class="guide-page-shell">
+      <section class="guide-page-hero reveal">
+        <p class="guide-page-eyebrow">How-To Guide 01</p>
+        <h1 class="guide-page-title">How to create your first App Store screenshot project on iPhone.</h1>
+        <p class="guide-page-lead">This is the cleanest starting point for the product. The docs make it clear that everything else grows from the same project model: frame, size, background, overlays, and export all stay editable after creation.</p>
+        <div class="guide-page-meta">
+          <span class="guide-chip">6 steps</span>
+          <span class="guide-chip" data-local-only>7 screenshot slots</span>
+          <span class="guide-chip">iPhone</span>
+        </div>
+        <div class="guide-page-cover">
+          <img src="/assets/feature-platforms/iphone/projects-presets.webp" alt="Create your first App Store screenshot project in Bezel Studio">
+        </div>
+        <div class="guide-page-panels">
+          <div class="guide-panel">
+            <p class="guide-panel__label">What You'll Build</p>
+            <p class="guide-panel__copy">One clean screenshot canvas with a device frame, background treatment, headline, and export-ready output.</p>
+          </div>
+          <div class="guide-panel">
+            <p class="guide-panel__label">What You'll Use</p>
+            <p class="guide-panel__copy">Project creation, default frame selection, canvas sizing, background styling, text overlays, and still export.</p>
+          </div>
+          <div class="guide-panel" data-local-only>
+            <p class="guide-panel__label">Screenshot Plan</p>
+            <p class="guide-panel__copy">Use 1 result image, 1 setup image, 4 process images, and 1 export image for the final article.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-steps reveal">
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 01</p>
+              <h2 class="guide-step__title">Create a new project and choose the default frame.</h2>
+              <p class="guide-step__body">Tap into the project creation flow and choose the Apple device frame you want as the first anchor. For a first tutorial, the iPhone frame is the clearest path because it matches the most common App Store screenshot workflow.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">Project creation screen with the default frame picker visible and the iPhone option selected.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 02</p>
+              <h2 class="guide-step__title">Set the canvas size and choose the starting background.</h2>
+              <p class="guide-step__body">Pick a size from presets, aspect ratios, or exact pixels depending on the output you need. Then choose a starting background, whether that is a solid, gradient, transparent canvas, or a more decorative treatment you plan to refine later.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">Canvas sizing options and background controls shown together during project setup.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 03</p>
+              <h2 class="guide-step__title">Import the screenshot and fit it into the frame.</h2>
+              <p class="guide-step__body">Place the raw app screenshot into the frame and adjust positioning until the composition looks stable. This is where the project stops being a blank template and starts becoming a usable marketing asset.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">The first imported screenshot placed inside the iPhone frame, with fitting or alignment controls visible.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 04</p>
+              <h2 class="guide-step__title">Add the headline and supporting copy.</h2>
+              <p class="guide-step__body">Create a text overlay and write the top-level message for the screenshot. Use a strong font choice, adjust the weight and alignment, and make sure the copy works with the frame instead of crowding it.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">Text overlay editor open with the first headline applied on top of the framed screenshot.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 05</p>
+              <h2 class="guide-step__title">Refine spacing, hierarchy, and layer placement.</h2>
+              <p class="guide-step__body">Tighten the composition by nudging the frame, text, and background until the layout feels balanced. If needed, use the layer order so the typography and frame relationship reads the way you want.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">Near-final canvas with the text, frame, and background aligned cleanly, plus one visible positioning or layer control.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 06</p>
+              <h2 class="guide-step__title">Export the finished still.</h2>
+              <p class="guide-step__body">Open the export flow and render a final still image. This closes the loop on the first project and sets up the next tutorials, because the same project can now grow into a full screenshot set, localization pass, or motion variant.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">Export panel or final exported result shown after the first screenshot project is complete.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="guide-related reveal">
+        <p class="guide-related__eyebrow">Continue</p>
+        <h2 class="guide-related__heading">Keep the workflow moving.</h2>
+        <div class="guide-related__links">
+          <a class="guide-related__link" href="/guides/make-clean-iphone-mockup.html">
+            <h3 class="guide-related__link-title">How to make a clean iPhone mockup from a raw screenshot.</h3>
+            <p class="guide-related__link-body">Take the same foundation and turn it into a more polished single-image deliverable.</p>
+          </a>
+          <a class="guide-related__link" href="/guides/build-full-app-store-screenshot-set.html">
+            <h3 class="guide-related__link-title">How to build a full App Store screenshot set in one project.</h3>
+            <p class="guide-related__link-body">Expand the same project model into a complete campaign set instead of stopping at one canvas.</p>
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="pt-16 pb-12 px-6 md:px-12 bg-transparent dark:bg-transparent relative z-10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex items-center gap-4">
+        <img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio">
+        <span class="text-zinc-900 dark:text-white font-semibold">Bezel Studio</span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">
+        <a href="/guides/index.html" class="hover:text-black dark:hover:text-white transition-colors">All Guides</a>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hover:text-black dark:hover:text-white transition-colors">App Store</a>
+        <a href="/privacy.html" class="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

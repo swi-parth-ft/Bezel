@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth antialiased">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Build a Full App Store Screenshot Set in One Project | Bezel Studio</title>
+  <meta name="description" content="Use Bezel Studio's project model to build a full App Store screenshot set with multiple canvases, grid review, reuse, and export.">
+  <link rel="canonical" href="https://bezelstudio.app/guides/build-full-app-store-screenshot-set.html">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      if (event.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
+  </script>
+</head>
+<body class="font-sans bg-zinc-50 dark:bg-[#0A0A0A] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="ambient-orb ambient-orb--blue absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]"></div>
+    <div class="ambient-orb ambient-orb--indigo absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]"></div>
+  </div>
+
+  <div class="guide-page-chrome relative z-10 pt-8 reveal">
+    <header class="guide-page-nav">
+      <a href="/" class="guide-page-nav__brand">
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio logo">
+        <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+      </a>
+      <nav class="guide-page-nav__links text-zinc-600 dark:text-zinc-400">
+        <a href="/#features">Features</a>
+        <a href="/guides/index.html">Guides</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="guide-page-nav__cta">Get the App</a>
+    </header>
+  </div>
+
+  <main class="guide-page-main">
+    <article class="guide-page-shell">
+      <section class="guide-page-hero reveal">
+        <p class="guide-page-eyebrow">How-To Guide 03</p>
+        <h1 class="guide-page-title">How to build a full App Store screenshot set in one project.</h1>
+        <p class="guide-page-lead">The docs are explicit that a project is meant to hold an entire asset set, not a single isolated screen. This guide should teach that model directly, because it is one of the clearest differentiators on the site.</p>
+        <div class="guide-page-meta">
+          <span class="guide-chip">6 steps</span>
+          <span class="guide-chip" data-local-only>7 screenshot slots</span>
+          <span class="guide-chip">iPad preferred</span>
+        </div>
+        <div class="guide-page-cover">
+          <img src="/assets/showcase/ipad/pro-layouts.webp" alt="Build a full App Store screenshot set in one Bezel Studio project">
+        </div>
+        <div class="guide-page-panels">
+          <div class="guide-panel">
+            <p class="guide-panel__label">What You'll Build</p>
+            <p class="guide-panel__copy">A multi-screen App Store screenshot set that stays inside one project instead of being split across separate files.</p>
+          </div>
+          <div class="guide-panel">
+            <p class="guide-panel__label">What You'll Use</p>
+            <p class="guide-panel__copy">Projects, canvases, duplication, grid mode, reuse, and multi-canvas export.</p>
+          </div>
+          <div class="guide-panel" data-local-only>
+            <p class="guide-panel__label">Screenshot Plan</p>
+            <p class="guide-panel__copy">Show 1 final set image, 1 starting base canvas, 3 canvas-building images, 1 grid mode image, and 1 multi-export image.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-steps reveal">
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 01</p>
+              <h2 class="guide-step__title">Create the first base canvas for the campaign.</h2>
+              <p class="guide-step__body">Build the first screenshot the way you want the rest of the set to feel. This is the visual reference for spacing, typography, and device treatment that the remaining canvases will inherit or adapt.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">The first completed base canvas before additional screenshots are added to the project.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 02</p>
+              <h2 class="guide-step__title">Add or duplicate canvases for the rest of the set.</h2>
+              <p class="guide-step__body">Expand the project into multiple canvases so each App Store screenshot has its own composition surface. This is where the product stops behaving like a one-image editor and starts behaving like a campaign workspace.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">Canvas add or duplicate action used to expand the project beyond the first screen.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 03</p>
+              <h2 class="guide-step__title">Reuse the headline structure and major layout decisions.</h2>
+              <p class="guide-step__body">Keep the set cohesive by carrying over the strongest parts of the first canvas, then swap in new screenshots and copy where needed. This is the practical benefit of project-level reuse and shared composition logic.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">Second or third canvas showing reused layout structure with different app content.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 04</p>
+              <h2 class="guide-step__title">Switch to grid mode to review the whole set together.</h2>
+              <p class="guide-step__body">Open grid mode and inspect the screenshot set as one visual system. This is where spacing problems, inconsistent headline lengths, or mismatched backgrounds become obvious before export.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">Grid mode overview showing multiple canvases in the same project.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 05</p>
+              <h2 class="guide-step__title">Tighten inconsistencies before export.</h2>
+              <p class="guide-step__body">Fix anything that breaks the sequence, whether that is headline rhythm, frame scale, screenshot placement, or visual balance between canvases. The tutorial should show one specific inconsistency being corrected so the step feels concrete.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">One visible correction pass on the set, ideally after reviewing multiple canvases together.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 06</p>
+              <h2 class="guide-step__title">Export the full screenshot set from the same project.</h2>
+              <p class="guide-step__body">Use the export flow to render the group of canvases as one deliverable batch. End the guide with the final set together so the reader can see the exact value of keeping everything inside one project.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">The export panel or final batch of App Store screenshots shown together after render.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="guide-related reveal">
+        <p class="guide-related__eyebrow">Continue</p>
+        <h2 class="guide-related__heading">Extend the same project instead of starting over.</h2>
+        <div class="guide-related__links">
+          <a class="guide-related__link" href="/guides/localize-screenshot-sets-apple-translate.html">
+            <h3 class="guide-related__link-title">How to localize screenshot sets with Apple Translate.</h3>
+            <p class="guide-related__link-body">Take the finished set and turn it into a multi-language campaign without rebuilding it by hand.</p>
+          </a>
+          <a class="guide-related__link" href="/guides/create-app-store-preview-visuals-canvas-motion.html">
+            <h3 class="guide-related__link-title">How to create App Store preview visuals with Canvas Motion.</h3>
+            <p class="guide-related__link-body">Use the same compositional base for motion instead of treating animation as a separate tool.</p>
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="pt-16 pb-12 px-6 md:px-12 bg-transparent dark:bg-transparent relative z-10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex items-center gap-4">
+        <img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio">
+        <span class="text-zinc-900 dark:text-white font-semibold">Bezel Studio</span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">
+        <a href="/guides/index.html" class="hover:text-black dark:hover:text-white transition-colors">All Guides</a>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hover:text-black dark:hover:text-white transition-colors">App Store</a>
+        <a href="/privacy.html" class="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

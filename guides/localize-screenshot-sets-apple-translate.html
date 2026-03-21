@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth antialiased">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Localize Screenshot Sets With Apple Translate | Bezel Studio</title>
+  <meta name="description" content="Learn how to localize a Bezel Studio screenshot set with Apple Translate while keeping the layout, overlays, and export flow intact.">
+  <link rel="canonical" href="https://bezelstudio.app/guides/localize-screenshot-sets-apple-translate.html">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      if (event.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
+  </script>
+</head>
+<body class="font-sans bg-zinc-50 dark:bg-[#0A0A0A] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="ambient-orb ambient-orb--blue absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]"></div>
+    <div class="ambient-orb ambient-orb--indigo absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]"></div>
+  </div>
+
+  <div class="guide-page-chrome relative z-10 pt-8 reveal">
+    <header class="guide-page-nav">
+      <a href="/" class="guide-page-nav__brand">
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio logo">
+        <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+      </a>
+      <nav class="guide-page-nav__links text-zinc-600 dark:text-zinc-400">
+        <a href="/#features">Features</a>
+        <a href="/guides/index.html">Guides</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="guide-page-nav__cta">Get the App</a>
+    </header>
+  </div>
+
+  <main class="guide-page-main">
+    <article class="guide-page-shell">
+      <section class="guide-page-hero reveal">
+        <p class="guide-page-eyebrow">How-To Guide 04</p>
+        <h1 class="guide-page-title">How to localize screenshot sets with Apple Translate.</h1>
+        <p class="guide-page-lead">Localization is one of the clearest reasons the project model matters. Translation writes back into the existing text overlays, which means the composition stays live instead of breaking into separate files or manual rebuilds.</p>
+        <div class="guide-page-meta">
+          <span class="guide-chip">6 steps</span>
+          <span class="guide-chip" data-local-only>7 screenshot slots</span>
+          <span class="guide-chip">Localization</span>
+        </div>
+        <div class="guide-page-cover">
+          <img src="/assets/feature-platforms/iphone/translation.webp" alt="Localize screenshot sets with Apple Translate in Bezel Studio">
+        </div>
+        <div class="guide-page-panels">
+          <div class="guide-panel">
+            <p class="guide-panel__label">What You'll Build</p>
+            <p class="guide-panel__copy">A localized screenshot set that still uses the same underlying layouts, layers, and export flow as the original language version.</p>
+          </div>
+          <div class="guide-panel">
+            <p class="guide-panel__label">What You'll Use</p>
+            <p class="guide-panel__copy">Project-level translation, text overlays, layout adjustment, and multi-canvas export.</p>
+          </div>
+          <div class="guide-panel" data-local-only>
+            <p class="guide-panel__label">Screenshot Plan</p>
+            <p class="guide-panel__copy">Use 1 original set image, 1 translate-menu image, 3 translation process images, 1 layout-fix image, and 1 final localized output image.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-steps reveal">
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 01</p>
+              <h2 class="guide-step__title">Finish the source-language set before you translate.</h2>
+              <p class="guide-step__body">Start from a screenshot set that already has the right structure, because translation works best when the underlying layouts and hierarchy are already clear. The tutorial should show the completed source version first.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">The original source-language screenshot set before translation begins.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 02</p>
+              <h2 class="guide-step__title">Open the translate menu and choose the target language.</h2>
+              <p class="guide-step__body">Select the language you want and decide whether you want to translate only the current canvas or the full project. This step should make the scope choice visible because it is part of the product’s value.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">Translate menu open with a target language selected and current-canvas vs all-canvas scope visible.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 03</p>
+              <h2 class="guide-step__title">Let the translated copy write back into the existing overlays.</h2>
+              <p class="guide-step__body">Run the translation and show how the text changes inside the same live composition. This is the part that should visually separate Bezel Studio from a manual export-and-redesign workflow.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">A translated canvas after the text overlays have been updated in place.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 04</p>
+              <h2 class="guide-step__title">Review text expansion and tighten the layout.</h2>
+              <p class="guide-step__body">Some languages will create longer lines or different spacing needs. Use this step to show a real adjustment pass, such as shifting text, resizing a caption block, or rebalancing the frame and copy relationship.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">One translated screenshot with a visible layout correction after text expansion.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 05</p>
+              <h2 class="guide-step__title">Check the rest of the project for consistency.</h2>
+              <p class="guide-step__body">Review the full localized set together so the rhythm and balance hold across every screenshot. This is especially important when the project contains many canvases and multiple headlines of different lengths.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">A project-wide review of the translated set, ideally in grid mode or a multi-canvas overview.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 06</p>
+              <h2 class="guide-step__title">Export the localized set for the target region.</h2>
+              <p class="guide-step__body">Render the localized version and show it as a complete output, not just a single translated screen. The value of the guide is proving that the same project can carry multiple language deliverables without splitting apart.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">The final exported localized screenshot set or a final localized result board.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="guide-related reveal">
+        <p class="guide-related__eyebrow">Continue</p>
+        <h2 class="guide-related__heading">Use the same project for motion or automation next.</h2>
+        <div class="guide-related__links">
+          <a class="guide-related__link" href="/guides/create-app-store-preview-visuals-canvas-motion.html">
+            <h3 class="guide-related__link-title">How to create App Store preview visuals with Canvas Motion.</h3>
+            <p class="guide-related__link-body">Turn the same screenshot set into animated output without moving to another tool.</p>
+          </a>
+          <a class="guide-related__link" href="/guides/make-instant-mockups-with-shortcuts.html">
+            <h3 class="guide-related__link-title">How to make instant mockups with Quick Mockups and Shortcuts.</h3>
+            <p class="guide-related__link-body">Build the faster automation path after the manual localization workflow is clear.</p>
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="pt-16 pb-12 px-6 md:px-12 bg-transparent dark:bg-transparent relative z-10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex items-center gap-4">
+        <img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio">
+        <span class="text-zinc-900 dark:text-white font-semibold">Bezel Studio</span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">
+        <a href="/guides/index.html" class="hover:text-black dark:hover:text-white transition-colors">All Guides</a>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hover:text-black dark:hover:text-white transition-colors">App Store</a>
+        <a href="/privacy.html" class="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
