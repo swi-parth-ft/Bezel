@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     headerMenuToggle.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
-      if (!headerChrome.classList.contains('is-collapsed')) return;
+      if (isDesktopHeader() && !headerChrome.classList.contains('is-collapsed')) return;
 
       const isOpen = headerChrome.classList.contains('is-menu-open');
       setHeaderMenuOpen(!isOpen);

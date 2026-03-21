@@ -37,19 +37,44 @@
     <div class="ambient-orb ambient-orb--indigo absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]"></div>
   </div>
 
-  <div class="guide-page-chrome relative z-10 pt-8 reveal">
-    <header class="guide-page-nav">
-      <a href="/" class="guide-page-nav__brand">
+  <div class="site-chrome relative z-10 w-full flex justify-center pt-8">
+    <header
+      class="site-header flex items-center justify-between px-6 py-3 bg-transparent rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
+      <a href="/" class="flex items-center gap-3">
         <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio logo">
-        <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+        <span class="site-header__brand-text text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
       </a>
-      <nav class="guide-page-nav__links text-zinc-600 dark:text-zinc-400">
+      <div class="site-header__expanded hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav class="flex items-center gap-8">
+          <a href="/#features"
+            class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
+          <a href="/guides/index.html"
+            class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
+          <a href="/#faq"
+            class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+        </nav>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"
+          class="cta-button cta-button--nav hidden sm:flex items-center justify-center px-4 py-2 bg-zinc-900/90 dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
+          Get the App
+        </a>
+      </div>
+      <button type="button" class="site-header__menu-toggle" data-header-menu-toggle aria-label="Open navigation"
+        aria-expanded="false" aria-controls="site-header-menu">
+        <svg class="symbol-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </header>
+    <div id="site-header-menu" class="site-header__menu-panel" data-header-menu-panel aria-hidden="true">
+      <nav class="site-header__menu-links">
         <a href="/#features">Features</a>
         <a href="/guides/index.html">Guides</a>
         <a href="/#faq">FAQ</a>
       </nav>
-      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="guide-page-nav__cta">Get the App</a>
-    </header>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="site-header__menu-cta">
+        Get the App
+      </a>
+    </div>
   </div>
 
   <main class="guide-page-main">
