@@ -4269,11 +4269,14 @@ html[data-runtime="live"] .guide-shot-placeholder {
   }
 
   .site-header__menu-panel {
-    top: calc(100% + 0.7rem);
+    top: 100%;
     left: 0;
-    right: auto;
-    width: min(18rem, calc(100vw - 1.5rem));
+    right: 0;
+    width: 100vw;
     min-width: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
   }
 
   .site-header>a {
