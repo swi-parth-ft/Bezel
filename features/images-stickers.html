@@ -7,8 +7,8 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "G-4H5EW5KWZC");
+    gtag('js', new Date());
+    gtag('config', 'G-4H5EW5KWZC');
   </script>
   <title>App Screenshot Stickers & Callouts | Bezel Studio</title>
   <meta name="description" content="Instantly remove backgrounds and build pop-out stickers to highlight specific features in your App Store screenshots.">
@@ -20,7 +20,8 @@
   <link rel="icon" type="image/png" href="/assets/brand/favicon-16x16.png" sizes="16x16">
   <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
   <link rel="stylesheet" href="/src/style.css">
-  <meta name="theme-color" content="#fafafa">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Bezel Studio">
   <meta property="og:locale" content="en_US">
@@ -28,24 +29,80 @@
   <meta property="og:description" content="Instantly remove backgrounds and build pop-out stickers to highlight specific features in your App Store screenshots.">
   <meta property="og:url" content="https://bezelstudio.app/features/images-stickers.html">
   <meta property="og:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/images-stickers.webp">
-  <meta property="og:image:alt" content="App Screenshot Stickers & Callouts | Bezel Studio">
+  <meta property="og:image:alt" content="Stickers & UI Cutouts on iPad">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="App Screenshot Stickers & Callouts | Bezel Studio">
   <meta name="twitter:description" content="Instantly remove backgrounds and build pop-out stickers to highlight specific features in your App Store screenshots.">
   <meta name="twitter:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/images-stickers.webp">
-  <meta name="twitter:image:alt" content="App Screenshot Stickers & Callouts | Bezel Studio">
-  <meta name="color-scheme" content="light">
+  <meta name="twitter:image:alt" content="Stickers & UI Cutouts on iPad">
+  <meta name="color-scheme" content="light dark">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "App Screenshot Stickers & Callouts | Bezel Studio",
+      "description": "Instantly remove backgrounds and build pop-out stickers to highlight specific features in your App Store screenshots.",
+      "url": "https://bezelstudio.app/features/images-stickers.html",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Bezel Studio",
+        "url": "https://bezelstudio.app/"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://bezelstudio.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Features",
+            "item": "https://bezelstudio.app/#features"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Stickers & UI Cutouts",
+            "item": "https://bezelstudio.app/features/images-stickers.html"
+          }
+        ]
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Bezel Studio",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "iOS, iPadOS",
+        "downloadUrl": "https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"
+      }
+    }
+  </script>
+  <script>
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      if (event.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
+  </script>
   <style>
     .feature-page-shell {
       position: relative;
-      width: min(100%, 72rem);
+      width: min(100%, 78rem);
       padding-inline: 1rem;
     }
     .feature-visual-stage {
       position: relative;
-      width: min(100%, 62rem);
-      height: clamp(17rem, 34vw, 26rem);
-      margin: 0 auto 3rem;
+      width: min(100%, 70rem);
+      height: clamp(20rem, 40vw, 31rem);
+      margin: 0 auto 4rem;
       pointer-events: none;
       overflow: hidden;
     }
@@ -99,23 +156,23 @@
     }
     /* Premium markdown overrides for generated body content */
     .premium-content h2 {
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 1.5rem;
       letter-spacing: -0.02em;
     }
     @media (min-width: 768px) {
-      .premium-content h2 { font-size: 3rem; }
+      .premium-content h2 { font-size: 3.5rem; }
     }
     .premium-content h3 {
-      font-size: 1.35rem;
+      font-size: 1.5rem;
       font-weight: 700;
       margin-top: 3rem;
       margin-bottom: 1rem;
     }
     .premium-content p {
-      font-size: 1rem;
+      font-size: 1.125rem;
       line-height: 1.8;
       color: var(--tw-prose-body);
       margin-bottom: 2rem;
@@ -137,7 +194,7 @@
     .premium-content li {
       position: relative;
       padding-left: 2.5rem;
-      font-size: 1rem;
+      font-size: 1.125rem;
     }
     .premium-content li::before {
       content: "";

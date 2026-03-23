@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const siteUrl = 'https://bezelstudio.app';
 
 // Content expanded with SEO keywords like "app store screenshot maker", "iPhone mockup generator", etc.
 const features = [
@@ -21,8 +22,8 @@ const features = [
         <li><strong>No Watermarks:</strong> Generate pristine, 4K device mockups ready for App Store Connect.</li>
       </ul>
     `,
-    iphone_shot: "/assets/feature-platforms/iphone/export-share.webp",
-    ipad_shot: "/assets/feature-platforms/ipad/export-share.webp"
+    iphone_shot: "/assets/feature-platforms/iphone/device-frames.webp",
+    ipad_shot: "/assets/feature-platforms/ipad/device-frames.webp"
   },
   {
     id: "canvas-styling",
@@ -232,6 +233,50 @@ const template = (data) => `<!doctype html>
   <meta name="twitter:image" content="https://bezelstudio.app${data.ipad_shot}">
   <meta name="twitter:image:alt" content="${data.headline} on iPad">
   <meta name="color-scheme" content="light dark">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "${data.title}",
+      "description": "${data.desc}",
+      "url": "${siteUrl}/features/${data.id}.html",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Bezel Studio",
+        "url": "${siteUrl}/"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "${siteUrl}/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Features",
+            "item": "${siteUrl}/#features"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "${data.headline}",
+            "item": "${siteUrl}/features/${data.id}.html"
+          }
+        ]
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Bezel Studio",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "iOS, iPadOS",
+        "downloadUrl": "https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"
+      }
+    }
+  </script>
   <script>
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       document.documentElement.classList.add('dark');
@@ -495,3 +540,34 @@ features.forEach(feature => {
   fs.writeFileSync(filePath, template(feature));
   console.log(`Created ${filePath}`);
 });
+
+const staticPages = ['/', '/privacy.html'];
+const featurePages = fs.existsSync(outDir)
+  ? fs.readdirSync(outDir)
+      .filter(file => file.endsWith('.html'))
+      .map(file => `/features/${file}`)
+      .sort()
+  : features.map(feature => `/features/${feature.id}.html`);
+const allPages = [...staticPages, ...featurePages];
+const lastmod = new Date().toISOString().split('T')[0];
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${allPages.map(page => `  <url>
+    <loc>${siteUrl}${page}</loc>
+    <lastmod>${lastmod}</lastmod>
+  </url>`).join('\n')}
+</urlset>
+`;
+
+fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemap);
+console.log(`Created ${path.join(__dirname, 'sitemap.xml')}`);
+
+const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${siteUrl}/sitemap.xml
+`;
+
+fs.writeFileSync(path.join(__dirname, 'robots.txt'), robots);
+console.log(`Created ${path.join(__dirname, 'robots.txt')}`);
