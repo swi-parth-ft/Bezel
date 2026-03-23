@@ -2,6 +2,142 @@ const fs = require('fs');
 const path = require('path');
 const siteUrl = 'https://bezelstudio.app';
 
+const guides = [
+  {
+    path: '/guides/create-first-app-store-screenshot-project.html',
+    title: 'How to create your first App Store screenshot project on iPhone.',
+    description: 'Build the project foundation with frame setup, canvas sizing, styling, and export.',
+  },
+  {
+    path: '/guides/make-clean-iphone-mockup.html',
+    title: 'How to make a clean iPhone mockup from a raw screenshot.',
+    description: 'Turn a raw screenshot into a polished device mockup with framing, copy, and export.',
+  },
+  {
+    path: '/guides/build-full-app-store-screenshot-set.html',
+    title: 'How to build a full App Store screenshot set in one project.',
+    description: 'Scale one canvas into a complete campaign set with review and batch export.',
+  },
+  {
+    path: '/guides/localize-screenshot-sets-apple-translate.html',
+    title: 'How to localize screenshot sets with Apple Translate.',
+    description: 'Translate a complete screenshot set without rebuilding each canvas by hand.',
+  },
+  {
+    path: '/guides/create-app-store-preview-visuals-canvas-motion.html',
+    title: 'How to create App Store preview visuals with Canvas Motion.',
+    description: 'Extend a still composition into motion with keyframes, timing, and export.',
+  },
+  {
+    path: '/guides/make-instant-mockups-with-shortcuts.html',
+    title: 'How to make instant mockups with Quick Mockups and Shortcuts.',
+    description: 'Automate repeatable mockup output with presets, Shortcuts, and one-tap generation.',
+  },
+];
+
+const guideByPath = new Map(guides.map((guide) => [guide.path, guide]));
+
+const guidePathsByFeature = {
+  'device-frames': [
+    '/guides/make-clean-iphone-mockup.html',
+    '/guides/create-first-app-store-screenshot-project.html',
+  ],
+  'canvas-styling': [
+    '/guides/create-first-app-store-screenshot-project.html',
+    '/guides/make-clean-iphone-mockup.html',
+  ],
+  typography: [
+    '/guides/create-first-app-store-screenshot-project.html',
+    '/guides/make-clean-iphone-mockup.html',
+  ],
+  'images-stickers': [
+    '/guides/make-clean-iphone-mockup.html',
+    '/guides/build-full-app-store-screenshot-set.html',
+  ],
+  'draw-doodle': [
+    '/guides/make-clean-iphone-mockup.html',
+    '/guides/build-full-app-store-screenshot-set.html',
+  ],
+  translation: [
+    '/guides/localize-screenshot-sets-apple-translate.html',
+    '/guides/build-full-app-store-screenshot-set.html',
+  ],
+  'layers-precision': [
+    '/guides/build-full-app-store-screenshot-set.html',
+    '/guides/create-first-app-store-screenshot-project.html',
+  ],
+  'projects-presets': [
+    '/guides/create-first-app-store-screenshot-project.html',
+    '/guides/build-full-app-store-screenshot-set.html',
+  ],
+  'export-share': [
+    '/guides/build-full-app-store-screenshot-set.html',
+    '/guides/create-app-store-preview-visuals-canvas-motion.html',
+  ],
+  'canvas-motion': [
+    '/guides/create-app-store-preview-visuals-canvas-motion.html',
+    '/guides/build-full-app-store-screenshot-set.html',
+  ],
+  'bezel-ai-shortcuts': [
+    '/guides/make-instant-mockups-with-shortcuts.html',
+    '/guides/create-first-app-store-screenshot-project.html',
+  ],
+  'copy-paste-projects': [
+    '/guides/build-full-app-store-screenshot-set.html',
+    '/guides/create-first-app-store-screenshot-project.html',
+  ],
+  'transforms-3-axis': [
+    '/guides/build-full-app-store-screenshot-set.html',
+    '/guides/make-clean-iphone-mockup.html',
+  ],
+  'undo-redo': [
+    '/guides/create-first-app-store-screenshot-project.html',
+    '/guides/build-full-app-store-screenshot-set.html',
+  ],
+};
+
+function getRelatedGuides(featureId) {
+  const paths = guidePathsByFeature[featureId] || [
+    '/guides/create-first-app-store-screenshot-project.html',
+    '/guides/build-full-app-store-screenshot-set.html',
+  ];
+
+  return paths
+    .map((path) => guideByPath.get(path))
+    .filter(Boolean);
+}
+
+function renderRelatedGuides(featureId) {
+  const relatedGuides = getRelatedGuides(featureId);
+
+  return `
+    <section class="relative z-10 w-full max-w-5xl px-6 mx-auto mt-20 reveal" style="animation-delay: 360ms;">
+      <div class="rounded-[2rem] border border-zinc-200/80 bg-white/85 px-6 py-8 shadow-[0_30px_80px_-50px_rgba(15,23,42,0.35)] backdrop-blur dark:border-white/10 dark:bg-white/5 md:px-8">
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-300">Keep Exploring</p>
+            <h2 class="mt-3 text-3xl font-black tracking-tight text-zinc-900 dark:text-white">Related guides for this feature</h2>
+            <p class="mt-3 text-base leading-7 text-zinc-600 dark:text-zinc-300">These tutorials deepen the workflow behind ${featureId.replace(/-/g, ' ')} so the feature page can pass users and crawlers into the stronger how-to cluster.</p>
+          </div>
+          <a href="/guides/index.html" class="inline-flex items-center gap-2 text-sm font-semibold text-zinc-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-300">
+            Browse all guides
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="mt-8 grid gap-4 md:grid-cols-2">
+          ${relatedGuides.map((guide) => `
+            <a href="${guide.path}" class="block rounded-[1.5rem] border border-zinc-200/80 bg-zinc-50/90 px-5 py-5 transition-all hover:-translate-y-1 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-zinc-950/40 dark:hover:border-blue-400/60 dark:hover:bg-zinc-950/70">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">Guide</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">${guide.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-300">${guide.description}</p>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 // Content expanded with SEO keywords like "app store screenshot maker", "iPhone mockup generator", etc.
 const features = [
   {
@@ -465,6 +601,7 @@ const template = (data) => `<!doctype html>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
         <a href="/#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
+        <a href="/guides/index.html" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
         <a href="/#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
         <a href="/#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
       </nav>
@@ -505,6 +642,7 @@ const template = (data) => `<!doctype html>
         ${data.body}
       </div>
     </section>
+    ${renderRelatedGuides(data.id)}
     </div>
     
   </main>
@@ -521,6 +659,7 @@ const template = (data) => `<!doctype html>
       <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">
         <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hover:text-black dark:hover:text-white transition-colors">App Store</a>
         <a href="/" class="hover:text-black dark:hover:text-white transition-colors">Home</a>
+        <a href="/guides/index.html" class="hover:text-black dark:hover:text-white transition-colors">Guides</a>
         <a href="/privacy.html" class="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
       </div>
     </div>
@@ -541,7 +680,7 @@ features.forEach(feature => {
   console.log(`Created ${filePath}`);
 });
 
-const staticPages = ['/', '/privacy.html'];
+const staticPages = ['/', '/guides/', ...guides.map((guide) => guide.path), '/privacy.html'];
 const featurePages = fs.existsSync(outDir)
   ? fs.readdirSync(outDir)
       .filter(file => file.endsWith('.html'))
@@ -565,6 +704,7 @@ console.log(`Created ${path.join(__dirname, 'sitemap.xml')}`);
 
 const robots = `User-agent: *
 Allow: /
+Allow: /guides/
 
 Sitemap: ${siteUrl}/sitemap.xml
 `;
