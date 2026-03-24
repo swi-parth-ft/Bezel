@@ -165,6 +165,7 @@ def fetch_ga_realtime(client: ApiClient, property_id: str) -> int:
 def find_page_files(repo_root: Path) -> list[Path]:
     pages = [repo_root / "index.html", repo_root / "privacy.html"]
     pages.extend(sorted((repo_root / "features").glob("*.html")))
+    pages.extend(sorted((repo_root / "guides").glob("*.html")))
     return [path for path in pages if path.exists()]
 
 
@@ -190,6 +191,26 @@ def audit_page(page_path: Path, site_origin: str) -> dict[str, Any]:
         html,
         re.IGNORECASE,
     )
+    og_title_match = re.search(
+        r'<meta property="og:title"\s+content="([^"]*)"',
+        html,
+        re.IGNORECASE,
+    )
+    og_desc_match = re.search(
+        r'<meta property="og:description"\s+content="([^"]*)"',
+        html,
+        re.IGNORECASE,
+    )
+    twitter_title_match = re.search(
+        r'<meta name="twitter:title"\s+content="([^"]*)"',
+        html,
+        re.IGNORECASE,
+    )
+    twitter_desc_match = re.search(
+        r'<meta name="twitter:description"\s+content="([^"]*)"',
+        html,
+        re.IGNORECASE,
+    )
     h1_matches = re.findall(r"<h1[^>]*>(.*?)</h1>", html, re.IGNORECASE | re.DOTALL)
     app_store_links = len(re.findall(APP_STORE_HOST, html, re.IGNORECASE))
 
@@ -209,6 +230,10 @@ def audit_page(page_path: Path, site_origin: str) -> dict[str, Any]:
         issues.append(f"meta description too long ({len(description)})")
     if canonical != url:
         issues.append("canonical mismatch")
+    if not og_title_match or not og_desc_match:
+        issues.append("missing Open Graph metadata")
+    if not twitter_title_match or not twitter_desc_match:
+        issues.append("missing Twitter metadata")
     if h1_count != 1:
         issues.append(f"unexpected h1 count ({h1_count})")
     if app_store_links == 0:
