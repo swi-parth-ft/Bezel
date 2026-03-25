@@ -170,9 +170,15 @@ def find_page_files(repo_root: Path) -> list[Path]:
 
 
 def audit_page(page_path: Path, site_origin: str) -> dict[str, Any]:
-    relative = "/" if page_path.name == "index.html" else f"/{page_path.relative_to(page_path.parents[1]).as_posix()}"
-    if page_path.parent.name == "features":
+    relative = f"/{page_path.name}"
+    if page_path.name == "index.html" and page_path.parent.name == "guides":
+        relative = "/guides/"
+    elif page_path.parent.name == "features":
         relative = f"/features/{page_path.name}"
+    elif page_path.parent.name == "guides":
+        relative = f"/guides/{page_path.name}"
+    elif page_path.name == "index.html":
+        relative = "/"
     elif page_path.name == "privacy.html":
         relative = "/privacy.html"
 
