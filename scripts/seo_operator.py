@@ -351,6 +351,71 @@ def build_page_opportunities(
     return items[:10]
 
 
+def build_keyword_hypotheses(
+    ga_pages: list[dict[str, Any]],
+    trending_keywords: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    if trending_keywords:
+        return []
+
+    keyword_map: dict[str, list[tuple[str, str]]] = {
+        "/": [
+            ("app store screenshot maker", "commercial"),
+            ("iphone mockup generator", "commercial"),
+            ("app preview video maker", "commercial"),
+        ],
+        "/features/device-frames.html": [
+            ("iphone mockup generator", "commercial"),
+            ("app store device mockup templates", "commercial"),
+        ],
+        "/features/canvas-motion.html": [
+            ("app preview video maker", "commercial"),
+            ("animated app store screenshots", "informational"),
+        ],
+        "/features/copy-paste-projects.html": [
+            ("app screenshot templates", "informational"),
+            ("reuse app store screenshot layouts", "informational"),
+        ],
+        "/features/translation.html": [
+            ("app store screenshot localization", "commercial"),
+            ("localized app screenshots", "commercial"),
+        ],
+        "/features/typography.html": [
+            ("app store screenshot captions", "informational"),
+            ("app screenshot text overlay", "informational"),
+        ],
+        "/features/bezel-ai-shortcuts.html": [
+            ("shortcuts app screenshot automation", "informational"),
+            ("instant iphone mockup shortcuts", "informational"),
+        ],
+    }
+
+    seen_keywords: set[str] = set()
+    hypotheses: list[dict[str, Any]] = []
+
+    for page in ga_pages:
+        page_path = page["pagePath"]
+        candidates = keyword_map.get(page_path, [])
+        page_views = page["screenPageViews"]
+
+        for keyword, intent in candidates:
+            if keyword in seen_keywords:
+                continue
+            hypotheses.append(
+                {
+                    "keyword": keyword,
+                    "intent": intent,
+                    "page": page_path,
+                    "page_views": page_views,
+                }
+            )
+            seen_keywords.add(keyword)
+            if len(hypotheses) >= 8:
+                return hypotheses
+
+    return hypotheses
+
+
 def render_report(
     active_users: int,
     ga_pages: list[dict[str, Any]],
@@ -358,8 +423,13 @@ def render_report(
     trending_keywords: list[dict[str, Any]],
     page_opportunities: list[dict[str, Any]],
     page_audits: list[dict[str, Any]],
+    keyword_hypotheses: list[dict[str, Any]],
 ) -> str:
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    event_counts = {item["eventName"]: item["eventCount"] for item in ga_events}
+    tracking_events = ["app_store_click", "feature_cta_click", "guide_cta_click"]
+    missing_events = [name for name in tracking_events if event_counts.get(name, 0) == 0]
+
     lines = [
         "# SEO Operator Report",
         "",
@@ -370,6 +440,8 @@ def render_report(
         f"- GA4 realtime active users: `{active_users}`",
         f"- Top GA4 page in the last 7 days: `{ga_pages[0]['pagePath']}` with `{ga_pages[0]['screenPageViews']}` page views" if ga_pages else "- No GA4 page view data yet",
         f"- Search Console trending keyword leader: `{trending_keywords[0]['query']}`" if trending_keywords else "- No Search Console keyword data yet",
+        f"- Conversion events (7d): `app_store_click={event_counts.get('app_store_click', 0)}`, `feature_cta_click={event_counts.get('feature_cta_click', 0)}`, `guide_cta_click={event_counts.get('guide_cta_click', 0)}`",
+        f"- Conversion tracking watch: missing recent activity for `{', '.join(missing_events)}`" if missing_events else "- Conversion tracking status: all primary CTA events are active",
         f"- Pages with on-page audit issues: `{sum(1 for audit in page_audits if audit['issues'])}` / `{len(page_audits)}`",
         "",
         "## GA4 Top Pages (Last 7 Days)",
@@ -430,6 +502,23 @@ def render_report(
     lines.extend(
         [
             "",
+            "## Keyword Hypotheses (Search Console Sparse)",
+            "",
+            "| Keyword | Intent | Evidence Page | 7D Page Views |",
+            "| --- | --- | --- | ---: |",
+        ]
+    )
+    if keyword_hypotheses:
+        for item in keyword_hypotheses:
+            lines.append(
+                f"| `{item['keyword']}` | {item['intent']} | `{item['page']}` | {item['page_views']} |"
+            )
+    else:
+        lines.append("| _No additional hypotheses needed while query data is available_ | - | - | - |")
+
+    lines.extend(
+        [
+            "",
             "## On-Page Audit",
             "",
             "| Page | Status | Issues |",
@@ -453,6 +542,10 @@ def render_report(
         lines.append(f"- Improve title/description CTR for `{top_page}` first; it has the strongest impression opportunity.")
     if trending_keywords:
         lines.append(f"- Expand copy or internal links around `{trending_keywords[0]['query']}` while momentum is rising.")
+    if keyword_hypotheses:
+        lines.append(
+            f"- Search Console is still sparse; prioritize content and internal links for `{keyword_hypotheses[0]['keyword']}` from `{keyword_hypotheses[0]['page']}`."
+        )
     audit_issues = [audit for audit in page_audits if audit["issues"]]
     if audit_issues:
         lines.append(f"- Fix on-page issues on `{audit_issues[0]['path']}` and related pages before the next crawl wave.")
@@ -490,11 +583,11 @@ def main() -> None:
         end_date="today",
         dimensions=["eventName"],
         metrics=["eventCount"],
-        limit=10,
+        limit=15,
         dimension_filter={
             "filter": {
                 "fieldName": "eventName",
-                "inListFilter": {"values": ["app_store_click", "feature_cta_click"]},
+                "inListFilter": {"values": ["app_store_click", "feature_cta_click", "guide_cta_click"]},
             }
         },
     )
@@ -526,14 +619,19 @@ def main() -> None:
 
     site_origin = args.site_url.rstrip("/")
     page_audits = [audit_page(page_path, site_origin) for page_path in find_page_files(repo_root)]
+    ga_pages = top_pages_from_ga(ga_pages_report)
+    ga_events = event_rows(ga_event_report)
+    trending_keywords = build_query_growth(current_queries, previous_queries)
+    keyword_hypotheses = build_keyword_hypotheses(ga_pages, trending_keywords)
 
     report = render_report(
         active_users=active_users,
-        ga_pages=top_pages_from_ga(ga_pages_report),
-        ga_events=event_rows(ga_event_report),
-        trending_keywords=build_query_growth(current_queries, previous_queries),
+        ga_pages=ga_pages,
+        ga_events=ga_events,
+        trending_keywords=trending_keywords,
         page_opportunities=build_page_opportunities(current_pages),
         page_audits=page_audits,
+        keyword_hypotheses=keyword_hypotheses,
     )
     output_path.write_text(report, encoding="utf-8")
     dated_output_path.write_text(report, encoding="utf-8")

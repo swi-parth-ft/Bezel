@@ -735,12 +735,20 @@ document.addEventListener('DOMContentLoaded', () => {
     return sectionRoot.id || 'section';
   };
 
+  const getPageType = (pathname) => {
+    if (pathname === '/' || pathname === '/index.html') return 'home';
+    if (pathname.includes('/features/')) return 'feature';
+    if (pathname.includes('/guides/')) return 'guide';
+    if (pathname === '/privacy.html') return 'privacy';
+    return 'site';
+  };
+
   const appStoreLinks = Array.from(document.querySelectorAll('a[href*="apps.apple.com"]'));
   appStoreLinks.forEach((link) => {
     link.addEventListener('click', () => {
       const text = normalizeLabel(link.textContent);
       const pathname = window.location.pathname;
-      const pageType = pathname.includes('/features/') ? 'feature' : 'site';
+      const pageType = getPageType(pathname);
       const section = getAppStoreSection(link);
 
       trackEvent('app_store_click', {
@@ -758,6 +766,34 @@ document.addEventListener('DOMContentLoaded', () => {
           section,
         });
       }
+    });
+  });
+
+  // 10. GA4 tracking for internal guide CTA clicks
+  const guideLinks = Array.from(document.querySelectorAll('a[href*="/guides/"]'));
+  guideLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      let targetUrl;
+      try {
+        targetUrl = new URL(link.href, window.location.origin);
+      } catch {
+        return;
+      }
+
+      if (!targetUrl.pathname.includes('/guides/')) return;
+
+      const pathname = window.location.pathname;
+      const destinationPath = targetUrl.pathname;
+      if (destinationPath === pathname) return;
+
+      const text = normalizeLabel(link.textContent);
+      trackEvent('guide_cta_click', {
+        page_type: getPageType(pathname),
+        page_path: pathname,
+        guide_path: destinationPath,
+        link_text: text || 'guide',
+        section: getAppStoreSection(link),
+      });
     });
   });
 
