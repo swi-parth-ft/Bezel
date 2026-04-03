@@ -1,6 +1,15 @@
 // Main JavaScript for interactions
 document.documentElement.dataset.runtime = import.meta.env.DEV ? 'local' : 'live';
 
+const pathname = window.location.pathname;
+const forceLightContentPage = pathname.startsWith('/features/') || pathname.startsWith('/guides/');
+
+if (forceLightContentPage) {
+  document.documentElement.classList.remove('dark');
+  document.documentElement.dataset.theme = 'light';
+  document.documentElement.style.colorScheme = 'light';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Header scroll logic
   const headerChrome = document.querySelector('.site-chrome');
