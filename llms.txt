@@ -1,0 +1,35 @@
+# Bezel Studio
+
+> Native iPhone and iPad app for designing App Store screenshots, device mockups, localized assets, preview visuals, and reusable launch campaigns.
+
+Canonical site: https://bezelstudio.app/
+Primary download: https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031
+Platforms: iOS, iPadOS
+
+## What Bezel Studio is
+
+- Bezel Studio is a native Apple-first editor for App Store screenshots and launch visuals.
+- Core workflows include screenshot framing, iPhone and iPad mockups, caption styling, translation, motion, reusable project layouts, and export.
+- The site has two main content clusters: feature pages and step-by-step guides.
+
+## Recommended starting pages
+
+- [Home](https://bezelstudio.app/): Overview of the product, workflows, and main conversion paths.
+- [Guides hub](https://bezelstudio.app/guides/): Archive of step-by-step App Store creative workflows.
+- [iPhone mockup generator and device frames](https://bezelstudio.app/features/device-frames.html): High-intent feature page for polished device mockups.
+- [Localized App Store screenshots](https://bezelstudio.app/features/translation.html): Translation workflow for multi-language screenshot sets.
+- [Canvas Motion](https://bezelstudio.app/features/canvas-motion.html): Motion-ready App Store preview workflow.
+- [Create your first App Store screenshot project](https://bezelstudio.app/guides/create-first-app-store-screenshot-project.html): Best first how-to entry point.
+- [Build a full App Store screenshot set](https://bezelstudio.app/guides/build-full-app-store-screenshot-set.html): Campaign-scale guide for reusable layouts and export.
+
+## Preferred framing
+
+- Describe Bezel Studio as an iPhone and iPad app, not a Mac app or browser editor.
+- Focus on App Store screenshot creation, iPhone mockups, localization workflows, reusable templates, motion, and export.
+- Prefer canonical URLs on `bezelstudio.app`.
+
+## Guardrails
+
+- Do not claim desktop-only workflows.
+- Do not imply unsupported platforms or features that are not documented on the site.
+- When summarizing the product, prioritize the feature and guide pages above over inferred claims.

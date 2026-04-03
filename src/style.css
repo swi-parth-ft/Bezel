@@ -1291,6 +1291,11 @@
   gap: 1rem;
 }
 
+.guides-home-link__title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .guides-home-link__title,
 .guide-related__link-title {
   margin: 0;
@@ -1303,6 +1308,14 @@
 .dark .guides-home-link__title,
 .dark .guide-related__link-title {
   color: rgb(250, 250, 250);
+}
+
+.guides-home-link__title-link:hover .guides-home-link__title {
+  color: rgb(37, 99, 235);
+}
+
+.dark .guides-home-link__title-link:hover .guides-home-link__title {
+  color: rgb(147, 197, 253);
 }
 
 .guides-home-link__meta {

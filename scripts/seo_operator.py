@@ -286,6 +286,34 @@ def event_rows(report: dict[str, Any]) -> list[dict[str, Any]]:
     return items
 
 
+def classify_page_bucket(page_path: str) -> str:
+    if page_path in {"/", "/index.html", ""}:
+        return "home"
+    if page_path.startswith("/features/"):
+        return "features"
+    if page_path.startswith("/guides/") or page_path == "/guides/":
+        return "guides"
+    if page_path == "/privacy.html":
+        return "privacy"
+    return "other"
+
+
+def build_page_mix(ga_pages: list[dict[str, Any]]) -> dict[str, Any]:
+    totals = {"home": 0, "features": 0, "guides": 0, "privacy": 0, "other": 0}
+    total_views = 0
+
+    for item in ga_pages:
+        page_views = int(item.get("screenPageViews", 0))
+        totals[classify_page_bucket(item.get("pagePath", ""))] += page_views
+        total_views += page_views
+
+    return {
+        "totals": totals,
+        "total_views": total_views,
+        "home_share": safe_div(totals["home"], total_views),
+    }
+
+
 def build_query_growth(
     current_rows: list[dict[str, Any]],
     previous_rows: list[dict[str, Any]],
@@ -427,8 +455,9 @@ def render_report(
 ) -> str:
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     event_counts = {item["eventName"]: item["eventCount"] for item in ga_events}
-    tracking_events = ["app_store_click", "feature_cta_click", "guide_cta_click"]
+    tracking_events = ["app_store_click", "feature_page_click", "feature_cta_click", "guide_cta_click"]
     missing_events = [name for name in tracking_events if event_counts.get(name, 0) == 0]
+    page_mix = build_page_mix(ga_pages)
 
     lines = [
         "# SEO Operator Report",
@@ -439,8 +468,9 @@ def render_report(
         "",
         f"- GA4 realtime active users: `{active_users}`",
         f"- Top GA4 page in the last 7 days: `{ga_pages[0]['pagePath']}` with `{ga_pages[0]['screenPageViews']}` page views" if ga_pages else "- No GA4 page view data yet",
+        f"- Traffic mix (7d): `home={page_mix['totals']['home']}`, `features={page_mix['totals']['features']}`, `guides={page_mix['totals']['guides']}`, `other={page_mix['totals']['other']}`",
         f"- Search Console trending keyword leader: `{trending_keywords[0]['query']}`" if trending_keywords else "- No Search Console keyword data yet",
-        f"- Conversion events (7d): `app_store_click={event_counts.get('app_store_click', 0)}`, `feature_cta_click={event_counts.get('feature_cta_click', 0)}`, `guide_cta_click={event_counts.get('guide_cta_click', 0)}`",
+        f"- Conversion events (7d): `app_store_click={event_counts.get('app_store_click', 0)}`, `feature_page_click={event_counts.get('feature_page_click', 0)}`, `feature_cta_click={event_counts.get('feature_cta_click', 0)}`, `guide_cta_click={event_counts.get('guide_cta_click', 0)}`",
         f"- Conversion tracking watch: missing recent activity for `{', '.join(missing_events)}`" if missing_events else "- Conversion tracking status: all primary CTA events are active",
         f"- Pages with on-page audit issues: `{sum(1 for audit in page_audits if audit['issues'])}` / `{len(page_audits)}`",
         "",
@@ -546,11 +576,19 @@ def render_report(
         lines.append(
             f"- Search Console is still sparse; prioritize content and internal links for `{keyword_hypotheses[0]['keyword']}` from `{keyword_hypotheses[0]['page']}`."
         )
+    if page_mix["home_share"] >= 0.6:
+        lines.append("- Homepage traffic is still too concentrated; add or strengthen homepage links that move visitors into feature pages and step-by-step guides.")
+    if event_counts.get("feature_page_click", 0) == 0:
+        lines.append("- No feature-page clicks were recorded in the last 7 days; inspect and improve internal feature entry points before the next run.")
+    if event_counts.get("guide_cta_click", 0) == 0:
+        lines.append("- No guide CTA clicks were recorded in the last 7 days; strengthen the guide hub and homepage guide links with clearer entry copy.")
+    if event_counts.get("feature_page_click", 0) > 0 and event_counts.get("feature_cta_click", 0) == 0:
+        lines.append("- Feature pages are being discovered but not sending people to the App Store; improve feature-page CTA placement and copy.")
     audit_issues = [audit for audit in page_audits if audit["issues"]]
     if audit_issues:
         lines.append(f"- Fix on-page issues on `{audit_issues[0]['path']}` and related pages before the next crawl wave.")
     if not (page_opportunities or trending_keywords or audit_issues):
-        lines.append("- Hold steady and gather more data; there is not enough signal yet for confident SEO changes.")
+        lines.append("- Search demand is still sparse; ship a new or materially expanded high-intent page before the next crawl wave instead of waiting for more data.")
 
     lines.append("")
     return "\n".join(lines)
@@ -574,7 +612,7 @@ def main() -> None:
         end_date="today",
         dimensions=["pagePath"],
         metrics=["screenPageViews", "sessions", "totalUsers"],
-        limit=10,
+        limit=25,
     )
     ga_event_report = fetch_ga_report(
         client,
@@ -587,7 +625,7 @@ def main() -> None:
         dimension_filter={
             "filter": {
                 "fieldName": "eventName",
-                "inListFilter": {"values": ["app_store_click", "feature_cta_click", "guide_cta_click"]},
+                "inListFilter": {"values": ["app_store_click", "feature_page_click", "feature_cta_click", "guide_cta_click"]},
             }
         },
     )

@@ -769,7 +769,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 10. GA4 tracking for internal guide CTA clicks
+  // 10. GA4 tracking for internal feature page clicks
+  const featureLinks = Array.from(document.querySelectorAll('a[href*="/features/"]'));
+  featureLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      let targetUrl;
+      try {
+        targetUrl = new URL(link.href, window.location.origin);
+      } catch {
+        return;
+      }
+
+      if (!targetUrl.pathname.includes('/features/')) return;
+
+      const pathname = window.location.pathname;
+      const destinationPath = targetUrl.pathname;
+      if (destinationPath === pathname) return;
+
+      const text = normalizeLabel(link.textContent);
+      trackEvent('feature_page_click', {
+        page_type: getPageType(pathname),
+        page_path: pathname,
+        feature_path: destinationPath,
+        link_text: text || 'feature',
+        section: getAppStoreSection(link),
+      });
+    });
+  });
+
+  // 11. GA4 tracking for internal guide CTA clicks
   const guideLinks = Array.from(document.querySelectorAll('a[href*="/guides/"]'));
   guideLinks.forEach((link) => {
     link.addEventListener('click', () => {
