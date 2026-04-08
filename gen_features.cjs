@@ -138,18 +138,79 @@ function renderRelatedGuides(featureId) {
   `;
 }
 
+function renderFeatureJourney(data) {
+  if (!Array.isArray(data.related_features) || data.related_features.length === 0) {
+    return '';
+  }
+
+  const guideHref = data.guide_cta_href || '/guides/';
+  const guideLabel = data.guide_cta_label || 'Browse the App Store screenshot guides';
+  const primaryCtaText = data.primary_cta_text || 'Get Bezel Studio';
+
+  return `
+    <section class="relative z-10 w-full max-w-5xl px-6 mx-auto mt-12 reveal" style="animation-delay: 420ms;">
+      <div class="rounded-[2rem] border border-zinc-200/80 bg-zinc-50/90 px-6 py-8 shadow-[0_30px_80px_-50px_rgba(15,23,42,0.28)] backdrop-blur dark:border-white/10 dark:bg-zinc-950/50 md:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-300">Launch Path</p>
+          <h2 class="mt-3 text-3xl font-black tracking-tight text-zinc-900 dark:text-white">${data.feature_journey_heading || 'Turn this feature into a complete launch workflow.'}</h2>
+          <p class="mt-3 text-base leading-7 text-zinc-600 dark:text-zinc-300">${data.feature_journey_body || 'Use these related feature pages to move from one commercial job-to-be-done into the next without dropping back to the homepage.'}</p>
+        </div>
+        <div class="mt-8 grid gap-4 md:grid-cols-2">
+          ${data.related_features.map((feature) => `
+            <a href="${feature.href}" class="block rounded-[1.5rem] border border-zinc-200/80 bg-white/90 px-5 py-5 transition-all hover:-translate-y-1 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-zinc-950/60 dark:hover:border-blue-400/60 dark:hover:bg-zinc-950/80">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">Feature</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">${feature.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-300">${feature.description}</p>
+            </a>
+          `).join('')}
+        </div>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="inline-flex items-center justify-center gap-3 rounded-full bg-blue-600 px-6 py-3 text-base font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-blue-500">
+            <img src="/assets/brand/app-store-logo.svg" alt="App Store" class="h-5 w-5 brightness-0 invert">
+            ${primaryCtaText}
+          </a>
+          <a href="${guideHref}" class="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-300/80 bg-white/75 px-6 py-3 text-base font-semibold text-zinc-900 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white dark:border-white/15 dark:bg-white/[0.04] dark:text-white dark:hover:border-blue-400/60 dark:hover:bg-white/[0.08]">
+            ${guideLabel}
+          </a>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 // Content expanded with SEO keywords like "app store screenshot maker", "iPhone mockup generator", etc.
 const features = [
   {
     id: "device-frames",
     title: "iPhone Mockup Generator & Device Frames | Bezel Studio",
     headline: "Photorealistic Device Frames",
-    desc: "Use our professional iPhone mockup generator and iPad templates to build high-converting App Store screenshots instantly.",
+    desc: "Generate iPhone mockups, iPad device frames, and App Store-ready Apple hardware layouts without leaving your iPhone or iPad.",
     seo_keywords: "iPhone mockup generator, app store screenshot maker, device mockups, high-quality iPhone mockups, 3D iPhone mockup generator",
+    hero_cta_text: "Get the iPhone mockup generator",
+    primary_cta_text: "Download Bezel Studio for device mockups",
+    guide_cta_href: "/guides/make-clean-iphone-mockup.html",
+    guide_cta_label: "Follow the clean iPhone mockup guide",
+    feature_journey_heading: "Build the mockup, then template and export it.",
+    feature_journey_body: "People who land on device frames are already close to buying intent. Keep that journey moving into reusable templates and final export instead of sending them back to the homepage.",
+    related_features: [
+      {
+        href: "/features/projects-presets.html",
+        title: "App screenshot templates and project presets",
+        description: "Save framed layouts as reusable starting points so the next launch begins from a tested template instead of a blank project.",
+      },
+      {
+        href: "/features/export-share.html",
+        title: "Batch export App Store screenshots and preview videos",
+        description: "Turn polished iPhone mockups into delivery-ready screenshots, localized batches, and preview assets for App Store Connect.",
+      },
+    ],
     body: `
       <h2 class="text-3xl font-bold mb-6 text-zinc-900 dark:text-white tracking-tight">The Best iPhone Mockup Generator for iOS Apps</h2>
       <p class="mb-6">
         When building your App Store presence, standard device screens aren't enough. Our <strong>iPhone mockup generator</strong> provides photorealistic, high-quality device frames that elevate your app's presentation. From the latest iPhone models to iPad and Apple Watch, Bezel Studio acts as your complete <strong>app store screenshot maker</strong>.
+      </p>
+      <p class="mb-6">
+        Because the frames live inside the same editor as backgrounds, captions, stickers, and export controls, you can turn one raw screenshot into a polished App Store mockup without bouncing between browser generators, PSD templates, and desktop apps.
       </p>
       <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Why Frame Your Screenshots?</h3>
       <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
@@ -157,9 +218,17 @@ const features = [
         <li><strong>Customizable Templates:</strong> Drop your app imagery into our customizable iPhone mockups with a single tap.</li>
         <li><strong>No Watermarks:</strong> Generate pristine, 4K device mockups ready for App Store Connect.</li>
       </ul>
+      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Where device frames help most</h3>
+      <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
+        <li><strong>Store listing screenshots:</strong> Build framed iPhone and iPad visuals that feel consistent across the whole set.</li>
+        <li><strong>Social launch assets:</strong> Reuse the same Apple hardware compositions for X, Product Hunt, and release posts.</li>
+        <li><strong>Client or team reviews:</strong> Share polished device mockups instead of raw screenshots when approvals depend on presentation quality.</li>
+      </ul>
     `,
     iphone_shot: "/assets/feature-platforms/iphone/device-frames.webp",
-    ipad_shot: "/assets/feature-platforms/ipad/device-frames.webp"
+    ipad_shot: "/assets/feature-platforms/ipad/device-frames.webp",
+    iphone_visual_alt: "Framed iPhone App Store screenshot mockup in Bezel Studio",
+    ipad_visual_alt: "Framed iPad App Store screenshot mockup in Bezel Studio",
   },
   {
     id: "canvas-styling",
@@ -247,14 +316,35 @@ const features = [
   },
   {
     id: "translation",
-    title: "Automatic Multi-Language App Screenshots | Bezel Studio",
+    title: "App Store Screenshot Localization | Bezel Studio",
     headline: "Global App Translation",
-    desc: "Generate localized App Store screenshots instantly. On-device, automatic multi-language screenshot translation.",
+    desc: "Localize App Store screenshots, text layers, and full projects on-device so every locale stays visually aligned.",
     seo_keywords: "localized screenshots, multi-language screenshots, automatic screenshot generation, app store localization",
+    hero_cta_text: "Get screenshot localization tools",
+    primary_cta_text: "Download Bezel Studio for localization workflows",
+    guide_cta_href: "/guides/localize-screenshot-sets-apple-translate.html",
+    guide_cta_label: "Follow the App Store localization guide",
+    feature_journey_heading: "Localize the set, then preserve it through export.",
+    feature_journey_body: "Screenshot localization is strongest when reusable templates and export live in the same workflow. These pages keep the localized campaign connected from setup to delivery.",
+    related_features: [
+      {
+        href: "/features/projects-presets.html",
+        title: "App screenshot templates for repeated localization work",
+        description: "Keep base layouts, safe text styles, and reusable project presets ready before you translate the next locale.",
+      },
+      {
+        href: "/features/export-share.html",
+        title: "Batch export localized App Store screenshot sets",
+        description: "Render every translated canvas and preview asset from one place when the localized release is ready to ship.",
+      },
+    ],
     body: `
       <h2 class="text-3xl font-bold mb-6 text-zinc-900 dark:text-white tracking-tight">Ship Globally with Localized Screenshots</h2>
       <p class="mb-6">
         Expanding your app's reach requires speaking the user's language. Bezel Studio offers <strong>automatic screenshot generation</strong> for multiple locales. Instantly translate your English captions into Spanish, French, Japanese, and more, creating fully <strong>localized screenshots</strong> in seconds.
+      </p>
+      <p class="mb-6">
+        App Store screenshot localization is more than translated copy. It also means preserving hierarchy, spacing, and typography when one language runs longer than another. Bezel Studio keeps translation, layout edits, and export in the same project so the localized campaign stays consistent instead of splintering into manual rebuilds.
       </p>
       <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Frictionless ASO Localization</h3>
       <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
@@ -262,9 +352,17 @@ const features = [
         <li><strong>Batch Canvas Updates:</strong> Translate every single canvas in your project with one tap.</li>
         <li><strong>Auto-Resizing Text:</strong> Our typography engine automatically adjusts font sizes to accommodate longer translated phrases.</li>
       </ul>
+      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">What a localization workflow should protect</h3>
+      <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
+        <li><strong>Visual consistency:</strong> Keep device frames, gradients, and callout systems aligned across every language.</li>
+        <li><strong>Readable copy:</strong> Adapt captions for German, French, Japanese, and other longer or denser strings without losing balance.</li>
+        <li><strong>Fast iteration:</strong> Review one locale, adjust the template, then push the improvement across the project instead of editing every canvas separately.</li>
+      </ul>
     `,
     iphone_shot: "/assets/feature-platforms/iphone/translation.webp",
-    ipad_shot: "/assets/feature-platforms/ipad/translation.webp"
+    ipad_shot: "/assets/feature-platforms/ipad/translation.webp",
+    iphone_visual_alt: "Localized iPhone App Store screenshot workflow in Bezel Studio",
+    ipad_visual_alt: "Localized iPad App Store screenshot workflow in Bezel Studio",
   },
   {
     id: "layers-precision",
@@ -289,14 +387,35 @@ const features = [
   },
   {
     id: "projects-presets",
-    title: "App Screenshot Templates & Projects | Bezel Studio",
+    title: "App Screenshot Templates & Project Presets | Bezel Studio",
     headline: "Projects & Custom Presets",
-    desc: "Organize your workflow. Save App Store screenshot templates, custom styles, and multi-canvas projects.",
+    desc: "Save editable app screenshot templates, custom styles, and multi-canvas project presets for faster launches and updates.",
     seo_keywords: "screenshot templates, save time app screenshots, easy app screenshot maker, app marketing tools",
+    hero_cta_text: "Get app screenshot templates",
+    primary_cta_text: "Download Bezel Studio for reusable templates",
+    guide_cta_href: "/guides/create-first-app-store-screenshot-project.html",
+    guide_cta_label: "Start with the first screenshot project guide",
+    feature_journey_heading: "Templates only matter if they speed up the next release.",
+    feature_journey_body: "Once someone understands presets, the next steps are layout reuse and export. Keep them inside that commercial path with direct links instead of generic navigation.",
+    related_features: [
+      {
+        href: "/features/copy-paste-projects.html",
+        title: "Reusable App Store screenshot layouts",
+        description: "Carry one approved canvas, caption stack, or full layout into the next launch campaign without rebuilding from zero.",
+      },
+      {
+        href: "/features/export-share.html",
+        title: "Batch export saved screenshot templates",
+        description: "Move saved layouts straight into still-image and preview-video exports when the campaign is approved.",
+      },
+    ],
     body: `
       <h2 class="text-3xl font-bold mb-6 text-zinc-900 dark:text-white tracking-tight">Scale Your Marketing Workflow</h2>
       <p class="mb-6">
         When managing multiple apps, organization is key. Bezel Studio allows you to save complete layout <strong>screenshot templates</strong> and styles. This is the ultimate way to <strong>save time on app screenshots</strong> while maintaining a cohesive brand aesthetic across your entire portfolio.
+      </p>
+      <p class="mb-6">
+        Instead of recreating backgrounds, frame stacks, caption styling, and export settings every time, you can open the exact project preset that matched the last release and adapt it for the next update, seasonal campaign, or localization pass.
       </p>
       <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Built for Iteration</h3>
       <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
@@ -304,20 +423,49 @@ const features = [
         <li><strong>Style Presets:</strong> Save your favorite gradient background or text shadow configuration for one-tap reuse later.</li>
         <li><strong>Duplicate & Iterate:</strong> Need to run an A/B test? Duplicate an entire project instantly and tweak the copy.</li>
       </ul>
+      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">What strong screenshot templates preserve</h3>
+      <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
+        <li><strong>Launch structure:</strong> Keep the same frame, headline system, and scene order across major updates.</li>
+        <li><strong>Team velocity:</strong> Hand collaborators or future-you a preset that already respects your brand and store constraints.</li>
+        <li><strong>Editable output:</strong> Reopen the template, change the copy, adjust a device frame, and export again without flattening the source.</li>
+      </ul>
     `,
     iphone_shot: "/assets/feature-platforms/iphone/projects-presets.webp",
-    ipad_shot: "/assets/feature-platforms/ipad/projects-presets.webp"
+    ipad_shot: "/assets/feature-platforms/ipad/projects-presets.webp",
+    iphone_visual_alt: "Reusable App Store screenshot project preset in Bezel Studio",
+    ipad_visual_alt: "Reusable App Store screenshot template preset in Bezel Studio",
   },
   {
     id: "export-share",
-    title: "Export App Store Screenshots & iOS Mockups | Bezel Studio",
+    title: "Batch Export App Store Screenshots | Bezel Studio",
     headline: "Instant Export & Sharing",
-    desc: "Export App Store screenshots in massive batches. Generate high-quality image and video assets natively on your device.",
+    desc: "Batch export App Store screenshots, preview videos, and localized sets from the same project without rebuilding assets.",
     seo_keywords: "export app screenshots, App Store Connect integration, panoramic screenshots, iOS screenshot generator",
+    hero_cta_text: "Get batch screenshot export",
+    primary_cta_text: "Download Bezel Studio for batch exports",
+    guide_cta_href: "/guides/build-full-app-store-screenshot-set.html",
+    guide_cta_label: "See the full screenshot set workflow",
+    feature_journey_heading: "Export is the last commercial step, not a dead end.",
+    feature_journey_body: "Visitors who reach export are close to conversion. Give them a direct App Store CTA plus the adjacent feature pages that explain motion and localization output.",
+    related_features: [
+      {
+        href: "/features/canvas-motion.html",
+        title: "App preview video maker with Canvas Motion",
+        description: "Turn the same screenshot composition into animated preview videos before you export the final launch package.",
+      },
+      {
+        href: "/features/translation.html",
+        title: "Localized App Store screenshot workflows",
+        description: "Keep translated campaigns in the same project so screenshot batches and locale-specific exports stay aligned.",
+      },
+    ],
     body: `
       <h2 class="text-3xl font-bold mb-6 text-zinc-900 dark:text-white tracking-tight">From Canvas to App Store Connect in Seconds</h2>
       <p class="mb-6">
         The final step is the most important. Bezel Studio's rendering engine allows you to <strong>export app screenshots</strong> in massive, high-fidelity batches. Whether you need static images or '.mp4' video previews, everything is generated instantly, radically streamlining your upload to <strong>App Store Connect</strong>.
+      </p>
+      <p class="mb-6">
+        That means the same project can hold the launch screenshots, localized variants, and motion-ready preview visuals until you are ready to render the whole campaign. Instead of rebuilding assets for every output type, you export from one source of truth.
       </p>
       <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Frictionless Delivery</h3>
       <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
@@ -325,9 +473,17 @@ const features = [
         <li><strong>High-Fidelity Output:</strong> Guaranteed razor-sharp text and assets that meet all of Apple's strict resolution guidelines.</li>
         <li><strong>Native Share Sheet:</strong> Save directly to your iOS Photos app, Files app, or AirDrop instantly to your Mac.</li>
       </ul>
+      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">What batch export solves</h3>
+      <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
+        <li><strong>Store-ready stills:</strong> Export the full screenshot set in one pass when copy, frames, and styling are locked.</li>
+        <li><strong>Preview-video delivery:</strong> Render motion pieces from the same project that already holds the static screenshots.</li>
+        <li><strong>Localization handoff:</strong> Keep every locale inside the same delivery workflow so App Store Connect upload stops being a manual scramble.</li>
+      </ul>
     `,
     iphone_shot: "/assets/feature-platforms/iphone/export-share.webp",
-    ipad_shot: "/assets/feature-platforms/ipad/export-share.webp"
+    ipad_shot: "/assets/feature-platforms/ipad/export-share.webp",
+    iphone_visual_alt: "Batch export workflow for App Store screenshots in Bezel Studio",
+    ipad_visual_alt: "Batch export workflow for App Store preview assets in Bezel Studio",
   }
 ];
 
@@ -626,14 +782,14 @@ const template = (data) => `<!doctype html>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
         <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/25 hover:-translate-y-1">
           <img src="/assets/brand/app-store-logo.svg" alt="App Store" class="w-5 h-5 brightness-0 invert">
-          Start building for free
+          ${data.hero_cta_text || 'Start building for free'}
         </a>
       </div>
     </section>
 
       <div class="feature-visual-stage reveal" style="animation-delay: 200ms;" aria-hidden="true">
-        <img class="feature-visual-stage__device feature-visual-stage__device--iphone" src="${data.iphone_shot}" alt="">
-        <img class="feature-visual-stage__device feature-visual-stage__device--ipad" src="${data.ipad_shot}" alt="">
+        <img class="feature-visual-stage__device feature-visual-stage__device--iphone" src="${data.iphone_shot}" alt="${data.iphone_visual_alt || ''}">
+        <img class="feature-visual-stage__device feature-visual-stage__device--ipad" src="${data.ipad_shot}" alt="${data.ipad_visual_alt || ''}">
       </div>
 
     <!-- Seamless Content Layout -->
@@ -643,6 +799,7 @@ const template = (data) => `<!doctype html>
       </div>
     </section>
     ${renderRelatedGuides(data.id)}
+    ${renderFeatureJourney(data)}
     </div>
     
   </main>
@@ -705,6 +862,39 @@ console.log(`Created ${path.join(__dirname, 'sitemap.xml')}`);
 const robots = `User-agent: *
 Allow: /
 Allow: /guides/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
 
 Sitemap: ${siteUrl}/sitemap.xml
 `;

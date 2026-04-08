@@ -64,6 +64,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--site-url", default=DEFAULT_SITE_URL, help="Search Console site URL.")
     parser.add_argument("--ga4-property-id", default=DEFAULT_GA4_PROPERTY_ID, help="GA4 property ID.")
     parser.add_argument(
+        "--audit-origin",
+        default=None,
+        help="Optional origin to fetch pages from for on-page audits while keeping GA4/Search Console on the canonical site.",
+    )
+    parser.add_argument(
         "--output",
         default="reports/seo/latest.md",
         help="Markdown report output path.",
@@ -169,7 +174,7 @@ def find_page_files(repo_root: Path) -> list[Path]:
     return [path for path in pages if path.exists()]
 
 
-def audit_page(page_path: Path, site_origin: str) -> dict[str, Any]:
+def audit_page(page_path: Path, request_origin: str, canonical_origin: str) -> dict[str, Any]:
     relative = f"/{page_path.name}"
     if page_path.name == "index.html" and page_path.parent.name == "guides":
         relative = "/guides/"
@@ -182,8 +187,9 @@ def audit_page(page_path: Path, site_origin: str) -> dict[str, Any]:
     elif page_path.name == "privacy.html":
         relative = "/privacy.html"
 
-    url = f"{site_origin.rstrip('/')}{relative}"
-    response = requests.get(url, timeout=60)
+    canonical_url = f"{canonical_origin.rstrip('/')}{relative}"
+    request_url = f"{request_origin.rstrip('/')}{relative}"
+    response = requests.get(request_url, timeout=60)
     html = response.text
 
     title_match = re.search(r"<title>(.*?)</title>", html, re.IGNORECASE | re.DOTALL)
@@ -234,7 +240,7 @@ def audit_page(page_path: Path, site_origin: str) -> dict[str, Any]:
         issues.append("missing meta description")
     elif len(description) > 160:
         issues.append(f"meta description too long ({len(description)})")
-    if canonical != url:
+    if canonical != canonical_url:
         issues.append("canonical mismatch")
     if not og_title_match or not og_desc_match:
         issues.append("missing Open Graph metadata")
@@ -247,7 +253,8 @@ def audit_page(page_path: Path, site_origin: str) -> dict[str, Any]:
 
     return {
         "path": relative,
-        "url": url,
+        "url": canonical_url,
+        "audit_url": request_url,
         "status_code": response.status_code,
         "title": title,
         "description": description,
@@ -655,8 +662,9 @@ def main() -> None:
         row_limit=100,
     )
 
-    site_origin = args.site_url.rstrip("/")
-    page_audits = [audit_page(page_path, site_origin) for page_path in find_page_files(repo_root)]
+    canonical_origin = args.site_url.rstrip("/")
+    audit_origin = (args.audit_origin or args.site_url).rstrip("/")
+    page_audits = [audit_page(page_path, audit_origin, canonical_origin) for page_path in find_page_files(repo_root)]
     ga_pages = top_pages_from_ga(ga_pages_report)
     ga_events = event_rows(ga_event_report)
     trending_keywords = build_query_growth(current_queries, previous_queries)

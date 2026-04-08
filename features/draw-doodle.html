@@ -20,7 +20,8 @@
   <link rel="icon" type="image/png" href="/assets/brand/favicon-16x16.png" sizes="16x16">
   <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
   <link rel="stylesheet" href="/src/style.css">
-  <meta name="theme-color" content="#fafafa">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Bezel Studio">
   <meta property="og:locale" content="en_US">
@@ -34,7 +35,7 @@
   <meta name="twitter:description" content="Use Apple PencilKit to draw directly on your iOS mockups. Add handcrafted annotations to your App Store screenshots.">
   <meta name="twitter:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/images-stickers.webp">
   <meta name="twitter:image:alt" content="Draw, Doodle & Annotate on iPad">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -78,6 +79,18 @@
         "downloadUrl": "https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"
       }
     }
+  </script>
+  <script>
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      if (event.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
   </script>
   <style>
     .feature-page-shell {
@@ -339,6 +352,7 @@
       </div>
     </section>
   
+    
     </div>
     
   </main>

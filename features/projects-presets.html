@@ -10,8 +10,8 @@
     gtag('js', new Date());
     gtag('config', 'G-4H5EW5KWZC');
   </script>
-  <title>App Screenshot Templates & Projects | Bezel Studio</title>
-  <meta name="description" content="Organize your workflow. Save App Store screenshot templates, custom styles, and multi-canvas projects.">
+  <title>App Screenshot Templates & Project Presets | Bezel Studio</title>
+  <meta name="description" content="Save editable app screenshot templates, custom styles, and multi-canvas project presets for faster launches and updates.">
   <meta name="keywords" content="screenshot templates, save time app screenshots, easy app screenshot maker, app marketing tools">
   <link rel="canonical" href="https://bezelstudio.app/features/projects-presets.html">
   <link rel="manifest" href="/site.webmanifest">
@@ -20,27 +20,28 @@
   <link rel="icon" type="image/png" href="/assets/brand/favicon-16x16.png" sizes="16x16">
   <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
   <link rel="stylesheet" href="/src/style.css">
-  <meta name="theme-color" content="#fafafa">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Bezel Studio">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="App Screenshot Templates & Projects | Bezel Studio">
-  <meta property="og:description" content="Organize your workflow. Save App Store screenshot templates, custom styles, and multi-canvas projects.">
+  <meta property="og:title" content="App Screenshot Templates & Project Presets | Bezel Studio">
+  <meta property="og:description" content="Save editable app screenshot templates, custom styles, and multi-canvas project presets for faster launches and updates.">
   <meta property="og:url" content="https://bezelstudio.app/features/projects-presets.html">
   <meta property="og:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/projects-presets.webp">
   <meta property="og:image:alt" content="Projects & Custom Presets on iPad">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="App Screenshot Templates & Projects | Bezel Studio">
-  <meta name="twitter:description" content="Organize your workflow. Save App Store screenshot templates, custom styles, and multi-canvas projects.">
+  <meta name="twitter:title" content="App Screenshot Templates & Project Presets | Bezel Studio">
+  <meta name="twitter:description" content="Save editable app screenshot templates, custom styles, and multi-canvas project presets for faster launches and updates.">
   <meta name="twitter:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/projects-presets.webp">
   <meta name="twitter:image:alt" content="Projects & Custom Presets on iPad">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "App Screenshot Templates & Projects | Bezel Studio",
-      "description": "Organize your workflow. Save App Store screenshot templates, custom styles, and multi-canvas projects.",
+      "name": "App Screenshot Templates & Project Presets | Bezel Studio",
+      "description": "Save editable app screenshot templates, custom styles, and multi-canvas project presets for faster launches and updates.",
       "url": "https://bezelstudio.app/features/projects-presets.html",
       "isPartOf": {
         "@type": "WebSite",
@@ -78,6 +79,18 @@
         "downloadUrl": "https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"
       }
     }
+  </script>
+  <script>
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      if (event.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
   </script>
   <style>
     .feature-page-shell {
@@ -273,21 +286,21 @@
         Projects & Custom Presets
       </h1>
       <p class="text-xl md:text-2xl font-light text-zinc-600 dark:text-zinc-300 max-w-3xl mx-auto leading-relaxed mb-12 [text-wrap:balance]">
-        Organize your workflow. Save App Store screenshot templates, custom styles, and multi-canvas projects.
+        Save editable app screenshot templates, custom styles, and multi-canvas project presets for faster launches and updates.
       </p>
       
       <!-- Call to action cluster in hero -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
         <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/25 hover:-translate-y-1">
           <img src="/assets/brand/app-store-logo.svg" alt="App Store" class="w-5 h-5 brightness-0 invert">
-          Start building for free
+          Get app screenshot templates
         </a>
       </div>
     </section>
 
       <div class="feature-visual-stage reveal" style="animation-delay: 200ms;" aria-hidden="true">
-        <img class="feature-visual-stage__device feature-visual-stage__device--iphone" src="/assets/feature-platforms/iphone/projects-presets.webp" alt="">
-        <img class="feature-visual-stage__device feature-visual-stage__device--ipad" src="/assets/feature-platforms/ipad/projects-presets.webp" alt="">
+        <img class="feature-visual-stage__device feature-visual-stage__device--iphone" src="/assets/feature-platforms/iphone/projects-presets.webp" alt="Reusable App Store screenshot project preset in Bezel Studio">
+        <img class="feature-visual-stage__device feature-visual-stage__device--ipad" src="/assets/feature-platforms/ipad/projects-presets.webp" alt="Reusable App Store screenshot template preset in Bezel Studio">
       </div>
 
     <!-- Seamless Content Layout -->
@@ -298,11 +311,20 @@
       <p class="mb-6">
         When managing multiple apps, organization is key. Bezel Studio allows you to save complete layout <strong>screenshot templates</strong> and styles. This is the ultimate way to <strong>save time on app screenshots</strong> while maintaining a cohesive brand aesthetic across your entire portfolio.
       </p>
+      <p class="mb-6">
+        Instead of recreating backgrounds, frame stacks, caption styling, and export settings every time, you can open the exact project preset that matched the last release and adapt it for the next update, seasonal campaign, or localization pass.
+      </p>
       <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Built for Iteration</h3>
       <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
         <li><strong>Multi-Canvas Projects:</strong> Keep all 8 of your App Store slots organized within a single project file.</li>
         <li><strong>Style Presets:</strong> Save your favorite gradient background or text shadow configuration for one-tap reuse later.</li>
         <li><strong>Duplicate & Iterate:</strong> Need to run an A/B test? Duplicate an entire project instantly and tweak the copy.</li>
+      </ul>
+      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">What strong screenshot templates preserve</h3>
+      <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
+        <li><strong>Launch structure:</strong> Keep the same frame, headline system, and scene order across major updates.</li>
+        <li><strong>Team velocity:</strong> Hand collaborators or future-you a preset that already respects your brand and store constraints.</li>
+        <li><strong>Editable output:</strong> Reopen the template, change the copy, adjust a device frame, and export again without flattening the source.</li>
       </ul>
     
       </div>
@@ -335,6 +357,41 @@
               <p class="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-300">Scale one canvas into a complete campaign set with review and batch export.</p>
             </a>
           
+        </div>
+      </div>
+    </section>
+  
+    
+    <section class="relative z-10 w-full max-w-5xl px-6 mx-auto mt-12 reveal" style="animation-delay: 420ms;">
+      <div class="rounded-[2rem] border border-zinc-200/80 bg-zinc-50/90 px-6 py-8 shadow-[0_30px_80px_-50px_rgba(15,23,42,0.28)] backdrop-blur dark:border-white/10 dark:bg-zinc-950/50 md:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-300">Launch Path</p>
+          <h2 class="mt-3 text-3xl font-black tracking-tight text-zinc-900 dark:text-white">Templates only matter if they speed up the next release.</h2>
+          <p class="mt-3 text-base leading-7 text-zinc-600 dark:text-zinc-300">Once someone understands presets, the next steps are layout reuse and export. Keep them inside that commercial path with direct links instead of generic navigation.</p>
+        </div>
+        <div class="mt-8 grid gap-4 md:grid-cols-2">
+          
+            <a href="/features/copy-paste-projects.html" class="block rounded-[1.5rem] border border-zinc-200/80 bg-white/90 px-5 py-5 transition-all hover:-translate-y-1 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-zinc-950/60 dark:hover:border-blue-400/60 dark:hover:bg-zinc-950/80">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">Feature</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">Reusable App Store screenshot layouts</h3>
+              <p class="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-300">Carry one approved canvas, caption stack, or full layout into the next launch campaign without rebuilding from zero.</p>
+            </a>
+          
+            <a href="/features/export-share.html" class="block rounded-[1.5rem] border border-zinc-200/80 bg-white/90 px-5 py-5 transition-all hover:-translate-y-1 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-zinc-950/60 dark:hover:border-blue-400/60 dark:hover:bg-zinc-950/80">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">Feature</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">Batch export saved screenshot templates</h3>
+              <p class="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-300">Move saved layouts straight into still-image and preview-video exports when the campaign is approved.</p>
+            </a>
+          
+        </div>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="inline-flex items-center justify-center gap-3 rounded-full bg-blue-600 px-6 py-3 text-base font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-blue-500">
+            <img src="/assets/brand/app-store-logo.svg" alt="App Store" class="h-5 w-5 brightness-0 invert">
+            Download Bezel Studio for reusable templates
+          </a>
+          <a href="/guides/create-first-app-store-screenshot-project.html" class="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-300/80 bg-white/75 px-6 py-3 text-base font-semibold text-zinc-900 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white dark:border-white/15 dark:bg-white/[0.04] dark:text-white dark:hover:border-blue-400/60 dark:hover:bg-white/[0.08]">
+            Start with the first screenshot project guide
+          </a>
         </div>
       </div>
     </section>
