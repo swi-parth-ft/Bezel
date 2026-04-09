@@ -731,6 +731,17 @@ document.addEventListener('DOMContentLoaded', () => {
       .toLowerCase()
   );
 
+  const shouldTrackWithoutDelay = (event, link) => (
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey ||
+    link.target === '_blank' ||
+    link.hasAttribute('download')
+  );
+
   const getAppStoreSection = (link) => {
     const sectionRoot = link.closest('[data-power-slide], section[id], header, footer, nav, main');
     if (!sectionRoot) return 'page';
@@ -754,27 +765,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const appStoreLinks = Array.from(document.querySelectorAll('a[href*="apps.apple.com"]'));
   appStoreLinks.forEach((link) => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (event) => {
       const text = normalizeLabel(link.textContent);
       const pathname = window.location.pathname;
       const pageType = getPageType(pathname);
       const section = getAppStoreSection(link);
-
-      trackEvent('app_store_click', {
+      const appStorePayload = {
         page_type: pageType,
         page_path: pathname,
         link_text: text || 'app store',
         section,
         destination_host: 'apps.apple.com',
-      });
+        transport_type: 'beacon',
+      };
+      const featurePayload = {
+        feature_slug: pathname.split('/').pop()?.replace(/\.html$/, '') || 'feature',
+        link_text: text || 'app store',
+        section,
+        transport_type: 'beacon',
+      };
+
+      if (shouldTrackWithoutDelay(event, link)) {
+        trackEvent('app_store_click', appStorePayload);
+
+        if (pageType === 'feature') {
+          trackEvent('feature_cta_click', featurePayload);
+        }
+        return;
+      }
+
+      event.preventDefault();
+      trackEvent('app_store_click', appStorePayload);
 
       if (pageType === 'feature') {
-        trackEvent('feature_cta_click', {
-          feature_slug: pathname.split('/').pop()?.replace(/\.html$/, '') || 'feature',
-          link_text: text || 'app store',
-          section,
-        });
+        trackEvent('feature_cta_click', featurePayload);
       }
+
+      // Give GA4 time to flush outbound-click beacons before navigating away.
+      window.setTimeout(() => {
+        window.location.assign(link.href);
+      }, 180);
     });
   });
 
