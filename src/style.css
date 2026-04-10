@@ -594,6 +594,11 @@
   margin: 0;
 }
 
+.workflow-jump-section {
+  position: relative;
+  margin-top: clamp(-0.75rem, -1.2vw, -0.25rem);
+}
+
 .workflow-editorial,
 .editor-essay {
   position: relative;
@@ -976,9 +981,9 @@
   }
 
   .hero-section {
-    min-height: 100svh;
+    min-height: 92svh;
     padding-top: 6rem !important;
-    padding-bottom: 3rem !important;
+    padding-bottom: 2rem !important;
     justify-content: flex-start;
     box-sizing: border-box;
   }
@@ -3871,7 +3876,7 @@ html[data-runtime="live"] .guide-shot-placeholder {
 
   .hero-section {
     padding-top: 6rem !important;
-    padding-bottom: 3rem !important;
+    padding-bottom: 2.25rem !important;
   }
 
   .hero-layout {
@@ -4311,7 +4316,7 @@ html[data-runtime="live"] .guide-shot-placeholder {
   .hero-section {
     position: relative;
     padding-top: 1rem;
-    padding-bottom: 2.5rem;
+    padding-bottom: 2rem;
     padding-inline: 1rem;
   }
 
@@ -4398,6 +4403,10 @@ html[data-runtime="live"] .guide-shot-placeholder {
     width: min(100%, 28rem);
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
+  }
+
+  .workflow-jump-section {
+    margin-top: -0.5rem;
   }
 
   .hero-highlights {
