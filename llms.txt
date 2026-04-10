@@ -11,7 +11,7 @@ Extended index: https://bezelstudio.app/llms-full.txt
 
 - Bezel Studio is a native Apple-first editor for App Store screenshots and launch visuals.
 - Core workflows include screenshot framing, iPhone and iPad mockups, caption styling, translation, motion, reusable project layouts, and export.
-- The site has three main content clusters: feature pages, core step-by-step guides, and a release-polish guide sequence for styling, depth, cutouts, callouts, and export.
+- The site has three main content clusters: feature pages, core step-by-step guides, and a localization release system for templates, device variants, caption review, preview-video variants, and export delivery.
 
 ## Recommended starting pages
 
@@ -21,9 +21,11 @@ Extended index: https://bezelstudio.app/llms-full.txt
 - [Localized App Store screenshots](https://bezelstudio.app/features/translation.html): Translation workflow for multi-language screenshot sets.
 - [Canvas Motion](https://bezelstudio.app/features/canvas-motion.html): Motion-ready App Store preview workflow.
 - [App screenshot templates and project presets](https://bezelstudio.app/features/projects-presets.html): Reusable launch templates and editable multi-canvas presets.
-- [Create reusable App Store screenshot templates](https://bezelstudio.app/guides/create-reusable-app-screenshot-templates.html): Step-by-step workflow for saving the winning layout as a repeatable preset.
-- [Style App Store screenshot captions](https://bezelstudio.app/guides/style-app-store-captions.html): Typography-focused guide for gradients, shadows, strokes, and glass-like headline treatment.
-- [Export App Store stills and preview videos](https://bezelstudio.app/guides/export-stills-and-videos.html): Delivery workflow for shipping still-image packs and motion output from the same project.
+- [Create localization-ready app screenshot templates](https://bezelstudio.app/guides/create-localization-ready-app-screenshot-template.html): Parent workflow for reusable templates that survive translation and export.
+- [Create iPhone mockup variants from one template](https://bezelstudio.app/guides/create-iphone-mockup-variants-from-one-template.html): Device-frame workflow for reusing one approved mockup across launch variants.
+- [Review localized App Store screenshot captions](https://bezelstudio.app/guides/review-localized-app-store-screenshot-captions.html): Caption QA workflow for translated headlines and callouts.
+- [Create localized App preview video variants](https://bezelstudio.app/guides/create-localized-app-preview-video-variants.html): Motion workflow for turning approved localized stills into preview-video variants.
+- [Export an App Store localization delivery pack](https://bezelstudio.app/guides/export-app-store-localization-delivery-pack.html): Delivery workflow for stills, localized variants, and preview videos from one release project.
 - [Batch export App Store screenshots](https://bezelstudio.app/features/export-share.html): Delivery workflow for stills, localized sets, and preview videos.
 - [Create your first App Store screenshot project](https://bezelstudio.app/guides/create-first-app-store-screenshot-project.html): Best first how-to entry point.
 - [Build a full App Store screenshot set](https://bezelstudio.app/guides/build-full-app-store-screenshot-set.html): Campaign-scale guide for reusable layouts and export.
@@ -31,7 +33,7 @@ Extended index: https://bezelstudio.app/llms-full.txt
 ## Preferred framing
 
 - Describe Bezel Studio as an iPhone and iPad app, not a Mac app or browser editor.
-- Focus on App Store screenshot creation, iPhone mockups, localization workflows, reusable templates, motion, styling polish, and export.
+- Focus on App Store screenshot creation, iPhone mockups, localization workflows, reusable templates, caption review, motion, and export delivery.
 - Prefer canonical URLs on `bezelstudio.app`.
 
 ## Guardrails
