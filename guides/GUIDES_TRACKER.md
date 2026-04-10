@@ -5,7 +5,7 @@ This file tracks which how-to guides already exist in the site, which ones are s
 ## Current Status
 
 - Archive page exists: `guides/index.html`
-- Live guide pages created: `6`
+- Live guide pages created: `12`
 - Cover images: added for all live guides
 - Step screenshot placeholders: present in local/dev only
 - Real step-by-step screenshots: still needed for every live guide
@@ -20,6 +20,12 @@ This file tracks which how-to guides already exist in the site, which ones are s
 | Live | How to localize screenshot sets with Apple Translate. | `guides/localize-screenshot-sets-apple-translate.html` | Added | Pending |
 | Live | How to create App Store preview visuals with Canvas Motion. | `guides/create-app-store-preview-visuals-canvas-motion.html` | Added | Pending |
 | Live | How to make instant mockups with Quick Mockups and Shortcuts. | `guides/make-instant-mockups-with-shortcuts.html` | Added | Pending |
+| Live | How to create reusable App Store screenshot templates. | `guides/create-reusable-app-screenshot-templates.html` | Added | Pending |
+| Live | How to style App Store captions with gradients, shadows, strokes, and glass text. | `guides/style-app-store-captions.html` | Added | Pending |
+| Live | How to use layers and 3-axis transforms to build more dimensional compositions. | `guides/use-layers-and-3-axis-transforms.html` | Added | Pending |
+| Live | How to turn imported images into sticker assets with background removal. | `guides/create-sticker-assets-background-removal.html` | Added | Pending |
+| Live | How to draw callouts and annotations with PencilKit. | `guides/draw-callouts-with-pencilkit.html` | Added | Pending |
+| Live | How to export high-quality stills and videos from the same project. | `guides/export-stills-and-videos.html` | Added | Pending |
 
 ## Next Guides To Create
 
@@ -27,12 +33,7 @@ These are the strongest next additions because they deepen the product story wit
 
 | Priority | Guide Title | Primary Product Area | Suggested Slug | Status |
 | --- | --- | --- | --- | --- |
-| High | How to style App Store captions with gradients, shadows, strokes, and glass text. | Typography | `guides/style-app-store-captions.html` | Not created |
-| High | How to use layers and 3-axis transforms to build more dimensional compositions. | Layers and transforms | `guides/use-layers-and-3-axis-transforms.html` | Not created |
-| High | How to turn imported images into sticker assets with background removal. | Images and stickers | `guides/create-sticker-assets-background-removal.html` | Not created |
-| High | How to draw callouts and annotations with PencilKit. | Drawing tools | `guides/draw-callouts-with-pencilkit.html` | Not created |
 | High | How to reuse layouts across projects with copy and paste. | Project reuse | `guides/reuse-layouts-across-projects.html` | Not created |
-| High | How to export high-quality stills and videos from the same project. | Export | `guides/export-stills-and-videos.html` | Not created |
 | Medium | How to use BezelAI to redesign or refine a canvas. | BezelAI | `guides/use-bezel-ai-to-refine-a-canvas.html` | Not created |
 | Medium | How to create multi-device promo visuals with iPhone, iPad, and Apple Watch. | Multi-device composition | `guides/create-multi-device-promo-visuals.html` | Not created |
 

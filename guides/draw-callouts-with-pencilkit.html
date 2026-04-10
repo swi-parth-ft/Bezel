@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth antialiased">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Draw Callouts and Annotations With PencilKit | Bezel Studio</title>
+  <meta name="description" content="Draw callouts and annotations with PencilKit in Bezel Studio to explain features inside App Store screenshots without leaving the canvas.">
+  <link rel="canonical" href="https://bezelstudio.app/guides/draw-callouts-with-pencilkit.html">
+  <meta name="apple-itunes-app" content="app-id=6758039031">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#fafafa">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Bezel Studio">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Draw Callouts and Annotations With PencilKit | Bezel Studio">
+  <meta property="og:description" content="Draw callouts and annotations with PencilKit in Bezel Studio to explain features inside App Store screenshots without leaving the canvas.">
+  <meta property="og:url" content="https://bezelstudio.app/guides/draw-callouts-with-pencilkit.html">
+  <meta property="og:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/images-stickers.webp">
+  <meta property="og:image:alt" content="PencilKit callouts drawn on App Store screenshots in Bezel Studio">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Draw Callouts and Annotations With PencilKit | Bezel Studio">
+  <meta name="twitter:description" content="Draw callouts and annotations with PencilKit in Bezel Studio to explain features inside App Store screenshots without leaving the canvas.">
+  <meta name="twitter:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/images-stickers.webp">
+  <meta name="twitter:image:alt" content="PencilKit callouts drawn on App Store screenshots in Bezel Studio">
+  <meta name="color-scheme" content="light">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to draw callouts and annotations with PencilKit.",
+      "description": "Draw callouts and annotations with PencilKit in Bezel Studio to explain features inside App Store screenshots without leaving the canvas.",
+      "image": "https://bezelstudio.app/assets/feature-platforms/ipad/images-stickers.webp",
+      "url": "https://bezelstudio.app/guides/draw-callouts-with-pencilkit.html",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Bezel Studio",
+        "url": "https://bezelstudio.app/"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Bezel Studio",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "iOS, iPadOS",
+        "downloadUrl": "https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://bezelstudio.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Guides",
+            "item": "https://bezelstudio.app/guides/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Draw Callouts and Annotations With PencilKit",
+            "item": "https://bezelstudio.app/guides/draw-callouts-with-pencilkit.html"
+          }
+        ]
+      },
+      "step": [
+        { "@type": "HowToStep", "name": "Choose the moment in the screenshot that deserves a callout." },
+        { "@type": "HowToStep", "name": "Open the drawing tools and sketch the first annotation." },
+        { "@type": "HowToStep", "name": "Use arrows, circles, or underlines with restraint." },
+        { "@type": "HowToStep", "name": "Color-match the callout to the rest of the launch system." },
+        { "@type": "HowToStep", "name": "Review the annotation flow and undo anything that feels noisy." },
+        { "@type": "HowToStep", "name": "Export the marked-up screenshot or move it into the delivery pack." }
+      ]
+    }
+  </script>
+</head>
+<body class="font-sans bg-zinc-50 dark:bg-[#0A0A0A] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="ambient-orb ambient-orb--blue absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]"></div>
+    <div class="ambient-orb ambient-orb--indigo absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]"></div>
+  </div>
+
+  <div class="site-chrome relative z-10 w-full flex justify-center pt-8">
+    <header
+      class="site-header flex items-center justify-between px-6 py-3 bg-transparent rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
+      <a href="/" class="flex items-center gap-3">
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio logo">
+        <span class="site-header__brand-text text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+      </a>
+      <div class="site-header__expanded hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav class="flex items-center gap-8">
+          <a href="/#features"
+            class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
+          <a href="/guides/"
+            class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
+          <a href="/#faq"
+            class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+        </nav>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"
+          class="cta-button cta-button--nav hidden sm:flex items-center justify-center px-4 py-2 bg-zinc-900/90 dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
+          Get the App
+        </a>
+      </div>
+      <button type="button" class="site-header__menu-toggle" data-header-menu-toggle aria-label="Open navigation"
+        aria-expanded="false" aria-controls="site-header-menu">
+        <svg class="symbol-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </header>
+    <div id="site-header-menu" class="site-header__menu-panel" data-header-menu-panel aria-hidden="true">
+      <nav class="site-header__menu-links">
+        <a href="/#features">Features</a>
+        <a href="/guides/">Guides</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="site-header__menu-cta">
+        Get the App
+      </a>
+    </div>
+  </div>
+
+  <main class="guide-page-main">
+    <article class="guide-page-shell">
+      <section class="guide-page-hero reveal">
+        <p class="guide-page-eyebrow">How-To Guide 11</p>
+        <h1 class="guide-page-title">How to draw callouts and annotations with PencilKit.</h1>
+        <p class="guide-page-lead">Hand-drawn callouts work best when they clarify a feature the screenshot cannot explain fast enough on its own. They should feel editorial and precise, not like emergency markup pasted over the final design.</p>
+        <div class="guide-page-meta">
+          <span class="guide-chip">6 steps</span>
+          <span class="guide-chip" data-local-only>7 screenshot slots</span>
+          <span class="guide-chip">PencilKit</span>
+        </div>
+        <div class="guide-page-cover">
+          <img src="/assets/feature-platforms/ipad/images-stickers.webp" alt="PencilKit callouts drawn on App Store screenshots in Bezel Studio">
+        </div>
+        <div class="guide-page-panels">
+          <div class="guide-panel">
+            <p class="guide-panel__label">What You'll Build</p>
+            <p class="guide-panel__copy">A marked-up App Store screenshot that highlights one key feature without obscuring the underlying interface.</p>
+          </div>
+          <div class="guide-panel">
+            <p class="guide-panel__label">What You'll Use</p>
+            <p class="guide-panel__copy">Drawing tools, PencilKit annotations, restrained color, review loops, and export-ready cleanup.</p>
+          </div>
+          <div class="guide-panel" data-local-only>
+            <p class="guide-panel__label">Screenshot Plan</p>
+            <p class="guide-panel__copy">Capture 1 untouched screen, 1 tool-open state, 2 annotation passes, 1 review pass with undo, and 1 final exported screenshot.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-steps reveal">
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 01</p>
+              <h2 class="guide-step__title">Choose the moment in the screenshot that deserves a callout.</h2>
+              <p class="guide-step__body">Pick the feature interaction, setting, or UI detail that is still getting lost. If everything already reads clearly with sticker assets or captions, do not add annotation just because the tool exists.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">The untouched screenshot with the future callout target identified but not yet marked.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 02</p>
+              <h2 class="guide-step__title">Open the drawing tools and sketch the first annotation.</h2>
+              <p class="guide-step__body">Start with the tools from the <a class="guide-inline-link" href="/features/draw-doodle.html">draw and annotate app screenshots feature page</a>. Use one arrow, circle, or underline to prove the point before committing to more marks on the same canvas.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">Drawing controls visible while the first annotation is sketched over the screenshot.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 03</p>
+              <h2 class="guide-step__title">Use arrows, circles, or underlines with restraint.</h2>
+              <p class="guide-step__body">Add only the marks that move the eye where you want it to go. If the scene already includes cutout support elements, keep the annotation system lighter than the sticker treatment from the <a class="guide-inline-link" href="/guides/create-sticker-assets-background-removal.html">background removal guide</a>.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">A screenshot with one or two callout marks placed to direct the reader toward the key feature.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 04</p>
+              <h2 class="guide-step__title">Color-match the callout to the rest of the launch system.</h2>
+              <p class="guide-step__body">Match the ink or stroke color to the caption palette so the annotation feels native to the same campaign. A callout should reinforce the launch art direction rather than look like a note from a review meeting.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">A colored callout adjusted to match the existing caption and background system.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 05</p>
+              <h2 class="guide-step__title">Review the annotation flow and undo anything that feels noisy.</h2>
+              <p class="guide-step__body">The quickest fix for over-annotation is to remove marks until the product screenshot breathes again. Use the safeguard from the <a class="guide-inline-link" href="/features/undo-redo.html">undo and redo feature page</a> aggressively while you decide which strokes actually help.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">A review pass where one or more annotation marks are removed or simplified before export.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 06</p>
+              <h2 class="guide-step__title">Export the marked-up screenshot or move it into the delivery pack.</h2>
+              <p class="guide-step__body">Once the callout adds clarity without overpowering the screen, send it into the <a class="guide-inline-link" href="/guides/export-stills-and-videos.html">export guide</a> so the same annotated scene can become part of the final still-image or preview-video pack.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">The final annotated screenshot shown in its export-ready state.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="guide-related reveal">
+        <p class="guide-related__eyebrow">Continue</p>
+        <h2 class="guide-related__heading">Use the annotation workflow as the last explanatory pass before delivery.</h2>
+        <div class="guide-related__links">
+          <a class="guide-related__link" href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" data-track-label="download bezel studio for pencilkit guide">
+            <h3 class="guide-related__link-title">Download Bezel Studio for PencilKit callouts and review loops.</h3>
+            <p class="guide-related__link-body">Keep drawing, refinement, and final App Store export inside one native canvas workflow.</p>
+          </a>
+          <a class="guide-related__link" href="/guides/create-sticker-assets-background-removal.html">
+            <h3 class="guide-related__link-title">Turn imported images into sticker assets with background removal.</h3>
+            <p class="guide-related__link-body">Use sticker cutouts first when the scene needs support shapes before drawn annotation.</p>
+          </a>
+          <a class="guide-related__link" href="/guides/export-stills-and-videos.html">
+            <h3 class="guide-related__link-title">Export high-quality stills and videos from the same project.</h3>
+            <p class="guide-related__link-body">Move the final marked-up screenshot into the delivery pack without rebuilding the scene.</p>
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="pt-16 pb-12 px-6 md:px-12 bg-transparent dark:bg-transparent relative z-10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex items-center gap-4">
+        <img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio">
+        <span class="text-zinc-900 dark:text-white font-semibold">Bezel Studio</span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">
+        <a href="/guides/" class="hover:text-black dark:hover:text-white transition-colors">All Guides</a>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hover:text-black dark:hover:text-white transition-colors">App Store</a>
+        <a href="/privacy.html" class="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1340,9 +1340,30 @@
   line-height: 1.72;
 }
 
+.guide-inline-link {
+  color: rgb(24, 24, 27);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: rgba(59, 130, 246, 0.4);
+  text-underline-offset: 0.18em;
+}
+
+.guide-inline-link:hover {
+  color: rgb(37, 99, 235);
+}
+
 .dark .guides-home-link__body,
 .dark .guide-related__link-body {
   color: rgb(212, 212, 216);
+}
+
+.dark .guide-inline-link {
+  color: rgb(250, 250, 250);
+  text-decoration-color: rgba(96, 165, 250, 0.45);
+}
+
+.dark .guide-inline-link:hover {
+  color: rgb(147, 197, 253);
 }
 
 .guides-home-footer {
@@ -1764,13 +1785,24 @@ html[data-runtime="live"] .guide-shot-placeholder {
 }
 
 .guide-coming-next__item {
+  display: block;
   padding-top: 0.9rem;
   border-top: 1px solid rgba(148, 163, 184, 0.14);
+  color: inherit;
+  text-decoration: none;
 }
 
 .guide-coming-next__item:first-child {
   border-top: 0;
   padding-top: 0;
+}
+
+.guide-coming-next__item:hover {
+  color: rgb(37, 99, 235);
+}
+
+.dark .guide-coming-next__item:hover {
+  color: rgb(147, 197, 253);
 }
 
 @media (min-width: 1024px) {
