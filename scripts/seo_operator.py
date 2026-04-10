@@ -342,6 +342,17 @@ def event_rows(report: dict[str, Any]) -> list[dict[str, Any]]:
     return items
 
 
+DOWNLOAD_TRACKING_EVENTS = [
+    "app_store_click",
+    "home_download_click",
+    "feature_download_click",
+    "guide_download_click",
+    "feature_page_click",
+    "feature_cta_click",
+    "guide_cta_click",
+]
+
+
 def classify_page_bucket(page_path: str) -> str:
     if page_path in {"/", "/index.html", ""}:
         return "home"
@@ -511,7 +522,7 @@ def render_report(
 ) -> str:
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     event_counts = {item["eventName"]: item["eventCount"] for item in ga_events}
-    tracking_events = ["app_store_click", "feature_page_click", "feature_cta_click", "guide_cta_click"]
+    tracking_events = DOWNLOAD_TRACKING_EVENTS
     missing_events = [name for name in tracking_events if event_counts.get(name, 0) == 0]
     page_mix = build_page_mix(ga_pages)
 
@@ -526,8 +537,8 @@ def render_report(
         f"- Top GA4 page in the last 7 days: `{ga_pages[0]['pagePath']}` with `{ga_pages[0]['screenPageViews']}` page views" if ga_pages else "- No GA4 page view data yet",
         f"- Traffic mix (7d): `home={page_mix['totals']['home']}`, `features={page_mix['totals']['features']}`, `guides={page_mix['totals']['guides']}`, `other={page_mix['totals']['other']}`",
         f"- Search Console trending keyword leader: `{trending_keywords[0]['query']}`" if trending_keywords else "- No Search Console keyword data yet",
-        f"- Conversion events (7d): `app_store_click={event_counts.get('app_store_click', 0)}`, `feature_page_click={event_counts.get('feature_page_click', 0)}`, `feature_cta_click={event_counts.get('feature_cta_click', 0)}`, `guide_cta_click={event_counts.get('guide_cta_click', 0)}`",
-        f"- Conversion tracking watch: missing recent activity for `{', '.join(missing_events)}`" if missing_events else "- Conversion tracking status: all primary CTA events are active",
+        f"- Download and CTA events (7d): `app_store_click={event_counts.get('app_store_click', 0)}`, `home_download_click={event_counts.get('home_download_click', 0)}`, `feature_download_click={event_counts.get('feature_download_click', 0)}`, `guide_download_click={event_counts.get('guide_download_click', 0)}`, `feature_page_click={event_counts.get('feature_page_click', 0)}`, `feature_cta_click={event_counts.get('feature_cta_click', 0)}`, `guide_cta_click={event_counts.get('guide_cta_click', 0)}`",
+        f"- Conversion tracking watch: missing recent activity for `{', '.join(missing_events)}`" if missing_events else "- Conversion tracking status: all primary CTA and download-proxy events are active",
         f"- Pages with on-page audit issues: `{sum(1 for audit in page_audits if audit['issues'])}` / `{len(page_audits)}`",
         "",
         "## GA4 Top Pages (Last 7 Days)",
@@ -543,7 +554,7 @@ def render_report(
     lines.extend(
         [
             "",
-            "## Conversion Events (Last 7 Days)",
+            "## Download And CTA Events (Last 7 Days)",
             "",
             "| Event | Count |",
             "| --- | ---: |",
@@ -634,12 +645,16 @@ def render_report(
         )
     if page_mix["home_share"] >= 0.6:
         lines.append("- Homepage traffic is still too concentrated; add or strengthen homepage links that move visitors into feature pages and step-by-step guides.")
+    if event_counts.get("app_store_click", 0) == 0:
+        lines.append("- No App Store clicks were recorded in the last 7 days; inspect outbound CTA tracking and the download path before publishing more content.")
     if event_counts.get("feature_page_click", 0) == 0:
         lines.append("- No feature-page clicks were recorded in the last 7 days; inspect and improve internal feature entry points before the next run.")
     if event_counts.get("guide_cta_click", 0) == 0:
         lines.append("- No guide CTA clicks were recorded in the last 7 days; strengthen the guide hub and homepage guide links with clearer entry copy.")
-    if event_counts.get("feature_page_click", 0) > 0 and event_counts.get("feature_cta_click", 0) == 0:
-        lines.append("- Feature pages are being discovered but not sending people to the App Store; improve feature-page CTA placement and copy.")
+    if event_counts.get("feature_page_click", 0) > 0 and event_counts.get("feature_download_click", 0) == 0:
+        lines.append("- Feature pages are being discovered but not producing download clicks; improve feature-page CTA placement, copy, and event wiring.")
+    elif event_counts.get("feature_page_click", 0) > 0 and event_counts.get("feature_cta_click", 0) == 0:
+        lines.append("- Feature pages are being discovered but the dedicated feature CTA event is still zero; verify event wiring before assuming the copy failed.")
     audit_issues = [audit for audit in page_audits if audit["issues"]]
     if audit_issues:
         lines.append(f"- Fix on-page issues on `{audit_issues[0]['path']}` and related pages before the next crawl wave.")
@@ -681,7 +696,7 @@ def main() -> None:
         dimension_filter={
             "filter": {
                 "fieldName": "eventName",
-                "inListFilter": {"values": ["app_store_click", "feature_page_click", "feature_cta_click", "guide_cta_click"]},
+                "inListFilter": {"values": DOWNLOAD_TRACKING_EVENTS},
             }
         },
     )

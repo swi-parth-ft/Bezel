@@ -772,48 +772,124 @@ document.addEventListener('DOMContentLoaded', () => {
     return 'site';
   };
 
-  const appStoreLinks = Array.from(document.querySelectorAll('a[href*="apps.apple.com"]'));
-  appStoreLinks.forEach((link) => {
-    link.addEventListener('click', (event) => {
-      const text = getTrackingLabel(link, 'app store');
-      const pathname = window.location.pathname;
-      const pageType = getPageType(pathname);
-      const section = getAppStoreSection(link);
-      const appStorePayload = {
+  const getPageSlug = (pathname) => (
+    pathname.split('/').pop()?.replace(/\.html$/, '') || 'home'
+  );
+
+  const buildAppStoreEventBatch = (link) => {
+    const pathname = window.location.pathname;
+    const pageType = getPageType(pathname);
+    const section = getAppStoreSection(link);
+    const text = getTrackingLabel(link, 'app store');
+    const pageSlug = getPageSlug(pathname);
+    const events = [];
+
+    events.push({
+      name: 'app_store_click',
+      params: {
         page_type: pageType,
         page_path: pathname,
+        page_slug: pageSlug,
         link_text: text,
         section,
         destination_host: 'apps.apple.com',
         transport_type: 'beacon',
-      };
-      const featurePayload = {
-        feature_slug: pathname.split('/').pop()?.replace(/\.html$/, '') || 'feature',
-        link_text: text,
-        section,
-        transport_type: 'beacon',
-      };
+      },
+    });
+
+    if (pageType === 'home') {
+      events.push({
+        name: 'home_download_click',
+        params: {
+          page_path: pathname,
+          link_text: text,
+          section,
+          transport_type: 'beacon',
+        },
+      });
+    }
+
+    if (pageType === 'feature') {
+      events.push({
+        name: 'feature_download_click',
+        params: {
+          feature_slug: pageSlug,
+          link_text: text,
+          section,
+          transport_type: 'beacon',
+        },
+      });
+      events.push({
+        name: 'feature_cta_click',
+        params: {
+          feature_slug: pageSlug,
+          link_text: text,
+          section,
+          transport_type: 'beacon',
+        },
+      });
+    }
+
+    if (pageType === 'guide') {
+      events.push({
+        name: 'guide_download_click',
+        params: {
+          guide_slug: pageSlug,
+          link_text: text,
+          section,
+          transport_type: 'beacon',
+        },
+      });
+    }
+
+    if (pageType === 'privacy') {
+      events.push({
+        name: 'privacy_download_click',
+        params: {
+          page_path: pathname,
+          link_text: text,
+          section,
+          transport_type: 'beacon',
+        },
+      });
+    }
+
+    return events;
+  };
+
+  const appStoreLinks = Array.from(document.querySelectorAll('a[href*="apps.apple.com"]'));
+  appStoreLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const events = buildAppStoreEventBatch(link);
 
       if (shouldTrackWithoutDelay(event, link)) {
-        trackEvent('app_store_click', appStorePayload);
-
-        if (pageType === 'feature') {
-          trackEvent('feature_cta_click', featurePayload);
-        }
+        events.forEach(({ name, params }) => trackEvent(name, params));
         return;
       }
 
       event.preventDefault();
-      trackEvent('app_store_click', appStorePayload);
+      let hasNavigated = false;
+      const navigateToStore = () => {
+        if (hasNavigated) return;
+        hasNavigated = true;
+        window.location.assign(link.href);
+      };
 
-      if (pageType === 'feature') {
-        trackEvent('feature_cta_click', featurePayload);
+      const appStoreEvent = events.find(({ name }) => name === 'app_store_click');
+      const followUpEvents = events.filter(({ name }) => name !== 'app_store_click');
+
+      followUpEvents.forEach(({ name, params }) => trackEvent(name, params));
+
+      if (appStoreEvent) {
+        trackEvent(appStoreEvent.name, {
+          ...appStoreEvent.params,
+          event_callback: navigateToStore,
+          event_timeout: 1200,
+        });
       }
 
-      // Give GA4 time to flush outbound-click beacons before navigating away.
-      window.setTimeout(() => {
-        window.location.assign(link.href);
-      }, 180);
+      // Fall back to timed navigation in case GA is blocked or callback does not fire.
+      window.setTimeout(navigateToStore, 320);
     });
   });
 
