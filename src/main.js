@@ -731,6 +731,15 @@ document.addEventListener('DOMContentLoaded', () => {
       .toLowerCase()
   );
 
+  const getTrackingLabel = (link, fallback) => (
+    normalizeLabel(
+      link.dataset.trackLabel ||
+      link.getAttribute('aria-label') ||
+      link.textContent ||
+      fallback
+    ) || fallback
+  );
+
   const shouldTrackWithoutDelay = (event, link) => (
     event.defaultPrevented ||
     event.button !== 0 ||
@@ -766,21 +775,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const appStoreLinks = Array.from(document.querySelectorAll('a[href*="apps.apple.com"]'));
   appStoreLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
-      const text = normalizeLabel(link.textContent);
+      const text = getTrackingLabel(link, 'app store');
       const pathname = window.location.pathname;
       const pageType = getPageType(pathname);
       const section = getAppStoreSection(link);
       const appStorePayload = {
         page_type: pageType,
         page_path: pathname,
-        link_text: text || 'app store',
+        link_text: text,
         section,
         destination_host: 'apps.apple.com',
         transport_type: 'beacon',
       };
       const featurePayload = {
         feature_slug: pathname.split('/').pop()?.replace(/\.html$/, '') || 'feature',
-        link_text: text || 'app store',
+        link_text: text,
         section,
         transport_type: 'beacon',
       };
@@ -808,57 +817,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  const trackedInternalLinks = Array.from(document.querySelectorAll('a[href]'));
+
   // 10. GA4 tracking for internal feature page clicks
-  const featureLinks = Array.from(document.querySelectorAll('a[href*="/features/"]'));
-  featureLinks.forEach((link) => {
+  trackedInternalLinks.forEach((link) => {
     link.addEventListener('click', () => {
       let targetUrl;
       try {
-        targetUrl = new URL(link.href, window.location.origin);
+        targetUrl = new URL(link.getAttribute('href') || link.href, window.location.href);
       } catch {
         return;
       }
 
-      if (!targetUrl.pathname.includes('/features/')) return;
-
       const pathname = window.location.pathname;
       const destinationPath = targetUrl.pathname;
+      if (!destinationPath.includes('/features/')) return;
       if (destinationPath === pathname) return;
 
-      const text = normalizeLabel(link.textContent);
+      const text = getTrackingLabel(link, 'feature');
       trackEvent('feature_page_click', {
         page_type: getPageType(pathname),
         page_path: pathname,
         feature_path: destinationPath,
-        link_text: text || 'feature',
+        link_text: text,
         section: getAppStoreSection(link),
       });
     });
   });
 
   // 11. GA4 tracking for internal guide CTA clicks
-  const guideLinks = Array.from(document.querySelectorAll('a[href*="/guides/"]'));
-  guideLinks.forEach((link) => {
+  trackedInternalLinks.forEach((link) => {
     link.addEventListener('click', () => {
       let targetUrl;
       try {
-        targetUrl = new URL(link.href, window.location.origin);
+        targetUrl = new URL(link.getAttribute('href') || link.href, window.location.href);
       } catch {
         return;
       }
 
-      if (!targetUrl.pathname.includes('/guides/')) return;
-
       const pathname = window.location.pathname;
       const destinationPath = targetUrl.pathname;
+      if (!destinationPath.includes('/guides/')) return;
       if (destinationPath === pathname) return;
 
-      const text = normalizeLabel(link.textContent);
+      const text = getTrackingLabel(link, 'guide');
       trackEvent('guide_cta_click', {
         page_type: getPageType(pathname),
         page_path: pathname,
         guide_path: destinationPath,
-        link_text: text || 'guide',
+        link_text: text,
         section: getAppStoreSection(link),
       });
     });

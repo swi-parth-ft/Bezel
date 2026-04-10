@@ -21,6 +21,7 @@ Extended index: https://bezelstudio.app/llms-full.txt
 - [Localized App Store screenshots](https://bezelstudio.app/features/translation.html): Translation workflow for multi-language screenshot sets.
 - [Canvas Motion](https://bezelstudio.app/features/canvas-motion.html): Motion-ready App Store preview workflow.
 - [App screenshot templates and project presets](https://bezelstudio.app/features/projects-presets.html): Reusable launch templates and editable multi-canvas presets.
+- [Create reusable App Store screenshot templates](https://bezelstudio.app/guides/create-reusable-app-screenshot-templates.html): Step-by-step workflow for saving the winning layout as a repeatable preset.
 - [Batch export App Store screenshots](https://bezelstudio.app/features/export-share.html): Delivery workflow for stills, localized sets, and preview videos.
 - [Create your first App Store screenshot project](https://bezelstudio.app/guides/create-first-app-store-screenshot-project.html): Best first how-to entry point.
 - [Build a full App Store screenshot set](https://bezelstudio.app/guides/build-full-app-store-screenshot-set.html): Campaign-scale guide for reusable layouts and export.

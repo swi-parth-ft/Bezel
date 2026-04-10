@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth antialiased">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create Reusable App Screenshot Templates | Bezel Studio</title>
+  <meta name="description" content="Create reusable App Store screenshot templates, project presets, and launch-ready layouts in Bezel Studio so each release starts from an editable base.">
+  <link rel="canonical" href="https://bezelstudio.app/guides/create-reusable-app-screenshot-templates.html">
+  <meta name="apple-itunes-app" content="app-id=6758039031">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#fafafa">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Bezel Studio">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Create Reusable App Screenshot Templates | Bezel Studio">
+  <meta property="og:description" content="Create reusable App Store screenshot templates, project presets, and launch-ready layouts in Bezel Studio so each release starts from an editable base.">
+  <meta property="og:url" content="https://bezelstudio.app/guides/create-reusable-app-screenshot-templates.html">
+  <meta property="og:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/projects-presets.webp">
+  <meta property="og:image:alt" content="Reusable App Store screenshot template workflow in Bezel Studio">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Create Reusable App Screenshot Templates | Bezel Studio">
+  <meta name="twitter:description" content="Create reusable App Store screenshot templates, project presets, and launch-ready layouts in Bezel Studio so each release starts from an editable base.">
+  <meta name="twitter:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/projects-presets.webp">
+  <meta name="twitter:image:alt" content="Reusable App Store screenshot template workflow in Bezel Studio">
+  <meta name="color-scheme" content="light">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to create reusable App Store screenshot templates.",
+      "description": "Create reusable App Store screenshot templates, project presets, and launch-ready layouts in Bezel Studio so each release starts from an editable base.",
+      "image": "https://bezelstudio.app/assets/feature-platforms/ipad/projects-presets.webp",
+      "url": "https://bezelstudio.app/guides/create-reusable-app-screenshot-templates.html",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Bezel Studio",
+        "url": "https://bezelstudio.app/"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Bezel Studio",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "iOS, iPadOS",
+        "downloadUrl": "https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://bezelstudio.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Guides",
+            "item": "https://bezelstudio.app/guides/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Create Reusable App Screenshot Templates",
+            "item": "https://bezelstudio.app/guides/create-reusable-app-screenshot-templates.html"
+          }
+        ]
+      },
+      "step": [
+        { "@type": "HowToStep", "name": "Build the base App Store screenshot layout worth saving." },
+        { "@type": "HowToStep", "name": "Turn the layout into a reusable project preset." },
+        { "@type": "HowToStep", "name": "Duplicate the template for the next release or device variant." },
+        { "@type": "HowToStep", "name": "Swap screenshots and update the copy without breaking the structure." },
+        { "@type": "HowToStep", "name": "Carry the template into localization, motion, and export workflows." },
+        { "@type": "HowToStep", "name": "Save the refreshed template and export the new launch assets." }
+      ]
+    }
+  </script>
+</head>
+<body class="font-sans bg-zinc-50 dark:bg-[#0A0A0A] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="ambient-orb ambient-orb--blue absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]"></div>
+    <div class="ambient-orb ambient-orb--indigo absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]"></div>
+  </div>
+
+  <div class="site-chrome relative z-10 w-full flex justify-center pt-8">
+    <header
+      class="site-header flex items-center justify-between px-6 py-3 bg-transparent rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
+      <a href="/" class="flex items-center gap-3">
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio logo">
+        <span class="site-header__brand-text text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+      </a>
+      <div class="site-header__expanded hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav class="flex items-center gap-8">
+          <a href="/#features"
+            class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
+          <a href="/guides/"
+            class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
+          <a href="/#faq"
+            class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+        </nav>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"
+          class="cta-button cta-button--nav hidden sm:flex items-center justify-center px-4 py-2 bg-zinc-900/90 dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
+          Get the App
+        </a>
+      </div>
+      <button type="button" class="site-header__menu-toggle" data-header-menu-toggle aria-label="Open navigation"
+        aria-expanded="false" aria-controls="site-header-menu">
+        <svg class="symbol-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </header>
+    <div id="site-header-menu" class="site-header__menu-panel" data-header-menu-panel aria-hidden="true">
+      <nav class="site-header__menu-links">
+        <a href="/#features">Features</a>
+        <a href="/guides/">Guides</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="site-header__menu-cta">
+        Get the App
+      </a>
+    </div>
+  </div>
+
+  <main class="guide-page-main">
+    <article class="guide-page-shell">
+      <section class="guide-page-hero reveal">
+        <p class="guide-page-eyebrow">How-To Guide 07</p>
+        <h1 class="guide-page-title">How to create reusable App Store screenshot templates.</h1>
+        <p class="guide-page-lead">Once one launch layout works, save the frame, caption hierarchy, spacing, and export structure as a reusable template. That way the next release starts from an editable base instead of a blank project.</p>
+        <div class="guide-page-meta">
+          <span class="guide-chip">6 steps</span>
+          <span class="guide-chip" data-local-only>7 screenshot slots</span>
+          <span class="guide-chip">iPhone or iPad</span>
+        </div>
+        <div class="guide-page-cover">
+          <img src="/assets/feature-platforms/ipad/projects-presets.webp" alt="Reusable App Store screenshot template workflow in Bezel Studio">
+        </div>
+        <div class="guide-page-panels">
+          <div class="guide-panel">
+            <p class="guide-panel__label">What You'll Build</p>
+            <p class="guide-panel__copy">A reusable App Store screenshot template that can be reopened, duplicated, localized, and exported for future launches.</p>
+          </div>
+          <div class="guide-panel">
+            <p class="guide-panel__label">What You'll Use</p>
+            <p class="guide-panel__copy">Projects, presets, reusable layouts, duplication, localization-ready structure, and export.</p>
+          </div>
+          <div class="guide-panel" data-local-only>
+            <p class="guide-panel__label">Screenshot Plan</p>
+            <p class="guide-panel__copy">Show 1 finished template, 1 saved preset view, 2 reuse passes, 1 localization or motion carryover, 1 updated export, and 1 final refreshed template.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-steps reveal">
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 01</p>
+              <h2 class="guide-step__title">Build the base screenshot layout worth saving.</h2>
+              <p class="guide-step__body">Start with the canvas that already feels launch-ready. This is the version with the right device frame, headline hierarchy, spacing, and supporting visuals, because the template only helps if the underlying composition is worth repeating.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">The finished base canvas before it becomes a reusable template.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 02</p>
+              <h2 class="guide-step__title">Turn the layout into a reusable project preset.</h2>
+              <p class="guide-step__body">Save the project structure so the frame choice, text styles, background treatment, and overall launch rhythm stay intact. This is what converts one successful screenshot system into a reusable App Store screenshot template instead of a one-off artifact.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">Preset or project-save view showing the reusable launch layout being stored.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 03</p>
+              <h2 class="guide-step__title">Duplicate the template for the next release or device variant.</h2>
+              <p class="guide-step__body">Open the saved template, duplicate the canvas or project structure, and create the next release pass from something that already works. Reuse is the point here: the next launch should inherit the system before any new screenshot or copy changes are made.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">A duplicated canvas or preset-based project created for a new release variant.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 04</p>
+              <h2 class="guide-step__title">Swap screenshots and update the copy without breaking the structure.</h2>
+              <p class="guide-step__body">Replace the app screens, tighten the headline, and adjust spacing while keeping the template’s visual system intact. This is where reusable templates save time: the structure survives, and only the release-specific content changes.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">The reused template with a new screenshot and updated copy layered into the same structure.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 05</p>
+              <h2 class="guide-step__title">Carry the template into localization, motion, or export workflows.</h2>
+              <p class="guide-step__body">Once the reusable template is stable, extend it into the adjacent workflows that matter for launch week: localized copy, preview-video variants, or full multi-canvas export. This proves the template is part of the real production workflow, not an isolated starter file.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">The same template structure being reused in a translated, animated, or export-ready variation.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-step__row">
+            <div>
+              <p class="guide-step__index">Step 06</p>
+              <h2 class="guide-step__title">Save the refreshed template and export the new launch assets.</h2>
+              <p class="guide-step__body">Finish by saving the improved template state and exporting the current campaign assets. That leaves the launch deliverables ready now and the template stronger for the next update, localization pass, or entirely new app.</p>
+            </div>
+            <div class="guide-shot-placeholder">
+              <p class="guide-shot-placeholder__label">Screenshot To Add</p>
+              <p class="guide-shot-placeholder__text">The refreshed template saved alongside the final launch assets after export.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="guide-related reveal">
+        <p class="guide-related__eyebrow">Continue</p>
+        <h2 class="guide-related__heading">Turn one reusable template into the rest of the launch workflow.</h2>
+        <div class="guide-related__links">
+          <a class="guide-related__link" href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" data-track-label="download bezel studio for reusable templates">
+            <h3 class="guide-related__link-title">Download Bezel Studio for reusable templates.</h3>
+            <p class="guide-related__link-body">Keep presets, reusable layouts, localization, and export inside the same native iPhone and iPad workflow.</p>
+          </a>
+          <a class="guide-related__link" href="/features/projects-presets.html" data-track-label="app screenshot templates and project presets feature">
+            <h3 class="guide-related__link-title">Open the App screenshot templates and project presets feature page.</h3>
+            <p class="guide-related__link-body">Go deeper on saved presets, multi-canvas project structure, and repeatable launch systems.</p>
+          </a>
+          <a class="guide-related__link" href="/features/copy-paste-projects.html" data-track-label="reusable app screenshot layouts feature">
+            <h3 class="guide-related__link-title">Reuse App Store screenshot layouts across projects.</h3>
+            <p class="guide-related__link-body">Carry the approved layout into the next release without rebuilding each canvas from zero.</p>
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="pt-16 pb-12 px-6 md:px-12 bg-transparent dark:bg-transparent relative z-10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex items-center gap-4">
+        <img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio">
+        <span class="text-zinc-900 dark:text-white font-semibold">Bezel Studio</span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">
+        <a href="/guides/" class="hover:text-black dark:hover:text-white transition-colors">All Guides</a>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hover:text-black dark:hover:text-white transition-colors">App Store</a>
+        <a href="/privacy.html" class="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

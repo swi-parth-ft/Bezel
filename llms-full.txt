@@ -27,6 +27,7 @@ Platforms: iOS, iPadOS
 - [Create your first App Store screenshot project](https://bezelstudio.app/guides/create-first-app-store-screenshot-project.html): Best first workflow for understanding the product model.
 - [Make a clean iPhone mockup from a raw screenshot](https://bezelstudio.app/guides/make-clean-iphone-mockup.html): Step-by-step device-frame workflow.
 - [Build a full App Store screenshot set in one project](https://bezelstudio.app/guides/build-full-app-store-screenshot-set.html): Campaign-scale screenshot workflow with reusable layouts and export.
+- [Create reusable App Store screenshot templates](https://bezelstudio.app/guides/create-reusable-app-screenshot-templates.html): Save the best launch layout as a reusable preset for updates, new versions, and new apps.
 - [Localize screenshot sets with Apple Translate](https://bezelstudio.app/guides/localize-screenshot-sets-apple-translate.html): Multi-language screenshot workflow.
 - [Create App Store preview visuals with Canvas Motion](https://bezelstudio.app/guides/create-app-store-preview-visuals-canvas-motion.html): Motion-specific guide for preview assets and launch videos.
 - [Make instant mockups with Quick Mockups and Shortcuts](https://bezelstudio.app/guides/make-instant-mockups-with-shortcuts.html): Shortcut-based automation path.

@@ -20,6 +20,7 @@ export default defineConfig({
         'guides/create-first-app-store-screenshot-project': resolve(__dirname, 'guides/create-first-app-store-screenshot-project.html'),
         'guides/make-clean-iphone-mockup': resolve(__dirname, 'guides/make-clean-iphone-mockup.html'),
         'guides/build-full-app-store-screenshot-set': resolve(__dirname, 'guides/build-full-app-store-screenshot-set.html'),
+        'guides/create-reusable-app-screenshot-templates': resolve(__dirname, 'guides/create-reusable-app-screenshot-templates.html'),
         'guides/localize-screenshot-sets-apple-translate': resolve(__dirname, 'guides/localize-screenshot-sets-apple-translate.html'),
         'guides/create-app-store-preview-visuals-canvas-motion': resolve(__dirname, 'guides/create-app-store-preview-visuals-canvas-motion.html'),
         'guides/make-instant-mockups-with-shortcuts': resolve(__dirname, 'guides/make-instant-mockups-with-shortcuts.html'),

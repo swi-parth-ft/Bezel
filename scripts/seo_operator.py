@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from collections import defaultdict
 from dataclasses import dataclass
@@ -19,6 +20,16 @@ DEFAULT_KEY_PATH = "keys/seo-automation.json"
 DEFAULT_SITE_URL = "https://bezelstudio.app/"
 DEFAULT_GA4_PROPERTY_ID = "529323990"
 APP_STORE_HOST = "apps.apple.com"
+DEFAULT_KEY_ENV_VARS = (
+    "SEO_AUTOMATION_KEY_PATH",
+    "BEZEL_SEO_KEY_PATH",
+    "GOOGLE_APPLICATION_CREDENTIALS",
+)
+FALLBACK_KEY_CANDIDATES = (
+    Path.home() / "Code/Swift/Websites/BezelStudio/keys/seo-automation.json",
+    Path.home() / "Code/Swift/Websites/Bezel/keys/seo-automation.json",
+    Path.home() / ".codex/keys/seo-automation.json",
+)
 
 
 @dataclass
@@ -74,6 +85,44 @@ def parse_args() -> argparse.Namespace:
         help="Markdown report output path.",
     )
     return parser.parse_args()
+
+
+def resolve_key_path(repo_root: Path, configured_path: str) -> Path:
+    raw_path = Path(configured_path).expanduser()
+    candidates: list[Path] = []
+    seen: set[Path] = set()
+
+    def add_candidate(candidate: Path) -> None:
+        expanded = candidate.expanduser()
+        if not expanded.is_absolute():
+            expanded = (repo_root / expanded).resolve()
+        else:
+            expanded = expanded.resolve()
+        if expanded in seen:
+            return
+        seen.add(expanded)
+        candidates.append(expanded)
+
+    add_candidate(raw_path)
+
+    for env_name in DEFAULT_KEY_ENV_VARS:
+        env_value = os.environ.get(env_name)
+        if env_value:
+            add_candidate(Path(env_value))
+
+    for candidate in FALLBACK_KEY_CANDIDATES:
+        add_candidate(candidate)
+
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+
+    searched = "\n".join(f"- {candidate}" for candidate in candidates)
+    raise FileNotFoundError(
+        "Could not find the SEO automation service-account key. "
+        "Set SEO_AUTOMATION_KEY_PATH or place the file at one of:\n"
+        f"{searched}"
+    )
 
 
 def iso_day(offset_days: int) -> str:
@@ -604,7 +653,7 @@ def render_report(
 def main() -> None:
     args = parse_args()
     repo_root = Path(__file__).resolve().parents[1]
-    key_path = (repo_root / args.key).resolve() if not Path(args.key).is_absolute() else Path(args.key)
+    key_path = resolve_key_path(repo_root, args.key)
     output_path = (repo_root / args.output).resolve() if not Path(args.output).is_absolute() else Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     dated_output_path = output_path.parent / f"{date.today().isoformat()}.md"
