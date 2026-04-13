@@ -33,4 +33,8 @@ dist-ssr
 
 # Local automation secrets and generated reports
 keys/
-reports/
+reports/*
+!reports/seo/
+reports/seo/*
+!reports/seo/content-cluster-ledger.md
+!reports/seo/content-cluster-ledger.json

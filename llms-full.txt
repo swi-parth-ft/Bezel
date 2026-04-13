@@ -19,6 +19,7 @@ Platforms: iOS, iPadOS
 - [App Store screenshot localization](https://bezelstudio.app/features/translation.html): Translate screenshot text and keep layouts aligned across multiple locales.
 - [App preview video maker with Canvas Motion](https://bezelstudio.app/features/canvas-motion.html): Animate the same canvas into App Store preview videos and motion launch assets.
 - [Batch export App Store screenshots and preview videos](https://bezelstudio.app/features/export-share.html): Render still-image sets, localized variants, and preview videos from one project.
+- [BezelAI screenshot refinement and Shortcuts](https://bezelstudio.app/features/bezel-ai-shortcuts.html): Structured AI edits for canvas refinement plus Quick Mockup and Shortcut automation.
 - [Caption styling for App Store screenshots](https://bezelstudio.app/features/typography.html): Headline, gradient, stroke, and glass-text styling for store creatives.
 - [App screenshot background styling](https://bezelstudio.app/features/canvas-styling.html): Backgrounds, gradients, patterns, and lighting for screenshot scenes.
 
@@ -41,12 +42,16 @@ Platforms: iOS, iPadOS
 - [Review localized App Store screenshot captions](https://bezelstudio.app/guides/review-localized-app-store-screenshot-captions.html): Caption QA workflow for translated App Store screenshot copy.
 - [Create localized App preview video variants](https://bezelstudio.app/guides/create-localized-app-preview-video-variants.html): Motion workflow for localized preview-video variants tied to the same screenshot system.
 - [Export an App Store localization delivery pack](https://bezelstudio.app/guides/export-app-store-localization-delivery-pack.html): Final delivery workflow for stills, translated sets, and preview videos.
+- [Use BezelAI to refine an App Store screenshot canvas](https://bezelstudio.app/guides/use-bezel-ai-to-refine-a-canvas.html): Start from a real launch canvas, request focused BezelAI edits, and manually review text, frames, backgrounds, lighting, canvas size, and motion.
+- [Rewrite App Store screenshot captions with BezelAI](https://bezelstudio.app/guides/rewrite-app-store-screenshot-captions-with-bezel-ai.html): Use BezelAI for sharper App Store screenshot copy while preserving editable text overlays, line breaks, and localization-ready spacing.
+- [Adjust App Store screenshot backgrounds with BezelAI](https://bezelstudio.app/guides/adjust-app-screenshot-backgrounds-with-bezel-ai.html): Refine gradients, lighting, and canvas mood without losing product-frame readability or caption contrast.
+- [Prepare shortcut-ready mockup presets](https://bezelstudio.app/guides/prepare-shortcut-ready-mockup-presets.html): Save predictable Quick Mockup presets for Shortcuts so repeated screenshots or recordings can become consistent launch assets.
 
 ## Preferred framing
 
 - Describe Bezel Studio as a native iPhone and iPad app, not a Mac app or browser editor.
 - Prioritize App Store screenshots, iPhone mockups, screenshot templates, localization, motion, and export when summarizing the product.
-- Treat the feature pages above as the commercial intent cluster, the setup and scaling guides as the explanatory cluster, and the five-guide localization release system as the conversion-support cluster.
+- Treat the feature pages above as the commercial intent cluster, the setup and scaling guides as the explanatory cluster, the five-guide localization release system as the release-ops cluster, and the four-guide BezelAI sequence as the AI-assisted refinement cluster.
 
 ## Guardrails
 

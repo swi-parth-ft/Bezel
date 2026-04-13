@@ -11,7 +11,7 @@ Extended index: https://bezelstudio.app/llms-full.txt
 
 - Bezel Studio is a native Apple-first editor for App Store screenshots and launch visuals.
 - Core workflows include screenshot framing, iPhone and iPad mockups, caption styling, translation, motion, reusable project layouts, and export.
-- The site has three main content clusters: feature pages, core step-by-step guides, and a localization release system for templates, device variants, caption review, preview-video variants, and export delivery.
+- The site has four main content clusters: feature pages, core step-by-step guides, a localization release system, and a BezelAI release assistant sequence for canvas refinement, captions, backgrounds, and shortcut-ready presets.
 
 ## Recommended starting pages
 
@@ -21,6 +21,11 @@ Extended index: https://bezelstudio.app/llms-full.txt
 - [Localized App Store screenshots](https://bezelstudio.app/features/translation.html): Translation workflow for multi-language screenshot sets.
 - [Canvas Motion](https://bezelstudio.app/features/canvas-motion.html): Motion-ready App Store preview workflow.
 - [App screenshot templates and project presets](https://bezelstudio.app/features/projects-presets.html): Reusable launch templates and editable multi-canvas presets.
+- [BezelAI screenshot refinement and Shortcuts](https://bezelstudio.app/features/bezel-ai-shortcuts.html): Structured AI edits and shortcut-ready mockup automation.
+- [Use BezelAI to refine an App Store screenshot canvas](https://bezelstudio.app/guides/use-bezel-ai-to-refine-a-canvas.html): AI-assisted canvas refinement workflow with manual review.
+- [Rewrite App Store screenshot captions with BezelAI](https://bezelstudio.app/guides/rewrite-app-store-screenshot-captions-with-bezel-ai.html): AI-assisted caption revision while preserving editable text hierarchy.
+- [Adjust App Store screenshot backgrounds with BezelAI](https://bezelstudio.app/guides/adjust-app-screenshot-backgrounds-with-bezel-ai.html): Background, gradient, and lighting refinement workflow.
+- [Prepare shortcut-ready mockup presets](https://bezelstudio.app/guides/prepare-shortcut-ready-mockup-presets.html): Quick Mockup preset workflow for repeated screenshots and recordings.
 - [Create localization-ready app screenshot templates](https://bezelstudio.app/guides/create-localization-ready-app-screenshot-template.html): Parent workflow for reusable templates that survive translation and export.
 - [Create iPhone mockup variants from one template](https://bezelstudio.app/guides/create-iphone-mockup-variants-from-one-template.html): Device-frame workflow for reusing one approved mockup across launch variants.
 - [Review localized App Store screenshot captions](https://bezelstudio.app/guides/review-localized-app-store-screenshot-captions.html): Caption QA workflow for translated headlines and callouts.

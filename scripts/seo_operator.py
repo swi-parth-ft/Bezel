@@ -274,6 +274,7 @@ def audit_page(page_path: Path, request_origin: str, canonical_origin: str) -> d
     )
     h1_matches = re.findall(r"<h1[^>]*>(.*?)</h1>", html, re.IGNORECASE | re.DOTALL)
     app_store_links = len(re.findall(APP_STORE_HOST, html, re.IGNORECASE))
+    has_ga4_loader = "googletagmanager.com/gtag/js?id=G-4H5EW5KWZC" in html
 
     title = clean_text(title_match.group(1)) if title_match else ""
     description = clean_text(desc_match.group(1)) if desc_match else ""
@@ -299,6 +300,8 @@ def audit_page(page_path: Path, request_origin: str, canonical_origin: str) -> d
         issues.append(f"unexpected h1 count ({h1_count})")
     if app_store_links == 0:
         issues.append("no App Store links")
+    if app_store_links > 0 and not has_ga4_loader:
+        issues.append("missing GA4 gtag loader")
 
     return {
         "path": relative,

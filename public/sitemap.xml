@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bezelstudio.app/</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/create-first-app-store-screenshot-project.html</loc>
@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/create-localization-ready-app-screenshot-template.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/create-iphone-mockup-variants-from-one-template.html</loc>
@@ -63,6 +63,22 @@
   <url>
     <loc>https://bezelstudio.app/guides/export-app-store-localization-delivery-pack.html</loc>
     <lastmod>2026-04-10</lastmod>
+  </url>
+  <url>
+    <loc>https://bezelstudio.app/guides/use-bezel-ai-to-refine-a-canvas.html</loc>
+    <lastmod>2026-04-13</lastmod>
+  </url>
+  <url>
+    <loc>https://bezelstudio.app/guides/rewrite-app-store-screenshot-captions-with-bezel-ai.html</loc>
+    <lastmod>2026-04-13</lastmod>
+  </url>
+  <url>
+    <loc>https://bezelstudio.app/guides/adjust-app-screenshot-backgrounds-with-bezel-ai.html</loc>
+    <lastmod>2026-04-13</lastmod>
+  </url>
+  <url>
+    <loc>https://bezelstudio.app/guides/prepare-shortcut-ready-mockup-presets.html</loc>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/localize-screenshot-sets-apple-translate.html</loc>
@@ -82,7 +98,7 @@
   </url>
   <url>
     <loc>https://bezelstudio.app/features/bezel-ai-shortcuts.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/canvas-motion.html</loc>
@@ -90,7 +106,7 @@
   </url>
   <url>
     <loc>https://bezelstudio.app/features/canvas-styling.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/copy-paste-projects.html</loc>
@@ -118,7 +134,7 @@
   </url>
   <url>
     <loc>https://bezelstudio.app/features/projects-presets.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/transforms-3-axis.html</loc>
@@ -130,7 +146,7 @@
   </url>
   <url>
     <loc>https://bezelstudio.app/features/typography.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/undo-redo.html</loc>

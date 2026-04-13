@@ -5,7 +5,7 @@ This file tracks which how-to guides already exist in the site, which ones are s
 ## Current Status
 
 - Archive page exists: `guides/index.html`
-- Live guide pages created: `12`
+- Live guide pages created: `21`
 - Cover images: added for all live guides
 - Step screenshot placeholders: present in local/dev only
 - Real step-by-step screenshots: still needed for every live guide
@@ -26,6 +26,15 @@ This file tracks which how-to guides already exist in the site, which ones are s
 | Live | How to turn imported images into sticker assets with background removal. | `guides/create-sticker-assets-background-removal.html` | Added | Pending |
 | Live | How to draw callouts and annotations with PencilKit. | `guides/draw-callouts-with-pencilkit.html` | Added | Pending |
 | Live | How to export high-quality stills and videos from the same project. | `guides/export-stills-and-videos.html` | Added | Pending |
+| Live | How to create localization-ready app screenshot templates. | `guides/create-localization-ready-app-screenshot-template.html` | Added | Pending |
+| Live | How to create iPhone mockup variants from one template. | `guides/create-iphone-mockup-variants-from-one-template.html` | Added | Pending |
+| Live | How to review localized App Store screenshot captions before export. | `guides/review-localized-app-store-screenshot-captions.html` | Added | Pending |
+| Live | How to create localized App preview video variants. | `guides/create-localized-app-preview-video-variants.html` | Added | Pending |
+| Live | How to export an App Store localization delivery pack. | `guides/export-app-store-localization-delivery-pack.html` | Added | Pending |
+| Live | How to use BezelAI to refine an App Store screenshot canvas. | `guides/use-bezel-ai-to-refine-a-canvas.html` | Added | Pending |
+| Live | How to rewrite App Store screenshot captions with BezelAI. | `guides/rewrite-app-store-screenshot-captions-with-bezel-ai.html` | Added | Pending |
+| Live | How to adjust App Store screenshot backgrounds with BezelAI. | `guides/adjust-app-screenshot-backgrounds-with-bezel-ai.html` | Added | Pending |
+| Live | How to prepare shortcut-ready mockup presets for repeated launch assets. | `guides/prepare-shortcut-ready-mockup-presets.html` | Added | Pending |
 
 ## Next Guides To Create
 
@@ -34,8 +43,8 @@ These are the strongest next additions because they deepen the product story wit
 | Priority | Guide Title | Primary Product Area | Suggested Slug | Status |
 | --- | --- | --- | --- | --- |
 | High | How to reuse layouts across projects with copy and paste. | Project reuse | `guides/reuse-layouts-across-projects.html` | Not created |
-| Medium | How to use BezelAI to redesign or refine a canvas. | BezelAI | `guides/use-bezel-ai-to-refine-a-canvas.html` | Not created |
 | Medium | How to create multi-device promo visuals with iPhone, iPad, and Apple Watch. | Multi-device composition | `guides/create-multi-device-promo-visuals.html` | Not created |
+| Medium | How to review an App Store screenshot set before export. | Release QA | `guides/review-app-store-screenshot-set-before-export.html` | Not created |
 
 ## Screenshot Production Checklist
 
