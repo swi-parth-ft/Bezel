@@ -11,7 +11,7 @@ Extended index: https://bezelstudio.app/llms-full.txt
 
 - Bezel Studio is a native Apple-first editor for App Store screenshots and launch visuals.
 - Core workflows include screenshot framing, iPhone and iPad mockups, caption styling, translation, motion, reusable project layouts, and export.
-- The site has four main content clusters: feature pages, core step-by-step guides, a localization release system, and a BezelAI release assistant sequence for canvas refinement, captions, backgrounds, and shortcut-ready presets.
+- The site has five main content clusters: feature pages, core step-by-step guides, a localization release system, a BezelAI release assistant sequence, and a release-QA handoff system for layout reuse, multi-device visuals, set review, and final asset kits.
 
 ## Recommended starting pages
 
@@ -32,6 +32,10 @@ Extended index: https://bezelstudio.app/llms-full.txt
 - [Create localized App preview video variants](https://bezelstudio.app/guides/create-localized-app-preview-video-variants.html): Motion workflow for turning approved localized stills into preview-video variants.
 - [Export an App Store localization delivery pack](https://bezelstudio.app/guides/export-app-store-localization-delivery-pack.html): Delivery workflow for stills, localized variants, and preview videos from one release project.
 - [Batch export App Store screenshots](https://bezelstudio.app/features/export-share.html): Delivery workflow for stills, localized sets, and preview videos.
+- [Reuse App Store screenshot layouts across projects](https://bezelstudio.app/guides/reuse-layouts-across-projects.html): A reusable screenshot layout carried into the next release without rebuilding frames, captions, and export structure.
+- [Create multi-device promo visuals](https://bezelstudio.app/guides/create-multi-device-promo-visuals.html): A multi-device launch scene that keeps the product screen, caption, and device stack readable.
+- [Review an App Store screenshot set before export](https://bezelstudio.app/guides/review-app-store-screenshot-set-before-export.html): A launch screenshot set that has been checked as a sequence before final export.
+- [Build an App Store release asset kit](https://bezelstudio.app/guides/build-app-store-release-asset-kit.html): A release-ready delivery kit with approved stills, localized screenshots, and preview-video canvases grouped from one project.
 - [Create your first App Store screenshot project](https://bezelstudio.app/guides/create-first-app-store-screenshot-project.html): Best first how-to entry point.
 - [Build a full App Store screenshot set](https://bezelstudio.app/guides/build-full-app-store-screenshot-set.html): Campaign-scale guide for reusable layouts and export.
 

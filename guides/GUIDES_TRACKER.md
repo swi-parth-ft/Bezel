@@ -5,7 +5,7 @@ This file tracks which how-to guides already exist in the site, which ones are s
 ## Current Status
 
 - Archive page exists: `guides/index.html`
-- Live guide pages created: `21`
+- Live guide pages created: `25`
 - Cover images: added for all live guides
 - Step screenshot placeholders: present in local/dev only
 - Real step-by-step screenshots: still needed for every live guide
@@ -35,6 +35,10 @@ This file tracks which how-to guides already exist in the site, which ones are s
 | Live | How to rewrite App Store screenshot captions with BezelAI. | `guides/rewrite-app-store-screenshot-captions-with-bezel-ai.html` | Added | Pending |
 | Live | How to adjust App Store screenshot backgrounds with BezelAI. | `guides/adjust-app-screenshot-backgrounds-with-bezel-ai.html` | Added | Pending |
 | Live | How to prepare shortcut-ready mockup presets for repeated launch assets. | `guides/prepare-shortcut-ready-mockup-presets.html` | Added | Pending |
+| Live | How to reuse App Store screenshot layouts across projects. | `guides/reuse-layouts-across-projects.html` | Added | Pending |
+| Live | How to create multi-device promo visuals for an App Store launch. | `guides/create-multi-device-promo-visuals.html` | Added | Pending |
+| Live | How to review an App Store screenshot set before export. | `guides/review-app-store-screenshot-set-before-export.html` | Added | Pending |
+| Live | How to build an App Store release asset kit in Bezel Studio. | `guides/build-app-store-release-asset-kit.html` | Added | Pending |
 
 ## Next Guides To Create
 
@@ -42,9 +46,7 @@ These are the strongest next additions because they deepen the product story wit
 
 | Priority | Guide Title | Primary Product Area | Suggested Slug | Status |
 | --- | --- | --- | --- | --- |
-| High | How to reuse layouts across projects with copy and paste. | Project reuse | `guides/reuse-layouts-across-projects.html` | Not created |
-| Medium | How to create multi-device promo visuals with iPhone, iPad, and Apple Watch. | Multi-device composition | `guides/create-multi-device-promo-visuals.html` | Not created |
-| Medium | How to review an App Store screenshot set before export. | Release QA | `guides/review-app-store-screenshot-set-before-export.html` | Not created |
+| Medium | How to capture real screenshots for the release-QA guides. | Screenshot production | TBD | Not created |
 
 ## Screenshot Production Checklist
 
