@@ -1,0 +1,137 @@
+{
+  "updated_at": "2026-04-14",
+  "gsc_context": {
+    "source": "user screenshots",
+    "indexed_count": 7,
+    "not_indexed_count": 16,
+    "primary_reason": "Discovered - currently not indexed",
+    "validation_pending": 16,
+    "validation_failed": 0,
+    "last_crawled_examples": "N/A",
+    "interpretation": "Google has discovered these URLs but has not crawled them yet; this is crawl scheduling, not confirmed content rejection."
+  },
+  "url_inspection_queue": [
+    {
+      "url": "https://bezelstudio.app/guides/",
+      "page_type": "guide_hub",
+      "priority": 1,
+      "status": "Discovered - currently not indexed",
+      "last_crawled": "N/A",
+      "manual_action": "not_requested",
+      "date_requested": null,
+      "next_action": "URL Inspection -> Request indexing",
+      "notes": "Hub connects all guides; submit first."
+    },
+    {
+      "url": "https://bezelstudio.app/features/device-frames.html",
+      "page_type": "commercial_feature",
+      "priority": 2,
+      "status": "Discovered - currently not indexed",
+      "last_crawled": "N/A",
+      "manual_action": "not_requested",
+      "date_requested": null,
+      "next_action": "URL Inspection -> Request indexing",
+      "notes": "iPhone mockup generator intent."
+    },
+    {
+      "url": "https://bezelstudio.app/features/projects-presets.html",
+      "page_type": "commercial_feature",
+      "priority": 3,
+      "status": "unknown_likely_discovered",
+      "last_crawled": "unknown",
+      "manual_action": "not_requested",
+      "date_requested": null,
+      "next_action": "URL Inspection -> Request indexing",
+      "notes": "App screenshot templates intent."
+    },
+    {
+      "url": "https://bezelstudio.app/features/translation.html",
+      "page_type": "commercial_feature",
+      "priority": 4,
+      "status": "Discovered - currently not indexed",
+      "last_crawled": "N/A",
+      "manual_action": "not_requested",
+      "date_requested": null,
+      "next_action": "URL Inspection -> Request indexing",
+      "notes": "Localization workflow intent."
+    },
+    {
+      "url": "https://bezelstudio.app/features/canvas-motion.html",
+      "page_type": "commercial_feature",
+      "priority": 5,
+      "status": "unknown_likely_discovered",
+      "last_crawled": "unknown",
+      "manual_action": "not_requested",
+      "date_requested": null,
+      "next_action": "URL Inspection -> Request indexing",
+      "notes": "App preview video intent."
+    },
+    {
+      "url": "https://bezelstudio.app/features/export-share.html",
+      "page_type": "commercial_feature",
+      "priority": 6,
+      "status": "unknown_likely_discovered",
+      "last_crawled": "unknown",
+      "manual_action": "not_requested",
+      "date_requested": null,
+      "next_action": "URL Inspection -> Request indexing",
+      "notes": "Export/download-adjacent intent."
+    }
+  ],
+  "backlink_targets": [
+    {
+      "target": "Product Hunt",
+      "url": "https://www.producthunt.com/",
+      "type": "launch/profile",
+      "status": "not_started",
+      "anchor_text": "Bezel Studio App Store screenshot maker",
+      "next_action": "Prepare launch page and maker profile.",
+      "notes": "Best when launch story is ready; can drive referral traffic."
+    },
+    {
+      "target": "AlternativeTo",
+      "url": "https://alternativeto.net/",
+      "type": "software_directory",
+      "status": "not_started",
+      "anchor_text": "Bezel Studio",
+      "next_action": "Submit app as alternative to screenshot/mockup tools.",
+      "notes": "Relevant durable directory listing."
+    },
+    {
+      "target": "SaaSHub",
+      "url": "https://www.saashub.com/",
+      "type": "product_directory",
+      "status": "not_started",
+      "anchor_text": "App Store screenshot maker",
+      "next_action": "Submit product listing with iOS/iPadOS positioning.",
+      "notes": "Directory backlink plus comparison pages."
+    },
+    {
+      "target": "BetaList",
+      "url": "https://betalist.com/",
+      "type": "startup_directory",
+      "status": "not_started",
+      "anchor_text": "Bezel Studio",
+      "next_action": "Submit if app positioning fits startup/product launch guidelines.",
+      "notes": "Good discovery source if accepted."
+    },
+    {
+      "target": "Indie Hackers",
+      "url": "https://www.indiehackers.com/",
+      "type": "community_story",
+      "status": "not_started",
+      "anchor_text": "Bezel Studio",
+      "next_action": "Post a build/launch story, not thin promo.",
+      "notes": "Best if framed as indie app growth/tooling story."
+    },
+    {
+      "target": "Dev.to",
+      "url": "https://dev.to/",
+      "type": "technical_article",
+      "status": "not_started",
+      "anchor_text": "App Store screenshot workflow",
+      "next_action": "Publish source-backed article on making App Store screenshots/localized assets.",
+      "notes": "Better than directory spam; can link to guide hub and feature page."
+    }
+  ]
+}
