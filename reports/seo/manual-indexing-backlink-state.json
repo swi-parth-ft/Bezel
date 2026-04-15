@@ -1,5 +1,11 @@
 {
   "updated_at": "2026-04-15",
+  "seo_operator_context": {
+    "mode": "conversion_path_optimization",
+    "support_operator_directive": "follow_up_only",
+    "reason": "Homepage concentration remains high and deeper feature or guide download events are still zero.",
+    "manual_queue_decision": "No new indexing or backlink queue this run. Follow up on existing submissions only."
+  },
   "gsc_context": {
     "source": "user report on 2026-04-15 plus prior screenshots",
     "indexed_count": 7,

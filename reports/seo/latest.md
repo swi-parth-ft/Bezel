@@ -1,118 +1,121 @@
 # SEO Operator Report
 
-Generated: 2026-04-14 16:21 UTC
+Generated: 2026-04-15 13:05 IST
+Primary mode: `conversion_path_optimization`
+Reason: homepage still dominates discovery, `feature_download_click=0`, `guide_download_click=0`, and `feature_cta_click=0` while content expansion remains blocked.
+Support operator directive: `follow_up_only`
 
 ## Executive Summary
 
-- GA4 realtime active users: `1`
-- Top GA4 page in the last 7 days: `/` with `67` page views
-- Traffic mix (7d): `home=67`, `features=5`, `guides=19`, `other=0`
-- Search Console trending keyword leader: `bezel ai`
-- Download and CTA events (7d): `app_store_click=1`, `home_download_click=1`, `feature_download_click=0`, `guide_download_click=0`, `feature_page_click=4`, `feature_cta_click=0`, `guide_cta_click=13`
-- Conversion tracking watch: missing recent activity for `feature_download_click, guide_download_click, feature_cta_click`
-- Pages with on-page audit issues: `0` / `42`
+- Install data unavailable in automation environment. `app_store_click` remains only install proxy.
+- Fresh 7d proxy and funnel snapshot: `app_store_click=2`, `home_download_click=2`, `feature_download_click=0`, `guide_download_click=0`, `feature_page_click=3`, `feature_cta_click=0`, `guide_cta_click=15`.
+- Traffic mix still home-heavy: `home=66`, `features=4`, `guides=20`, `other=0`.
+- Search Console still sparse. Homepage remains only meaningful opportunity page in current export: `4` clicks / `22` impressions / `18.18%` CTR / average position `7.8`.
+- Deep audit ran this run because homepage concentration remains high and key CTA events are still zero. Result: `82/100` overall in [`/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/reports/seo/SEO-REPORT.html`](/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/reports/seo/SEO-REPORT.html).
 
-## GA4 Top Pages (Last 7 Days)
+## Trend Check
 
-| Page | Page Views | Sessions | Users |
+Last 3 completed runs:
+
+| Run date | Traffic mix home/features/guides | `app_store_click` proxy | `feature_page_click` | `feature_cta_click` | `guide_cta_click` | Read |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| 2026-04-13 | `73 / 6 / 16` | 1 | 5 | 0 | 9 | measurement improved, but home concentration too high |
+| 2026-04-14 | `67 / 5 / 19` | 1 | 4 | 0 | 13 | structure improved, download proof still weak |
+| 2026-04-15 | `66 / 4 / 20` | 2 | 3 | 0 | 15 | slight proxy lift, but still mostly home/guide behavior |
+
+Trailing read:
+
+- Guides keep gaining share. That helps structure.
+- Feature discovery is not improving. It slipped `6 -> 5 -> 4`.
+- App Store proxy improved `1 -> 2`, but only homepage download clicks moved with it.
+- Deeper download intent is still not healthy enough to justify new page expansion.
+
+Verdict: latest work before this run appears to help structure and some top-level App Store intent, not deeper commercial-page conversion yet.
+
+## Data Refresh
+
+### GA4
+
+- Realtime active users: `0`
+- Top 7d pages:
+
+| Page | Views | Sessions | Users |
 | --- | ---: | ---: | ---: |
-| `/` | 67 | 43 | 35 |
+| `/` | 66 | 43 | 33 |
 | `/guides/create-localization-ready-app-screenshot-template.html` | 6 | 1 | 1 |
 | `/guides/create-iphone-mockup-variants-from-one-template.html` | 5 | 2 | 2 |
 | `/guides/export-app-store-localization-delivery-pack.html` | 4 | 2 | 2 |
 | `/features/export-share.html` | 2 | 2 | 1 |
 | `/features/projects-presets.html` | 2 | 2 | 1 |
-| `/guides/create-localized-app-preview-video-variants.html` | 2 | 2 | 2 |
-| `/guides/review-localized-app-store-screenshot-captions.html` | 2 | 1 | 1 |
-| `/features/draw-doodle.html` | 1 | 1 | 1 |
-| `/guides/create-first-app-store-screenshot-project.html` | 0 | 1 | 1 |
 
-## Download And CTA Events (Last 7 Days)
+### Search Console
 
-| Event | Count |
-| --- | ---: |
-| `guide_cta_click` | 13 |
-| `feature_page_click` | 4 |
-| `app_store_click` | 1 |
-| `home_download_click` | 1 |
+- Trending query leader: `bezel ai`
+- Sparse query surface still limits new keyword decisions.
+- No new evidence that fresh guides are winning meaningful commercial discovery yet.
 
-## Trending Search Console Queries
+## Deep Audit
 
-| Query | Clicks | Impressions | Click Change | Impression Change | Avg Position |
-| --- | ---: | ---: | --- | --- | ---: |
-| `bezel ai` | 0.00 | 1.00 | 0% | new | 46.0 |
+Artifacts:
 
-## Search Opportunity Pages
+- HTML audit: [`/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/reports/seo/SEO-REPORT.html`](/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/reports/seo/SEO-REPORT.html)
+- Audit summary: [`/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/reports/seo/FULL-AUDIT-REPORT.md`](/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/reports/seo/FULL-AUDIT-REPORT.md)
+- Action plan: [`/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/reports/seo/ACTION-PLAN.md`](/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/reports/seo/ACTION-PLAN.md)
 
-| Page | Clicks | Impressions | CTR | Avg Position |
-| --- | ---: | ---: | ---: | ---: |
-| `https://bezelstudio.app/` | 4.00 | 22.00 | 18.18% | 7.8 |
+Key findings:
 
-## Keyword Hypotheses (Search Console Sparse)
+- Internal links: healthy enough for current site size. Crawl found `42` unique pages and `220` internal links at depth `1`.
+- Robots, social meta, redirects, `llms.txt`, broken links: no urgent blocker surfaced in deep audit.
+- Homepage remains main commercial leverage point because Search Console opportunity is still concentrated there.
+- PageSpeed Google API rate-limited again. Treat CWV this run as environment-limited, not newly verified regression.
 
-| Keyword | Intent | Evidence Page | 7D Page Views |
-| --- | --- | --- | ---: |
-| _No additional hypotheses needed while query data is available_ | - | - | - |
+Strategy challenge from audit:
 
-## On-Page Audit
+- Site is no longer blocked by missing pages or obvious crawl defects.
+- More guides right now would likely keep improving structure, not installs.
+- Best next bet remains stronger commercial routing from homepage and guide hub into feature pages and App Store handoff.
 
-| Page | Status | Issues |
-| --- | ---: | --- |
-| `/` | 200 | ok |
-| `/privacy.html` | 200 | ok |
-| `/features/bezel-ai-shortcuts.html` | 200 | ok |
-| `/features/canvas-motion.html` | 200 | ok |
-| `/features/canvas-styling.html` | 200 | ok |
-| `/features/copy-paste-projects.html` | 200 | ok |
-| `/features/device-frames.html` | 200 | ok |
-| `/features/draw-doodle.html` | 200 | ok |
-| `/features/export-share.html` | 200 | ok |
-| `/features/images-stickers.html` | 200 | ok |
-| `/features/layers-precision.html` | 200 | ok |
-| `/features/projects-presets.html` | 200 | ok |
-| `/features/transforms-3-axis.html` | 200 | ok |
-| `/features/translation.html` | 200 | ok |
-| `/features/typography.html` | 200 | ok |
-| `/features/undo-redo.html` | 200 | ok |
-| `/guides/adjust-app-screenshot-backgrounds-with-bezel-ai.html` | 200 | ok |
-| `/guides/build-app-store-release-asset-kit.html` | 200 | ok |
-| `/guides/build-full-app-store-screenshot-set.html` | 200 | ok |
-| `/guides/create-app-store-preview-visuals-canvas-motion.html` | 200 | ok |
-| `/guides/create-first-app-store-screenshot-project.html` | 200 | ok |
-| `/guides/create-iphone-mockup-variants-from-one-template.html` | 200 | ok |
-| `/guides/create-localization-ready-app-screenshot-template.html` | 200 | ok |
-| `/guides/create-localized-app-preview-video-variants.html` | 200 | ok |
-| `/guides/create-multi-device-promo-visuals.html` | 200 | ok |
-| `/guides/create-reusable-app-screenshot-templates.html` | 200 | ok |
-| `/guides/create-sticker-assets-background-removal.html` | 200 | ok |
-| `/guides/draw-callouts-with-pencilkit.html` | 200 | ok |
-| `/guides/export-app-store-localization-delivery-pack.html` | 200 | ok |
-| `/guides/export-stills-and-videos.html` | 200 | ok |
-| `/guides/` | 200 | ok |
-| `/guides/localize-screenshot-sets-apple-translate.html` | 200 | ok |
-| `/guides/make-clean-iphone-mockup.html` | 200 | ok |
-| `/guides/make-instant-mockups-with-shortcuts.html` | 200 | ok |
-| `/guides/prepare-shortcut-ready-mockup-presets.html` | 200 | ok |
-| `/guides/reuse-layouts-across-projects.html` | 200 | ok |
-| `/guides/review-app-store-screenshot-set-before-export.html` | 200 | ok |
-| `/guides/review-localized-app-store-screenshot-captions.html` | 200 | ok |
-| `/guides/rewrite-app-store-screenshot-captions-with-bezel-ai.html` | 200 | ok |
-| `/guides/style-app-store-captions.html` | 200 | ok |
-| `/guides/use-bezel-ai-to-refine-a-canvas.html` | 200 | ok |
-| `/guides/use-layers-and-3-axis-transforms.html` | 200 | ok |
+## Changes Shipped
 
-## Next Actions
+1. [`/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/index.html`](/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/index.html)
+   Confidence: `medium`
+   Change: rewrote homepage title and meta description around stronger commercial terms, changed hero secondary CTA from guide-first to feature-first, and added above-fold commercial path links for iPhone mockups, templates, localization, preview videos, and export.
 
-- Improve title/description CTR for `https://bezelstudio.app/` first; it has the strongest impression opportunity.
-- Expand copy or internal links around `bezel ai` while momentum is rising.
-- Homepage traffic is still too concentrated; add or strengthen homepage links that move visitors into feature pages and step-by-step guides.
-- Feature pages are being discovered but not producing download clicks; improve feature-page CTA placement, copy, and event wiring.
+2. [`/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/index.html`](/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/index.html)
+   Confidence: `medium`
+   Change: added a conversion row under the lower feature-path block so users can either start with the strongest commercial feature page or jump directly to the App Store.
 
-## Operator Notes
+3. [`/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/guides/index.html`](/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/guides/index.html)
+   Confidence: `medium`
+   Change: added explicit commercial CTA row near the top of the guide hub and changed the bottom CTA away from another guide loop toward a commercial feature page plus App Store install path.
 
-- Install data was unavailable in this automation environment, so `app_store_click` is only a download proxy.
-- Self-review: 7-day guide traffic improved from the prior run (`16` to `19` views) and home concentration eased slightly (`73/6/16` to `67/5/19` across home/features/guides), but `app_store_click` stayed flat at `1` and feature/guide download events stayed at `0`.
-- Verdict: latest work appears to help structure and qualified guide paths, not downloads yet.
-- Deep audit status: ran because a major page batch shipped and download proxies stayed weak. Robots and `llms.txt` passed, local crawl found `42` unique pages and `0` orphan candidates, broken links were `0`, redirects were clean, PageSpeed was rate-limited, and security headers remain a host/CDN blocker.
-- Shipped content: 4-page `release qa handoff system` cluster for layout reuse, multi-device visuals, set review, and final release asset kits.
-- Source material consulted: `BEZEL_STUDIO_MASTER_GUIDE.md`, `APP_STORE_CONNECT_CONTEXT.md`, `BZLS_APP_TECHNICAL_REPORT.md`, `guides/GUIDES_TRACKER.md`, `public/assets/source/notes/assets-description.md`, existing feature pages, existing guides, current GA4/GSC data, and repo assets.
+4. [`/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/index.html`](/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/index.html), [`/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/guides/index.html`](/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/guides/index.html)
+   Confidence: `high`
+   Change: added clearer `data-track-label` values on new routing links so next runs can read route quality with less ambiguity.
+
+## Why No New Content
+
+`content_expansion` stayed blocked because:
+
+- `feature_download_click == 0`
+- `guide_download_click == 0`
+- `feature_cta_click == 0`
+- homepage share is still too high relative to site breadth
+- manual indexing/backlink queue is still inside active follow-up window
+
+## Support Operator Handoff
+
+Directive: `follow_up_only`
+
+What support operator should do next:
+
+- Do not create a new indexing or backlink batch yet.
+- Wait out current recheck window on submitted URL Inspection requests from `2026-04-15`.
+- Wait for live URLs or approvals on Product Hunt, AlternativeTo, SaaSHub, BetaList, Indie Hackers, and Dev.to submissions.
+- When next run happens, recheck commercial feature pages first: `device-frames`, `projects-presets`, `translation`, `canvas-motion`, `export-share`, then guide hub.
+
+## Self Review
+
+- Latest measured movement before this run: slight help to top-level download proxy only.
+- This run should help routing, not traffic immediately.
+- If next 2 completed runs still fail to produce any `feature_download_click` or `guide_download_click`, strategy should escalate toward stronger CTA experiments on individual feature pages and possibly reduce guide bias further.

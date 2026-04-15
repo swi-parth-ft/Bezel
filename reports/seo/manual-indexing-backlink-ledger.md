@@ -16,6 +16,8 @@ Interpretation: Google knows these URLs but has not crawled them yet. This is cr
 
 Update 2026-04-15: user reported URL Inspection indexing requests were submitted for the recommended URLs. Next check should wait 3-7 days, then record whether each URL is indexed, still discovered, crawled but not indexed, or has a new last-crawled date.
 
+Update 2026-04-15 (SEO operator run): primary mode was `conversion_path_optimization`. Support operator directive is `follow_up_only`. No new manual queue should be opened until the current recheck window expires or live backlink URLs arrive.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |

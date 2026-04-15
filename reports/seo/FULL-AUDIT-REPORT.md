@@ -1,68 +1,57 @@
-# Bezel Studio SEO Deep Audit - 2026-04-14
+# Full Audit Report
 
-## Summary
+Date: 2026-04-15
+Mode under review: `conversion_path_optimization`
 
-Deep audit ran because this run shipped a major guide cluster and download-proxy metrics remain weak. Install data is unavailable in this automation environment, so `app_store_click` is used only as a download proxy.
+## Audit Trigger
 
-Latest 7-day data from GA4/GSC:
+Deep audit ran because:
 
-- Traffic mix: `home=67`, `features=5`, `guides=19`
-- Download proxy: `app_store_click=1`
-- CTA events: `home_download_click=1`, `feature_download_click=0`, `guide_download_click=0`, `feature_cta_click=0`, `feature_page_click=4`, `guide_cta_click=13`
-- Search Console: only visible query signal is `bezel ai` with `1` impression and `0` clicks
-- On-page audit: `0 / 42` pages with issues after the new release-QA cluster
+- homepage traffic concentration remains too high
+- `feature_download_click=0`
+- `guide_download_click=0`
+- `feature_cta_click=0`
+
+Install data is unavailable here, so `app_store_click` is used only as a download proxy.
 
 ## Evidence
 
-| Check | Result | Source |
-| --- | --- | --- |
-| Production robots.txt | HTTP 200; sitemap declared; AI crawlers explicitly allowed | `robots_checker.py https://bezelstudio.app/` |
-| Production llms.txt | Found; `llms-full.txt` found; quality score `100/100` | `llms_txt_checker.py https://bezelstudio.app/` |
-| Local build internal links | `43` pages crawled, `42` unique pages found, `357` internal links, no orphan candidates | `internal_links.py http://127.0.0.1:4173 --depth 2 --max-pages 80 --json` |
-| Local build broken links | `35` checked, `33` healthy, `0` broken, `2` redirected | `broken_links.py http://127.0.0.1:4173 --workers 5` |
-| Production redirects | `0` hops; final `200` | `redirect_checker.py https://bezelstudio.app/` |
-| Security headers | HTTPS yes; score `25/100`; 6 missing headers | `security_headers.py https://bezelstudio.app/` |
-| PageSpeed mobile | Blocked by Google API rate limit | `pagespeed.py https://bezelstudio.app/ --strategy mobile` |
-
-## Strategy Read
-
-The work is helping structure and guide discovery more than downloads so far. Guide views rose from the previous run (`16` to `19`) while home concentration eased slightly (`73/6/16` to `67/5/19` by 7-day page views), but `app_store_click` stayed flat at `1`, and feature/guide download events are still `0`.
-
-The correct next bet remains conversion-path and measurement work before more broad content. This run still shipped 4 pages because the content-cluster mandate could be satisfied with truthful, high-intent release-QA topics that also strengthen paths into export and App Store intent.
-
-## Shipped Content Cluster
-
-Theme: `release qa handoff system`
-
-New pages:
-
-- `/guides/reuse-layouts-across-projects.html` targeting `reuse App Store screenshot layouts`
-- `/guides/create-multi-device-promo-visuals.html` targeting `multi-device app promo visuals`
-- `/guides/review-app-store-screenshot-set-before-export.html` targeting `App Store screenshot set review`
-- `/guides/build-app-store-release-asset-kit.html` targeting `App Store release asset kit`
-
-Source material consulted:
-
-- `BEZEL_STUDIO_MASTER_GUIDE.md`
-- `APP_STORE_CONNECT_CONTEXT.md`
-- `BZLS_APP_TECHNICAL_REPORT.md`
-- `guides/GUIDES_TRACKER.md`
-- `public/assets/source/notes/assets-description.md`
-- Existing feature pages and guide pages in the repo
-- Current GA4/GSC report in `reports/seo/latest.md`
-
-No unsupported features, fake benchmarks, or external claims were added.
+- 7d traffic mix: `home=66`, `features=4`, `guides=20`
+- 7d conversion proxy: `app_store_click=2`
+- 7d CTA events: `home_download_click=2`, `feature_download_click=0`, `guide_download_click=0`, `feature_page_click=3`, `feature_cta_click=0`, `guide_cta_click=15`
+- Search Console opportunity page: homepage only, `4` clicks / `22` impressions / `18.18%` CTR / position `7.8`
+- Deep audit HTML report: [`/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/reports/seo/SEO-REPORT.html`](/Users/parthantala/.codex-profiles/speechactors/home/worktrees/5a25/BezelStudio/reports/seo/SEO-REPORT.html)
+- Deep audit score: `82/100`
+- Internal link crawl: `42` unique pages, `220` internal links, no obvious discovery collapse
 
 ## Findings
 
-| Priority | Finding | Evidence | Impact | Fix |
+| Severity | Finding | Evidence | Impact | Fix |
 | --- | --- | --- | --- | --- |
-| High | Download proxy is flat | `app_store_click=1`; same proxy level as prior run | More pages are not yet proving install movement | Next run should inspect CTA click behavior in browser and consider App Store CTA placement/copy tests on guide pages |
-| High | Feature CTA path still weak | `feature_download_click=0`, `feature_cta_click=0` | Feature traffic is qualified but not moving to App Store | Add stronger above-fold and mid-page feature CTAs or test whether current clicks are too sparse to measure |
-| Medium | Homepage still dominates | `home=67`, `features=5`, `guides=19` | Search and direct users still concentrate at the homepage | Keep routing home visitors into commercial guide clusters and feature pages |
-| Medium | Security headers missing | Security score `25/100`; missing HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy | Trust/security hardening remains unresolved | Move behind host/CDN that supports response headers, or configure headers in the deployment layer |
-| Low | PageSpeed could not refresh | Google API rate-limited | CWV status not verified this run | Retry later or add PageSpeed API key |
+| High | Homepage still carries too much commercial load | Search opportunity page set is still homepage-only; `home=66` vs `features=4` | Users and crawlers keep starting and ending too shallow | Push stronger above-fold and mid-page routes into commercial feature pages |
+| High | Deeper download intent remains unproven | `feature_download_click=0`, `guide_download_click=0`, `feature_cta_click=0` | Existing content is not yet demonstrating install-path health | Prioritize routing and CTA path changes over new content |
+| Medium | Guide structure is improving faster than feature discovery | last-3-run feature views `6 -> 5 -> 4`, guide share `16 -> 19 -> 20` | More publishing would likely bias even harder toward guide browsing | Shift entry points toward money pages and feature hubs |
+| Medium | Technical foundations are mostly adequate | robots, redirects, social meta, broken links, llms all passed in current audit | Strategy should not hide behind technical excuses | Treat routing and intent alignment as primary problem |
+| Unknown | PageSpeed status still unresolved | Google API rate-limited again | Could hide performance issues, but not confirmed | Retry later with available quota or API key |
 
-## Verdict
+## Strategy Read
 
-Latest work appears to help site structure, crawlability, and qualified guide paths. It is not helping downloads yet based on available proxy data. `app_store_click` remains only a proxy because install data is unavailable.
+Current strategy needed correction, not expansion.
+
+- Previous runs helped structure.
+- They did not prove deeper conversion health.
+- New guide publishing this run would have been low-signal.
+- Strongest next move was conversion-path tightening on homepage and guide hub.
+
+## Shipped Response
+
+- Homepage meta title and description now lean harder into commercial terms.
+- Homepage hero now routes second click into a commercial feature page, not deeper guide loop.
+- Homepage now has above-fold commercial path links for top-intent workflows.
+- Guide hub now includes stronger product-page and App Store CTA rows.
+
+## Conclusion
+
+Latest work before this run helped structure and top-level App Store intent a little, not deeper installs yet.
+
+This run intentionally shifted from publishing bias to conversion-path work.
