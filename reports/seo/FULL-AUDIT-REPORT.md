@@ -55,3 +55,7 @@ Current strategy needed correction, not expansion.
 Latest work before this run helped structure and top-level App Store intent a little, not deeper installs yet.
 
 This run intentionally shifted from publishing bias to conversion-path work.
+
+## Post-Audit Note
+
+On 2026-04-16, the homepage title, OG title, and Twitter title were shortened in the local build, and preview validation cleared the only on-page issue the audit had flagged.

@@ -18,6 +18,8 @@ Update 2026-04-15: user reported URL Inspection indexing requests were submitted
 
 Update 2026-04-15 (SEO operator run): primary mode was `conversion_path_optimization`. Support operator directive is `follow_up_only`. No new manual queue should be opened until the current recheck window expires or live backlink URLs arrive.
 
+Update 2026-04-16 (SEO operator run): homepage title CTR fix shipped locally and preview validation passed. Manual queue stays unchanged. Still `follow_up_only` until the current indexing and backlink recheck window expires or live URLs arrive.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |

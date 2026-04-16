@@ -22,3 +22,8 @@ Support operator: `follow_up_only`
 - No broad new guide cluster next run unless measurement and commercial routing improve first.
 - No new backlink queue while submitted targets still await live URLs or outcomes.
 - No repeated URL Inspection requests inside current recheck window.
+
+## Completed Since Audit
+
+- Homepage title, Open Graph title, and Twitter title were shortened on 2026-04-16.
+- Local preview validation now shows the homepage on-page audit as clean.
