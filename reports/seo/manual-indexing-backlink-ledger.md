@@ -20,6 +20,8 @@ Update 2026-04-15 (SEO operator run): primary mode was `conversion_path_optimiza
 
 Update 2026-04-16 (SEO operator run): homepage title CTR fix shipped locally and preview validation passed. Manual queue stays unchanged. Still `follow_up_only` until the current indexing and backlink recheck window expires or live URLs arrive.
 
+Update 2026-04-17 (SEO operator run): `app_store_click` and `home_download_click` both rose to `4`, but `feature_cta_click` and `feature_download_click` are still `0`. Manual queue stays unchanged. Keep `follow_up_only`; do not open a new manual queue until the current recheck window expires or live backlink URLs arrive.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |

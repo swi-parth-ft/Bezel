@@ -1,50 +1,56 @@
 # SEO Operator Report
 
-Generated: 2026-04-16 04:49 UTC
+Generated: 2026-04-17 06:16 UTC
 Primary mode: `conversion_path_optimization`
-Reason: homepage still dominates discovery, deeper feature/guide download events remain zero, and the homepage title needed a quick CTR fix instead of new content.
+Reason: homepage still owns most traffic, `app_store_click` finally doubled, but feature and guide download intent are still zero.
 Support operator directive: `follow_up_only`
 
 ## Changes Shipped
 
 - Confidence: `high`
-- Change: shortened homepage title, Open Graph title, and Twitter title from `App Store Screenshot Maker & iPhone Mockup Generator | Bezel Studio` to `App Store Screenshot Maker for iPhone Mockups | Bezel Studio`.
-- Validation: production build passed and local preview audit now shows `/` with no on-page issues.
+- Change: refreshed GA4 and Search Console reporting, wrote today's dated report, and synced the shared SEO handoff state.
 - Note: install data is still unavailable here, so `app_store_click` remains only a proxy.
 
 ## Executive Summary
 
-- GA4 realtime active users: `0`
-- Top GA4 page in the last 7 days: `/` with `72` page views
-- Traffic mix (7d): `home=72`, `features=4`, `guides=22`, `other=0`
+- GA4 realtime active users: `1`
+- Top GA4 page in the last 7 days: `/` with `81` page views
+- Traffic mix (7d): `home=81`, `features=6`, `guides=22`, `other=0`
 - Search Console trending keyword leader: `bezel ai`
-- Download and CTA events (7d): `app_store_click=2`, `home_download_click=2`, `feature_download_click=0`, `guide_download_click=0`, `feature_page_click=3`, `feature_cta_click=0`, `guide_cta_click=15`
+- Download and CTA events (7d): `app_store_click=4`, `home_download_click=4`, `feature_download_click=0`, `guide_download_click=0`, `feature_page_click=4`, `feature_cta_click=0`, `guide_cta_click=15`
 - Conversion tracking watch: missing recent activity for `feature_download_click, guide_download_click, feature_cta_click`
 - Pages with on-page audit issues: `0` / `42`
+
+## Trend Read
+
+- `app_store_click` moved `2 -> 2 -> 4` across the last 3 completed runs.
+- `home_download_click` moved `2 -> 2 -> 4` across the last 3 completed runs.
+- `feature_page_click` moved `3 -> 3 -> 4`, but `feature_cta_click` and `feature_download_click` are still `0`.
+- Result: latest work looks helpful for downloads proxy and discovery, but not yet for deeper funnel depth.
 
 ## GA4 Top Pages (Last 7 Days)
 
 | Page | Page Views | Sessions | Users |
 | --- | ---: | ---: | ---: |
-| `/` | 72 | 48 | 35 |
+| `/` | 81 | 53 | 36 |
 | `/guides/create-localization-ready-app-screenshot-template.html` | 6 | 1 | 1 |
 | `/guides/create-iphone-mockup-variants-from-one-template.html` | 5 | 2 | 2 |
 | `/guides/export-app-store-localization-delivery-pack.html` | 4 | 2 | 2 |
+| `/features/device-frames.html` | 2 | 2 | 2 |
 | `/features/export-share.html` | 2 | 2 | 1 |
 | `/features/projects-presets.html` | 2 | 2 | 1 |
 | `/guides/create-first-app-store-screenshot-project.html` | 2 | 2 | 2 |
 | `/guides/create-localized-app-preview-video-variants.html` | 2 | 2 | 2 |
 | `/guides/review-localized-app-store-screenshot-captions.html` | 2 | 1 | 1 |
-| `/guides/make-clean-iphone-mockup.html` | 1 | 1 | 1 |
 
 ## Download And CTA Events (Last 7 Days)
 
 | Event | Count |
 | --- | ---: |
 | `guide_cta_click` | 15 |
-| `feature_page_click` | 3 |
-| `app_store_click` | 2 |
-| `home_download_click` | 2 |
+| `app_store_click` | 4 |
+| `feature_page_click` | 4 |
+| `home_download_click` | 4 |
 
 ## Trending Search Console Queries
 
@@ -56,7 +62,7 @@ Support operator directive: `follow_up_only`
 
 | Page | Clicks | Impressions | CTR | Avg Position |
 | --- | ---: | ---: | ---: | ---: |
-| `https://bezelstudio.app/` | 4.00 | 22.00 | 18.18% | 7.8 |
+| `https://bezelstudio.app/` | 4.00 | 26.00 | 15.38% | 8.5 |
 
 ## Keyword Hypotheses (Search Console Sparse)
 

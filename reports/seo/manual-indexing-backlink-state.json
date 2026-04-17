@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-04-16",
+  "updated_at": "2026-04-17",
   "seo_operator_context": {
     "mode": "conversion_path_optimization",
     "support_operator_directive": "follow_up_only",
     "reason": "Homepage concentration remains high and deeper feature or guide download events are still zero.",
     "manual_queue_decision": "No new indexing or backlink queue this run. Follow up on existing submissions only.",
-    "latest_run_note": "Homepage title CTR fix shipped locally on 2026-04-16; preview validation passed; indexing and backlink recheck window remains open."
+    "latest_run_note": "2026-04-17 refresh: app_store_click and home_download_click rose to 4, but feature_cta_click and feature_download_click remain 0, so keep follow_up_only while the recheck window stays open."
   },
   "gsc_context": {
     "source": "user report on 2026-04-15 plus prior screenshots",
