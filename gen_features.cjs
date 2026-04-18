@@ -864,13 +864,14 @@ const template = (data) => `<!doctype html>
         <img class="feature-visual-stage__device feature-visual-stage__device--ipad" src="${data.ipad_shot}" alt="${data.ipad_visual_alt || ''}">
       </div>
 
+    ${renderFeatureConversionCta(data)}
+
     <!-- Seamless Content Layout -->
     <section class="relative z-10 w-full max-w-3xl px-6 mx-auto premium-content reveal" style="animation-delay: 300ms;">
       <div class="prose prose-lg dark:prose-invert max-w-none text-zinc-900 dark:text-white">
         ${data.body}
       </div>
     </section>
-    ${renderFeatureConversionCta(data)}
     ${renderRelatedGuides(data.id)}
     ${renderFeatureJourney(data)}
     </div>

@@ -2,170 +2,94 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bezelstudio.app/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/create-first-app-store-screenshot-project.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/make-clean-iphone-mockup.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/build-full-app-store-screenshot-set.html</loc>
-    <lastmod>2026-04-09</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/create-reusable-app-screenshot-templates.html</loc>
-    <lastmod>2026-04-10</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/style-app-store-captions.html</loc>
-    <lastmod>2026-04-10</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/use-layers-and-3-axis-transforms.html</loc>
-    <lastmod>2026-04-10</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/create-sticker-assets-background-removal.html</loc>
-    <lastmod>2026-04-10</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/draw-callouts-with-pencilkit.html</loc>
-    <lastmod>2026-04-10</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/export-stills-and-videos.html</loc>
-    <lastmod>2026-04-10</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/create-localization-ready-app-screenshot-template.html</loc>
-    <lastmod>2026-04-13</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/create-iphone-mockup-variants-from-one-template.html</loc>
-    <lastmod>2026-04-10</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/review-localized-app-store-screenshot-captions.html</loc>
-    <lastmod>2026-04-10</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/create-localized-app-preview-video-variants.html</loc>
-    <lastmod>2026-04-10</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/export-app-store-localization-delivery-pack.html</loc>
-    <lastmod>2026-04-10</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/use-bezel-ai-to-refine-a-canvas.html</loc>
-    <lastmod>2026-04-13</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/rewrite-app-store-screenshot-captions-with-bezel-ai.html</loc>
-    <lastmod>2026-04-13</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/adjust-app-screenshot-backgrounds-with-bezel-ai.html</loc>
-    <lastmod>2026-04-13</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/prepare-shortcut-ready-mockup-presets.html</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/localize-screenshot-sets-apple-translate.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/create-app-store-preview-visuals-canvas-motion.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/guides/make-instant-mockups-with-shortcuts.html</loc>
-    <lastmod>2026-04-09</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/reuse-layouts-across-projects.html</loc>
-    <lastmod>2026-04-14</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/create-multi-device-promo-visuals.html</loc>
-    <lastmod>2026-04-14</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/review-app-store-screenshot-set-before-export.html</loc>
-    <lastmod>2026-04-14</lastmod>
-  </url>
-  <url>
-    <loc>https://bezelstudio.app/guides/build-app-store-release-asset-kit.html</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/privacy.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/bezel-ai-shortcuts.html</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/canvas-motion.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/canvas-styling.html</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/copy-paste-projects.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/device-frames.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/draw-doodle.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/export-share.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/images-stickers.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/layers-precision.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/projects-presets.html</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/transforms-3-axis.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/translation.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/typography.html</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
   <url>
     <loc>https://bezelstudio.app/features/undo-redo.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-18</lastmod>
   </url>
 </urlset>

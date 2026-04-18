@@ -1,13 +1,21 @@
 # SEO Operator Report
 
-Generated: 2026-04-18 09:57 UTC
+Generated: 2026-04-18 11:09 UTC
+
+## Automation Context
+
+- Primary growth mode: `conversion_path_optimization`
+- Reason: homepage still owns most traffic, feature and guide download events are still zero, and the best leverage is moving more visitors into the commercial path and App Store CTA.
+- Support operator directive: `follow_up_only`
+- Confidence: `high` for moving the feature CTA earlier and adding guide-hub and guide-page install blocks.
+- Install KPI note: `app_store_click` remains the closest proxy because install data is unavailable here.
 
 ## Changes Shipped
 
-- Confidence: `high`
-- Change: homepage hero primary CTA now routes to `/features/device-frames.html` before the direct App Store CTA, and the homepage now includes a small supporting-tools link row for `Typography`, `Images & stickers`, `Draw & annotate`, `Layer precision`, `3-axis transforms`, and `Undo & redo`.
-- Reason: homepage still owns most traffic, feature pages are under-discovered, and deeper feature CTA events remain zero.
-- Note: install data is unavailable here, so `app_store_click` remains only a proxy for installs.
+- Moved the feature-page install block ahead of long content on all generated feature pages.
+- Added a top guide-hub commercial CTA strip.
+- Added above-the-fold install CTA rows to the three highest-intent guide pages: `create-first-app-store-screenshot-project`, `make-clean-iphone-mockup`, and `create-iphone-mockup-variants-from-one-template`.
+- Regenerated feature pages plus `sitemap.xml` and `robots.txt`.
 
 ## Executive Summary
 
@@ -108,8 +116,7 @@ Generated: 2026-04-18 09:57 UTC
 
 ## Next Actions
 
-- Watch whether the homepage feature-first CTA lifts `feature_page_click` without collapsing `app_store_click`.
-- Watch whether `device-frames` becomes the strongest commercial entry and whether `feature_cta_click` stays at zero.
-- Improve title/description CTR for `https://bezelstudio.app/` first; it still has the strongest impression opportunity.
-- Keep strengthening internal links into feature pages before any new content batch.
-- Do not open a new manual indexing or backlink queue until the current recheck window closes or live target URLs arrive.
+- Improve title/description CTR for `https://bezelstudio.app/` first; it has the strongest impression opportunity.
+- Expand copy or internal links around `bezel ai` while momentum is rising.
+- Homepage traffic is still too concentrated; add or strengthen homepage links that move visitors into feature pages and step-by-step guides.
+- Feature pages are being discovered but not producing download clicks; improve feature-page CTA placement, copy, and event wiring.

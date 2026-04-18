@@ -24,6 +24,8 @@ Update 2026-04-17 (SEO operator run): `app_store_click` and `home_download_click
 
 Update 2026-04-18 (SEO operator run): `app_store_click` rose to `5` and `home_download_click` stayed at `5`, but `feature_cta_click` and `feature_download_click` remain `0`. Homepage CTA balance now favors `device-frames` first and adds support links to underlinked feature pages. Manual queue stays unchanged. Keep `follow_up_only`.
 
+Update 2026-04-18 (SEO operator run, refreshed after build validation): feature install CTA now moves earlier in the generated feature template, guide hub now has a top commercial CTA strip, and the strongest guide pages now show above-the-fold install CTAs. Manual queue stays unchanged. Keep `follow_up_only`.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |
