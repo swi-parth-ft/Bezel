@@ -22,6 +22,8 @@ Update 2026-04-16 (SEO operator run): homepage title CTR fix shipped locally and
 
 Update 2026-04-17 (SEO operator run): `app_store_click` and `home_download_click` both rose to `4`, but `feature_cta_click` and `feature_download_click` are still `0`. Manual queue stays unchanged. Keep `follow_up_only`; do not open a new manual queue until the current recheck window expires or live backlink URLs arrive.
 
+Update 2026-04-18 (SEO operator run): `app_store_click` rose to `5` and `home_download_click` stayed at `5`, but `feature_cta_click` and `feature_download_click` remain `0`. Homepage CTA balance now favors `device-frames` first and adds support links to underlinked feature pages. Manual queue stays unchanged. Keep `follow_up_only`.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |
