@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-04-18",
+  "updated_at": "2026-04-22",
   "seo_operator_context": {
     "mode": "conversion_path_optimization",
     "support_operator_directive": "follow_up_only",
     "reason": "Homepage concentration remains high, feature discovery is still thin, and deeper feature or guide download events are still zero.",
     "manual_queue_decision": "No new indexing or backlink queue this run. Follow up on existing submissions only.",
-    "latest_run_note": "2026-04-18 refresh after build validation: app_store_click reached 5 and home_download_click stayed at 5, but feature_cta_click and feature_download_click remain 0. Feature install CTA now appears earlier in generated feature pages and the guide hub plus top guides now carry earlier install CTAs. Recheck window stays open."
+    "latest_run_note": "2026-04-22 refresh after live GA4/GSC pull: app_store_click stayed at 5 and home_download_click stayed at 5, but feature_cta_click and feature_download_click remain 0. Home still owns 38 of 44 page views. Keep follow_up_only; do not open a new manual queue."
   },
   "gsc_context": {
     "source": "user report on 2026-04-15 plus prior screenshots",

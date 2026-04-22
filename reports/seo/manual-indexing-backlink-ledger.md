@@ -26,6 +26,8 @@ Update 2026-04-18 (SEO operator run): `app_store_click` rose to `5` and `home_do
 
 Update 2026-04-18 (SEO operator run, refreshed after build validation): feature install CTA now moves earlier in the generated feature template, guide hub now has a top commercial CTA strip, and the strongest guide pages now show above-the-fold install CTAs. Manual queue stays unchanged. Keep `follow_up_only`.
 
+Update 2026-04-22 (SEO operator run): live GA4/GSC refresh still shows `app_store_click=5`, `home_download_click=5`, `feature_cta_click=0`, and `feature_download_click=0`. Home still owns `38/44` page views. Manual queue stays unchanged. Keep `follow_up_only`; no new indexing or backlink queue this run.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |
