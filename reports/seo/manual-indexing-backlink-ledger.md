@@ -28,6 +28,8 @@ Update 2026-04-18 (SEO operator run, refreshed after build validation): feature 
 
 Update 2026-04-22 (SEO operator run): live GA4/GSC refresh still shows `app_store_click=5`, `home_download_click=5`, `feature_cta_click=0`, and `feature_download_click=0`. Home still owns `38/44` page views. Manual queue stays unchanged. Keep `follow_up_only`; no new indexing or backlink queue this run.
 
+Update 2026-04-24 (SEO operator run): live GA4/GSC refresh shows `app_store_click=2`, `home_download_click=1`, `feature_cta_click=1`, `feature_download_click=1`, `feature_page_click=0`, and `guide_cta_click=0`. Homepage still owns `15/17` tracked page views. Homepage BezelAI meta and above-fold BezelAI/starter-guide links shipped under `conversion_path_optimization`. Manual queue stays unchanged. Keep `follow_up_only`; wait on existing indexing and backlink outcomes before opening new requests.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |
