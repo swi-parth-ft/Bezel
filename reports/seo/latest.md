@@ -1,33 +1,35 @@
 # SEO Operator Report
 
-Generated: 2026-04-24 07:29 UTC
+Generated: 2026-04-25 06:27 UTC
 
 ## Executive Summary
 
 - GA4 realtime active users: `0`
-- Top GA4 page in the last 7 days: `/` with `15` page views
-- Traffic mix (7d): `home=15`, `features=2`, `guides=0`, `other=0`
+- Top GA4 page in the last 7 days: `/` with `24` page views
+- Traffic mix (7d): `home=24`, `features=3`, `guides=0`, `other=0`
 - Search Console trending keyword leader: `bezel ai`
-- Download and CTA events (7d): `app_store_click=2`, `home_download_click=1`, `feature_download_click=1`, `guide_download_click=0`, `feature_page_click=0`, `feature_cta_click=1`, `guide_cta_click=0`
-- Conversion tracking watch: missing recent activity for `guide_download_click, feature_page_click, guide_cta_click`
+- Download and CTA events (7d): `app_store_click=3`, `home_download_click=2`, `feature_download_click=1`, `guide_download_click=0`, `feature_page_click=1`, `feature_cta_click=1`, `guide_cta_click=0`
+- Conversion tracking watch: missing recent activity for `guide_download_click, guide_cta_click`
 - Pages with on-page audit issues: `0` / `42`
 
 ## GA4 Top Pages (Last 7 Days)
 
 | Page | Page Views | Sessions | Users |
 | --- | ---: | ---: | ---: |
-| `/` | 15 | 14 | 14 |
+| `/` | 24 | 22 | 22 |
 | `/features/bezel-ai-shortcuts.html` | 1 | 1 | 1 |
 | `/features/canvas-motion.html` | 1 | 1 | 1 |
+| `/features/device-frames.html` | 1 | 1 | 1 |
 
 ## Download And CTA Events (Last 7 Days)
 
 | Event | Count |
 | --- | ---: |
-| `app_store_click` | 2 |
+| `app_store_click` | 3 |
+| `home_download_click` | 2 |
 | `feature_cta_click` | 1 |
 | `feature_download_click` | 1 |
-| `home_download_click` | 1 |
+| `feature_page_click` | 1 |
 
 ## Trending Search Console Queries
 
@@ -40,7 +42,7 @@ Generated: 2026-04-24 07:29 UTC
 
 | Page | Clicks | Impressions | CTR | Avg Position |
 | --- | ---: | ---: | ---: | ---: |
-| `https://bezelstudio.app/` | 3.00 | 39.00 | 7.69% | 7.1 |
+| `https://bezelstudio.app/` | 3.00 | 41.00 | 7.32% | 7.2 |
 
 ## Keyword Hypotheses (Search Console Sparse)
 
@@ -100,31 +102,28 @@ Generated: 2026-04-24 07:29 UTC
 - Improve title/description CTR for `https://bezelstudio.app/` first; it has the strongest impression opportunity.
 - Expand copy or internal links around `bezel ai` while momentum is rising.
 - Homepage traffic is still too concentrated; add or strengthen homepage links that move visitors into feature pages and step-by-step guides.
-- No feature-page clicks were recorded in the last 7 days; inspect and improve internal feature entry points before the next run.
 - No guide CTA clicks were recorded in the last 7 days; strengthen the guide hub and homepage guide links with clearer entry copy.
 
 ## Automation Context
 
 - Primary growth mode: `conversion_path_optimization`
-- Reason: `app_store_click` fell from `5` to `2`, homepage still owns `15/17` tracked page views, `feature_page_click=0`, and guide-path events are still `0`.
+- Reason: `app_store_click` rose to `3`, but homepage still owns `24/27` tracked page views, `feature_page_click` is only `1`, and guide-path events are still `0`.
 - Support operator directive: `follow_up_only`
 - Install KPI note: App Store install data is unavailable in this environment; `app_store_click` is only a proxy.
-- Deep-audit status: ran because homepage concentration stayed high and key guide/feature entry events were zero. Result: `80/100` in `reports/seo/SEO-REPORT.html`; PageSpeed was rate-limited.
-- Stagnation status: stop-loss active. Last reports show structure improved before, but download proxy weakened this run; no content expansion.
+- Deep-audit status: last deep audit remains the 2026-04-24 run; it scored `80/100` in `reports/seo/SEO-REPORT.html`. No new deep audit was needed after the fresh live refresh because the run improved, but guide-path clicks are still dead.
+- Stagnation status: content expansion stays blocked. Latest work looks better for download proxy and feature discovery, not yet guide movement.
 - Source material used for new content: none. No new page was created.
 
 ## Shipped Changes
 
 | Change | Confidence | Reason |
 | --- | --- | --- |
-| Updated homepage title, OG title, and Twitter title to include `BezelAI` | `medium` | Search Console query leader is `bezel ai`; homepage is the only visible opportunity page. |
-| Updated homepage meta, OG, and Twitter descriptions to mention BezelAI edits while keeping App Store screenshot, mockup, localization, template, and preview-video intent | `medium` | CTR opportunity is homepage-only and current copy did not reflect the rising query. |
-| Added above-fold hero quick link to `/features/bezel-ai-shortcuts.html` | `medium` | BezelAI has query momentum and one of only two feature page views this period. |
-| Added above-fold hero quick link to `/guides/create-first-app-store-screenshot-project.html` | `medium` | Guide views and guide CTA events are `0`; this makes the strongest starter guide reachable before the lower page sections. |
+| Refreshed GA4 and Search Console report artifacts | `high` | Live analytics state changed and needed a fresh daily snapshot. |
+| Updated manual indexing/backlink ledger and state with the 2026-04-25 live metrics | `high` | Support operator handoff must match the current funnel state. |
 
 ## Self-Review
 
-- Last 3 completed reports: `2026-04-18` had `app_store_click=5`; `2026-04-22` held at `5`; `2026-04-24` fell to `2`.
-- Deeper funnel health improved only slightly: `feature_download_click=1` and `feature_cta_click=1`, but `feature_page_click=0`, `guide_download_click=0`, and `guide_cta_click=0`.
-- Latest work appears to help search-result alignment and homepage routing, not proven downloads yet.
+- Last 3 completed reports: `2026-04-18` had `app_store_click=5`; `2026-04-24` fell to `2`; `2026-04-25` rebounded to `3`.
+- Deeper funnel health improved slightly: `feature_page_click` moved from `0` to `1`, but `guide_download_click` and `guide_cta_click` are still `0`.
+- Latest work appears to help download proxy and feature discovery, not guide-path movement yet.
 - Support operator should stay `follow_up_only`: existing indexing/backlink submissions still need outcomes; no broad new manual queue.
