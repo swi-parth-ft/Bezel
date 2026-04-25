@@ -62,6 +62,8 @@ The editor is intentionally state-heavy. The source shows `ContentView` owns sel
 
 Confirmed in `ProjectsRootView.swift`, users can create projects, rename them, duplicate them, delete them, search them, sort them, switch between grid/list layouts, and open project settings or the paywall from the gallery toolbar. The project list also exposes a "find projects" command through `ProjectCommandCenter`.
 
+The same root also now owns project archive export/import entry points for `.bezel` files, including export file creation and pending-import consumption.
+
 Internally, the gallery reads `ProjectRecord` objects from SwiftData, decodes them into `Project`, and keeps a hydrated in-memory array. On save, it re-encodes the project back into the record payload. The root also manages live translation state and export/share sheets at the project level.
 
 ### Canvas Editor
@@ -95,9 +97,11 @@ Internally, `ImageOverlay.newDefault(...)` down-samples a display image to keep 
 
 ### Frame / Mockup Editing
 
-Confirmed from `FrameOverlay.swift`, `FrameTemplate.swift`, `CanvasVideoOverlayView.swift`, and `CanvasVideoMaskView.swift`, users can add device frames, place screenshots or videos inside them, edit frame placement/rotation/scale, and use touch cues. There is also explicit support for 3D frames, including a special template named `3D iPhone Frame`.
+Confirmed from `FrameOverlay.swift`, `FrameTemplate.swift`, `CanvasVideoOverlayView.swift`, `CanvasVideoMaskView.swift`, `FrameTouchCue.swift`, and `DynamicIslandStatusBarNormalizer.swift`, users can add device frames, place screenshots or videos inside them, edit frame placement/rotation/scale, replace messy captured status bars with a clean Apple-style 9:41 status bar treatment, add adjustable frame reflections, and use touch cues. There is also explicit support for 3D frames, including a special template named `3D iPhone Frame`.
 
-Internally, frame overlays store the template, screenshot, video URL, optional exported video asset ID, touch cues, 2D transform state, and 3D state. Video frames are backed by a separate `FrameVideoStore` that writes files into Documents/FrameVideos, and `ProjectAssetRecord` persists those frame-video payloads for deduplication and restore.
+Internally, frame overlays store the template, screenshot, video URL, optional exported video asset ID, clean status bar state, touch cues, touch cue appearance, shadow state, floor reflection state/style, 2D transform state, and 3D state. Video frames are backed by a separate `FrameVideoStore` that writes files into Documents/FrameVideos, and `ProjectAssetRecord` persists those frame-video payloads for deduplication and restore.
+
+`FrameFloorReflectionContainer` mirrors the rendered frame content below the device and applies blur, top opacity, fade distance, rotation compensation, and optional surface shadow styling. `FrameEditSheet` exposes `Show Reflection` plus blur, opacity, and fade controls.
 
 ### Canvas Backgrounds and Lighting
 
@@ -108,10 +112,11 @@ Users can adjust:
 - Gradient colors and direction.
 - Emoji background composition.
 - Background images.
+- Background image blur.
 - Background patterns and their animation.
 - Lighting effect and opacity.
 
-Internally, `CanvasState` owns the background model, and the live/export renderers recompose the background separately from foreground overlays. Pattern animation and lighting are toggles that can affect both live preview and export.
+Internally, `CanvasState` owns the background model, and the live/export renderers recompose the background separately from foreground overlays. `BackgroundPhotoView.swift` and `CanvasExportView.swift` confirm the current implementation supports blurred photo backgrounds through `canvas.backgroundImageBlur`. Pattern animation and lighting are toggles that can affect both live preview and export.
 
 ### Drawing Mode
 
@@ -150,6 +155,8 @@ User flow:
 
 Internally, the app concatenates text entries with `\n---\n`, uses `NLLanguageRecognizer` to detect the dominant source language, configures a `TranslationSession`, and then splits the translated response back into corresponding overlays.
 
+Current checked-in changes also show active work to improve the translation flow while keeping the same on-device architecture and editable write-back model.
+
 ### AI Assistant
 
 Confirmed in `CanvasAIAssistant.swift`, `GeminiLiveClient.swift`, and `ContentView.swift`, the app has a typed AI editing assistant and a microphone-driven AI mode. The AI can propose structured canvas edits rather than freeform prose.
@@ -173,6 +180,17 @@ Users can:
 
 Internally, presets are stored in a separate SwiftData container with legacy migration support. A quick mockup preset is a named wrapper around a `CanvasState`, and the editor persists preset changes on dismiss.
 
+### Project Import and Export
+
+Confirmed in `ProjectsRootView.swift`, `ProjectArchive.swift`, `ProjectImportCoordinator.swift`, and `Info.plist`, the app now supports `.bezel` project archive import/export.
+
+Users can:
+- Export a complete project into a `.bezel` file.
+- Import a `.bezel` file into the gallery.
+- Carry archived frame-video assets with the project payload.
+
+Internally, `BezelProjectArchive` encodes the `Project` plus archived assets, `ImportedBezelProjectPayload` remaps imported IDs into a new project, and the custom `UTType` is registered as `com.parthant.bzls.project`.
+
 ### Export, Save, Share
 
 Confirmed in `ProjectsRootView.swift`, `ContentView.swift`, `SaveShareSheet.swift`, `CanvasExportView.swift`, `CanvasVideoOverlayView.swift`, and `ExportLiveActivitySupport.swift`, the app can export:
@@ -183,7 +201,7 @@ Confirmed in `ProjectsRootView.swift`, `ContentView.swift`, `SaveShareSheet.swif
 - File exports.
 - Shared output through the system share sheet.
 
-The export UI previews either a single canvas image or a stack of canvases. For export, the app decides whether the canvas needs video rendering based on animation/video content and then chooses an appropriate render path. The app shows progress, can continue background rendering, and updates a live activity when available.
+The export UI previews either a single canvas image or a stack of canvases. For export, the app decides whether the canvas needs video rendering based on animation/video content and then chooses an appropriate render path. Clean status bar state is part of frame rendering and must be preserved in still export, animated canvas export, and frame-video export paths. The app shows progress, can continue background rendering, and updates a live activity when available.
 
 ### Onboarding, Tips, Settings, Paywall
 
@@ -197,8 +215,11 @@ Internally:
 
 ## 3. Hidden Features, Less-Obvious Capabilities, Supporting Systems
 
+- `ProjectArchive.swift` and `ProjectImportCoordinator.swift` add a full `.bezel` archive path for importing and exporting complete projects with linked assets.
 - `ProjectAssetRecord.swift` stores frame-video blobs separately from the project payload so the app can deduplicate and restore media assets independently of the canvas JSON.
 - `FrameVideoStore` in `FrameOverlay.swift` keeps embedded frame videos under Documents/FrameVideos and can resolve stale URLs by file name.
+- `FrameFloorReflectionStyle` stores frame reflection blur, opacity, fade, and surface shadow values, and `ProjectArchive.swift` preserves them during `.bezel` import/export.
+- `FrameTouchCue.swift` and the frame edit sheets support touch cues as reusable interaction callouts inside framed media.
 - `QuickMockupDefaultsStore` has a legacy migration path from user defaults and JSON into a dedicated SwiftData store. This is a hidden compatibility layer, not a visible feature.
 - `ExportBackgroundTaskCoordinator` and `ExportLiveActivityManager` support long-running exports that continue in the background and surface progress in a live activity. This is not obvious from the UI alone.
 - `ProjectCommandCenter` and `ProjectCommands` expose editor actions into app menu commands. That is why toolbar actions, keyboard shortcuts, and menu commands can share the same implementation path.
@@ -261,11 +282,15 @@ Confirmed render layers:
 - `CanvasExportView` for still-image export.
 - `CanvasVideoOverlayView` for composition of background, frame bezels, overlay layers, pattern animation, lighting, and watermark.
 - `CanvasVideoMaskView` for frame screen masks.
+- `DynamicIslandStatusBarNormalizer` for clean status bar treatment on supported frame screenshots and videos.
+- `FrameFloorReflectionContainer` for mirrored frame reflections in live preview and export renderers.
 - `LightingOverlayView`, `CanvasPatternOverlayView`, `BackgroundPresetView`, `CustomGradientView`, and `EmojiPatternBackgroundView` for background construction.
 
 Confirmed export behavior:
 - The app can export stills, photo-library assets, files, and share-sheet content.
 - It chooses a video export path when frames contain video or when canvas/overlay animation requires it.
+- It preserves clean status bar rendering for supported frame screenshots and videos.
+- It preserves frame reflection rendering for supported mockups.
 - It supports transparent exports and special 3D frame rendering.
 
 Inference:
@@ -347,6 +372,9 @@ Confirmed iOS 26+ gating:
 - `Overlays/ImageOverlay.swift`: image overlay model and interactive image editing view.
 - `Overlays/FrameOverlay.swift`: frame overlay model, 3D frame state, frame-video store, and frame editing view.
 - `FrameTemplate.swift`: device frame catalog and asset lookup rules.
+- `FrameTouchCue.swift`: touch cue model and rendered interaction callouts for framed media.
+- `Control Sheets/FrameEditSheet.swift`: frame transform, status bar, reflection, shadow, and touch cue controls.
+- `Utils/DynamicIslandStatusBarNormalizer.swift`: clean status bar normalization for supported screenshots and frame videos.
 - `CanvasExportView.swift`: still-image compositor for export and quick mockup rendering.
 - `CanvasVideoOverlayView.swift`: layered video export compositor with optional pattern animation, lighting, bezels, and watermark.
 - `CanvasVideoMaskView.swift`: screen-opening mask renderer for frame videos.

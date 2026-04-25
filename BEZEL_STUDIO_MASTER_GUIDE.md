@@ -15,7 +15,7 @@ Where useful, this guide distinguishes between:
 
 Bezel Studio is a native Apple-platform creative tool for building App Store screenshots, device mockups, marketing visuals, and motion previews directly on iPhone, iPad, and Mac. It is designed to let users go from raw screenshots or recordings to polished promotional assets without leaving the Apple ecosystem.
 
-The app supports static and animated compositions, full project-based canvas management, rich typography, advanced background styling, Apple device frames, stickers, image editing, PencilKit drawing, offline translation, AI-assisted editing, iCloud sync, and high-quality export.
+The app supports static and animated compositions, full project-based canvas management, rich typography, advanced background styling, blurred photo backgrounds, Apple device frames, frame reflections, clean status bar cleanup for supported screenshots and recordings, stickers, image editing, PencilKit drawing, improved on-device translation, `.bezel` project import/export, AI-assisted editing, iCloud sync, and high-quality export.
 
 At its core, Bezel Studio is not just a screenshot wrapper. It is a full canvas editor tailored for app marketing.
 
@@ -28,8 +28,12 @@ The current source in `/Users/parthantala/Code/Swift/Bzls` shows:
 - A separate local-only SwiftData store for quick mockup presets
 - RevenueCat-based premium gating
 - Apple Translation integration
+- `.bezel` project archive import/export support
 - Image Playground integration
 - A Gemini-backed BezelAI pipeline
+- Clean status bar normalization for supported framed screenshots and videos
+- Adjustable frame reflections with blur, opacity, fade, and surface shadow controls
+- Frame touch cues for callouts inside device mockups
 - Background export support with live activity updates
 
 Important implementation note:
@@ -48,6 +52,7 @@ Bezel Studio should be understood as:
 - A motion design tool for App Store preview visuals
 - A project-based creative workspace for Apple platform marketing
 - A native, on-device editor that works across iPhone, iPad, and Mac
+- A reusable project workflow that can package full projects as `.bezel` files
 
 Its core value is speed without sacrificing control. Users can generate fast mockups through presets and shortcuts, or build highly custom compositions with deep editing controls.
 
@@ -165,6 +170,7 @@ Supported background types include:
 - Gradient background
 - Emoji patterns
 - Pattern overlays
+- Photo backgrounds with blur control
 
 Background customization includes:
 
@@ -199,7 +205,9 @@ Examples of how systems connect:
 - Motion is stored in persisted animation tracks, so it is not just a preview effect. The same motion data is consumed during video export.
 - Quick Mockup presets are effectively stored `CanvasState` snapshots, which means the quick automation path reuses the full canvas model rather than a separate template language.
 - Translation works on text overlays already inside the canvas model, so translated output remains part of the same editable composition.
+- `.bezel` project archives package the same project model plus linked assets, so import/export reuses the existing canvas and asset structure rather than inventing a separate interchange format.
 - BezelAI acts on structured canvas actions, which means AI edits plug into the same underlying frame, text, image, background, layer, and motion systems used by the manual editor.
+- Clean status bar state belongs to frame media, so screenshot preview, video preview, still export, and video export all need to preserve the same visual treatment.
 - Export uses the same compositing vocabulary as the live canvas, which helps keep preview and final output aligned.
 
 ## Project Structure
@@ -256,6 +264,22 @@ Frames can contain either:
 - Videos
 
 This means users can build both static graphics and animated preview compositions.
+
+#### Clean Status Bar
+
+Supported frame media can use `Clean Status Bar` to replace messy captured status bar content in screenshots and screen recordings with a clean Apple-style 9:41 status bar treatment. This helps raw app captures look ready for App Store screenshots, device mockups, and motion previews without requiring separate image or video cleanup outside Bezel Studio.
+
+Clean status bar state is part of the frame overlay, so it must be honored consistently in live preview, still export, video export, and `.bezel` project archive flows.
+
+#### Frame Reflections
+
+Supported frame media can use floor-style reflections to make device mockups feel more dimensional. The reflection is generated from the frame content, mirrored below the device, and controlled with blur, top opacity, fade distance, and a subtle surface shadow.
+
+Frame reflection state is stored on the frame overlay, so it travels with the project model, export renderers, video renderers, and `.bezel` archive import/export.
+
+#### Frame Touch Cues
+
+Frame overlays can include touch cues. These cues help explain taps, gestures, and interaction moments inside framed screenshots or recordings without leaving the canvas system.
 
 ### 2. Text
 
@@ -375,6 +399,8 @@ This is valuable for localization workflows, especially when generating App Stor
 
 Because the translation is offline and on-device, it aligns with the native Apple-first nature of the product.
 
+The current release direction also includes improved translation handling around this same workflow, so localization messaging can stay stronger than a one-off experiment.
+
 Current code-backed note:
 
 - The app uses Apple translation APIs plus language detection
@@ -415,9 +441,24 @@ This means Bezel Studio supports:
 
 - Static App Store screenshots
 - Motion-based preview assets
+- Clean status bar cleanup for supported screenshots and recordings inside frames
+- Frame reflections for supported device mockups
+- Frame touch cues for interaction callouts
 - Hybrid creative workflows where stills and video are both part of a campaign
 
 The product is not limited to static screen placement.
+
+## Project Import and Export
+
+The current source now includes a project archive system for moving full projects in and out of the app as `.bezel` files.
+
+Users can:
+
+- Export a complete project as a `.bezel` file.
+- Import a `.bezel` file back into the gallery.
+- Preserve linked project assets, including frame-video assets, through the archive flow.
+
+Internally, `ProjectArchive.swift` defines the archive format, `ProjectsRootView.swift` creates and loads archive payloads, `ProjectImportCoordinator.swift` queues incoming imports, and `Info.plist` registers the custom document type.
 
 ## BezelAI
 
@@ -480,6 +521,7 @@ Current code-backed note:
 
 - Still export and video export share the same canvas compositing concepts
 - The app can switch to a video render path when canvas motion or frame video is present
+- Clean status bar rendering is preserved for supported frame screenshots and frame videos during export
 - Background exports can continue with background-task and live-activity support
 - Transparent export and layered lighting/pattern rendering are part of the export architecture
 
@@ -520,6 +562,7 @@ Current code-backed note:
 
 The checked-in code also reveals several less-obvious capabilities that are important context even if they are not always front-and-center in marketing:
 
+- `.bezel` project archives can package the encoded project plus linked assets for import/export
 - Keyboard commands exist for save/share, canvas navigation, insert actions, undo/redo, grid toggle, layers, and preview toggle
 - Frame videos are stored separately from the main project payload to avoid forcing all media into one giant serialized blob
 - The app has explicit support for background export continuation and live activity progress reporting
@@ -590,7 +633,11 @@ These are the files that matter most if someone needs to rebuild the app’s men
 - [ContentView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ContentView.swift)
 - [CanvasModels.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasModels.swift)
 - [ProjectPersistence.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectPersistence.swift)
+- [ProjectArchive.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectArchive.swift)
 - [ProjectAssetRecord.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectAssetRecord.swift)
+- [ProjectImportCoordinator.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectImportCoordinator.swift)
+- [FrameTouchCue.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/FrameTouchCue.swift)
+- [Utils/DynamicIslandStatusBarNormalizer.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/Utils/DynamicIslandStatusBarNormalizer.swift)
 - [CanvasAIAssistant.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasAIAssistant.swift)
 - [GeminiLiveClient.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/GeminiLiveClient.swift)
 - [QuickMockupDefaults.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/QuickMockupDefaults.swift)
@@ -606,8 +653,13 @@ In practical terms, Bezel Studio supports all of the following major workflows:
 - Create a multi-canvas project
 - Define custom canvas sizes and save presets
 - Apply backgrounds, patterns, emoji systems, and lighting
+- Blur photo backgrounds
 - Add Apple device frames
 - Insert images or videos into frames
+- Clean up captured status bars in supported frame media
+- Replace messy captured status bars with a clean Apple-style 9:41 status bar treatment
+- Add adjustable frame reflections with blur, opacity, fade, and surface shadow controls
+- Add touch cues inside framed mockups
 - Add and style text deeply
 - Add stickers, badges, and image-based assets
 - Remove image backgrounds
@@ -618,6 +670,7 @@ In practical terms, Bezel Studio supports all of the following major workflows:
 - Rotate items in 3D axes
 - Animate with keyframes in Canvas Motion
 - Translate one canvas or many canvases offline
+- Import or export full `.bezel` projects
 - Copy and paste items or full canvases across projects
 - Use undo and redo throughout the experience
 - Sync everything with iCloud
@@ -648,6 +701,9 @@ If this app is being documented for product, marketing, onboarding, or engineeri
 ### C. Canvas Editing
 
 - Frames
+- Clean Status Bar
+- Frame Reflections
+- Touch Cues
 - Text
 - Stickers and badges
 - Images
@@ -808,7 +864,7 @@ Meaning:
 
 ## Plain-Language Product Definition
 
-Bezel Studio is a native Apple creative studio for building screenshot-based marketing assets. It lets users create multi-canvas projects, place images and videos into Apple device frames, style backgrounds and typography in depth, manage layers, draw with PencilKit, animate individual items with keyframes, translate content offline, sync work across devices with iCloud, export high-quality deliverables, and automate fast single-frame mockup generation through Shortcuts. On top of this manual control, BezelAI allows users to describe edits and animations in natural language and have the canvas update automatically.
+Bezel Studio is a native Apple creative studio for building screenshot-based marketing assets. It lets users create multi-canvas projects, place images and videos into Apple device frames, replace messy captured status bars with a clean Apple-style 9:41 status bar treatment, add frame reflections and touch cues, style backgrounds and typography in depth, manage layers, draw with PencilKit, animate individual items with keyframes, translate content offline, sync work across devices with iCloud, export high-quality deliverables, and automate fast single-frame mockup generation through Shortcuts. On top of this manual control, BezelAI allows users to describe edits and animations in natural language and have the canvas update automatically.
 
 ## Suggested Use of This Document
 

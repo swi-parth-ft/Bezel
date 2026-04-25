@@ -172,6 +172,8 @@ These are the dedicated per-platform assets currently used by the feature detail
 | `public/assets/feature-platforms/ipad/typography.webp` | `features/typography.html` |
 | `public/assets/feature-platforms/ipad/undo-redo.webp` | `features/undo-redo.html` |
 
+Clean Status Bar is now part of the documented device-frame product story. Frame Reflections are also part of the frame-polish story. No dedicated production screenshots are tracked yet; future feature assets should use `clean-status-bar.webp` and `frame-reflections.webp` in the matching iPhone/iPad feature-platform folder when added.
+
 ### Feature Page Hero Art
 
 These are the feature-specific image assets used by deep-dive pages.
@@ -267,4 +269,6 @@ Use these rules for future additions:
 - The old `iPhoneWebAssests` location is no longer the canonical website asset path.
 - The source archive has been converted from PNG-heavy exports to WebP to keep future-use assets much lighter.
 - The latest five iPad feature screenshots from Downloads were imported into `public/assets/source/imports/ipad-feature-pages` and converted into the live `public/assets/feature-platforms/ipad` set.
+- Clean Status Bar is documented as a supported frame-media feature, but no dedicated website asset is currently present.
+- Frame Reflections are documented as a supported device-frame feature, but no dedicated website asset is currently present.
 - This file should be updated whenever assets are moved, renamed, added, or deprecated.

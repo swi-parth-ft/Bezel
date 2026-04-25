@@ -16,6 +16,14 @@ Bezel Studio is a native Apple creative studio for building App Store screenshot
 
 The product is not positioned as a simple screenshot wrapper. The docs consistently describe it as a full canvas editor built for app marketing workflows.
 
+Current release-backed additions that should now be treated as source-backed:
+
+- Photo backgrounds can be blurred directly inside the canvas workflow.
+- Clean Status Bar can replace messy captured status bars in supported framed screenshots and recordings with a clean Apple-style 9:41 status bar treatment.
+- Frame Reflections can add mirrored depth to supported device mockups with blur, opacity, fade, and surface shadow controls.
+- Translation flows have been improved while staying on-device and editable in-place.
+- Full projects can now be imported from and exported to `.bezel` files.
+
 ## Core Positioning
 
 Bezel Studio should be framed as:
@@ -25,6 +33,8 @@ Bezel Studio should be framed as:
 - A project-based creative workspace for app marketing
 - A motion-capable tool for preview visuals
 - A native Apple workflow for screenshot localization and export
+- A frame-polish workflow for Clean Status Bar, reflections, and touch cues
+- A reusable project-file workflow through `.bezel` import and export
 
 The clearest value proposition from the docs is speed without losing creative control: users can generate fast mockups through presets and Shortcuts, or build more advanced multi-canvas campaigns with deep editing tools.
 
@@ -51,6 +61,9 @@ Relevant metadata language:
 - Multi-device compositions
 - Screenshot placement inside device frames
 - Static and video content inside frames
+- Clean Status Bar cleanup for supported screenshots and recordings inside frames
+- Frame Reflections for supported device mockups
+- Touch cues for framed interaction callouts
 
 ### 3. Rich Visual Editing
 
@@ -63,6 +76,7 @@ The Markdown docs describe a full editing surface with:
 - Glass-style text presentation
 - Images and stickers
 - Background images
+- Background photo blur controls
 - Gradients, patterns, emoji backgrounds, and lighting
 - Layer ordering
 - Gesture-based transforms and 3-axis rotation
@@ -88,9 +102,20 @@ This is one of the strongest differentiated claims in the current Markdown set:
 
 - Localize screenshot sets
 - Translate one canvas or an entire project
+- Use improved on-device translation flows
 - Keep translated output editable inside the same canvas workflow
 
-### 6. AI and Automation
+### 6. Project Import and Export
+
+The current source now includes a `.bezel` project archive format with import coordination, archive encoding/decoding, and Info.plist document-type registration.
+
+Safe claims:
+
+- Import complete `.bezel` project files
+- Export full projects for reuse or handoff
+- Preserve project assets, including frame-video data, inside the archive flow
+
+### 7. AI and Automation
 
 The docs describe two different intelligence/automation tracks:
 
@@ -111,7 +136,10 @@ The Markdown docs support these primary use cases:
 
 - Build a full App Store screenshot set inside one project
 - Turn a raw screenshot into a polished iPhone or iPad mockup
+- Clean up captured status bars in supported framed screenshots or recordings
+- Add frame reflections and touch cues to supported mockups
 - Create localized screenshot variants for different languages or regions
+- Move full projects with `.bezel` import and export
 - Build motion-driven preview visuals
 - Generate fast one-frame mockups through Shortcuts
 - Reuse layouts, styles, and canvases across campaigns
@@ -149,9 +177,12 @@ The docs repeatedly suggest that Bezel Studio stands out because it combines:
 
 - Full project and canvas management instead of one-image editing
 - Native Apple-device-focused mockup workflows
+- Clean Status Bar cleanup for supported frame media
+- Frame Reflection depth controls for supported mockups
 - Rich typography and styling tools
 - Motion support for preview visuals
 - Offline translation for localization workflows
+- Full-project `.bezel` import/export
 - iCloud continuity for main projects
 - Shortcut-based quick mockup automation
 - AI-assisted editing on top of manual control
@@ -163,6 +194,8 @@ These details should shape messaging, even if they are not all customer-facing:
 - Main projects are persisted with SwiftData and CloudKit-backed sync
 - The app treats projects as nested canvas payloads rather than isolated single documents
 - Export supports background continuation and live activity progress
+- Clean Status Bar normalization is part of supported frame-media rendering
+- Frame reflection state is part of frame overlay rendering and `.bezel` archive preservation
 - Frame videos are stored separately from the main project payload
 - Image handling is optimized through downsampling
 - Background removal and sticker creation are part of the image workflow
@@ -184,6 +217,9 @@ The asset guide maps the current visual storytelling to these product themes:
 
 - iCloud syncing and continuity
 - Dynamic backgrounds
+- Photo background blur
+- Clean Status Bar
+- Frame Reflections
 - BezelAI
 - Canvas management
 - Image Playground and stickers
@@ -201,10 +237,11 @@ If space is limited, the docs suggest leading with these ideas first:
 
 1. Create App Store screenshots and mockups on iPhone and iPad
 2. Build full multi-canvas campaigns, not just single images
-3. Add device frames, typography, backgrounds, layers, and motion
-4. Localize screenshot sets with on-device translation
-5. Export high-quality stills and videos
-6. Use AI edits and Shortcuts for faster workflows
+3. Add device frames, Clean Status Bar cleanup, frame reflections, typography, backgrounds, layers, and motion
+4. Localize screenshot sets with improved on-device translation
+5. Import or export full `.bezel` projects when reuse matters
+6. Export high-quality stills and videos
+7. Use AI edits and Shortcuts for faster workflows
 
 ## Words and Phrases That Match the Docs
 
@@ -216,6 +253,12 @@ Strong phrases:
 - Preview visuals
 - Localization workflows
 - On-device translation
+- Photo background blur
+- Clean Status Bar
+- Frame Reflections
+- touch cues
+- status bar cleanup
+- `.bezel` project import/export
 - Quick mockups
 - Native creative workspace
 - Motion-ready export
@@ -254,11 +297,100 @@ Use combinations of:
 - App Store screenshot maker
 - iPhone and iPad mockup creator
 - multi-canvas project workflow
+- clean status bar cleanup
+- frame reflections
 - typography, backgrounds, and layers
 - motion and video export
 - on-device translation
 - AI-assisted editing
 - Shortcuts quick mockups
+
+## Draft App Store Connect Listing Copy
+
+Use this as the current recommended listing direction. It intentionally uses `Clean Status Bar` as the feature name because it is direct, product-like, and easy to understand in screenshots, release notes, and search.
+
+### Subtitle
+
+App screenshots, made clean
+
+### Promotional Text
+
+New Clean Status Bar helps polish framed screenshots and screen recordings, and frame reflections add more depth to supported mockups.
+
+### Keywords
+
+app screenshots,mockups,device frames,clean status bar,screen recordings,app preview,reflection
+
+### Full Description
+
+Create clean, App Store-ready screenshots and device mockups directly on iPhone and iPad.
+
+Bezel Studio turns raw screenshots, screen recordings, and visual assets into polished marketing creatives with Apple device frames, rich text, layered backgrounds, motion, and export tools built for launch workflows.
+
+Add realistic frame reflections with blur, opacity, fade, and surface shadow controls to give supported mockups more depth without changing the main frame composition.
+
+Clean Status Bar
+
+Make framed screenshots and recordings feel presentation-ready. Clean Status Bar helps replace captured status bar clutter with a cleaner Apple-style 9:41 status bar treatment in supported frame media, so your app screens look cleaner inside iPhone and iPad mockups.
+
+Frame Reflections
+
+Add realistic frame reflections with blur, opacity, fade, and surface shadow controls to give supported mockups more depth without changing the main frame composition.
+
+Build Full Screenshot Sets
+
+Work in multi-canvas projects instead of one image at a time. Create a full App Store screenshot campaign, duplicate layouts, reuse styles, and keep every screen in one editable workspace.
+
+Apple Device Mockups
+
+Place screenshots or videos inside iPhone, iPad, Apple Watch, Mac, Apple TV, and multi-device frames. Adjust scale, rotation, layers, lighting, and perspective to create professional product visuals.
+
+Canvas Motion
+
+Animate frames, text, images, and canvas elements with keyframes. Export motion-ready preview visuals and social assets from the same project you use for still screenshots.
+
+Design Tools for App Marketing
+
+Add custom typography, gradient text, glass-style captions, stickers, drawings, photo backgrounds, blur, animated patterns, and lighting. Use layers and precise transforms to control every part of the composition.
+
+Localization
+
+Translate screenshot text with Apple translation APIs and keep the result editable inside the canvas. Localize one canvas or an entire project without rebuilding each layout from scratch.
+
+Project Import and Export
+
+Move complete projects with `.bezel` files, including linked frame-video assets. Reuse launch assets, hand off projects, or keep campaign versions organized.
+
+Automation and AI
+
+Use Quick Mockups with Shortcuts for fast one-frame mockups, or use BezelAI to describe edits and apply structured changes to your canvas.
+
+Bezel Studio is built for indie developers, app marketers, designers, and creators who need polished screenshots, clean device mockups, localized assets, and motion-ready visuals for App Store Connect and beyond.
+
+### What's New
+
+Clean Status Bar is here.
+
+Polish framed screenshots and screen recordings with a cleaner status bar treatment for supported device frames.
+
+Add realistic frame reflections with blur and opacity controls for more dimensional mockups.
+
+Also included: performance improvements and bug fixes.
+
+### Screenshot Caption Ideas
+
+- Clean Status Bar
+- Polish captured app screens
+- Remove status bar clutter
+- Make framed recordings cleaner
+- App Store-ready mockups
+- Clean screenshots and videos
+
+### Feature Callout Copy
+
+Clean Status Bar helps turn raw app captures into cleaner, presentation-ready mockups. Apply it to supported screenshots and screen recordings inside device frames, then export stills or videos with the same polished look.
+
+Frame Reflections add more depth to supported device mockups with mirrored reflections and adjustable blur, opacity, fade, and surface shadow controls.
 
 ### Tone
 

@@ -5,7 +5,7 @@ This file tracks which how-to guides already exist in the site, which ones are s
 ## Current Status
 
 - Archive page exists: `guides/index.html`
-- Live guide pages created: `25`
+- Live guide pages created: `27`
 - Cover images: added for all live guides
 - Step screenshot placeholders: present in local/dev only
 - Real step-by-step screenshots: still needed for every live guide
@@ -39,6 +39,8 @@ This file tracks which how-to guides already exist in the site, which ones are s
 | Live | How to create multi-device promo visuals for an App Store launch. | `guides/create-multi-device-promo-visuals.html` | Added | Pending |
 | Live | How to review an App Store screenshot set before export. | `guides/review-app-store-screenshot-set-before-export.html` | Added | Pending |
 | Live | How to build an App Store release asset kit in Bezel Studio. | `guides/build-app-store-release-asset-kit.html` | Added | Pending |
+| Live | How to clean status bars in framed screenshots and recordings. | `guides/clean-status-bars-in-device-frames.html` | Added | Pending |
+| Live | How to add frame reflections to device mockups. | `guides/add-frame-reflections-to-device-mockups.html` | Added | Pending |
 
 ## Next Guides To Create
 

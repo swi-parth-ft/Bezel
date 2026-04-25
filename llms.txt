@@ -18,6 +18,8 @@ Extended index: https://bezelstudio.app/llms-full.txt
 - [Home](https://bezelstudio.app/): Overview of the product, workflows, and main conversion paths.
 - [Guides hub](https://bezelstudio.app/guides/): Archive of step-by-step App Store creative workflows.
 - [iPhone mockup generator and device frames](https://bezelstudio.app/features/device-frames.html): High-intent feature page for polished device mockups.
+- [Clean Status Bar](https://bezelstudio.app/features/clean-status-bar.html): Frame-media polish for replacing messy captured status bars with a clean Apple-style 9:41 treatment.
+- [Frame Reflections](https://bezelstudio.app/features/frame-reflections.html): Mirrored reflection controls for adding depth to supported device mockups.
 - [Localized App Store screenshots](https://bezelstudio.app/features/translation.html): Translation workflow for multi-language screenshot sets.
 - [Canvas Motion](https://bezelstudio.app/features/canvas-motion.html): Motion-ready App Store preview workflow.
 - [App screenshot templates and project presets](https://bezelstudio.app/features/projects-presets.html): Reusable launch templates and editable multi-canvas presets.
@@ -38,6 +40,8 @@ Extended index: https://bezelstudio.app/llms-full.txt
 - [Build an App Store release asset kit](https://bezelstudio.app/guides/build-app-store-release-asset-kit.html): A release-ready delivery kit with approved stills, localized screenshots, and preview-video canvases grouped from one project.
 - [Create your first App Store screenshot project](https://bezelstudio.app/guides/create-first-app-store-screenshot-project.html): Best first how-to entry point.
 - [Build a full App Store screenshot set](https://bezelstudio.app/guides/build-full-app-store-screenshot-set.html): Campaign-scale guide for reusable layouts and export.
+- [Clean status bars in framed screenshots](https://bezelstudio.app/guides/clean-status-bars-in-device-frames.html): Step-by-step frame cleanup workflow for supported screenshots and recordings.
+- [Add frame reflections to device mockups](https://bezelstudio.app/guides/add-frame-reflections-to-device-mockups.html): Step-by-step reflection workflow for richer device mockups.
 
 ## Preferred framing
 
