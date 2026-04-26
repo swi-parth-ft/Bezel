@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-04-25",
+  "updated_at": "2026-04-26",
   "seo_operator_context": {
-    "mode": "conversion_path_optimization",
+    "mode": "measurement_repair",
     "support_operator_directive": "follow_up_only",
-    "reason": "App Store click proxy rose to 3, homepage still owns 24 of 27 tracked page views, feature_page_click moved to 1, and guide CTA/download events are still 0.",
+    "reason": "Sunday audit found four live clean-status/reflection pages missing the GA4 loader, so feature and guide CTA measurement on those URLs was incomplete. Homepage still owns 20 of 23 tracked page views and guide CTA/download events remain 0.",
     "manual_queue_decision": "No new indexing or backlink queue this run. Follow up on existing submissions only.",
-    "latest_run_note": "2026-04-25 refresh after live GA4/GSC pull: app_store_click=3, home_download_click=2, feature_cta_click=1, feature_download_click=1, feature_page_click=1, guide_cta_click=0. No code changes shipped this run; keep follow_up_only and do not open a new manual queue."
+    "latest_run_note": "2026-04-26 refresh after live GA4/GSC pull: app_store_click=3, home_download_click=2, feature_cta_click=1, feature_download_click=1, feature_page_click=1, guide_cta_click=0. Fixed missing GA4 loader and Twitter metadata on four live clean-status/reflection pages. Keep follow_up_only and do not open a new manual queue."
   },
   "gsc_context": {
     "source": "user report on 2026-04-15 plus prior screenshots",

@@ -32,6 +32,8 @@ Update 2026-04-24 (SEO operator run): live GA4/GSC refresh shows `app_store_clic
 
 Update 2026-04-25 (SEO operator run): live GA4/GSC refresh shows `app_store_click=3`, `home_download_click=2`, `feature_cta_click=1`, `feature_download_click=1`, `feature_page_click=1`, and `guide_cta_click=0`. Homepage still owns `24/27` tracked page views. Manual queue stays unchanged. Keep `follow_up_only`; feature discovery moved once, but guide-path clicks are still dead so do not open a new manual queue.
 
+Update 2026-04-26 (SEO operator run): primary mode switched to `measurement_repair` after the Sunday audit found four live clean-status/reflection pages missing the GA4 loader and Twitter metadata. Live GA4/GSC refresh still shows `app_store_click=3`, `home_download_click=2`, `feature_cta_click=1`, `feature_download_click=1`, `feature_page_click=1`, and `guide_cta_click=0`. Manual queue stays unchanged. Keep `follow_up_only`; existing indexing and backlink requests still need outcomes, and this run did not justify a new queue.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |
