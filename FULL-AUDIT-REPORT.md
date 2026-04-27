@@ -1,50 +1,55 @@
 # Bezel Studio Sunday SEO Audit
 
-Scope: full-site operating audit with live GA4/Search Console refresh, production homepage deep audit, and local-preview verification after fixes on `2026-04-26`.
+Scope: full-site operating audit with live GA4/Search Console refresh, local production-preview deep audit, and conversion-path review on `2026-04-27`.
 
 Overall rating: `72/100`
 Score confidence: `medium`
 
+Primary mode: `conversion_path_optimization`
+
+Reason: current run happened at `2026-04-26 22:12 PDT` / `2026-04-27 05:12 UTC`, so Sunday deep-audit rules applied. Measurement stayed clean after the 2026-04-26 repair, but homepage concentration and weak deeper routing still block download growth.
+
 Top 3 issues:
-- Measurement coverage was broken on four live clean-status/reflection pages because the GA4 loader was missing.
-- Traffic remains homepage-heavy, with `home=20`, `features=3`, `guides=0` over the last 7 days.
-- Internal-link depth is still uneven, with `8` pages showing `<=1` incoming internal link in the Sunday crawl.
+- Homepage still owns `22` of `26` tracked page views in the last 7 days.
+- Deeper guide intent is still dead: `guide_cta_click=0`, `guide_download_click=0`.
+- Download proxy held flat at `app_store_click=3` after the last repair, so structure is improving faster than installs.
 
 Top 3 opportunities:
-- Use repaired measurement to confirm whether clean-status/reflection pages contribute any deeper CTA or download intent.
-- Improve homepage CTR on the only meaningful Search Console opportunity page, which sits at `40` impressions, `2` clicks, `5.0%` CTR, and average position `7.2`.
-- Strengthen internal links into underlinked feature pages before shipping more content.
+- Improve homepage CTR on the only meaningful Search Console opportunity page: `51` impressions, `2` clicks, `3.92%` CTR, average position `7.9`.
+- Put more direct feature routes above the fold so homepage visitors hit commercial pages before long-scroll sections.
+- Keep manual indexing/backlink work in follow-up mode while the main operator fixes conversion path depth.
 
 ## Findings Table
 
 | Area | Severity | Confidence | Finding | Evidence | Fix |
 | --- | --- | --- | --- | --- | --- |
-| Measurement | Warning | Confirmed | Four live pages were missing the GA4 loader, so page-specific feature and guide click events could not fire there. | `reports/seo/2026-04-26.md` originally flagged `/features/clean-status-bar.html`, `/features/frame-reflections.html`, `/guides/clean-status-bars-in-device-frames.html`, and `/guides/add-frame-reflections-to-device-mockups.html` with `missing GA4 gtag loader`; local rerun now shows `0 / 46` issues. | Fixed in this run by restoring the GA4 loader block on all four pages. |
-| On-page social metadata | Warning | Confirmed | The same four pages also lacked complete Twitter metadata, weakening social preview parity and audit health. | Live report flagged `missing Twitter metadata`; local rerun cleared all four pages. | Fixed in this run by adding `twitter:title`, `twitter:description`, `twitter:image`, and `twitter:image:alt`. |
-| Conversion path | Warning | Confirmed | Downloads proxy is stable but deeper funnel movement is still weak. | Last 7 days: `app_store_click=3`, `feature_page_click=1`, `feature_cta_click=1`, `feature_download_click=1`, `guide_cta_click=0`, `guide_download_click=0`. | Next run should return to `conversion_path_optimization` and improve homepage/guide-hub routing into commercial feature pages. |
-| Homepage concentration | Warning | Confirmed | Traffic is still overly concentrated on the homepage. | GA4 traffic mix is `home=20`, `features=3`, `guides=0`. | Prioritize stronger internal routes and sharper CTR work on homepage before expanding content. |
-| Internal links | Warning | Confirmed | Several feature pages remain underlinked. | Sunday `internal_links.py` crawl found `46` unique pages, `191` internal links, and `8` potential orphan/underlinked pages with `<=1` incoming link. | Add at least one additional contextual link into each underlinked commercial feature page from homepage, guide hub, or related features. |
-| Crawl hygiene | Pass | Confirmed | Core crawl and AI-access controls are healthy. | `robots_checker.py` returned sitemap present and AI crawlers explicitly allowed; `llms_txt_checker.py` scored `100/100`; `broken_links.py` found `0` broken links. | Keep current `robots.txt`, `llms.txt`, and sitemap behavior. |
-| Security headers | Warning | Confirmed | Security headers are still missing at the host level. | `security_headers.py` scored `25/100` and reported missing HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy. | Needs CDN or host configuration outside this repo. Track separately; not fixable in static site code alone. |
-| Performance data | Info | Confirmed | PageSpeed evidence is incomplete this run. | `pagespeed.py` was rate-limited by Google API during the Sunday audit. | Re-run CWV checks later or with API key support before making performance claims. |
-| Schema policy | Warning | Confirmed | Two guides still use `HowTo` schema, which this audit framework treats as deprecated for rich-result value. | `guides/clean-status-bars-in-device-frames.html` and `guides/add-frame-reflections-to-device-mockups.html` include `\"@type\": \"HowTo\"`. | Replace those blocks with valid `Article` or `WebPage` JSON-LD in a future technical cleanup run. |
+| Conversion path | Warning | Confirmed | Homepage concentration is still too high for a site trying to drive installs. | GA4 7d mix: `home=22`, `features=3`, `guides=1`. | Add stronger above-the-fold internal routes from home into commercial feature pages and one clearer guide-hub route. |
+| Download proxy | Warning | Confirmed | Download proxy is stable, not growing. | `app_store_click=3`, same as prior completed run. | Improve discovery into pages that already show some install intent before adding more content. |
+| Guide path | Warning | Confirmed | Guide discovery exists, but guide CTA and guide download signals are still zero. | GA4 7d events: `guide_cta_click=0`, `guide_download_click=0`, while `/guides/` has `1` page view. | Give homepage visitors a clearer route into the guide archive and keep guide hub commercial paths visible. |
+| Homepage CTR | Warning | Confirmed | Search Console opportunity is concentrated almost entirely on the homepage. | `https://bezelstudio.app/` shows `51` impressions, `2` clicks, `3.92%` CTR, average position `7.9`. | Tighten homepage title/meta around `App Store Screenshot Maker` and `iPhone mockups`. |
+| Measurement integrity | Pass | Confirmed | On-page audit is still clean after last run’s repair. | `reports/seo/latest.md` shows `0 / 46` pages with issues. | Keep measurement repair work closed unless new gaps appear. |
+| Crawl and AI controls | Pass | Confirmed | Crawlability basics remain healthy. | `robots.txt` and `llms.txt` both passed; broken-links audit found `0` broken links. | No change needed. |
+| Internal links | Warning | Confirmed | Some secondary guides are still underlinked, but this is not the main bottleneck right now. | Local preview crawl found `45` unique pages, `281` internal links, and `4` guides at `<=1` incoming link. | Keep this as a follow-on cleanup after homepage routing proves or fails. |
+| Security headers | Warning | Confirmed | Header hardening still depends on host/CDN control. | Security audit still flags missing HSTS/CSP and related headers. | Track outside repo; not fixable in static site code alone. |
+| Performance data | Info | Confirmed | Core Web Vitals are incomplete again. | `pagespeed.py` hit rate limits during this audit. | Re-run later before making performance claims. |
 
 ## Prioritized Action Plan
 
-1. Keep this run in `measurement_repair` and ship the GA4/Twitter fixes. Status: complete.
-2. Use the repaired data surface to watch whether clean-status/reflection URLs now contribute any feature or guide CTA events. Status: next 1-2 runs.
-3. Return to `conversion_path_optimization` next run if no new measurement gaps appear. Focus on homepage CTR and deeper feature routing.
-4. Add contextual links into the eight underlinked pages, starting with commercial features that support installs.
-5. Handle non-repo blockers separately: host security headers and PageSpeed API access.
+1. Stay in `conversion_path_optimization`.
+2. Ship homepage meta-copy update for CTR and clearer qualified intent.
+3. Ship an above-the-fold commercial route block on home with direct links to `device-frames`, `projects-presets`, `translation`, `canvas-motion`, plus one guide-hub route.
+4. Rebuild site and rerun report + deep audit on local production preview.
+5. Keep support operator on `follow_up_only`; no new indexing or backlink queue this run.
 
 ## Unknowns And Follow-ups
 
-- Core Web Vitals remain unverified this run because the PageSpeed API was rate-limited.
-- Search Console indexing state for the existing manual queue still depends on user-side rechecks in GSC.
-- The repaired pages need at least one more reporting window before judging download impact.
+- Need 1-2 more runs to see whether the new route block changes `feature_page_click`, `feature_cta_click`, or `guide_cta_click`.
+- Guide underlinking still exists, but it may not matter if homepage routing starts working.
+- App Store installs remain unavailable in automation, so `app_store_click` is still only a proxy.
 
 ## Artifacts
 
 - HTML dashboard: `reports/seo/SEO-REPORT.html`
-- Live metrics report: `reports/seo/2026-04-26.md`
+- Live metrics report: `reports/seo/latest.md`
+- Dated report: `reports/seo/2026-04-27.md`
 - Shared support-worker handoff: `reports/seo/manual-indexing-backlink-ledger.md` and `reports/seo/manual-indexing-backlink-state.json`

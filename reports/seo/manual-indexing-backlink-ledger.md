@@ -34,6 +34,8 @@ Update 2026-04-25 (SEO operator run): live GA4/GSC refresh shows `app_store_clic
 
 Update 2026-04-26 (SEO operator run): primary mode switched to `measurement_repair` after the Sunday audit found four live clean-status/reflection pages missing the GA4 loader and Twitter metadata. Live GA4/GSC refresh still shows `app_store_click=3`, `home_download_click=2`, `feature_cta_click=1`, `feature_download_click=1`, `feature_page_click=1`, and `guide_cta_click=0`. Manual queue stays unchanged. Keep `follow_up_only`; existing indexing and backlink requests still need outcomes, and this run did not justify a new queue.
 
+Update 2026-04-27 (SEO operator run): primary mode switched back to `conversion_path_optimization` because measurement stayed clean after the 2026-04-26 repair, but homepage concentration is still `22/26` tracked page views and guide-path intent remains `guide_cta_click=0`, `guide_download_click=0`. This run shipped homepage CTR copy updates plus a new above-the-fold `Fastest routes` block into commercial feature pages and the guide hub. Manual queue stays unchanged. Keep `follow_up_only`; existing indexing and backlink requests still need outcome checks before any new asks.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |
