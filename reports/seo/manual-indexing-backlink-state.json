@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-04-27",
+  "updated_at": "2026-04-30",
   "seo_operator_context": {
     "mode": "conversion_path_optimization",
     "support_operator_directive": "follow_up_only",
-    "reason": "Measurement stayed clean after the 2026-04-26 repair, but homepage still owns 22 of 26 tracked page views and guide CTA/download events remain 0, so clearer homepage-to-money-page routing is still the highest-leverage move.",
+    "reason": "Measurement is clean at 0 of 46 on-page issues and app_store_click rose to 6, but homepage still owns 52 of 55 tracked page views while guide_cta_click and guide_download_click remain 0.",
     "manual_queue_decision": "No new indexing or backlink queue this run. Follow up on existing submissions only.",
-    "latest_run_note": "2026-04-27 refresh after live GA4/GSC pull: app_store_click=3, home_download_click=2, feature_cta_click=1, feature_download_click=1, feature_page_click=1, guide_cta_click=0, guide_download_click=0. Shipped homepage title/meta CTR updates and a new above-the-fold Fastest routes block linking into device frames, templates, translation, canvas motion, and the guide hub. Keep follow_up_only and do not open a new manual queue."
+    "latest_run_note": "2026-04-30 refresh after live GA4/GSC pull: app_store_click=6, home_download_click=6, feature_cta_click=1, feature_download_click=1, feature_page_click=1, guide_cta_click=0, guide_download_click=0. Shipped a homepage hero route to BezelAI workflows, added a top guide-hub CTA to the first screenshot guide, and corrected guide count to 27. Deep audit scored 72/100; PageSpeed was rate-limited and security headers remain host/CDN work. Keep follow_up_only and do not open a new manual queue."
   },
   "gsc_context": {
     "source": "user report on 2026-04-15 plus prior screenshots",

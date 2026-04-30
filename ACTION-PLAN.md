@@ -1,37 +1,31 @@
 # Bezel Studio SEO Action Plan
 
-Primary mode for `2026-04-27`: `conversion_path_optimization`
+Primary mode for `2026-04-30`: `conversion_path_optimization`
 
-Reason: measurement repair held, but homepage still owns most tracked attention and deeper guide intent remains zero.
+Reason: measurement is clean and `app_store_click` rose, but homepage traffic concentration is still `52 / 55` tracked page views and guide CTA/download events remain `0`.
 
 ## Immediate
 
-1. Tighten homepage title/description and social copy around `App Store Screenshot Maker` + `iPhone mockups`.
-2. Add an above-the-fold commercial route block on the homepage.
-3. Rebuild site and rerun `npm run seo:report -- --audit-origin http://127.0.0.1:4173`.
-4. Re-run Sunday deep audit and refresh `reports/seo/SEO-REPORT.html`.
+1. Watch whether the new homepage BezelAI hero route increases `feature_page_click`.
+2. Watch whether the new guide-hub first-guide CTA increases `guide_cta_click`.
+3. Keep content expansion blocked until deeper feature or guide intent improves.
+4. Keep support operator on `follow_up_only`.
 
 ## Quick Wins
 
-1. Watch for movement in `feature_page_click`, `feature_cta_click`, and `guide_cta_click` over the next 1-2 runs.
-2. Keep support operator on `follow_up_only`; do not open a new indexing or backlink queue.
-3. Keep content expansion blocked until deeper download intent improves.
-
-## Strategic Next
-
-1. If feature discovery still stays near `1`, challenge homepage above-the-fold strategy harder.
-2. If guide hub still gets views with `guide_cta_click=0`, tighten guide-hub commercial CTA hierarchy next.
-3. If two more runs stay flat, propose a prompt/strategy upgrade instead of publishing more content.
+1. If `/features/bezel-ai-shortcuts.html` gets more page views but no feature download growth, improve BezelAI feature CTA copy next.
+2. If `/guides/` gets views but `guide_cta_click` remains `0`, test stronger guide-hub CTA hierarchy.
+3. If homepage CTR stays below `2%`, revisit title/meta around the highest-impression homepage query.
 
 ## Deferred / External
 
-1. Recheck PageSpeed later; current audit was rate-limited.
-2. Fix security headers through host/CDN controls, not repo code.
-3. Clean up underlinked secondary guides in a later internal-link pass if conversion routing starts working.
+1. Security headers still need host/CDN control.
+2. PageSpeed was rate-limited during the deep audit; rerun later before performance claims.
+3. Internal-link cleanup can wait unless money-page discovery fails again.
 
 ## Success Check
 
-- `reports/seo/latest.md` still shows `0 / 46` pages with on-page audit issues.
-- `reports/seo/SEO-REPORT.html` exists for the Sunday deep audit.
-- Shared manual-state files reflect `conversion_path_optimization` + `follow_up_only`.
-- Remote branch contains validated homepage route changes.
+- `npm run build` passes.
+- `npm run seo:report -- --audit-origin http://127.0.0.1:4173` shows `0 / 46` on-page issues.
+- `reports/seo/SEO-REPORT.html` exists and records the 2026-04-30 deep audit.
+- Manual state remains `follow_up_only` with no broad new backlink or indexing queue.

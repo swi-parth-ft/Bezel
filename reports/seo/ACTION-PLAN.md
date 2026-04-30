@@ -1,37 +1,31 @@
-# Action Plan
+# Bezel Studio SEO Action Plan
 
-Date: 2026-04-24
-Primary mode: `conversion_path_optimization`
-Support operator: `follow_up_only`
+Primary mode for `2026-04-30`: `conversion_path_optimization`
+
+Reason: measurement is clean and `app_store_click` rose, but homepage traffic concentration is still `52 / 55` tracked page views and guide CTA/download events remain `0`.
 
 ## Immediate
 
-1. Watch whether homepage title/description changes improve CTR for the homepage Search Console opportunity page.
-2. Watch whether the new above-fold BezelAI feature link raises `feature_page_click` from `0`.
-3. Watch whether the new above-fold starter-guide link raises `guide_cta_click` and guide page views from `0`.
-4. Keep the guide hub and top guides pointed at install CTA paths, but do not publish new content until deeper funnel events move.
-5. Treat security headers as host/CDN work, not repo work.
+1. Watch whether the new homepage BezelAI hero route increases `feature_page_click`.
+2. Watch whether the new guide-hub first-guide CTA increases `guide_cta_click`.
+3. Keep content expansion blocked until deeper feature or guide intent improves.
+4. Keep support operator on `follow_up_only`.
 
-## Next Run Decision Gates
+## Quick Wins
 
-1. If `feature_download_click > 0` persists, keep optimizing the strongest feature page path before publishing new content.
-2. If `feature_page_click` rises but `feature_download_click` stays flat, run page-specific CTA experiments on the highest-traffic feature page.
-3. If support-feature pages still look underlinked, add one small contextual link layer from the most relevant guides or feature pages.
-4. If indexing follow-up shows commercial pages still not crawled after the current wait window, support operator can resume a small manual queue.
-5. If security headers remain missing, leave them to the host/CDN owner.
-6. If `app_store_click` stays flat or worse next run, run deeper strategy review before shipping more page changes.
+1. If `/features/bezel-ai-shortcuts.html` gets more page views but no feature download growth, improve BezelAI feature CTA copy next.
+2. If `/guides/` gets views but `guide_cta_click` remains `0`, test stronger guide-hub CTA hierarchy.
+3. If homepage CTR stays below `2%`, revisit title/meta around the highest-impression homepage query.
 
-## Explicit Non-Goals
+## Deferred / External
 
-- No broad new guide cluster next run unless measurement and commercial routing improve first.
-- No new backlink queue while submitted targets still await live URLs or outcomes.
-- No repeated URL Inspection requests inside the current recheck window.
-- No content expansion until deeper download intent shows movement.
+1. Security headers still need host/CDN control.
+2. PageSpeed was rate-limited during the deep audit; rerun later before performance claims.
+3. Internal-link cleanup can wait unless money-page discovery fails again.
 
-## Completed Since Audit
+## Success Check
 
-- Report and shared-state files were refreshed with the 2026-04-24 live metrics.
-- Deep audit confirmed crawlability, `llms.txt`, broken links, and redirects are fine.
-- Deep audit scored `80/100`; PageSpeed was blocked by Google API rate limiting.
-- Homepage meta tags were adjusted around `BezelAI`, the current query leader.
-- Above-fold homepage routing now links to BezelAI and the first screenshot guide.
+- `npm run build` passes.
+- `npm run seo:report -- --audit-origin http://127.0.0.1:4173` shows `0 / 46` on-page issues.
+- `reports/seo/SEO-REPORT.html` exists and records the 2026-04-30 deep audit.
+- Manual state remains `follow_up_only` with no broad new backlink or indexing queue.

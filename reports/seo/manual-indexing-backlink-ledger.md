@@ -36,6 +36,8 @@ Update 2026-04-26 (SEO operator run): primary mode switched to `measurement_repa
 
 Update 2026-04-27 (SEO operator run): primary mode switched back to `conversion_path_optimization` because measurement stayed clean after the 2026-04-26 repair, but homepage concentration is still `22/26` tracked page views and guide-path intent remains `guide_cta_click=0`, `guide_download_click=0`. This run shipped homepage CTR copy updates plus a new above-the-fold `Fastest routes` block into commercial feature pages and the guide hub. Manual queue stays unchanged. Keep `follow_up_only`; existing indexing and backlink requests still need outcome checks before any new asks.
 
+Update 2026-04-30 (SEO operator run): primary mode stayed `conversion_path_optimization`. Live GA4/GSC refresh shows `app_store_click=6`, `home_download_click=6`, `feature_cta_click=1`, `feature_download_click=1`, `feature_page_click=1`, `guide_cta_click=0`, and `guide_download_click=0`; homepage still owns `52/55` tracked page views. This run added a homepage hero route to BezelAI workflows and a top guide-hub CTA to the first screenshot guide. Manual queue stays unchanged. Keep `follow_up_only`; existing indexing and backlink requests still need outcomes before any new asks.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |

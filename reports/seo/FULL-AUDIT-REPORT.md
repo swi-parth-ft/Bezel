@@ -1,75 +1,53 @@
-# Full Audit Report
+# Bezel Studio SEO Audit
 
-Date: 2026-04-24
-Mode under review: `conversion_path_optimization`
+Scope: full-site operating audit with live GA4/Search Console refresh, local production-preview audit, and conversion-path review on `2026-04-30`.
 
-## Audit Trigger
+Overall rating: `72/100`
+Score confidence: `medium`
 
-Deep audit ran because:
+Primary mode: `conversion_path_optimization`
 
-- homepage traffic concentration remains too high
-- `app_store_click` fell from `5` to `2`
-- `feature_page_click=0`
-- `guide_download_click=0`
-- `guide_cta_click=0`
-- internal link depth still leaves several support pages weakly linked
+Reason: measurement is clean at `0 / 46` on-page issues and `app_store_click` rose to `6`, but homepage concentration is worse at `52 / 55` tracked page views and guide intent is still `0`.
 
-Install data is unavailable here, so `app_store_click` is only a download proxy.
+Top 3 issues:
+- Homepage owns almost all tracked attention: `home=52`, `features=2`, `guides=1`.
+- Deeper guide intent is still dead: `guide_cta_click=0`, `guide_download_click=0`.
+- Homepage Search Console CTR fell to `1.89%` on `53` impressions even though average position improved to `7.4`.
 
-## Evidence
+Top 3 opportunities:
+- Route homepage visitors into the active `bezel ai` commercial feature path above the fold.
+- Give `/guides/` a direct above-fold guide action so guide visits can produce `guide_cta_click`.
+- Keep App Store click growth under review because the proxy rose from `4` to `6`, but mostly as homepage download intent.
 
-- 7d traffic mix: `home=15`, `features=2`, `guides=0`
-- 7d conversion proxy: `app_store_click=2`
-- 7d CTA events: `home_download_click=1`, `feature_download_click=1`, `guide_download_click=0`, `feature_page_click=0`, `feature_cta_click=1`, `guide_cta_click=0`
-- Search Console opportunity page: homepage only, `3` clicks / `39` impressions / `7.69%` CTR / position `7.1`
-- Trending Search Console query leader: `bezel ai`
-- Robots check: `200`, sitemap declared, AI crawler management explicitly allowed
-- `llms.txt` check: `200`, `llms-full.txt` present, recommended starting pages curated
-- Broken link check: `35` links tested, `0` broken, `2` redirected
-- Redirect check: `0` internal hops
-- Internal link crawl sample: `33` pages crawled, `42` unique pages found, `257` internal links, `6` potential orphan candidates
-- Security headers check: `25/100`, with `6` missing headers
-- PageSpeed: rate-limited by Google API, so no fresh CWV numbers this run
-- Generated audit dashboard: `reports/seo/SEO-REPORT.html`, overall score `80/100`
+## Findings Table
 
-## Findings
-
-| Severity | Finding | Evidence | Impact | Fix |
-| --- | --- | --- | --- | --- |
-| High | Homepage still carries too much commercial load | Search opportunity page remains homepage-only; traffic mix is `home=15` vs `features=2` and `guides=0` | Users and crawlers keep starting and ending too shallow | Keep pushing stronger routes into commercial feature pages and starter guides from the homepage |
-| High | Download proxy weakened this run | `app_store_click` moved from `5` to `2`; home download clicks fell from `5` to `1` | Latest structure work is not yet translating into install proxy growth | Prioritize homepage CTR and above-fold routing over new content |
-| Medium | BezelAI query demand is not reflected strongly enough on the homepage | `bezel ai` is the trending query leader while the homepage title did not mention BezelAI before this run | Search-result alignment may suppress CTR and route quality for the one visible opportunity page | Add BezelAI to homepage meta tags and above-fold feature routing |
-| Medium | Guide path is currently dead in analytics | `guides=0`, `guide_cta_click=0`, `guide_download_click=0` | Existing guides cannot support downloads if homepage users never enter them | Add a top-of-page starter-guide path from the homepage |
-| Medium | Feature discovery is still thin on supporting pages | Internal link crawl found `6` potential orphan candidates, all low-link support pages | Supporting feature pages may stay under-discovered and under-reinforced | Add contextual links later only if commercial paths keep improving |
-| Medium | Technical foundations are mostly adequate, but security headers are missing | Robots, llms, broken links, and redirects passed; security score was `25/100` | Strategy should not hide behind technical excuses, but host/CDN hardening still matters | Treat routing and intent alignment as primary; escalate headers to host/CDN owner |
-| Unknown | PageSpeed status still unresolved | Google API rate-limited again | Could hide performance issues, but not confirmed | Retry later with available quota or add an API key |
-
-## Strategy Read
-
-Current strategy still needs conversion correction, not expansion.
-
-- Prior runs improved structure and homepage intent.
-- This run shows one feature download and one feature CTA click, but the overall App Store proxy weakened.
-- New guide publishing would still be low-signal.
-- Best move remains stronger homepage search-result alignment and above-fold routing into BezelAI, commercial feature pages, and the strongest starter guide.
+| Area | Severity | Confidence | Finding | Evidence | Fix |
+| --- | --- | --- | --- | --- | --- |
+| Conversion path | Warning | Confirmed | Homepage concentration is still too high for a site trying to drive installs. | GA4 7d mix: `home=52`, `features=2`, `guides=1`. | Add stronger above-fold routes from home into active commercial feature pages. |
+| Download proxy | Warning | Confirmed | Download proxy improved, but remains shallow. | `app_store_click=6`, `home_download_click=6`, `feature_download_click=1`, `guide_download_click=0`. | Push users into feature and guide paths before App Store handoff. |
+| Guide path | Warning | Confirmed | Guide discovery exists, but guide CTA and guide download signals are still zero. | `/guides/` has `1` page view; `guide_cta_click=0`, `guide_download_click=0`. | Add a top guide-hub CTA to the first screenshot guide. |
+| Homepage CTR | Warning | Confirmed | Search result opportunity is still homepage-only and CTR weakened. | `https://bezelstudio.app/` shows `53` impressions, `1` click, `1.89%` CTR, average position `7.4`. | Keep homepage copy aligned to `App Store Screenshot Maker`, `iPhone mockup generator`, and `BezelAI`. |
+| Measurement integrity | Pass | Confirmed | On-page audit remains clean after prior repairs. | `reports/seo/latest.md` shows `0 / 46` pages with issues. | Keep measurement repair closed unless new event gaps appear. |
+| Deep audit | Warning | Confirmed | Technical dashboard stayed at `72/100`. | `reports/seo/SEO-REPORT.html`; PageSpeed errored/rate-limited, security headers missing, internal-link script flagged shallow crawl issues. | Treat security as host/CDN work; keep internal-link cleanup secondary to conversion path. |
 
 ## Shipped Response
 
-- Homepage title, OG title, and Twitter title now include `BezelAI`.
-- Homepage meta, OG, and Twitter descriptions now mention BezelAI edits.
-- Hero quick links now include `/features/bezel-ai-shortcuts.html`.
-- Hero quick links now include `/guides/create-first-app-store-screenshot-project.html`.
-- Report and shared-state files were refreshed.
+- Added a prominent homepage hero route to `/features/bezel-ai-shortcuts.html`.
+- Added an above-fold guide-hub CTA to `/guides/create-first-app-store-screenshot-project.html`.
+- Corrected guide hub UI count from `25` to `27` live guides.
+- Refreshed `reports/seo/latest.md`, `reports/seo/2026-04-30.md`, `reports/seo/SEO-REPORT.html`, and manual handoff files.
 
-## Conclusion
+## Self-Review
 
-Latest work appears to help search-result alignment and routing, not downloads yet.
+Latest work appears to be helping download proxy at homepage level, but not deeper funnel depth yet.
 
-This run keeps the bias on conversion routing, not content expansion.
+Content expansion stays blocked. Next run should watch whether the new BezelAI hero route raises `feature_page_click` and whether the guide-hub first-guide CTA raises `guide_cta_click`.
 
-## Post-Audit Note
+App Store installs remain unavailable in automation, so `app_store_click` is only a proxy.
 
-- On 2026-04-16, the homepage title, OG title, and Twitter title were shortened in the local build, and preview validation cleared the only on-page issue the audit had flagged.
-- On 2026-04-18, the homepage CTA balance was reworked to push more visitors into the iPhone mockup feature before the App Store handoff.
-- On 2026-04-22, the live run still showed flat deeper-funnel events, so the strategy stayed conversion-first.
-- On 2026-04-24, `app_store_click` weakened but feature CTA/download events finally registered `1`; strategy stays conversion-first and avoids content expansion.
+## Artifacts
+
+- HTML dashboard: `reports/seo/SEO-REPORT.html`
+- Live metrics report: `reports/seo/latest.md`
+- Dated report: `reports/seo/2026-04-30.md`
+- Shared support-worker handoff: `reports/seo/manual-indexing-backlink-ledger.md` and `reports/seo/manual-indexing-backlink-state.json`
