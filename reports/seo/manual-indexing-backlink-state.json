@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-01",
+  "updated_at": "2026-05-06",
   "seo_operator_context": {
     "mode": "conversion_path_optimization",
     "support_operator_directive": "follow_up_only",
-    "reason": "App Store installs are unavailable, so app_store_click is only a proxy. It held at 6, but homepage still owns 50 of 52 tracked page views while feature_download_click, feature_cta_click, guide_download_click, and guide_cta_click are all 0.",
+    "reason": "App Store installs are unavailable, so app_store_click is only a proxy. It improved to 7 and feature_cta_click/feature_download_click recovered to 2 each, but guide_cta_click and guide_download_click remain 0.",
     "manual_queue_decision": "No new indexing or backlink queue this run. Follow up on existing submissions only.",
-    "latest_run_note": "2026-05-01 refresh after live GA4/GSC pull: app_store_click=6, home_download_click=7, feature_page_click=1, feature_cta_click=0, feature_download_click=0, guide_cta_click=0, guide_download_click=0. Shipped homepage title, Open Graph title, and Twitter title alignment to BezelAI App Store Screenshot Maker because bezel ai remains the active query leader and the homepage is the only meaningful impression page. Deep audit scored 80/100; PageSpeed failed in the audit environment. Keep follow_up_only and do not open a new manual queue."
+    "latest_run_note": "2026-05-06 refresh after live GA4/GSC pull: app_store_click=7, home_download_click=6, feature_page_click=4, feature_cta_click=2, feature_download_click=2, guide_cta_click=0, guide_download_click=0. Shipped early App Store and matching feature-page CTA rows on the three active guide pages with recent traffic: use-bezel-ai-to-refine-a-canvas, create-multi-device-promo-visuals, and review-app-store-screenshot-set-before-export. Deep audit scored 72/100; PageSpeed failed in the audit environment. Keep follow_up_only and do not open a new manual queue."
   },
   "gsc_context": {
     "source": "user report on 2026-04-15 plus prior screenshots",

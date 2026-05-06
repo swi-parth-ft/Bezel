@@ -40,6 +40,8 @@ Update 2026-04-30 (SEO operator run): primary mode stayed `conversion_path_optim
 
 Update 2026-05-01 (SEO operator run): primary mode stayed `conversion_path_optimization`. Live GA4/GSC refresh shows `app_store_click=6`, `home_download_click=7`, `feature_page_click=1`, `feature_cta_click=0`, `feature_download_click=0`, `guide_cta_click=0`, and `guide_download_click=0`; homepage still owns `50/52` tracked page views. This run updated the homepage title/social title to match the active `bezel ai` query signal. Manual queue stays unchanged. Keep `follow_up_only`; existing URL Inspection and submitted backlink outcomes still need confirmation before any new manual asks.
 
+Update 2026-05-06 (SEO operator run): primary mode stayed `conversion_path_optimization`. Live GA4/GSC refresh shows `app_store_click=7`, `home_download_click=6`, `feature_page_click=4`, `feature_cta_click=2`, `feature_download_click=2`, `guide_cta_click=0`, and `guide_download_click=0`; homepage now owns `23/33` tracked page views. This run added early App Store and matching feature-page CTA rows to the three guide pages with recent traffic: BezelAI refinement, multi-device promo visuals, and screenshot-set review. Manual queue stays unchanged. Keep `follow_up_only`; existing URL Inspection and submitted backlink outcomes still need confirmation before any new manual asks.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |

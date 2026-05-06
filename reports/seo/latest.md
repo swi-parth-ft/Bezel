@@ -1,46 +1,55 @@
 # SEO Operator Report
 
-Generated: 2026-05-01 10:49 UTC
+Generated: 2026-05-06 06:31 UTC
 
 ## Executive Summary
 
 - GA4 realtime active users: `0`
-- Top GA4 page in the last 7 days: `/` with `50` page views
-- Traffic mix (7d): `home=50`, `features=1`, `guides=1`, `other=0`
-- Search Console trending keyword leader: `bezel ai`
-- Download and CTA events (7d): `app_store_click=6`, `home_download_click=7`, `feature_download_click=0`, `guide_download_click=0`, `feature_page_click=1`, `feature_cta_click=0`, `guide_cta_click=0`
-- Conversion tracking watch: missing recent activity for `feature_download_click, guide_download_click, feature_cta_click, guide_cta_click`
+- Top GA4 page in the last 7 days: `/` with `23` page views
+- Traffic mix (7d): `home=23`, `features=6`, `guides=4`, `other=0`
+- Search Console trending keyword leader: `bezel studio`
+- Download and CTA events (7d): `app_store_click=7`, `home_download_click=6`, `feature_download_click=2`, `guide_download_click=0`, `feature_page_click=4`, `feature_cta_click=2`, `guide_cta_click=0`
+- Conversion tracking watch: missing recent activity for `guide_download_click, guide_cta_click`
 - Pages with on-page audit issues: `0` / `46`
 
 ## GA4 Top Pages (Last 7 Days)
 
 | Page | Page Views | Sessions | Users |
 | --- | ---: | ---: | ---: |
-| `/` | 50 | 31 | 25 |
-| `/features/device-frames.html` | 1 | 1 | 1 |
-| `/guides/` | 1 | 1 | 1 |
+| `/` | 23 | 25 | 21 |
+| `/features/device-frames.html` | 3 | 3 | 3 |
+| `/features/copy-paste-projects.html` | 1 | 1 | 1 |
+| `/features/projects-presets.html` | 1 | 1 | 1 |
+| `/features/translation.html` | 1 | 1 | 1 |
+| `/guides/create-iphone-mockup-variants-from-one-template.html` | 1 | 1 | 1 |
+| `/guides/create-multi-device-promo-visuals.html` | 1 | 1 | 1 |
+| `/guides/review-app-store-screenshot-set-before-export.html` | 1 | 1 | 1 |
+| `/guides/use-bezel-ai-to-refine-a-canvas.html` | 1 | 1 | 1 |
 
 ## Download And CTA Events (Last 7 Days)
 
 | Event | Count |
 | --- | ---: |
-| `home_download_click` | 7 |
-| `app_store_click` | 6 |
-| `feature_page_click` | 1 |
+| `app_store_click` | 7 |
+| `home_download_click` | 6 |
+| `feature_page_click` | 4 |
+| `feature_cta_click` | 2 |
+| `feature_download_click` | 2 |
 
 ## Trending Search Console Queries
 
 | Query | Clicks | Impressions | Click Change | Impression Change | Avg Position |
 | --- | ---: | ---: | --- | --- | ---: |
-| `bezel ai` | 0.00 | 2.00 | 0% | new | 28.0 |
 | `bezel studio` | 0.00 | 1.00 | 0% | new | 3.0 |
+| `iphone mockup generator` | 0.00 | 1.00 | 0% | new | 92.0 |
 | `mockup generator iphone` | 0.00 | 1.00 | 0% | new | 94.0 |
+| `bezel ai` | 0.00 | 1.00 | 0% | +0.0% | 10.0 |
 
 ## Search Opportunity Pages
 
 | Page | Clicks | Impressions | CTR | Avg Position |
 | --- | ---: | ---: | ---: | ---: |
-| `https://bezelstudio.app/` | 2.00 | 53.00 | 3.77% | 7.2 |
+| `https://bezelstudio.app/` | 3.00 | 67.00 | 4.48% | 7.2 |
 
 ## Keyword Hypotheses (Search Console Sparse)
 
@@ -102,30 +111,29 @@ Generated: 2026-05-01 10:49 UTC
 ## Next Actions
 
 - Improve title/description CTR for `https://bezelstudio.app/` first; it has the strongest impression opportunity.
-- Expand copy or internal links around `bezel ai` while momentum is rising.
+- Expand copy or internal links around `bezel studio` while momentum is rising.
 - Homepage traffic is still too concentrated; add or strengthen homepage links that move visitors into feature pages and step-by-step guides.
 - No guide CTA clicks were recorded in the last 7 days; strengthen the guide hub and homepage guide links with clearer entry copy.
-- Feature pages are being discovered but not producing download clicks; improve feature-page CTA placement, copy, and event wiring.
 
 ## Automation Context
 
 - Primary growth mode: `conversion_path_optimization`
-- Reason: App Store installs are unavailable in this environment, so `app_store_click` is only a proxy. The proxy held at `6`, but homepage still owns `50 / 52` tracked page views while `feature_download_click=0`, `feature_cta_click=0`, `guide_download_click=0`, and `guide_cta_click=0`.
+- Reason: App Store installs are unavailable in this environment, so `app_store_click` is only a proxy. The proxy improved from `6` to `7`, feature funnel health recovered (`feature_cta_click=2`, `feature_download_click=2`), and homepage share fell from `50 / 52` to `23 / 33`, but guide handoff remains dead with `guide_cta_click=0` and `guide_download_click=0`.
 - Support operator directive: `follow_up_only`
 - Install KPI note: App Store install data is unavailable here; `app_store_click` remains only a proxy for install intent.
-- Deep-audit status: ran because homepage concentration remains above 70 percent and feature/guide CTA events are zero. `reports/seo/SEO-REPORT.html` scored `80/100`; PageSpeed failed in the audit environment, while robots, social meta, redirects, `llms.txt`, broken links, internal links, entity, hreflang, duplicate-content, parse, readability, and article checks completed.
-- Stagnation status: not a 3-run total proxy decline because `app_store_click` improved from `2` on 2026-04-24 to `6` on 2026-04-30 and held at `6` today, but deeper funnel health regressed to zero. Content expansion stays blocked.
-- Strategy shift: stay conversion-first; the next bet is tighter SERP alignment for the homepage query that already has impressions, then watch whether more visitors enter BezelAI/device-frame feature paths before adding pages.
+- Deep-audit status: ran because guide CTA/download events stayed at zero. `reports/seo/SEO-REPORT.html` scored `72/100`; PageSpeed failed in the audit environment, while robots, social meta, redirects, `llms.txt`, broken links, internal links, entity, hreflang, duplicate-content, parse, readability, and article checks completed.
+- Stagnation status: not a 3-run proxy decline. Last completed snapshots moved from `app_store_click=3` on 2026-04-26 to `6` on 2026-05-01 and `7` today; deeper feature intent also recovered. Guide intent is still the active blocker, so content expansion remains blocked.
+- Strategy shift: stay conversion-first, but shift the conversion fix from homepage/feature routing to early guide-page handoff on the specific guides that received traffic this week.
 
 ## Changes Shipped
 
 | Change | Confidence | Download-proxy hypothesis |
 | --- | --- | --- |
-| Updated the homepage title, Open Graph title, and Twitter title to `BezelAI App Store Screenshot Maker | Bezel Studio`. | `medium` | The only meaningful Search Console opportunity page is the homepage, and the active query leader is `bezel ai`; tighter title alignment should improve qualified clicks into the existing homepage App Store and feature-path CTAs. |
+| Added early guide-page CTA rows to `/guides/create-multi-device-promo-visuals.html`, `/guides/review-app-store-screenshot-set-before-export.html`, and `/guides/use-bezel-ai-to-refine-a-canvas.html`. | `medium` | These three guides each received a visit in the last 7 days but guide download intent stayed `0`; moving App Store and matching feature-page CTAs above the step body should give guide visitors a visible conversion path before the related block. |
 
 ## Self-Review
 
-- Last 3 completed snapshots: 2026-04-24 had `app_store_click=2`, 2026-04-30 had `6`, and 2026-05-01 held at `6`.
-- Download proxy is no longer falling, but it is still mostly homepage intent: `home_download_click=7`, `feature_download_click=0`, and `guide_download_click=0`.
-- Latest work appears to help search-result alignment and download proxy quality, not proven downloads yet.
+- Last 3 completed snapshots: 2026-04-26 had `app_store_click=3`, 2026-05-01 had `6`, and 2026-05-06 has `7`.
+- Latest work appears to be helping download proxy and feature-path depth: `feature_page_click=4`, `feature_cta_click=2`, and `feature_download_click=2`.
+- Latest work is not helping guide downloads yet: `guide_cta_click=0` and `guide_download_click=0`, so this run fixed the guide pages with actual recent visits instead of publishing more content.
 - Source material for new content: no new page created; product docs were not needed beyond existing page truth.
