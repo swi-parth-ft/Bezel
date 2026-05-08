@@ -345,6 +345,25 @@ def event_rows(report: dict[str, Any]) -> list[dict[str, Any]]:
     return items
 
 
+def event_source_rows(report: dict[str, Any]) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    for row in report.get("rows", []):
+        dims = row.get("dimensionValues", [])
+        metrics = row.get("metricValues", [])
+        event_name = dims[0]["value"] if dims else ""
+        page_path = dims[1]["value"] if len(dims) > 1 else ""
+        items.append(
+            {
+                "eventName": event_name,
+                "pagePath": page_path,
+                "pageBucket": classify_page_bucket(page_path),
+                "eventCount": int(metrics[0]["value"]) if metrics else 0,
+            }
+        )
+    items.sort(key=lambda item: (item["eventName"], item["eventCount"]), reverse=True)
+    return items
+
+
 DOWNLOAD_TRACKING_EVENTS = [
     "app_store_click",
     "home_download_click",
@@ -518,6 +537,7 @@ def render_report(
     active_users: int,
     ga_pages: list[dict[str, Any]],
     ga_events: list[dict[str, Any]],
+    ga_event_sources: list[dict[str, Any]],
     trending_keywords: list[dict[str, Any]],
     page_opportunities: list[dict[str, Any]],
     page_audits: list[dict[str, Any]],
@@ -568,6 +588,23 @@ def render_report(
             lines.append(f"| `{item['eventName']}` | {item['eventCount']} |")
     else:
         lines.append("| _No tracked events yet_ | 0 |")
+
+    lines.extend(
+        [
+            "",
+            "## Download And CTA Event Sources (Last 7 Days)",
+            "",
+            "| Event | Source Page | Bucket | Count |",
+            "| --- | --- | --- | ---: |",
+        ]
+    )
+    if ga_event_sources:
+        for item in ga_event_sources[:25]:
+            lines.append(
+                f"| `{item['eventName']}` | `{item['pagePath']}` | `{item['pageBucket']}` | {item['eventCount']} |"
+            )
+    else:
+        lines.append("| _No tracked event-source rows yet_ | - | - | 0 |")
 
     lines.extend(
         [
@@ -703,6 +740,21 @@ def main() -> None:
             }
         },
     )
+    ga_event_source_report = fetch_ga_report(
+        client,
+        args.ga4_property_id,
+        start_date="7daysAgo",
+        end_date="today",
+        dimensions=["eventName", "pagePath"],
+        metrics=["eventCount"],
+        limit=50,
+        dimension_filter={
+            "filter": {
+                "fieldName": "eventName",
+                "inListFilter": {"values": DOWNLOAD_TRACKING_EVENTS},
+            }
+        },
+    )
 
     current_queries = fetch_search_console(
         client,
@@ -741,6 +793,7 @@ def main() -> None:
         active_users=active_users,
         ga_pages=ga_pages,
         ga_events=ga_events,
+        ga_event_sources=event_source_rows(ga_event_source_report),
         trending_keywords=trending_keywords,
         page_opportunities=build_page_opportunities(current_pages),
         page_audits=page_audits,

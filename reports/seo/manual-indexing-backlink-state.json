@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-06",
+  "updated_at": "2026-05-08",
   "seo_operator_context": {
-    "mode": "conversion_path_optimization",
+    "mode": "measurement_repair",
     "support_operator_directive": "follow_up_only",
-    "reason": "App Store installs are unavailable, so app_store_click is only a proxy. It improved to 7 and feature_cta_click/feature_download_click recovered to 2 each, but guide_cta_click and guide_download_click remain 0.",
+    "reason": "App Store installs are unavailable, so app_store_click is only a proxy. It fell to 5 while feature_cta_click and feature_download_click improved to 3 each, but guide_cta_click and guide_download_click remain 0. This run repaired reporting by adding event-source rows.",
     "manual_queue_decision": "No new indexing or backlink queue this run. Follow up on existing submissions only.",
-    "latest_run_note": "2026-05-06 refresh after live GA4/GSC pull: app_store_click=7, home_download_click=6, feature_page_click=4, feature_cta_click=2, feature_download_click=2, guide_cta_click=0, guide_download_click=0. Shipped early App Store and matching feature-page CTA rows on the three active guide pages with recent traffic: use-bezel-ai-to-refine-a-canvas, create-multi-device-promo-visuals, and review-app-store-screenshot-set-before-export. Deep audit scored 72/100; PageSpeed failed in the audit environment. Keep follow_up_only and do not open a new manual queue."
+    "latest_run_note": "2026-05-08 refresh after live GA4/GSC pull: app_store_click=5, home_download_click=2, feature_page_click=5, feature_cta_click=3, feature_download_click=3, guide_cta_click=0, guide_download_click=0. Added source-page reporting for download and CTA events; current App Store clicks are from /features/device-frames.html (3) and / (2), with no guide-originated App Store clicks. Deep audit scored 80/100; PageSpeed failed in the audit environment. Keep follow_up_only and do not open a new manual queue."
   },
   "gsc_context": {
     "source": "user report on 2026-04-15 plus prior screenshots",
@@ -27,7 +27,7 @@
       "last_crawled": "N/A",
       "manual_action": "indexing_requested",
       "date_requested": "2026-04-15",
-      "next_action": "Wait 3-7 days, then check indexed status and last crawled in GSC.",
+      "next_action": "Recheck now; the 2026-04-15 request window has expired. Record indexed status, current reason, and last crawled date.",
       "notes": "Hub connects all guides; submit first. URL Inspection request submitted by user on 2026-04-15."
     },
     {
@@ -38,8 +38,8 @@
       "last_crawled": "N/A",
       "manual_action": "indexing_requested",
       "date_requested": "2026-04-15",
-      "next_action": "Wait 3-7 days, then check indexed status and last crawled in GSC.",
-      "notes": "iPhone mockup generator intent. URL Inspection request submitted by user on 2026-04-15."
+      "next_action": "Recheck now; the 2026-04-15 request window has expired. Record indexed status, current reason, and last crawled date.",
+      "notes": "iPhone mockup generator intent and current strongest App Store click source. URL Inspection request submitted by user on 2026-04-15."
     },
     {
       "url": "https://bezelstudio.app/features/projects-presets.html",
@@ -49,7 +49,7 @@
       "last_crawled": "unknown",
       "manual_action": "indexing_requested",
       "date_requested": "2026-04-15",
-      "next_action": "Wait 3-7 days, then check indexed status and last crawled in GSC.",
+      "next_action": "Recheck now; the 2026-04-15 request window has expired. Record indexed status, current reason, and last crawled date.",
       "notes": "App screenshot templates intent. URL Inspection request submitted by user on 2026-04-15."
     },
     {
@@ -60,7 +60,7 @@
       "last_crawled": "N/A",
       "manual_action": "indexing_requested",
       "date_requested": "2026-04-15",
-      "next_action": "Wait 3-7 days, then check indexed status and last crawled in GSC.",
+      "next_action": "Recheck now; the 2026-04-15 request window has expired. Record indexed status, current reason, and last crawled date.",
       "notes": "Localization workflow intent. URL Inspection request submitted by user on 2026-04-15."
     },
     {
@@ -71,7 +71,7 @@
       "last_crawled": "unknown",
       "manual_action": "indexing_requested",
       "date_requested": "2026-04-15",
-      "next_action": "Wait 3-7 days, then check indexed status and last crawled in GSC.",
+      "next_action": "Recheck now; the 2026-04-15 request window has expired. Record indexed status, current reason, and last crawled date.",
       "notes": "App preview video intent. URL Inspection request submitted by user on 2026-04-15."
     },
     {
@@ -82,7 +82,7 @@
       "last_crawled": "unknown",
       "manual_action": "indexing_requested",
       "date_requested": "2026-04-15",
-      "next_action": "Wait 3-7 days, then check indexed status and last crawled in GSC.",
+      "next_action": "Recheck now; the 2026-04-15 request window has expired. Record indexed status, current reason, and last crawled date.",
       "notes": "Export/download-adjacent intent. URL Inspection request submitted by user on 2026-04-15."
     },
     {
@@ -93,7 +93,7 @@
       "last_crawled": "unknown",
       "manual_action": "indexing_requested",
       "date_requested": "2026-04-15",
-      "next_action": "Wait 3-7 days, then check indexed status and last crawled in GSC.",
+      "next_action": "Recheck now; the 2026-04-15 request window has expired. Record indexed status, current reason, and last crawled date.",
       "notes": "Reusable layout intent; supports new release-QA cluster. URL Inspection request submitted by user on 2026-04-15."
     }
   ],

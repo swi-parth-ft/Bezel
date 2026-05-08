@@ -42,17 +42,19 @@ Update 2026-05-01 (SEO operator run): primary mode stayed `conversion_path_optim
 
 Update 2026-05-06 (SEO operator run): primary mode stayed `conversion_path_optimization`. Live GA4/GSC refresh shows `app_store_click=7`, `home_download_click=6`, `feature_page_click=4`, `feature_cta_click=2`, `feature_download_click=2`, `guide_cta_click=0`, and `guide_download_click=0`; homepage now owns `23/33` tracked page views. This run added early App Store and matching feature-page CTA rows to the three guide pages with recent traffic: BezelAI refinement, multi-device promo visuals, and screenshot-set review. Manual queue stays unchanged. Keep `follow_up_only`; existing URL Inspection and submitted backlink outcomes still need confirmation before any new manual asks.
 
+Update 2026-05-08 (SEO operator run): primary mode switched to `measurement_repair`. Live GA4/GSC refresh shows `app_store_click=5`, `home_download_click=2`, `feature_page_click=5`, `feature_cta_click=3`, `feature_download_click=3`, `guide_cta_click=0`, and `guide_download_click=0`; homepage owns `19/31` tracked page views. This run added event-source reporting and confirmed current App Store clicks are from `/features/device-frames.html` (`3`) and `/` (`2`), with no guide-originated App Store clicks. Manual queue stays unchanged. Keep `follow_up_only`; the 2026-04-15 URL Inspection and backlink submissions need outcome follow-up, not new requests.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `https://bezelstudio.app/guides/` | Guide hub | Discovered, not indexed | N/A | Indexing requested | 2026-04-15 | Wait 3-7 days, then recheck status | Hub connects all guides; submit first. |
-| 2 | `https://bezelstudio.app/features/device-frames.html` | Commercial feature | Discovered, not indexed | N/A | Indexing requested | 2026-04-15 | Wait 3-7 days, then recheck status | iPhone mockup generator intent. |
-| 3 | `https://bezelstudio.app/features/projects-presets.html` | Commercial feature | Unknown / likely discovered | Unknown | Indexing requested | 2026-04-15 | Wait 3-7 days, then recheck status | App screenshot templates intent. |
-| 4 | `https://bezelstudio.app/features/translation.html` | Commercial feature | Discovered, not indexed | N/A | Indexing requested | 2026-04-15 | Wait 3-7 days, then recheck status | Localization workflow intent. |
-| 5 | `https://bezelstudio.app/features/canvas-motion.html` | Commercial feature | Unknown / likely discovered | Unknown | Indexing requested | 2026-04-15 | Wait 3-7 days, then recheck status | App preview video intent. |
-| 6 | `https://bezelstudio.app/features/export-share.html` | Commercial feature | Unknown / likely discovered | Unknown | Indexing requested | 2026-04-15 | Wait 3-7 days, then recheck status | Export/download-adjacent intent. |
-| 7 | `https://bezelstudio.app/features/copy-paste-projects.html` | Commercial feature | Unknown / likely discovered | Unknown | Indexing requested | 2026-04-15 | Wait 3-7 days, then recheck status | Reusable layout intent; supports new release-QA cluster. |
+| 1 | `https://bezelstudio.app/guides/` | Guide hub | Discovered, not indexed | N/A | Indexing requested | 2026-04-15 | Recheck now; record current status and last crawled | Hub connects all guides; submit first. |
+| 2 | `https://bezelstudio.app/features/device-frames.html` | Commercial feature | Discovered, not indexed | N/A | Indexing requested | 2026-04-15 | Recheck now; record current status and last crawled | iPhone mockup generator intent; current strongest App Store click source. |
+| 3 | `https://bezelstudio.app/features/projects-presets.html` | Commercial feature | Unknown / likely discovered | Unknown | Indexing requested | 2026-04-15 | Recheck now; record current status and last crawled | App screenshot templates intent. |
+| 4 | `https://bezelstudio.app/features/translation.html` | Commercial feature | Discovered, not indexed | N/A | Indexing requested | 2026-04-15 | Recheck now; record current status and last crawled | Localization workflow intent. |
+| 5 | `https://bezelstudio.app/features/canvas-motion.html` | Commercial feature | Unknown / likely discovered | Unknown | Indexing requested | 2026-04-15 | Recheck now; record current status and last crawled | App preview video intent. |
+| 6 | `https://bezelstudio.app/features/export-share.html` | Commercial feature | Unknown / likely discovered | Unknown | Indexing requested | 2026-04-15 | Recheck now; record current status and last crawled | Export/download-adjacent intent. |
+| 7 | `https://bezelstudio.app/features/copy-paste-projects.html` | Commercial feature | Unknown / likely discovered | Unknown | Indexing requested | 2026-04-15 | Recheck now; record current status and last crawled | Reusable layout intent; supports new release-QA cluster. |
 | 8 | `https://bezelstudio.app/guides/reuse-layouts-across-projects.html` | Guide | New | Unknown | Not requested | - | Request after feature pages | New release-QA parent path. |
 | 9 | `https://bezelstudio.app/guides/review-app-store-screenshot-set-before-export.html` | Guide | New | Unknown | Not requested | - | Request after feature pages | Strong release-QA intent. |
 
