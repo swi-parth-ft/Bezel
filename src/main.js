@@ -90,18 +90,175 @@ document.addEventListener('DOMContentLoaded', () => {
   revealTargets.forEach((el) => observer.observe(el));
 
   // 3. Shared device family default
-  const getDefaultDeviceFamily = () => (
-    window.matchMedia('(max-width: 767px)').matches ? 'iphone' : 'ipad'
+  const getDefaultDeviceFamily = () => {
+    if (window.matchMedia('(max-width: 767px)').matches) return 'iphone';
+    if (window.matchMedia('(max-width: 1279px)').matches) return 'ipad';
+    return 'mac';
+  };
+
+  const getSupportedDeviceFamily = (image, buttons = [], preferred = getDefaultDeviceFamily()) => {
+    const supportedByButtons = buttons
+      .map((button) => button.dataset.powerMediaDevice || button.dataset.showcaseCardDevice || button.dataset.powerDeviceTrigger)
+      .filter(Boolean);
+    const fallbackOrder = {
+      iphone: ['iphone', 'ipad', 'mac'],
+      ipad: ['ipad', 'iphone', 'mac'],
+      mac: ['mac', 'ipad', 'iphone'],
+    };
+
+    return (fallbackOrder[preferred] || fallbackOrder.iphone).find((device) => {
+      const hasButton = !supportedByButtons.length || supportedByButtons.includes(device);
+      const hasImage = !image || Boolean(image.dataset[`${device}Src`]);
+      return hasButton && hasImage;
+    }) || 'iphone';
+  };
+
+  const swapDeviceImage = (image, nextSrc, animated = true) => {
+    if (!image || !nextSrc || image.getAttribute('src') === nextSrc) return;
+
+    if (!animated || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      image.setAttribute('src', nextSrc);
+      return;
+    }
+
+    window.clearTimeout(Number(image.dataset.swapTimer || 0));
+    image.classList.add('is-switching');
+
+    const timer = window.setTimeout(() => {
+      image.setAttribute('src', nextSrc);
+      image.addEventListener('load', () => image.classList.remove('is-switching'), { once: true });
+
+      window.setTimeout(() => {
+        image.classList.remove('is-switching');
+      }, 180);
+    }, 150);
+
+    image.dataset.swapTimer = String(timer);
+  };
+
+  // 4. Mobile feature-card carousel
+  const featuresViewport = document.querySelector('#features-viewport');
+  const featureCards = Array.from(document.querySelectorAll('#features-track > .feature-card'));
+  const featurePrevButton = document.querySelector('[data-feature-nav="prev"]');
+  const featureNextButton = document.querySelector('[data-feature-nav="next"]');
+  const featureDotButtons = Array.from(document.querySelectorAll('[data-feature-dot]'));
+  const isMobileFeatureCarousel = () => window.matchMedia('(max-width: 767px)').matches;
+  let featureVisibleIndex = 0;
+  let featureScrollFrame = null;
+
+  const clampFeatureIndex = (index) => (
+    Math.max(0, Math.min(featureCards.length - 1, index))
   );
 
-  // 4. Swipeable power-features logic
+  const syncFeatureControls = (index) => {
+    const clampedIndex = clampFeatureIndex(index);
+    featureVisibleIndex = clampedIndex;
+
+    featureDotButtons.forEach((button, buttonIndex) => {
+      const isActive = buttonIndex === clampedIndex;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-selected', String(isActive));
+      button.setAttribute('tabindex', isActive ? '0' : '-1');
+    });
+
+    if (featurePrevButton) {
+      featurePrevButton.disabled = clampedIndex === 0;
+    }
+
+    if (featureNextButton) {
+      featureNextButton.disabled = clampedIndex === featureCards.length - 1;
+    }
+  };
+
+  const getClosestFeatureIndex = () => {
+    if (!featuresViewport || !featureCards.length) return 0;
+
+    const viewportRect = featuresViewport.getBoundingClientRect();
+    const viewportCenter = viewportRect.left + (viewportRect.width / 2);
+    return featureCards.reduce((closestIndex, card, index) => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + (cardRect.width / 2);
+      const closestCardRect = featureCards[closestIndex].getBoundingClientRect();
+      const closestCenter = closestCardRect.left + (closestCardRect.width / 2);
+      return Math.abs(cardCenter - viewportCenter) < Math.abs(closestCenter - viewportCenter)
+        ? index
+        : closestIndex;
+    }, 0);
+  };
+
+  const queueFeatureControlSync = () => {
+    if (featureScrollFrame) return;
+    featureScrollFrame = window.requestAnimationFrame(() => {
+      featureScrollFrame = null;
+      if (!isMobileFeatureCarousel()) return;
+      syncFeatureControls(getClosestFeatureIndex());
+    });
+  };
+
+  const scrollFeatureCardIntoView = (index) => {
+    if (!featuresViewport || !featureCards.length) return;
+
+    const clampedIndex = clampFeatureIndex(index);
+    const targetCard = featureCards[clampedIndex];
+    const targetLeft = targetCard.offsetLeft - ((featuresViewport.clientWidth - targetCard.offsetWidth) / 2);
+
+    featuresViewport.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: 'smooth',
+    });
+    syncFeatureControls(clampedIndex);
+  };
+
+  if (featuresViewport && featureCards.length) {
+    syncFeatureControls(0);
+    featuresViewport.addEventListener('scroll', queueFeatureControlSync, { passive: true });
+    window.addEventListener('resize', queueFeatureControlSync);
+    window.addEventListener('load', queueFeatureControlSync);
+  }
+
+  if (featurePrevButton) {
+    featurePrevButton.addEventListener('click', () => {
+      scrollFeatureCardIntoView(featureVisibleIndex - 1);
+    });
+  }
+
+  if (featureNextButton) {
+    featureNextButton.addEventListener('click', () => {
+      scrollFeatureCardIntoView(featureVisibleIndex + 1);
+    });
+  }
+
+  if (featureDotButtons.length) {
+    featureDotButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        scrollFeatureCardIntoView(index);
+        button.focus();
+      });
+    });
+  }
+
+  // 5. Swipeable power-features logic
   const powerFeaturesViewport = document.querySelector('#power-features-viewport');
-  const powerFeatureSlides = Array.from(document.querySelectorAll('[data-power-slide]'));
+  const getPowerFeatureSlides = () => (
+    isMobilePowerFeatures()
+      ? [
+        ...document.querySelectorAll('[data-power-slide]:not(.power-feature--text-grid)'),
+        ...document.querySelectorAll('[data-power-mobile-slide]'),
+      ]
+      : Array.from(document.querySelectorAll('[data-power-slide]'))
+  );
   const powerPrevButton = document.querySelector('[data-power-nav="prev"]');
   const powerNextButton = document.querySelector('[data-power-nav="next"]');
-  const powerDotButtons = Array.from(document.querySelectorAll('[data-power-dot]'));
+  const allPowerDotButtons = Array.from(document.querySelectorAll('[data-power-dot]'));
   const isMobilePowerFeatures = () => window.matchMedia('(max-width: 767px)').matches;
+  const getPowerDotButtons = () => (
+    isMobilePowerFeatures()
+      ? allPowerDotButtons
+      : allPowerDotButtons.filter((button) => !button.hasAttribute('data-power-mobile-only'))
+  );
   const easeOutCubic = (value) => 1 - Math.pow(1 - value, 3);
+  let powerFeatureSlides = [];
+  let powerDotButtons = [];
   let powerAnimationFrame = null;
   let powerSwipeDragState = null;
   let powerSuppressClick = false;
@@ -114,6 +271,11 @@ document.addEventListener('DOMContentLoaded', () => {
     lastEventTime: 0,
     isLocked: false,
     resetTimer: null,
+  };
+
+  const refreshPowerCollections = () => {
+    powerFeatureSlides = getPowerFeatureSlides();
+    powerDotButtons = getPowerDotButtons();
   };
 
   const resetPowerWheelGesture = () => {
@@ -279,6 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderPowerFeatures = () => {
     powerAnimationFrame = null;
 
+    refreshPowerCollections();
     if (!powerFeaturesViewport || !powerFeatureSlides.length) return;
 
     if (isMobilePowerFeatures()) {
@@ -298,6 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const animatePowerSlideTo = (nextIndex) => {
+    refreshPowerCollections();
     if (!powerFeatureSlides.length) return;
 
     const clampedIndex = clampPowerSlideIndex(nextIndex);
@@ -357,6 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const goToPowerSlide = (index) => {
+    refreshPowerCollections();
     const clampedIndex = clampPowerSlideIndex(index);
 
     if (isMobilePowerFeatures()) {
@@ -366,6 +531,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     animatePowerSlideTo(clampedIndex);
   };
+
+  refreshPowerCollections();
 
   if (powerFeaturesViewport && powerFeatureSlides.length) {
     queuePowerFeaturesSwipeRender();
@@ -502,8 +669,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (powerDotButtons.length) {
-    powerDotButtons.forEach((button, index) => {
+  if (allPowerDotButtons.length) {
+    allPowerDotButtons.forEach((button, index) => {
       button.addEventListener('click', () => {
         goToPowerSlide(index);
         button.focus();
@@ -533,10 +700,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     powerImages.forEach((image) => {
-      const nextSrc = image.dataset[device === 'ipad' ? 'ipadSrc' : 'iphoneSrc'];
-      if (nextSrc && image.getAttribute('src') !== nextSrc) {
-        image.setAttribute('src', nextSrc);
-      }
+      const nextSrc = image.dataset[`${device}Src`] || image.dataset.ipadSrc || image.dataset.iphoneSrc;
+      swapDeviceImage(image, nextSrc);
     });
 
     powerMediaFrames.forEach((frame) => {
@@ -578,145 +743,72 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Sticky horizontal showcase logic
-  const showcaseSpacer = document.querySelector('#showcase-height');
-  const showcaseConfigs = {
-    iphone: {
-      container: document.querySelector('#showcase-carousel'),
-      reverse: false,
-    },
-    ipad: {
-      container: document.querySelector('#showcase-ipad-carousel'),
-      reverse: true,
-    },
-  };
-  let activeShowcaseDevice = 'iphone';
-  const isMobileShowcase = () => window.matchMedia('(max-width: 767px)').matches;
+  const setPowerMediaDevice = (slide, device) => {
+    const image = slide.querySelector('[data-power-image]');
+    const media = slide.querySelector('[data-power-media]');
+    const buttons = Array.from(slide.querySelectorAll('[data-power-media-device]'));
+    const nextSrc = image?.dataset[`${device}Src`];
 
-  const setShowcasePosition = (device, progress) => {
-    const config = showcaseConfigs[device];
-    if (!config?.container) return;
+    if (!image || !nextSrc) return;
 
-    const maxScroll = Math.max(0, config.container.scrollWidth - config.container.clientWidth);
-    config.container.scrollLeft = config.reverse
-      ? (1 - progress) * maxScroll
-      : progress * maxScroll;
-  };
+    swapDeviceImage(image, nextSrc);
 
-  const updateShowcaseSpacerHeight = () => {
-    if (!showcaseSpacer) return;
+    media.classList.toggle('is-ipad', device !== 'iphone');
 
-    if (isMobileShowcase()) {
-      showcaseSpacer.style.height = 'auto';
-      return;
-    }
-
-    const activeConfig = showcaseConfigs[activeShowcaseDevice];
-    if (!activeConfig?.container) return;
-
-    const maxScroll = Math.max(0, activeConfig.container.scrollWidth - activeConfig.container.clientWidth);
-    const minimumScreens = 3.5;
-    const targetHeight = Math.max(
-      window.innerHeight * minimumScreens,
-      maxScroll + window.innerHeight
-    );
-
-    showcaseSpacer.style.height = `${Math.ceil(targetHeight)}px`;
-  };
-
-  const syncActiveShowcaseScroll = () => {
-    if (!showcaseSpacer) return;
-
-    if (isMobileShowcase()) {
-      Object.keys(showcaseConfigs).forEach((device) => {
-        setShowcasePosition(device, 0);
-      });
-      return;
-    }
-
-    const spacerRect = showcaseSpacer.getBoundingClientRect();
-    const start = spacerRect.top + window.scrollY;
-    const end = spacerRect.bottom + window.scrollY - window.innerHeight;
-    const current = window.scrollY;
-    const range = Math.max(1, end - start);
-    let progress = (current - start) / range;
-    progress = Math.max(0, Math.min(1, progress));
-
-    Object.keys(showcaseConfigs).forEach((device) => {
-      if (device === activeShowcaseDevice) {
-        setShowcasePosition(device, progress);
-        return;
-      }
-
-      setShowcasePosition(device, 0);
-    });
-  };
-
-  window.addEventListener('scroll', syncActiveShowcaseScroll, { passive: true });
-  window.addEventListener('resize', () => {
-    updateShowcaseSpacerHeight();
-    syncActiveShowcaseScroll();
-  });
-
-  // 8. Device segmented toggle for the showcase gallery
-  const toggle = document.querySelector('[data-showcase-toggle]');
-  const toggleButtons = Array.from(document.querySelectorAll('[data-device-trigger]'));
-  const showcasePanels = Array.from(document.querySelectorAll('[data-showcase-panel]'));
-  const showcaseCopies = Array.from(document.querySelectorAll('[data-showcase-copy]'));
-  const getDefaultShowcaseDevice = () => getDefaultDeviceFamily();
-
-  const setActiveShowcase = (device) => {
-    if (!toggle) return;
-
-    activeShowcaseDevice = device;
-    toggle.dataset.activeDevice = device;
-    toggle.style.setProperty('--toggle-index', device === 'ipad' ? '1' : '0');
-
-    toggleButtons.forEach((button) => {
-      const isActive = button.dataset.deviceTrigger === device;
+    buttons.forEach((button) => {
+      const isActive = button.dataset.powerMediaDevice === device;
       button.classList.toggle('is-active', isActive);
-      button.setAttribute('aria-selected', String(isActive));
-      button.setAttribute('tabindex', isActive ? '0' : '-1');
+      button.setAttribute('aria-pressed', String(isActive));
     });
-
-    showcasePanels.forEach((panel) => {
-      const isActive = panel.dataset.showcasePanel === device;
-      panel.classList.toggle('is-active', isActive);
-      panel.setAttribute('aria-hidden', String(!isActive));
-    });
-
-    showcaseCopies.forEach((copy) => {
-      copy.classList.toggle('is-active', copy.dataset.showcaseCopy === device);
-    });
-
-    updateShowcaseSpacerHeight();
-    syncActiveShowcaseScroll();
   };
 
-  if (toggle && toggleButtons.length) {
-    setActiveShowcase(getDefaultShowcaseDevice());
+  document.querySelectorAll('[data-power-slide]').forEach((slide) => {
+    const buttons = Array.from(slide.querySelectorAll('[data-power-media-device]'));
+    if (!buttons.length) return;
 
-    toggleButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        setActiveShowcase(button.dataset.deviceTrigger);
+    setPowerMediaDevice(slide, getSupportedDeviceFamily(slide.querySelector('[data-power-image]'), buttons));
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        setPowerMediaDevice(slide, button.dataset.powerMediaDevice);
         button.focus();
       });
     });
+  });
 
-    toggle.addEventListener('keydown', (event) => {
-      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+  // 6. Per-card showcase device switching
+  const showcaseCards = Array.from(document.querySelectorAll('[data-showcase-card]'));
 
-      event.preventDefault();
-      const currentIndex = toggleButtons.findIndex((button) => button.classList.contains('is-active'));
-      const nextIndex = event.key === 'ArrowRight'
-        ? (currentIndex + 1) % toggleButtons.length
-        : (currentIndex - 1 + toggleButtons.length) % toggleButtons.length;
+  const setShowcaseCardDevice = (card, device) => {
+    const image = card.querySelector('[data-showcase-image]');
+    const media = card.querySelector('.showcase-card__media');
+    const buttons = Array.from(card.querySelectorAll('[data-showcase-card-device]'));
+    const nextSrc = image?.dataset[`${device}Src`];
 
-      const nextButton = toggleButtons[nextIndex];
-      setActiveShowcase(nextButton.dataset.deviceTrigger);
-      nextButton.focus();
+    if (!image || !nextSrc) return;
+
+    swapDeviceImage(image, nextSrc);
+    media?.classList.toggle('is-ipad', device === 'ipad');
+
+    buttons.forEach((button) => {
+      const isActive = button.dataset.showcaseCardDevice === device;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
     });
-  }
+  };
+
+  showcaseCards.forEach((card) => {
+    const initialDevice = getSupportedDeviceFamily(card.querySelector('[data-showcase-image]'), Array.from(card.querySelectorAll('[data-showcase-card-device]')));
+    setShowcaseCardDevice(card, initialDevice);
+
+    card.querySelectorAll('[data-showcase-card-device]').forEach((button) => {
+      button.addEventListener('click', () => {
+        setShowcaseCardDevice(card, button.dataset.showcaseCardDevice);
+        button.focus();
+      });
+    });
+  });
 
   // 9. GA4 tracking for App Store CTA clicks
   const trackEvent = (name, params = {}) => {

@@ -1,883 +1,473 @@
 # Bezel Studio Master Guide
 
-This document is intended to be the highest-context reference for Bezel Studio. It combines:
+Last updated: 2026-05-20
 
-- Product behavior described by the app creator
-- Source-backed implementation context from [BZLS_APP_TECHNICAL_REPORT.md](/Users/parthantala/Code/Swift/Websites/BezelStudio/BZLS_APP_TECHNICAL_REPORT.md)
-- Existing image-story mapping from [assets_description.md](/Users/parthantala/Code/Swift/Websites/BezelStudio/iPhoneWebAssests/assets_description.md)
+This is the website-side master product reference for Bezel Studio. It is meant to guide the upcoming homepage redesign, App Store copy, screenshots, feature pages, and implementation planning.
 
-Where useful, this guide distinguishes between:
+This pass uses the app source in `/Users/parthantala/Code/Swift/Bzls` as the source of truth, not the older Markdown files. The app code now proves a larger product surface than the previous docs described.
 
-- Product intent: what the app is meant to do
-- Current code-backed implementation: what is visible in the checked-in source today
+## Current Product Definition
 
-## Overview
+Bezel Studio is a native Apple-platform creative studio for building App Store screenshots, device mockups, localized screenshot sets, marketing visuals, and motion previews on iPhone, iPad, and native Mac.
 
-Bezel Studio is a native Apple-platform creative tool for building App Store screenshots, device mockups, marketing visuals, and motion previews directly on iPhone, iPad, and Mac. It is designed to let users go from raw screenshots or recordings to polished promotional assets without leaving the Apple ecosystem.
+The product is no longer just an iPhone/iPad mockup editor with a placeholder Mac target. The checked-in source now shows:
 
-The app supports static and animated compositions, full project-based canvas management, rich typography, advanced background styling, blurred photo backgrounds, Apple device frames, frame reflections, clean status bar cleanup for supported screenshots and recordings, stickers, image editing, PencilKit drawing, improved on-device translation, `.bezel` project import/export, AI-assisted editing, iCloud sync, and high-quality export.
+- A full iOS/iPadOS SwiftUI editor.
+- A native Mac app with project gallery, canvas editor, inspector, export, localization, `.bezel` import/export, iCloud-backed project persistence, Quick Mockups, RevenueCat premium state, and Codex MCP automation.
+- A separate Mac Quick Mockups helper/login item for menu bar drag-and-drop rendering.
+- A Live Activity widget target for export progress.
+- A large 2D device-frame catalog plus a current 3D USDZ frame catalog across iPhone, iPad, Mac, Studio Display, iMac, and Apple Watch.
+- Same-project localization sets for screenshot text, not just one-off text translation.
 
-At its core, Bezel Studio is not just a screenshot wrapper. It is a full canvas editor tailored for app marketing.
+In plain language: Bezel Studio is a serious native mockup and screenshot production workspace for people shipping Apple-platform apps.
 
-## Current Code-Backed Platform Picture
+## Platform Picture
 
-The current source in `/Users/parthantala/Code/Swift/Bzls` shows:
+The current Xcode project contains these app targets:
 
-- A full iPhone and iPad editor implemented in SwiftUI
-- A SwiftData + CloudKit project store for the main app
-- A separate local-only SwiftData store for quick mockup presets
-- RevenueCat-based premium gating
-- Apple Translation integration
-- `.bezel` project archive import/export support
-- Image Playground integration
-- A Gemini-backed BezelAI pipeline
-- Clean status bar normalization for supported framed screenshots and videos
-- Adjustable frame reflections with blur, opacity, fade, and surface shadow controls
-- Frame touch cues for callouts inside device mockups
-- Background export support with live activity updates
+- `Bezel Studio`: iPhone/iPad app.
+- `Bezel Studio Mac`: native macOS app.
+- `Bezel Studio Quick Mockups Helper`: macOS helper/login item for the menu bar Quick Mockups dropper.
+- `BzlsExportLiveActivity`: export progress Live Activity widget.
 
-Important implementation note:
+Important platform truth for marketing and website work:
 
-- The iOS and iPadOS app is the full production surface in this repo
-- A separate `BzlsMac` target exists, but the checked-in macOS view currently appears minimal or placeholder rather than full editor parity
-
-So the product story is multi-device, but the current repository most clearly proves a full iPhone/iPad experience, with Mac-related continuity and environment support present in parts of the codebase.
+- iPhone and iPad remain the primary touch-first editor surfaces.
+- Mac is now a real native product surface, not a placeholder. It has its own SwiftUI workspace, sidebar, inspector, project store, export pipeline, localization flow, Quick Mockups support, and MCP server.
+- Some capabilities are platform-specific. AR preview belongs to iOS/iPadOS code. The Mac MCP docs explicitly avoid advertising iOS-only AR actions or custom clean status bar text.
+- "Localization" in the current code means localizing project canvas text inside a Bezel project. It is not evidence that the app interface itself is fully localized.
 
 ## Product Positioning
 
-Bezel Studio should be understood as:
+Bezel Studio should be positioned as:
 
-- An App Store screenshot maker
-- A multi-device mockup studio
-- A motion design tool for App Store preview visuals
-- A project-based creative workspace for Apple platform marketing
-- A native, on-device editor that works across iPhone, iPad, and Mac
-- A reusable project workflow that can package full projects as `.bezel` files
+- An App Store screenshot maker.
+- A realistic Apple device mockup studio.
+- A native Mac, iPad, and iPhone creative workflow.
+- A multi-canvas project workspace for launch assets.
+- A screenshot localization tool.
+- A motion and video export tool for preview visuals and social assets.
+- A fast automation tool through Quick Mockups, Shortcuts, Visual Intelligence, and Codex MCP.
 
-Its core value is speed without sacrificing control. Users can generate fast mockups through presets and shortcuts, or build highly custom compositions with deep editing controls.
-
-## Core User Model
-
-The product structure is:
-
-- A user creates a `Project`
-- A project contains one or more `Canvases`
-- Each canvas contains multiple editable `Items`
-- Items can be reordered using layers and animated independently
-
-This makes Bezel Studio suitable for both:
-
-- Quick one-off screenshot generation
-- Large multi-screen marketing campaigns with many assets in one project
+The strongest value proposition is speed with control. Users can generate quick mockups from presets, or build detailed multi-canvas campaigns with precise frames, typography, backgrounds, 3D device scenes, localization, motion, and export settings.
 
 ## Source-Backed Runtime Architecture
 
-At runtime, the checked-in app follows this high-level structure:
-
-```text
-App launch
-  -> `BzlsApp`
-     -> prepare background export support
-     -> configure RevenueCat
-     -> create SwiftData container for `ProjectRecord` + `ProjectAssetRecord`
-     -> inject `PresetStore`
-     -> gate onboarding, tips, paywall, and BezelAI intro
-     -> open `ProjectsRootView`
-
-Projects root
-  -> load encoded `Project` payloads from SwiftData
-  -> hydrate project models into memory
-  -> show project gallery / search / sort / settings / export / translation
-  -> navigate into `ProjectEditorView`
-
-Project editor
-  -> select current canvas
-  -> open `ContentView`
-  -> allow canvas switching, add-canvas flow, save/discard behavior
-
-Canvas editor
-  -> mutate `CanvasState`
-  -> render frames, text, images, drawing, backgrounds, lighting, motion
-  -> run translation / AI / export / quick actions
-  -> persist project payload back to SwiftData
-  -> persist frame-video binaries separately through `ProjectAssetRecord`
-```
-
-This matters because the app is not modeled as many tiny documents. It is modeled as an encoded `Project` payload with nested canvas state, while heavier media like frame videos can be stored separately.
-
-## Core Technical Model
-
-The current model hierarchy in code is:
+The main app architecture is project-first:
 
 ```text
 Project
-  -> [CanvasState]
-     -> [FrameOverlay]
-     -> [TextOverlay]
-     -> [ImageOverlay]
-     -> [CanvasLayerID]
-     -> CanvasAnimationTrack
+  -> canvases
+     -> frame overlays
+     -> text overlays
+     -> image overlays
+     -> layer order
+     -> canvas motion
+     -> background, pattern, lighting, sizing
+  -> optional localization state
+     -> localized canvas sets
+  -> encoded into SwiftData project record
+  -> linked media stored in separate asset records
 ```
 
-Key implementation details:
+The important runtime split is:
 
-- `Project` is encoded into `ProjectRecord.payload`
-- `CanvasState` owns background, sizing, overlays, lighting, and canvas-wide animation
-- Explicit z-order is stored as `CanvasLayerID` instead of being inferred from separate arrays
-- Frame videos are persisted separately through `ProjectAssetRecord`
-- Quick mockups are stored outside the main CloudKit-backed project store
+- Main projects use `ProjectRecord` and `ProjectAssetRecord` with SwiftData and CloudKit.
+- Frame videos and heavier assets are stored separately from the encoded project payload.
+- Quick Mockup presets use separate storage, because they are reusable automation templates rather than normal CloudKit project documents.
+- `.bezel` archives package a project plus linked assets for import/export.
 
-This structure is a major reason the app can support copy/paste, multi-canvas projects, motion, export, and AI edits within a single consistent model.
+Core files:
 
-## Main App Flow
+- [BzlsApp.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/BzlsApp.swift): iOS/iPadOS app entry, RevenueCat setup, CloudKit SwiftData container, onboarding, tips, import handling, export credit setup, MCP startup.
+- [ProjectsRootView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectsRootView.swift): iOS/iPadOS project gallery, persistence, project import/export, Quick Mockup entry, project opening.
+- [ProjectEditorView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectEditorView.swift): iOS/iPadOS project-to-canvas bridge and same-project localization host.
+- [ContentView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ContentView.swift): main iOS/iPadOS canvas editor and export orchestrator.
+- [CanvasModels.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasModels.swift): core project, canvas, background, motion, and localization models.
+- [FrameTemplate.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/FrameTemplate.swift): 2D and 3D frame catalog.
+- [BzlsMac/App/BezelStudioMacApp.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/App/BezelStudioMacApp.swift): native Mac app entry.
+- [BzlsMac/Views/MacContentView.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Views/MacContentView.swift): native Mac main workspace shell.
+- [BzlsMac/Views/MacEditorView.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Views/MacEditorView.swift): native Mac artboard editor.
+- [BzlsMac/Stores/MacProjectStore.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Stores/MacProjectStore.swift): native Mac project state, persistence, export, translation, undo/redo, and editing actions.
+- [CODEX_MCP.md](/Users/parthantala/Code/Swift/Bzls/CODEX_MCP.md): current local MCP feature contract.
 
-When a user opens the app, they can create a new project. The project creation flow is one of the most important parts of the experience because it sets up the foundation for all later editing.
+## Main Workflows
 
-### New Project Creation
+### 1. Multi-Canvas Projects
 
-When the user taps `Create Project`, they can configure the following:
+Users create a project, choose a frame, canvas size, background, pattern, and lighting, then build one or more canvases inside that project.
 
-#### 1. Default Frame
+Supported project workflows include:
 
-The user can choose the default Apple device frame that should be added first. This helps the project start with the right device context immediately.
+- Create, rename, duplicate, delete, search, sort, and open projects.
+- Manage many canvases in one campaign.
+- Duplicate, reorder, and navigate canvases.
+- Copy/paste individual layers or complete canvases.
+- Save reusable canvas sizes and style decisions.
+- Sync main projects through iCloud.
+- Import/export complete `.bezel` project files.
 
-Examples:
+This is the correct website story: Bezel Studio is not a one-image wrapper. It is a project workspace for a complete screenshot or campaign set.
 
-- iPhone frame
-- iPad frame
-- Mac frame
-- Apple Watch frame
+### 2. Canvas Editing
 
-#### 2. Canvas Size
+Each canvas supports:
 
-The user can define canvas size in multiple ways:
+- Apple device frames.
+- Screenshots and videos inside frames.
+- Text overlays.
+- Image overlays.
+- Stickers and generated sticker-like assets.
+- Drawing/PencilKit on iOS/iPadOS.
+- Backgrounds, patterns, emoji backgrounds, transparent backgrounds, and blurred photo backgrounds.
+- Lighting effects.
+- Explicit layer ordering.
+- Gesture transforms and rotation.
+- Canvas motion and per-layer animation tracks.
 
-- From presets
-- From aspect ratio
-- From exact pixel dimensions
+The product should feel like a focused creative editor for app marketing, not a generic design app.
 
-The user can also save custom ratios or custom pixel sizes as presets for future use. This is important for repeatable production workflows and team consistency.
+### 3. Device Frames
 
-#### 3. Background System
+The frame system is now one of the strongest product pillars.
 
-The user can choose the default project background, and this can also be changed later. The background system is rich and highly customizable.
+Current source-backed frame capabilities:
 
-Supported background types include:
+- Large 2D frame catalog covering iPhone, iPad, MacBook, iMac, Apple Watch, Apple TV, and modern Apple hardware families.
+- 3D USDZ frame catalog under the top-level `3D Frames` group.
+- Screenshots or videos placed inside frames.
+- Clean Status Bar treatment for supported frame media.
+- Frame touch cues for interaction callouts.
+- Frame shadows.
+- Floor reflections with blur, opacity, fade, and surface shadow controls.
+- Emphasis callouts.
+- 3D look controls for screen texture, device orientation, lighting, material, scale, offset, and export rendering.
 
-- Preset themes
-- Transparent background
-- Solid color
-- Gradient background
-- Emoji patterns
-- Pattern overlays
-- Photo backgrounds with blur control
+The current 3D catalog includes 33 app-bundled realistic USDZ templates:
 
-Background customization includes:
+- iPhone Air: Cloud White, Light Gold, Sky Blue, Space Black.
+- iPhone 17 Pro: Cosmic Orange, Deep Blue, Silver.
+- iPhone 17 Pro Max: Cosmic Orange, Deep Blue, Silver.
+- iPhone 17: Black, Lavender, Mist Blue, Sage, White.
+- iPhone 17e: Black, Soft Pink, White.
+- iPad Air M3: Blue with Magic Keyboard, Blue with Apple Pencil, Blue with Apple Pencil Portrait.
+- iPad A16: Blue portrait and landscape.
+- iPad mini: Purple with Pencil Pro portrait and landscape.
+- Mac: MacBook Air 13 Sky Blue, MacBook Neo Citrus, MacBook Pro 14 Space Black, iMac 24 Blue with Keyboard and Mouse, Studio Display Standard Glass with Tilt Stand, Studio Display XDR with Tilt Stand.
+- Apple Watch: Series 11 Rose Gold with Sport Band Light Blush, Ultra 3 Natural with Ocean Band Green.
 
-- Custom gradient direction
-- Custom colors
-- Emoji choice
-- Emoji size
-- Emoji spacing
-- Pattern color
-- Pattern opacity
-- Pattern animation
-- Pattern movement
-- Pattern color animation
+Website wording should use "realistic 3D Apple-device frames" or "official-style 3D device frames" unless there is separate legal confirmation to call them official Apple assets.
 
-#### 4. Lighting
+### 4. Clean Status Bar
 
-Users can apply lighting effects during project creation and also modify them later. Lighting helps give device frames and compositions more depth and polish.
+Clean Status Bar replaces messy captured status bars in supported framed screenshots and recordings with a clean Apple-style status bar treatment.
 
-### Important Behavior
+This is not only a preview filter. The frame overlay stores the clean status bar state, and export paths preserve it across supported still and video rendering.
 
-Everything configured during project creation remains editable later. The initial setup is not destructive or permanent. Users can revisit and modify frames, canvas size, background, lighting, and styling after the project is created.
+Good public wording:
 
-## How Features Connect
+- Clean up captured status bars.
+- Make raw screenshots and recordings presentation-ready.
+- Keep frame exports consistent with the editor preview.
 
-One of the most important things to understand about Bezel Studio is that its features are not isolated tools. They are connected through shared canvas state, shared rendering, and shared export logic.
+### 5. Reflections, Touch Cues, and Emphasis
 
-Examples of how systems connect:
+The app supports more than placing screenshots inside a bezel:
 
-- Project creation sets the initial `CanvasState`, which later powers editing, motion, export, quick mockups, and AI operations.
-- Backgrounds, patterns, emoji systems, and lighting are part of the same canvas model that is used for both live preview and export rendering.
-- Text, image, and frame items all participate in the same `layerOrder`, so manual editing, AI edits, copy/paste, and export share the same depth model.
-- Motion is stored in persisted animation tracks, so it is not just a preview effect. The same motion data is consumed during video export.
-- Quick Mockup presets are effectively stored `CanvasState` snapshots, which means the quick automation path reuses the full canvas model rather than a separate template language.
-- Translation works on text overlays already inside the canvas model, so translated output remains part of the same editable composition.
-- `.bezel` project archives package the same project model plus linked assets, so import/export reuses the existing canvas and asset structure rather than inventing a separate interchange format.
-- BezelAI acts on structured canvas actions, which means AI edits plug into the same underlying frame, text, image, background, layer, and motion systems used by the manual editor.
-- Clean status bar state belongs to frame media, so screenshot preview, video preview, still export, and video export all need to preserve the same visual treatment.
-- Export uses the same compositing vocabulary as the live canvas, which helps keep preview and final output aligned.
+- Frame reflections create mirrored depth under device mockups.
+- Touch cues show taps or interactions inside framed media.
+- Emphasis areas create callouts/highlights for parts of the framed screen.
+- Shadows and lighting make scenes feel more dimensional.
 
-## Project Structure
+These belong in the website because they explain polish, not just feature count.
 
-A single project can contain many canvases. This is essential because App Store presentation rarely involves just one image. A project is intended to hold an entire asset set.
+### 6. Backgrounds and Visual Style
 
-Examples of what a project may include:
+The background system supports:
 
-- Multiple App Store screenshots for a listing
-- Alternative language versions
-- Multiple device-specific layouts
-- Motion preview variants
-- Campaign variations with different backgrounds or copy
+- Preset themes.
+- Custom gradients.
+- Transparent backgrounds.
+- Photo backgrounds with blur.
+- Emoji backgrounds.
+- Pattern overlays.
+- Pattern animation and movement.
+- Lighting effects.
 
-This project-based model lets users manage a complete visual campaign inside one workspace rather than splitting assets across separate files.
+The code includes broad pattern and lighting vocabularies. Current patterns include waves, topo, starfield, constellation, confetti, lattice, chevrons, checkerboard, bricks, grids, dots, circuit, weave, and more. Current lighting effects include soft spot, top glow, beams, studio light, slatted light, window bars, vignettes, side light, bottom glow, ring vignette, clouds, dappled light, edge glow, curtain rays, and more.
 
-## Canvas System
+The website should show this as "deep native styling" rather than dumping every effect name.
 
-Each project contains canvases, and each canvas is an independent composition surface.
+### 7. Text, Images, Stickers, and Drawing
 
-Inside a canvas, the user can build layered visuals using frames, text, stickers, drawings, images, videos, and more.
+Text overlays support:
 
-### Grid Mode
+- Rich font choices and custom bundled font families.
+- Weight, alignment, fill, gradient, stroke, shadow, and glass styling.
+- Motion tracks.
 
-Users can switch to `Grid Mode` to see all canvases in the current project in a grid layout.
+Image overlays support:
 
-This is useful for:
+- Import.
+- Transform and rotation.
+- Background removal.
+- Sticker-style output with borders.
+- Generated sticker assets through Image Playground.
 
-- Managing many canvases at once
-- Reviewing consistency across a campaign
-- Duplicating or reorganizing work
-- Navigating quickly between screens
+Drawing is available in the iOS/iPadOS editor through PencilKit-style workflows.
 
-Grid mode turns the project into a broader management workspace rather than a single-canvas editor.
+### 8. Motion and Video
 
-## Canvas Elements and Editing
+Motion is persisted in the canvas model. It is not only an editor preview.
 
-Inside each canvas, the user can add and manipulate many kinds of content.
+The app supports:
 
-### 1. Frames
+- Canvas-level animation.
+- Per-frame, per-text, and per-image animation tracks.
+- Keyframes for position, scale, rotation, opacity, and timing.
+- Embedded frame videos.
+- Video export when a canvas has motion or video content.
+- Background export progress and Live Activity updates.
 
-Users can add additional Apple device frames to the canvas at any time. A single canvas can contain one frame or many frames.
+This makes Bezel Studio useful for App Store preview visuals, social launch assets, and motion-driven product announcements.
 
-Supported use cases include:
+### 9. Same-Project Localizations
 
-- Single-device mockups
-- Multi-device ecosystem scenes
-- Side-by-side comparisons
-- Watch, phone, tablet, and desktop combinations
+The old docs under-described localization. Current code has actual project localization sets.
 
-Frames can contain either:
+The source model includes `ProjectLocalizationState` and `ProjectLocalizationSet`. Each localization set stores:
 
-- Images
-- Videos
+- Language ID.
+- Localized canvases.
+- Selected canvas index or ID.
+- Source text hashes by overlay ID.
+- Created/updated timestamps.
 
-This means users can build both static graphics and animated preview compositions.
+Current iOS/iPadOS and Mac flows support:
 
-#### Clean Status Bar
+- Original project view.
+- Add localization.
+- Select a localization.
+- Update translation.
+- Update all localizations.
+- Copy base layout to one localization.
+- Copy base layout to all localizations.
+- Set a localization as default.
+- Delete localization.
+- Export using the active localization selection.
 
-Supported frame media can use `Clean Status Bar` to replace messy captured status bar content in screenshots and screen recordings with a clean Apple-style 9:41 status bar treatment. This helps raw app captures look ready for App Store screenshots, device mockups, and motion previews without requiring separate image or video cleanup outside Bezel Studio.
+Current language menu coverage includes English, Spanish, French, German, Italian, Japanese, Korean, Portuguese, Chinese, Russian, Hindi, and Arabic. The app uses Apple Translation and NaturalLanguage to detect source language, resolve supported target languages, translate text overlays, and keep localized output editable.
 
-Clean status bar state is part of the frame overlay, so it must be honored consistently in live preview, still export, video export, and `.bezel` project archive flows.
+Correct website story: Bezel Studio helps users keep localized screenshot variants inside the same project without rebuilding the layout from scratch.
 
-#### Frame Reflections
+### 10. Native Mac App
 
-Supported frame media can use floor-style reflections to make device mockups feel more dimensional. The reflection is generated from the frame content, mirrored below the device, and controlled with blur, top opacity, fade distance, and a subtle surface shadow.
+The Mac app is now a real native editor surface.
 
-Frame reflection state is stored on the frame overlay, so it travels with the project model, export renderers, video renderers, and `.bezel` archive import/export.
+Source-backed Mac capabilities include:
 
-#### Frame Touch Cues
+- Native `BezelStudioMacApp` entry with main window, Quick Mockup window, and Settings scene.
+- `NavigationSplitView` project workspace with sidebar, canvas sidebar, artboard editor, and inspector.
+- Native Mac project store with CloudKit-backed project records and project assets.
+- Project create, duplicate, rename, delete, import, export, and reload from CloudKit.
+- Canvas creation, duplication, selection, layer editing, and undo/redo.
+- Frame catalog browser with 2D and 3D templates.
+- Mac inspector controls for canvas, background, frame, text, and image layers.
+- Localization and translation using the same Apple Translation direction as iOS/iPadOS.
+- Export current canvas or all canvases with export-credit checks.
+- Video export using a GPU-first Metal/Core Image path with Core Graphics fallback.
+- `.bezel` archive bridge between the shared archive format and native Mac models.
+- Codex MCP server and builder for creating/updating/rendering/exporting Mac projects through local automation.
 
-Frame overlays can include touch cues. These cues help explain taps, gestures, and interaction moments inside framed screenshots or recordings without leaving the canvas system.
+The website homepage can now confidently mention a native Mac app. It should still avoid saying every iOS-only feature exists on Mac unless the specific code path proves it.
 
-### 2. Text
+### 11. Quick Mockups
 
-Text is a major part of the product and is fully customizable.
+Quick Mockups are a fast automation surface built on reusable canvas presets.
 
-Text customization includes:
+iOS/iPadOS:
 
-- Font selection
-- Solid color fills
-- Gradient text fills
-- Custom gradient direction
-- Shadows
-- Borders
-- Glass effect behind text
+- Quick Mockup presets are stored separately from normal projects.
+- App Intents and Siri Shortcuts can accept image or movie input.
+- The intent renders the selected preset and can save or return an output file.
+- Visual Intelligence integration can produce mockup candidates from semantic content on supported systems.
 
-This allows users to create headline-driven App Store creatives, feature callouts, captions, and premium marketing layouts directly inside the app.
+Mac:
 
-### 3. Stickers, Badges, and Decorative Assets
+- Native Quick Mockup window exists in the Mac app.
+- A separate Quick Mockups Helper app runs as an accessory/login item.
+- The helper owns the menu bar dropper.
+- Users can drop image or video files, choose presets, render outputs, and choose output folders.
+- The helper can request paywall or settings actions from the main app.
 
-Users can add:
+This is a meaningful homepage feature because it turns Bezel Studio from an editor into a repeatable production shortcut.
 
-- Pre-added stickers
-- Pre-added badges
-- Decorative assets
+### 12. Codex MCP Automation
 
-These help call out features, add visual emphasis, and build more expressive marketing compositions.
+Bezel Studio now exposes a local MCP server for Codex control on both iOS/iPadOS and native Mac.
 
-### 4. Images
+Current endpoint:
 
-Users can add images into the canvas and use them in several ways.
+- `http://127.0.0.1:29471/mcp`
+- Streamable HTTP JSON-RPC over `POST /mcp`.
+- Bearer-token protected.
+- Loopback-only.
+- Only one running Bezel app can bind the port at a time.
 
-Image-related capabilities include:
+Current MCP tools include:
 
-- Importing images into a canvas
-- Saving imported images in-app for reuse later
-- Removing image backgrounds
-- Adding sticker-style borders
-- Turning images into sticker-like elements
+- `app_status`
+- `list_projects`
+- `canvas_capabilities`
+- `create_canvas_project`
+- `update_canvas_project`
+- `render_canvas_previews`
+- `export_project_screenshots`
+- `new_project`
+- `open_project`
+- `quick_mockup`
+- `show_settings`
 
-This makes the app useful not only for screenshot framing but also for flexible visual storytelling.
+This is mostly an advanced/internal/pro-facing story. It may fit the website as "local automation" or "Codex-ready workflows", but it should not overwhelm the main consumer homepage.
 
-### 5. AI Sticker Generation with Image Playground
+### 13. Export, Credits, and Rendering
 
-Users can generate new sticker assets using Image Playground. This expands the available visual library beyond built-in resources and lets users create custom assets on demand.
+The app has a real export system:
 
-### 6. Drawing with PencilKit
+- Still image export.
+- Video export.
+- Current canvas or all canvases.
+- Photos, files, and share-sheet oriented output.
+- Export-credit gating.
+- Background export continuation on iOS/iPadOS.
+- Live Activity progress via `BzlsExportLiveActivity`.
+- Mac GPU-first video export with fallback.
+- Clean Status Bar, reflections, 3D frames, lighting, backgrounds, and motion included in render paths where supported.
 
-Users can draw directly inside the canvas using PencilKit and access a full set of drawing tools and colors.
+Current export messaging should emphasize publish-ready stills and videos, not just "save image".
 
-This enables:
+## Website Redesign Implications
 
-- Hand-drawn annotations
-- Highlighting UI details
-- Freeform sketches
-- Organic callouts
+The homepage should now lead with the current product:
 
-Drawing is part of the composition system, not a separate disconnected tool.
+1. Native App Store screenshot and mockup studio for iPhone, iPad, and Mac.
+2. Realistic 3D Apple-device frames and multi-device scenes.
+3. Same-project localizations for screenshot sets.
+4. Full multi-canvas projects with iCloud and `.bezel` handoff.
+5. Motion/video export, Clean Status Bar, reflections, touch cues, and polish controls.
+6. Quick Mockups and automation for repeated outputs.
 
-### 7. Layers
+The previous website story likely underweights:
 
-Users can rearrange every element on the canvas using layers to control what appears in front of or behind other elements.
+- Native Mac.
+- 3D realistic device frames.
+- Localization sets.
+- Quick Mockups helper.
+- MCP/local automation.
+- Export depth.
 
-This includes managing depth for:
+The new homepage should avoid becoming a generic feature grid. The first screen should show the product output: a polished Apple-device screenshot campaign, ideally with realistic 3D frames and a hint of Mac/iPad/iPhone continuity.
 
-- Frames
-- Text
-- Images
-- Stickers
-- Drawings
-- Decorative items
+## Recommended Information Architecture
 
-Layer control is critical for precision layout and professional composition building.
+Use this structure as the working product map for website content:
 
-## Transform and Gesture System
+### A. Create
 
-Users can directly manipulate canvas items using touch and gesture controls.
+- Start a project.
+- Pick canvas size and frame.
+- Choose backgrounds, patterns, lighting, and device templates.
 
-Supported interactions include:
+### B. Compose
 
-- Drag
-- Pinch
-- Rotate
+- Add frames, screenshots, recordings, text, images, stickers, badges, and drawing.
+- Arrange layers.
+- Apply Clean Status Bar, reflections, touch cues, and emphasis.
+- Use 2D or 3D frames.
 
-Users can also rotate items in all three axes, enabling more dynamic and spatial compositions.
+### C. Localize
 
-This makes the editor feel tactile and expressive rather than limited to flat 2D placement.
+- Add localized versions inside the same project.
+- Translate text overlays.
+- Copy base layouts across languages.
+- Export selected language variants.
 
-## Motion Editing
+### D. Animate
 
-Bezel Studio includes a dedicated motion workflow through `Canvas Motion`.
+- Add Canvas Motion.
+- Animate layers with keyframes.
+- Export stills or videos.
 
-When the user opens motion editing, they can add keyframe animations to items individually. This allows them to build polished, animated marketing visuals and App Store preview content.
+### E. Automate
 
-### Motion Capabilities
+- Use Quick Mockups.
+- Use Shortcuts and App Intents.
+- Use Visual Intelligence where available.
+- Use local Codex MCP for advanced workflows.
 
-Users can animate:
+### F. Continue
 
-- Visibility with show and hide behavior
-- Position
-- Rotation
-- Scale or size
+- Sync projects through iCloud.
+- Use native iPhone, iPad, and Mac surfaces.
+- Import/export `.bezel` projects.
 
-Animations can be different between keyframes, allowing expressive transitions and more professional motion output.
+## Current Feature Inventory
 
-This is intended for creating beautiful visuals and dynamic previews, not just static screenshots.
+Use this as the short checklist for content planning:
 
-## Translation
+- Native iPhone editor.
+- Native iPad editor.
+- Native Mac editor.
+- Mac menu bar Quick Mockups helper.
+- Multi-canvas projects.
+- iCloud project sync.
+- `.bezel` import/export.
+- 2D Apple device frames.
+- 33 realistic 3D USDZ device frames.
+- AR preview for 3D frames on iOS/iPadOS.
+- Screenshots and videos inside frames.
+- Clean Status Bar.
+- Frame reflections.
+- Touch cues.
+- Emphasis/callout areas.
+- Shadows and lighting.
+- Custom backgrounds, photo blur, emoji, patterns, and transparent backgrounds.
+- Rich typography.
+- Image import, background removal, stickers, and Image Playground assets.
+- Drawing/PencilKit on iOS/iPadOS.
+- Layers, copy/paste, undo/redo.
+- Canvas Motion and layer animation.
+- Still export.
+- Video export.
+- Background export and Live Activity progress.
+- Export credits and RevenueCat premium gating.
+- Same-project localization sets.
+- Apple Translation/NaturalLanguage-backed translation.
+- Quick Mockups through Shortcuts/App Intents.
+- Visual Intelligence mockup path where available.
+- Local Codex MCP automation.
 
-Bezel Studio includes an on-device translation feature powered by Apple Translate and designed to work fully offline.
+## Public Messaging Guardrails
 
-Users can:
+- Do say native iPhone, iPad, and Mac app.
+- Do say realistic 3D device frames.
+- Do say localize screenshot sets inside a project.
+- Do say import/export `.bezel` projects.
+- Do say Quick Mockups and Shortcuts automation.
+- Do say AI-assisted editing only when framed as structured canvas editing.
+- Do not imply the app uploads to App Store Connect.
+- Do not imply every AI feature is offline.
+- Do not imply all features are available on every Apple platform.
+- Do not call the app UI localized unless app-interface localization files are separately verified.
+- Do not call the 3D frames "official Apple assets" in public copy unless licensing/legal confirmation exists.
 
-- Translate text in a single canvas
-- Translate all canvases in a project
+## Source Basis
 
-This is valuable for localization workflows, especially when generating App Store assets for multiple languages and regions.
+This guide is based on current code and docs in:
 
-Because the translation is offline and on-device, it aligns with the native Apple-first nature of the product.
+- `/Users/parthantala/Code/Swift/Bzls`
+- [BZLS_APP_TECHNICAL_REPORT.md](/Users/parthantala/Code/Swift/Websites/BezelStudio/BZLS_APP_TECHNICAL_REPORT.md)
+- [APP_STORE_CONNECT_CONTEXT.md](/Users/parthantala/Code/Swift/Websites/BezelStudio/APP_STORE_CONNECT_CONTEXT.md)
+- [assets_description.md](/Users/parthantala/Code/Swift/Websites/BezelStudio/iPhoneWebAssests/assets_description.md)
 
-The current release direction also includes improved translation handling around this same workflow, so localization messaging can stay stronger than a one-off experiment.
-
-Current code-backed note:
-
-- The app uses Apple translation APIs plus language detection
-- It supports translating the current canvas or all canvases in a project
-- The implementation batches text entries, translates them together, then maps them back into the correct overlays
-
-## Copy, Paste, and Cross-Project Reuse
-
-Users can copy and paste:
-
-- Individual items
-- Entire canvases
-
-Copy and paste works across projects, making it easy to reuse layouts, scenes, text treatments, and components without rebuilding them from scratch.
-
-This is a key productivity feature for teams or creators producing large volumes of related assets.
-
-## Undo and Redo
-
-Undo and redo are supported throughout the product.
-
-This is important because the app supports:
-
-- Deep visual editing
-- Layer management
-- Gesture-based transforms
-- Animation editing
-- Background styling
-- AI-assisted changes
-
-Reliable undo and redo are essential to make experimentation safe.
-
-## Media Support
-
-Frames can contain either images or videos.
-
-This means Bezel Studio supports:
-
-- Static App Store screenshots
-- Motion-based preview assets
-- Clean status bar cleanup for supported screenshots and recordings inside frames
-- Frame reflections for supported device mockups
-- Frame touch cues for interaction callouts
-- Hybrid creative workflows where stills and video are both part of a campaign
-
-The product is not limited to static screen placement.
-
-## Project Import and Export
-
-The current source now includes a project archive system for moving full projects in and out of the app as `.bezel` files.
-
-Users can:
-
-- Export a complete project as a `.bezel` file.
-- Import a `.bezel` file back into the gallery.
-- Preserve linked project assets, including frame-video assets, through the archive flow.
-
-Internally, `ProjectArchive.swift` defines the archive format, `ProjectsRootView.swift` creates and loads archive payloads, `ProjectImportCoordinator.swift` queues incoming imports, and `Info.plist` registers the custom document type.
-
-## BezelAI
-
-BezelAI is an AI-powered editing mode that can be turned on for any canvas.
-
-When enabled, the user can describe what they want to create, add, modify, or animate using natural language. The system then performs the requested changes.
-
-Examples of requests include:
-
-- Add a new visual element
-- Redesign the canvas
-- Change the layout
-- Add or modify animations
-- Adjust visual styling
-
-BezelAI is meant to reduce manual effort and make advanced editing accessible through intent rather than only through controls.
-
-Current code-backed note:
-
-- The AI path is structured, not freeform
-- The editor builds a `CanvasAIContext`
-- The prompt is sent through a Gemini client
-- The response is parsed into typed edit actions such as adding/updating text, frames, images, background, lighting, canvas size, and motion
-- Those actions are then applied directly to the live canvas model
-
-## iCloud Sync
-
-Everything syncs through iCloud so users can work on their projects from anywhere across:
-
-- iPhone
-- iPad
-- Mac
-
-This continuity is a major part of the product story. A user can begin on one device and continue on another without losing context.
-
-Typical workflow:
-
-- Start a project on iPhone
-- Refine layout on iPad
-- Continue on Mac or return later on another device
-
-Current code-backed note:
-
-- Main projects are stored in SwiftData with CloudKit enabled
-- Quick Mockup presets are stored in a separate local-only SwiftData store with CloudKit disabled
-
-## Export and Render Quality
-
-Bezel Studio is designed to render high-quality output suitable for shipping and publishing.
-
-Output goals include:
-
-- High-resolution image export
-- High-quality video export
-- Professional results suitable for App Store listings and marketing
-
-Rendering quality is part of the product promise, especially for creators producing customer-facing promotional assets.
-
-Current code-backed note:
-
-- Still export and video export share the same canvas compositing concepts
-- The app can switch to a video render path when canvas motion or frame video is present
-- Clean status bar rendering is preserved for supported frame screenshots and frame videos during export
-- Background exports can continue with background-task and live-activity support
-- Transparent export and layered lighting/pattern rendering are part of the export architecture
-
-## Quick Mockup Feature
-
-In addition to full project editing, Bezel Studio includes a `Quick Mockup` workflow designed to work with Shortcuts.
-
-This is a fast, automation-oriented path for users who need mockups instantly without opening a full editing session.
-
-### Quick Mockup Workflow
-
-Users can create predefined quick mockups that contain a single frame. These act like reusable templates.
-
-Then, through Shortcuts, users can:
-
-- Take a screenshot on device
-- Trigger a shortcut
-- See a list of available quick mockups
-- Choose one
-- Automatically generate the mockup
-- Save the final result to Photos
-
-Users can also:
-
-- Share a photo into the workflow
-- Generate a mockup from the shared image
-
-This makes Bezel Studio useful for automation-heavy creators, marketers, and rapid publishing workflows.
-
-Current code-backed note:
-
-- Quick Mockups are backed by a stored `CanvasState`
-- Siri Shortcuts/App Intents can accept either an image or a movie
-- The intent renders the preset canvas, optionally saves the output to Photos, and returns the generated file
-- The quick-mockup store includes migration logic from older storage formats
-
-## Hidden and Supporting Features
-
-The checked-in code also reveals several less-obvious capabilities that are important context even if they are not always front-and-center in marketing:
-
-- `.bezel` project archives can package the encoded project plus linked assets for import/export
-- Keyboard commands exist for save/share, canvas navigation, insert actions, undo/redo, grid toggle, layers, and preview toggle
-- Frame videos are stored separately from the main project payload to avoid forcing all media into one giant serialized blob
-- The app has explicit support for background export continuation and live activity progress reporting
-- Image insertion is optimized with downsampling and separate display/source handling to reduce memory pressure
-- Background removal can check whether an image even has a removable subject before attempting a cutout
-- Sticker generation includes border creation and preset save/unsave flows
-- The frame system includes more than phones: watch, iPad, iPhone, MacBook, iMac, and Apple TV templates are present in the frame catalog
-- iPad receives specialized floating-panel workflows and a broader workspace treatment
-- Voice-driven AI editing is platform-gated and uses newer speech-analysis APIs rather than only a basic speech-to-text flow
-
-## Technical Pseudocode Summary
-
-Below is the most useful high-level pseudocode view of the app as a whole:
-
-```text
-create_project()
-  canvas = CanvasState.newDefault()
-  canvas.apply(default_frame)
-  canvas.apply(canvas_size_choice)
-  canvas.apply(background_choice)
-  canvas.apply(pattern_choice)
-  canvas.apply(lighting_choice)
-  project = Project(name, canvases: [canvas])
-  persist(project)
-
-edit_canvas(project, canvas_index)
-  canvas = project.canvases[canvas_index]
-  while editor_open:
-    if user_adds_text:
-      canvas.textOverlays.append(new_text_overlay)
-      canvas.layerOrder.insert(.text(id))
-    if user_adds_image:
-      canvas.imageOverlays.append(new_image_overlay)
-      canvas.layerOrder.insert(.image(id))
-    if user_adds_frame:
-      canvas.frameOverlays.append(new_frame_overlay)
-      canvas.layerOrder.insert(.frame(id))
-    if user_reorders_layers:
-      mutate(canvas.layerOrder)
-    if user_animates_item:
-      mutate(item.animationTrack)
-    if user_animates_canvas:
-      mutate(canvas.canvasAnimation)
-    if user_uses_translation:
-      translate(text_overlays_for_scope)
-    if user_uses_ai:
-      context = build_canvas_ai_context(canvas)
-      plan = generate_edit_plan(context, prompt)
-      apply(plan, to: canvas)
-    persist(project)
-
-export(project, scope)
-  for canvas in selected_canvases:
-    if canvas_has_video_or_motion:
-      render_video(canvas)
-    else:
-      render_still(canvas)
-  save_or_share(output)
-```
-
-## Important Files for Deep Understanding
-
-These are the files that matter most if someone needs to rebuild the app’s mental model quickly:
-
-- [BzlsApp.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/BzlsApp.swift)
-- [ProjectsRootView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectsRootView.swift)
-- [ProjectEditorView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectEditorView.swift)
-- [ContentView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ContentView.swift)
-- [CanvasModels.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasModels.swift)
-- [ProjectPersistence.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectPersistence.swift)
-- [ProjectArchive.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectArchive.swift)
-- [ProjectAssetRecord.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectAssetRecord.swift)
-- [ProjectImportCoordinator.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectImportCoordinator.swift)
-- [FrameTouchCue.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/FrameTouchCue.swift)
-- [Utils/DynamicIslandStatusBarNormalizer.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/Utils/DynamicIslandStatusBarNormalizer.swift)
-- [CanvasAIAssistant.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasAIAssistant.swift)
-- [GeminiLiveClient.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/GeminiLiveClient.swift)
-- [QuickMockupDefaults.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/QuickMockupDefaults.swift)
-- [ShortcutMockupIntent.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ShortcutMockupIntent.swift)
-- [ImageBackgroundRemoval.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ImageBackgroundRemoval.swift)
-- [ImageGeneration.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ImageGeneration.swift)
-- [ExportLiveActivitySupport.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ExportLiveActivitySupport.swift)
-
-## Functional Summary
-
-In practical terms, Bezel Studio supports all of the following major workflows:
-
-- Create a multi-canvas project
-- Define custom canvas sizes and save presets
-- Apply backgrounds, patterns, emoji systems, and lighting
-- Blur photo backgrounds
-- Add Apple device frames
-- Insert images or videos into frames
-- Clean up captured status bars in supported frame media
-- Replace messy captured status bars with a clean Apple-style 9:41 status bar treatment
-- Add adjustable frame reflections with blur, opacity, fade, and surface shadow controls
-- Add touch cues inside framed mockups
-- Add and style text deeply
-- Add stickers, badges, and image-based assets
-- Remove image backgrounds
-- Generate stickers using Image Playground
-- Draw with PencilKit
-- Manage layers
-- Use drag, pinch, and rotation gestures
-- Rotate items in 3D axes
-- Animate with keyframes in Canvas Motion
-- Translate one canvas or many canvases offline
-- Import or export full `.bezel` projects
-- Copy and paste items or full canvases across projects
-- Use undo and redo throughout the experience
-- Sync everything with iCloud
-- Export high-quality final assets
-- Generate fast mockups through Shortcuts
-- Use BezelAI for natural-language editing and motion requests
-
-## Information Architecture Recommendation
-
-If this app is being documented for product, marketing, onboarding, or engineering alignment, the cleanest conceptual structure is:
-
-### A. Project Creation
-
-- Default frame
-- Canvas sizing
-- Backgrounds
-- Patterns
-- Emoji systems
-- Lighting
-- Saved presets
-
-### B. Project Management
-
-- Multi-canvas projects
-- Grid mode
-- Project-wide organization
-
-### C. Canvas Editing
-
-- Frames
-- Clean Status Bar
-- Frame Reflections
-- Touch Cues
-- Text
-- Stickers and badges
-- Images
-- Background removal
-- Drawing
-- Layers
-- Gesture controls
-- 3-axis transforms
-
-### D. Motion
-
-- Canvas Motion
-- Keyframes
-- Show and hide behavior
-- Position, scale, and rotation animation
-
-### E. Intelligence and Automation
-
-- BezelAI
-- Image Playground
-- Quick Mockups
-- Shortcuts support
-
-### F. Localization and Sync
-
-- Offline translation with Apple Translate
-- iCloud continuity
-
-### G. Output
-
-- High-quality export
-- Static and video deliverables
-
-## Image Resource Mapping
-
-The existing image resource document in [assets_description.md](/Users/parthantala/Code/Swift/Websites/BezelStudio/iPhoneWebAssests/assets_description.md) describes the meaning of the current showcase assets. Those resources represent the following product stories:
-
-### 1. iCloud Syncing
-
-Files:
-
-- `icloud.png`
-- `icloud-bg.png`
-- `icloud-ipad.png`
-
-Meaning:
-
-- Shows continuity between iPhone and iPad
-- Communicates seamless project syncing and multi-device editing
-
-### 2. Dynamic Backgrounds
-
-Files:
-
-- `backgrounds.png`
-- `backgrounds-bg.png`
-- `backgrounds-ipad.png`
-
-Meaning:
-
-- Shows gradient, pattern, emoji, and image-driven background customization
-
-### 3. Bezel AI
-
-Files:
-
-- `bezelAI.png`
-- `bezelAI-bg.png`
-- `bezelAI-ipad.png`
-
-Meaning:
-
-- Shows conversational AI editing and command-driven creation
-
-### 4. Canvas Management
-
-Files:
-
-- `canvasMangement.png`
-- `canvasMangement-bg.png`
-- `canvasMangement-ipad.png`
-
-Meaning:
-
-- Shows multi-canvas organization and grid-style project management
-
-### 5. Image Playground and Stickers
-
-Files:
-
-- `imagePlayground.png`
-- `imagePlayground-bg.png`
-- `imagePlayground-ipad.png`
-
-Meaning:
-
-- Shows AI-assisted sticker generation and image cutout workflows
-
-### 6. Layer Hierarchy
-
-Files:
-
-- `layers.png`
-- `layers-bg.png`
-- `layers-ipad.png`
-
-Meaning:
-
-- Shows precise front-to-back arrangement and composition control
-
-### 7. Pro Layouts and Multi-Device Frames
-
-Files:
-
-- `prolayput.png`
-- `prolayput-bg.png`
-- `prolayput-ipad.png`
-
-Meaning:
-
-- Shows ecosystem compositions containing multiple Apple devices in one canvas
-
-### 8. Canvas Motion and Keyframes
-
-Files:
-
-- `CanvasMotion.png`
-- `CanvasMotion-bg.png`
-- `CanvasMotion-ipad.png`
-
-Meaning:
-
-- Shows item-based animation and keyframe editing
-
-### 9. Typography
-
-Files:
-
-- `typography.png`
-- `typography-bg.png`
-- `typography-ipad.png`
-
-Meaning:
-
-- Shows premium caption design and text styling flexibility
-
-### 10. Translate Assets
-
-Files:
-
-- `translate.png`
-- `translate-bg.png`
-- `translate-ipad.png`
-
-Meaning:
-
-- Shows offline translation for localized screenshot production
-
-## Plain-Language Product Definition
-
-Bezel Studio is a native Apple creative studio for building screenshot-based marketing assets. It lets users create multi-canvas projects, place images and videos into Apple device frames, replace messy captured status bars with a clean Apple-style 9:41 status bar treatment, add frame reflections and touch cues, style backgrounds and typography in depth, manage layers, draw with PencilKit, animate individual items with keyframes, translate content offline, sync work across devices with iCloud, export high-quality deliverables, and automate fast single-frame mockup generation through Shortcuts. On top of this manual control, BezelAI allows users to describe edits and animations in natural language and have the canvas update automatically.
-
-## Suggested Use of This Document
-
-This file can serve as:
-
-- A master internal product description
-- A base document for marketing copy
-- A product spec starting point
-- A reference for designers or developers
-- A source document for generating website, App Store, or onboarding content
-
-## Notes
-
-- This guide is based on the current repository context plus the detailed product behavior described by the app creator.
-- It now also includes source-backed implementation notes from the checked-in `Bzls` app code.
-- The deepest source analysis lives in [BZLS_APP_TECHNICAL_REPORT.md](/Users/parthantala/Code/Swift/Websites/BezelStudio/BZLS_APP_TECHNICAL_REPORT.md).
+The technical report contains the detailed code-path map. This master guide is the product-level version for website and messaging work.

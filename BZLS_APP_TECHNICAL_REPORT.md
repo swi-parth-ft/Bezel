@@ -1,409 +1,393 @@
 # Bezel Studio Technical Report
 
-Scope: source-based analysis of `/Users/parthantala/Code/Swift/Bzls`. I did not modify app source files. Where behavior is inferred from callers or file structure rather than directly observed, I label it as an inference.
+Last updated: 2026-05-20
 
-## 1. End-to-End App Flow
+Scope: source-based analysis of `/Users/parthantala/Code/Swift/Bzls` for the website redesign and product-documentation refresh. I did not modify the app source. Claims below are based on code paths inspected during this pass.
 
-### Launch and Root Bootstrap
+## 1. Project Targets
 
-```text
-App start
-  -> `BzlsAppDelegate.application(_:didFinishLaunchingWithOptions:)`
-     -> `ExportBackgroundTaskCoordinator.shared.prepareForLaunch()`
-  -> `BzlsApp`
-     -> configure RevenueCat with a hardcoded API key
-     -> read `Purchases.shared.customerInfo()` and store `isPremium`
-     -> initialize SwiftData container with schema:
-          `ProjectRecord`
-          `ProjectAssetRecord`
-     -> inject `PresetStore`
-     -> render `ProjectsRootView`
-     -> show onboarding / tips / paywall / Bezel AI intro based on `@AppStorage` flags
-```
+The Xcode project currently exposes these first-party targets:
 
-Confirmed in `BzlsApp.swift`, the app starts with SwiftData + CloudKit-backed persistence for projects and project assets, while RevenueCat entitlement state is mapped to the global `isPremium` flag. The root view is `ProjectsRootView`, which is the gallery, project launcher, and persistence coordinator.
+- `Bezel Studio`: iOS/iPadOS app.
+- `Bezel Studio Mac`: native macOS app.
+- `Bezel Studio Quick Mockups Helper`: macOS helper/login item for menu bar Quick Mockups.
+- `BzlsExportLiveActivity`: ActivityKit widget bundle for export progress.
 
-### Project Open / Edit / Persist Loop
+The package graph includes `RevenueCat`, `RevenueCatUI`, `Drops`, `LiquidDropsKit`, and `CardStack`.
 
-```text
-`ProjectsRootView`
-  -> load stored project records from SwiftData
-  -> hydrate project payloads into `Project` models
-  -> normalize assets / video references / layer references
-  -> show list or grid of projects
-  -> user selects project
-     -> `ProjectEditorHost(project: hydratedProject)`
-        -> `ProjectEditorView(project: ...)`
-           -> `ContentView(canvas: ..., project: ...)`
-              -> canvas UI, toolbars, sheets, gestures, AI, translation, export
-  -> on change:
-     -> persist canvas/project payloads back to `ProjectRecord`
-     -> persist frame videos to `ProjectAssetRecord`
-     -> clean unused frame-video assets
-```
+Important correction from older docs: the native Mac target is no longer a placeholder. The current Mac source has a native app entry, project store, editor, inspector, export pipeline, localization support, Quick Mockups support, RevenueCat state, and Codex MCP server.
 
-`ProjectEditorView.swift` is the bridge between project-level state and the canvas editor. It creates `ContentView` for the selected canvas, supports canvas switching, and decides whether closing should save or discard. In `ProjectsRootView.swift`, project writes are funneled through persistence helpers that encode `Project` into the SwiftData record payload.
+## 2. Runtime Entry Points
 
-### Canvas Interaction Loop
+### iOS / iPadOS
+
+Primary files:
+
+- [BzlsApp.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/BzlsApp.swift)
+- [ProjectsRootView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectsRootView.swift)
+- [ProjectEditorView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectEditorView.swift)
+- [ContentView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ContentView.swift)
+
+Launch flow:
 
 ```text
-`ContentView`
-  -> user adds/edits text, images, frames, backgrounds, motion, drawing, translation, AI actions
-  -> editor mutates `CanvasState` and nested overlay models
-  -> command center mirrors available editor actions into app commands
-  -> save/share/export paths render the current canvas or canvases into images/video
+BzlsAppDelegate
+  -> prepare background export support
+
+BzlsApp
+  -> configure RevenueCat
+  -> initialize SwiftData model container
+       ProjectRecord
+       ProjectAssetRecord
+  -> refresh export credit state
+  -> prepare Quick Mockup defaults
+  -> handle onboarding, tips, paywall, BezelAI intro, whats-new flows
+  -> start Codex MCP server if enabled
+  -> render ProjectsRootView
 ```
 
-The editor is intentionally state-heavy. The source shows `ContentView` owns selection state, sheet state, preview state, AI state, translation state, undo/redo state, animation editor state, and platform-specific presentation state. The view composes a large tree of overlays and sheets rather than pushing each capability into a separate coordinator.
+The root view owns project hydration, project persistence, import/export, gallery UI, Quick Mockup entry, navigation into the editor, and several global share/export flows.
 
-## 2. User-Facing Features
+### Native Mac
 
-### Project Gallery
+Primary files:
 
-Confirmed in `ProjectsRootView.swift`, users can create projects, rename them, duplicate them, delete them, search them, sort them, switch between grid/list layouts, and open project settings or the paywall from the gallery toolbar. The project list also exposes a "find projects" command through `ProjectCommandCenter`.
+- [BzlsMac/App/BezelStudioMacApp.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/App/BezelStudioMacApp.swift)
+- [BzlsMac/Views/MacContentView.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Views/MacContentView.swift)
+- [BzlsMac/Views/MacEditorView.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Views/MacEditorView.swift)
+- [BzlsMac/Views/MacInspectorView.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Views/MacInspectorView.swift)
+- [BzlsMac/Stores/MacProjectStore.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Stores/MacProjectStore.swift)
 
-The same root also now owns project archive export/import entry points for `.bezel` files, including export file creation and pending-import consumption.
+Launch flow:
 
-Internally, the gallery reads `ProjectRecord` objects from SwiftData, decodes them into `Project`, and keeps a hydrated in-memory array. On save, it re-encodes the project back into the record payload. The root also manages live translation state and export/share sheets at the project level.
+```text
+BezelStudioMacApp
+  -> register remote notifications when not running as helper
+  -> create MacProjectStore
+  -> configure RevenueCat
+  -> start MacSubscriptionStore
+  -> register help book
+  -> render welcome screen or MacContentView
+  -> expose Quick Mockup window and Settings scene
+  -> reload from CloudKit when active
+  -> start/stop Mac Codex MCP server based on premium state
+```
 
-### Canvas Editor
+`MacContentView` is a real native workspace. It uses `NavigationSplitView`, a canvas sidebar, `HSplitView`, `MacEditorView`, and `MacInspectorSidebarHost`. It presents save/discard alerts, export-current/export-all choices, insufficient-credit alerts, translation alerts, frame catalog sheets, tip guides, copy/paste toolbar actions, export status, translation status, and inspector controls.
 
-Confirmed in `ProjectEditorView.swift` and `ContentView.swift`, the editor supports multiple canvases per project, canvas switching, a canvas grid/overview, and a canvas toolbar that changes behavior for iPad, iPhone, and quick-mockup mode.
+`MacEditorView` renders scrollable artboards with zoom, all-canvas view, alignment guides, keyboard nudge behavior, localization menu, 3D frame rotation mode, and canvas motion timeline/preview controls.
 
-Users can:
-- Add text, frames, images, and drawings.
-- Open text, frame, image, layer-order, canvas settings, rotation, and motion editors.
-- Move, rotate, scale, and reorder overlays.
-- Use undo/redo and clipboard copy/paste on supported overlays.
-- Switch canvases and enable a mission-control style arrangement mode on iPad.
+### Mac Quick Mockups Helper
 
-Internally, those actions mutate `CanvasState`, `TextOverlay`, `ImageOverlay`, and `FrameOverlay` instances, with layer ordering tracked by `CanvasLayerID`. `CanvasToolbarView` wires the visible toolbar buttons to those actions and uses `ProjectCommandCenter` so macOS-style menu commands can trigger the same handlers.
+Primary files:
 
-### Text Overlay Editing
+- [BzlsMacQuickMockupsHelper/QuickMockupsHelperApp.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMacQuickMockupsHelper/QuickMockupsHelperApp.swift)
+- [BzlsMac/Stores/MacQuickMockupDropperStore.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Stores/MacQuickMockupDropperStore.swift)
+- [BzlsMac/Services/MacQuickMockupStatusItemController.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Services/MacQuickMockupStatusItemController.swift)
+- [BzlsMac/Support/MacQuickMockupRuntime.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Support/MacQuickMockupRuntime.swift)
 
-Confirmed from `TextOverlay.swift`, `TextEditorSheet.swift` call sites, and `ContentView`, text overlays support:
-- Custom text content.
-- Font family selection, including bundled custom fonts such as `Amatic`, `Bangers`, `Caveat`, `Chewy`, `Fredoka`, `Grandstander`, `HennyPenny`, `Hurricane`, `Lobster`, `LuckiestGuy`, `Monoton`, `Nunito`, `Pacifico`, `Poppins`, and `SourGummy`.
-- Weight, design, alignment, fill/gradient, stroke, shadow, and glass-style presentation.
-- Per-text animation tracks.
+The helper runs as an accessory app, starts the menu bar dropper, accepts dropped image/video files, lets users choose presets, renders outputs, tracks progress, stores output-folder bookmarks, and can open the main app for settings or paywall requests. It uses `SMAppService` login item management and a lock file to prevent duplicate helpers.
 
-Internally, text overlays are stored as model objects and rendered by `TextOverlayRenderedView` in export paths and in the live editor. `CanvasExportView` scales font, shadow, stroke, and glass padding to the output canvas size before rendering.
+### Live Activity Widget
 
-### Image Overlay Editing
+Primary file:
 
-Confirmed from `ImageOverlay.swift`, users can insert images from the picker or from generated/sticker sources, move them, scale them, rotate them, and open a 3D rotation sheet for some edits.
+- [BzlsExportLiveActivity/ExportLiveActivityWidget.swift](/Users/parthantala/Code/Swift/Bzls/BzlsExportLiveActivity/ExportLiveActivityWidget.swift)
 
-Internally, `ImageOverlay.newDefault(...)` down-samples a display image to keep interactive memory usage lower than the source image. The overlay retains both the original image and a display image. `ImageOverlayView` handles gesture-driven transforms, selection outline display, and interaction state.
+The widget defines `ExportLiveActivityAttributes` with progress, status text, completion, and failure state. It renders Lock Screen and Dynamic Island export progress UI.
 
-### Frame / Mockup Editing
+## 3. Core Data Model
 
-Confirmed from `FrameOverlay.swift`, `FrameTemplate.swift`, `CanvasVideoOverlayView.swift`, `CanvasVideoMaskView.swift`, `FrameTouchCue.swift`, and `DynamicIslandStatusBarNormalizer.swift`, users can add device frames, place screenshots or videos inside them, edit frame placement/rotation/scale, replace messy captured status bars with a clean Apple-style 9:41 status bar treatment, add adjustable frame reflections, and use touch cues. There is also explicit support for 3D frames, including a special template named `3D iPhone Frame`.
+Shared iOS/iPadOS model files:
 
-Internally, frame overlays store the template, screenshot, video URL, optional exported video asset ID, clean status bar state, touch cues, touch cue appearance, shadow state, floor reflection state/style, 2D transform state, and 3D state. Video frames are backed by a separate `FrameVideoStore` that writes files into Documents/FrameVideos, and `ProjectAssetRecord` persists those frame-video payloads for deduplication and restore.
+- [CanvasModels.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasModels.swift)
+- [Overlays/FrameOverlay.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/Overlays/FrameOverlay.swift)
+- [Overlays/TextOverlay.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/Overlays/TextOverlay.swift)
+- [Overlays/ImageOverlay.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/Overlays/ImageOverlay.swift)
+- [ProjectPersistence.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectPersistence.swift)
+- [ProjectAssetRecord.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectAssetRecord.swift)
 
-`FrameFloorReflectionContainer` mirrors the rendered frame content below the device and applies blur, top opacity, fade distance, rotation compensation, and optional surface shadow styling. `FrameEditSheet` exposes `Show Reflection` plus blur, opacity, and fade controls.
+Core hierarchy:
 
-### Canvas Backgrounds and Lighting
+```text
+Project
+  -> [CanvasState]
+     -> [FrameOverlay]
+     -> [TextOverlay]
+     -> [ImageOverlay]
+     -> [CanvasLayerID]
+     -> CanvasAnimationTrack
+  -> ProjectLocalizationState?
+```
 
-Confirmed from `CanvasModels.swift`, `CanvasExportView.swift`, `CanvasVideoOverlayView.swift`, and `CanvasSettingsSheet.swift`, the canvas background can be themed, custom gradient, emoji-based, photo-based, or transparent. Lighting overlays are separate and can be layered on top of a non-transparent background.
+Key implementation details:
 
-Users can adjust:
-- Background preset.
-- Gradient colors and direction.
-- Emoji background composition.
-- Background images.
-- Background image blur.
-- Background patterns and their animation.
-- Lighting effect and opacity.
+- `ProjectRecord.payload` stores the encoded project model.
+- `ProjectAssetRecord.payload` stores heavier linked assets, especially frame-video data.
+- Layer order is explicit through `CanvasLayerID`, not inferred from array order.
+- Canvas, frame, text, and image motion data is persisted as animation tracks.
+- Main project persistence is CloudKit-backed. Quick Mockup preset storage is separate.
 
-Internally, `CanvasState` owns the background model, and the live/export renderers recompose the background separately from foreground overlays. `BackgroundPhotoView.swift` and `CanvasExportView.swift` confirm the current implementation supports blurred photo backgrounds through `canvas.backgroundImageBlur`. Pattern animation and lighting are toggles that can affect both live preview and export.
+Native Mac has parallel model types in [BzlsMac/Models/MacCanvasProject.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Models/MacCanvasProject.swift), including `MacCanvasProject`, `MacCanvasState`, `MacFrameOverlay`, `MacTextOverlay`, `MacImageOverlay`, `MacCanvasMotionTrack`, `MacFrameThreeDState`, and `MacProjectLocalizationState`.
 
-### Drawing Mode
+The Mac bridge in [BzlsMac/Services/MacBezelArchiveBridge.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Services/MacBezelArchiveBridge.swift) maps the shared archive/project format into Mac-native models and back.
 
-Confirmed in `ContentView.swift` and `CanvasToolbarView.swift`, users can enter drawing mode, sketch on the canvas, then commit or cancel the drawing. The toolbar suppresses many other actions while drawing is active.
+## 4. Project Gallery and Persistence
 
-Internally, drawing is represented as image overlays with `isDrawing = true`. The editor manages a drawing lifecycle with start, cancel, and commit steps, and it uses separate hit-testing and selection suppression during the active gesture.
+Confirmed iOS/iPadOS behavior:
 
-### Layer Ordering
+- Create, rename, duplicate, delete, search, sort, and open projects.
+- Hydrate projects from SwiftData records into in-memory `Project` values.
+- Re-encode project payloads on save.
+- Persist linked frame-video assets through `ProjectAssetRecord`.
+- Import and export `.bezel` files.
+- Handle quick-action launch into Quick Mockup.
 
-Confirmed in `LayerOrderSheet.swift` call sites and the model structure, users can reorder text, image, and frame layers explicitly.
+Confirmed Mac behavior:
 
-Internally, the order is serialized as `[CanvasLayerID]` in `CanvasState.layerOrder`. Export and preview rendering iterate that order rather than inferring z-order from separate arrays.
-
-### Motion / Animation
-
-Confirmed in `CanvasModels.swift`, `ContentView.swift`, `CanvasMotionStyleSliderView.swift`, and the export paths, both the canvas and individual overlays can have animation tracks with keyframes, easing, opacity, scale, offset, and rotation.
-
-Users can:
-- Open the canvas animation editor.
-- Add, remove, and reset keyframes.
-- Adjust duration and easing.
-- Preview motion on-canvas.
-- Export motion as rendered video.
-
-Internally, `CanvasAnimationTrack` stores duration, keyframes, and easing. `CanvasAnimationTransform` interpolates position, scale, and rotation components. The editor and exporter both reuse those models so what users see in preview is intended to match render output.
-
-### Translation
-
-Confirmed in `ProjectsRootView.swift`, `ContentView.swift`, and `CanvasToolbarView.swift`, text can be translated either for the current canvas or across all canvases. The app uses Apple’s translation APIs with a `.translationTask`.
-
-User flow:
-- Pick a target language from the Translate menu.
-- Choose scope: current canvas or all canvases.
-- The app detects the source language automatically.
-- The translated strings are written back into the canvas or project.
-
-Internally, the app concatenates text entries with `\n---\n`, uses `NLLanguageRecognizer` to detect the dominant source language, configures a `TranslationSession`, and then splits the translated response back into corresponding overlays.
-
-Current checked-in changes also show active work to improve the translation flow while keeping the same on-device architecture and editable write-back model.
-
-### AI Assistant
-
-Confirmed in `CanvasAIAssistant.swift`, `GeminiLiveClient.swift`, and `ContentView.swift`, the app has a typed AI editing assistant and a microphone-driven AI mode. The AI can propose structured canvas edits rather than freeform prose.
-
-Users can:
-- Type a prompt.
-- Or, on supported devices and with premium access, speak into a mic mode.
-- Receive direct edits to text, images, frames, background, lighting, canvas size, and motion.
-
-Internally, `ContentView` collects a `CanvasAIContext` snapshot of the current canvas, including sampled text/image/frame entries and layer order. It sends the prompt to `GeminiLiveClient.generatePlan(...)`, receives a `CanvasAIEditPlan`, and applies it in `applyAIEditPlan`.
-
-### Quick Mockups
-
-Confirmed in `QuickMockupSettingsView.swift`, `QuickMockupEditorView.swift`, `QuickMockupDefaults.swift`, and `ShortcutMockupIntent.swift`, the app has a separate quick-mockup preset system.
-
-Users can:
-- Open saved quick mockups from Settings.
-- Create, rename, and delete presets.
-- Edit a preset’s canvas directly.
-- Use the preset from Siri Shortcuts.
-
-Internally, presets are stored in a separate SwiftData container with legacy migration support. A quick mockup preset is a named wrapper around a `CanvasState`, and the editor persists preset changes on dismiss.
-
-### Project Import and Export
-
-Confirmed in `ProjectsRootView.swift`, `ProjectArchive.swift`, `ProjectImportCoordinator.swift`, and `Info.plist`, the app now supports `.bezel` project archive import/export.
-
-Users can:
-- Export a complete project into a `.bezel` file.
-- Import a `.bezel` file into the gallery.
-- Carry archived frame-video assets with the project payload.
-
-Internally, `BezelProjectArchive` encodes the `Project` plus archived assets, `ImportedBezelProjectPayload` remaps imported IDs into a new project, and the custom `UTType` is registered as `com.parthant.bzls.project`.
-
-### Export, Save, Share
-
-Confirmed in `ProjectsRootView.swift`, `ContentView.swift`, `SaveShareSheet.swift`, `CanvasExportView.swift`, `CanvasVideoOverlayView.swift`, and `ExportLiveActivitySupport.swift`, the app can export:
-- Images.
-- Videos.
-- Multiple canvases.
-- Photos-library saves.
-- File exports.
-- Shared output through the system share sheet.
-
-The export UI previews either a single canvas image or a stack of canvases. For export, the app decides whether the canvas needs video rendering based on animation/video content and then chooses an appropriate render path. Clean status bar state is part of frame rendering and must be preserved in still export, animated canvas export, and frame-video export paths. The app shows progress, can continue background rendering, and updates a live activity when available.
-
-### Onboarding, Tips, Settings, Paywall
-
-Confirmed in `Onboarding.swift`, `Tips/TipsViewiPhone.swift`, `Tips/TipsViewiPad.swift`, `SettingsView.swift`, and `Control Sheets/PayWall.swift`, the app has first-launch onboarding, device-specific tips flows, settings, and a paywall.
-
-Internally:
-- Onboarding is controlled with `@AppStorage` flags in `BzlsApp`.
-- Tips are split into iPhone and iPad video walkthroughs.
-- Settings includes app metadata, review/share links, developer notes, quick mockups, and other apps by the developer.
-- The paywall uses RevenueCat offering/package data and auto-selects a likely annual or lifetime package when possible.
-
-## 3. Hidden Features, Less-Obvious Capabilities, Supporting Systems
-
-- `ProjectArchive.swift` and `ProjectImportCoordinator.swift` add a full `.bezel` archive path for importing and exporting complete projects with linked assets.
-- `ProjectAssetRecord.swift` stores frame-video blobs separately from the project payload so the app can deduplicate and restore media assets independently of the canvas JSON.
-- `FrameVideoStore` in `FrameOverlay.swift` keeps embedded frame videos under Documents/FrameVideos and can resolve stale URLs by file name.
-- `FrameFloorReflectionStyle` stores frame reflection blur, opacity, fade, and surface shadow values, and `ProjectArchive.swift` preserves them during `.bezel` import/export.
-- `FrameTouchCue.swift` and the frame edit sheets support touch cues as reusable interaction callouts inside framed media.
-- `QuickMockupDefaultsStore` has a legacy migration path from user defaults and JSON into a dedicated SwiftData store. This is a hidden compatibility layer, not a visible feature.
-- `ExportBackgroundTaskCoordinator` and `ExportLiveActivityManager` support long-running exports that continue in the background and surface progress in a live activity. This is not obvious from the UI alone.
-- `ProjectCommandCenter` and `ProjectCommands` expose editor actions into app menu commands. That is why toolbar actions, keyboard shortcuts, and menu commands can share the same implementation path.
-- `CanvasExportView` and `CanvasVideoOverlayView` deliberately separate background, pattern overlay, content overlays, lighting, and watermarking so live preview and export can share a compositing model.
-- `CanvasExportView.debugGlassTextBackgroundEnabled` is a debug switch for the text glass effect in export output.
-- `ImageOverlay.newDefault(...)` and `UIImage.codableData(...)` downsample large assets before storage/rendering to keep memory and payload size lower.
-- `BackgroundRemover` in `ImageBackgroundRemoval.swift` can detect whether an image has a removable subject and can produce stickers with a border using Vision + Core Image.
-- `ImageGeneration.swift` uses `ImagePlayground` to generate sticker-like images and can save them into presets.
-- `ShortcutMockupIntent.swift` turns a shared photo or video into a rendered mockup via an App Intent, which makes the app shortcut-friendly without requiring the app to open.
-- `CanvasSpeechController.swift` uses iOS 26 SpeechAnalyzer APIs, not a legacy speech-recognition text pipeline. The voice mode is therefore intentionally platform-gated.
-- `Motion` is not just preview-only. Motion keyframes and canvas-wide animation are part of the persisted canvas model and are consumed by export rendering.
-- `CanvasVideoMaskView.swift` and the procedural mask fallback indicate the app can extract the screen opening from a frame template and use it as a video matte.
-- `FrameTemplate.swift` includes a broad library of Apple device templates, not just phones. The catalog spans watch, iPad, iPhone, MacBook, iMac, and Apple TV.
-
-## 4. Architecture Overview
-
-### Entry Points
-
-Confirmed entry points are:
-- `BzlsApp.swift` for iOS/iPadOS.
-- `BzlsMac/BzlsMacApp.swift` for the macOS target.
-- `BzlsAppDelegate` in `BzlsApp.swift` for launch-time preparation of background export support.
-
-The macOS target currently launches `MacContentView`, which is a simple placeholder surface rather than the full iOS editor. That is confirmed by `BzlsMac/MacContentView.swift`.
-
-### State and Data Models
-
-Confirmed core model files:
-- `CanvasModels.swift` owns `CanvasState`, `Project`, `CanvasAnimationTrack`, `CanvasAnimationKeyframe`, `CanvasAnimationTransform`, `CanvasLayerID`, and a set of enums for backgrounds, lighting, sizing, and animation.
-- `Overlays/TextOverlay.swift` owns text style enums and the text styling vocabulary.
-- `Overlays/ImageOverlay.swift` owns `ImageOverlay`.
-- `Overlays/FrameOverlay.swift` owns `FrameOverlay`, `FrameOverlayThreeDState`, and `FrameVideoStore`.
-- `FrameTemplate.swift` owns the frame template catalog and screen-opening metadata.
-- `QuickMockupDefaults.swift` owns `QuickMockupPreset` and `QuickMockupPresetRecord`.
-
-Important model relationships:
-- `Project` contains one or more `CanvasState` values.
-- `CanvasState` contains text, image, and frame overlays plus layer order and animation track.
-- Each overlay can carry its own animation track.
-- `CanvasLayerID` provides stable serialization for explicit z-order.
-
-### Persistence and Sync
-
-Confirmed persistence stack:
-- SwiftData with CloudKit auto-sync for `ProjectRecord` and `ProjectAssetRecord`.
-- Separate SwiftData store for quick mockup presets, with CloudKit disabled.
-- `ProjectRecord.payload` stores an encoded `Project`.
-- `ProjectAssetRecord.payload` stores binary asset payloads, currently used for frame video.
-
-Confirmed sync behavior:
-- The main project store is configured with `cloudKitContainerIdentifier` and automatic sync.
-- Quick mockups are local-only in their dedicated store.
-
-Inference:
-- The app appears to rely on record payload encoding rather than normalized tables for most project state, likely to keep schema migration simpler and preserve full canvas fidelity.
-
-### Rendering and Export
-
-Confirmed render layers:
-- `CanvasExportView` for still-image export.
-- `CanvasVideoOverlayView` for composition of background, frame bezels, overlay layers, pattern animation, lighting, and watermark.
-- `CanvasVideoMaskView` for frame screen masks.
-- `DynamicIslandStatusBarNormalizer` for clean status bar treatment on supported frame screenshots and videos.
-- `FrameFloorReflectionContainer` for mirrored frame reflections in live preview and export renderers.
-- `LightingOverlayView`, `CanvasPatternOverlayView`, `BackgroundPresetView`, `CustomGradientView`, and `EmojiPatternBackgroundView` for background construction.
-
-Confirmed export behavior:
-- The app can export stills, photo-library assets, files, and share-sheet content.
-- It chooses a video export path when frames contain video or when canvas/overlay animation requires it.
-- It preserves clean status bar rendering for supported frame screenshots and videos.
-- It preserves frame reflection rendering for supported mockups.
-- It supports transparent exports and special 3D frame rendering.
-
-Inference:
-- The export stack is intentionally layered so one compositing vocabulary can feed preview, still export, video export, and quick mockup rendering.
-
-### AI
-
-Confirmed AI files:
-- `CanvasAIAssistant.swift` defines the action vocabulary and context snapshot.
-- `GeminiLiveClient.swift` translates user prompts into structured edit plans.
-
-Confirmed AI runtime:
-- `ContentView` builds the prompt context.
-- `GeminiLiveClient` calls Google’s Gemini generate-content endpoint.
-- The response is normalized into `CanvasAIEditPlan`.
-- `applyAIEditPlan` mutates the canvas through typed action handlers.
-
-Inference:
-- The code intentionally uses a constrained action schema to reduce hallucinated edits and keep canvas modifications deterministic.
-
-### Shortcuts
-
-Confirmed shortcut files:
-- `ShortcutMockupIntent.swift`
-- `QuickMockupDefaults.swift`
-
-Confirmed behavior:
-- There is an App Intent named `CreateMockupFromPhotoIntent`.
-- It accepts image or movie input, uses a quick mockup preset, renders a mockup, optionally saves it to Photos, and returns an `IntentFile`.
-- `BzlsShortcutsProvider` exposes a ready-made shortcut phrase set.
-
-### Motion
-
-Confirmed motion model:
-- `CanvasAnimationTrack` is persisted inside `CanvasState`.
-- Each text/image/frame overlay also has an animation track.
-- Easing options include linear, ease-in, ease-out, ease-in-out, and bounce.
-
-Confirmed runtime:
-- The editor’s animation timeline and preview UI drive those tracks.
-- Export uses the same tracks to render frame-by-frame output when needed.
-
-### Translation
-
-Confirmed translation runtime:
-- `NLLanguageRecognizer` detects the source language.
-- `TranslationSession` performs the translation.
-- The app supports translating the current canvas or all canvases.
-
-Inference:
-- The delimiter-based batching approach suggests the app is optimized for translating many text overlays in one pass and then restoring the text-to-overlay mapping afterward.
-
-### Platform-Specific Pieces
-
-Confirmed iPad behavior:
-- The editor uses floating panels for many sheets when `UIDevice.isiPad` is true.
-- The toolbar exposes additional canvas navigation and mission-control controls on iPad.
-
-Confirmed iPhone behavior:
-- The editor relies more on sheets and a bottom toolbar.
-- The tips flow has separate iPhone video walkthroughs.
-
-Confirmed macOS/Catalyst-adjacent behavior:
-- `SaveShareSheet` checks `ProcessInfo.processInfo.isiOSAppOnMac`.
-- `BzlsMac` has a separate minimal app entry point.
-
-Confirmed iOS 26+ gating:
-- SpeechAnalyzer-based AI mic mode requires iOS 26.
-- Continued background export processing also uses iOS 26 background task APIs when available.
-
-## 5. File / Module Map
-
-- `BzlsApp.swift`: app entry, SwiftData container setup, RevenueCat init, onboarding/paywall gating, environment wiring.
-- `ProjectsRootView.swift`: project gallery, project persistence pipeline, project-level export/share, root translation handling, navigation into the editor, and `ProjectEditorHost`.
-- `ProjectEditorView.swift`: project-to-canvas bridge, canvas switching, add-canvas flow, close/save behavior.
-- `ContentView.swift`: main canvas editor, toolbar wiring, sheets, gestures, selection, drawing, AI, translation, motion editor, and export orchestration.
-- `CanvasModels.swift`: core data model definitions for projects, canvases, layers, backgrounds, lighting, and motion.
-- `Overlays/TextOverlay.swift`: text style vocabulary and font/design/alignment options.
-- `Overlays/ImageOverlay.swift`: image overlay model and interactive image editing view.
-- `Overlays/FrameOverlay.swift`: frame overlay model, 3D frame state, frame-video store, and frame editing view.
-- `FrameTemplate.swift`: device frame catalog and asset lookup rules.
-- `FrameTouchCue.swift`: touch cue model and rendered interaction callouts for framed media.
-- `Control Sheets/FrameEditSheet.swift`: frame transform, status bar, reflection, shadow, and touch cue controls.
-- `Utils/DynamicIslandStatusBarNormalizer.swift`: clean status bar normalization for supported screenshots and frame videos.
-- `CanvasExportView.swift`: still-image compositor for export and quick mockup rendering.
-- `CanvasVideoOverlayView.swift`: layered video export compositor with optional pattern animation, lighting, bezels, and watermark.
-- `CanvasVideoMaskView.swift`: screen-opening mask renderer for frame videos.
-- `CanvasAIAssistant.swift`: structured AI action schema, context snapshot, and enum mappings.
-- `GeminiLiveClient.swift`: Gemini HTTP client, prompt builder, JSON/function-call parsing, plan recovery logic.
-- `CanvasSpeechController.swift`: speech/audio capture and SpeechAnalyzer integration for AI mic mode.
-- `SubscriptionManager.swift`: RevenueCat status, entitlement flags, purchase/restore/trial eligibility handling.
-- `Control Sheets/PayWall.swift`: paywall UI and package selection logic.
-- `SettingsView.swift`: settings hub, app metadata, developer links, quick mockups entry, and app discovery.
-- `QuickMockupDefaults.swift`: quick mockup preset store and legacy migration.
-- `QuickMockupSettingsView.swift`: preset list/editor launcher and shortcut launcher.
-- `QuickMockupEditorView.swift`: preset editor wrapper and persistence-on-dismiss.
-- `ShortcutMockupIntent.swift`: App Intents, quick mockup preset entity/query, shortcut rendering pipeline.
-- `ExportLiveActivitySupport.swift`: background export persistence, background-task handoff, and live activity updates.
-- `SaveShareSheet.swift`: save/share/export choice UI and preview UI.
-- `ImageGeneration.swift`: Image Playground-based sticker generation and preset save/unsave integration.
-- `ImageBackgroundRemoval.swift`: Vision/Core Image background removal and sticker border generation.
-- `ProjectPersistence.swift`: SwiftData record for project payload persistence.
-- `ProjectAssetRecord.swift`: SwiftData record for binary project assets, currently frame videos.
-- `ProjectCommandCenter.swift`: command registration/dispatch hub.
-- `ProjectCommands.swift`: app command menus and keyboard shortcuts.
-- `Notifications.swift`: canvas-history clear notification name.
-- `HapticManager.swift`: small haptic utility.
-- `BzlsMac/BzlsMacApp.swift`: macOS app entry.
-- `BzlsMac/MacContentView.swift`: placeholder macOS view.
-
-## Gaps / Unverified Areas
-
-- I did not fully inspect every control sheet file, so some fine-grained editor UI behavior is inferred from call sites and type names rather than traced line-by-line.
-- I confirmed the Gemini transport and parser, but I did not exhaustively trace every helper in `GeminiLiveClient.swift`; the high-level AI pipeline is solid, while some recovery heuristics are summarized from the implementation shape.
-- I did not fully inspect `PresetStore`, `CanvasSettingsSheet`, `TextEditorSheet`, `FrameEditSheet`, `ImagePlacementSheet`, `LayerOrderSheet`, `CanvasAxisRotationSheet`, or `BadgePickerSheet`, so their internal widget layout is unverified here.
-- The macOS target appears minimal compared with the iOS/iPadOS app; I confirmed the placeholder entry point, but not any future/full macOS parity plans.
+- `MacProjectStore` maintains `projects`, `selectedProjectID`, dirty project tracking, undo/redo stacks, import/export state, translation state, export state, and frame catalog requests.
+- It configures a CloudKit-backed store for persisted projects and a quick-mockup mode for ephemeral preset editing.
+- It can reload from CloudKit, replace projects, create projects from MCP specs, and map `.bezel` archives through `MacBezelArchiveBridge`.
+
+## 5. Canvas Editor
+
+The iOS/iPadOS editor is centered on `ContentView`, with `ProjectEditorView` bridging project-level state. The Mac editor uses `MacContentView`, `MacEditorView`, `MacCanvasArtboard`, and `MacInspectorView`.
+
+Confirmed editor capabilities:
+
+- Multi-canvas editing.
+- Frame, text, and image overlays.
+- Layer ordering.
+- Copy/paste.
+- Undo/redo.
+- Canvas and overlay transforms.
+- Background settings.
+- Pattern and lighting effects.
+- Motion/keyframe editing.
+- Screenshot/video placement inside frames.
+- Frame edit sheets or inspectors.
+- Export preview and rendering.
+- Localization selection and translation.
+
+The Mac version is architecturally separate rather than a thin Catalyst wrapper. It has Mac-specific stores, models, views, inspector panels, menu commands, and render services.
+
+## 6. Frame and Mockup System
+
+Primary files:
+
+- [FrameTemplate.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/FrameTemplate.swift)
+- [Overlays/FrameOverlay.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/Overlays/FrameOverlay.swift)
+- [Control Sheets/FrameEditSheet.swift](</Users/parthantala/Code/Swift/Bzls/Bzls/Control Sheets/FrameEditSheet.swift>)
+- [FrameTouchCue.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/FrameTouchCue.swift)
+- [ThreeDPhoneFrameSceneView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ThreeDPhoneFrameSceneView.swift)
+- [SharedThreeDFrameCanvasSceneView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/SharedThreeDFrameCanvasSceneView.swift)
+- [ThreeDFrameARView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ThreeDFrameARView.swift)
+- [ThreeDPhoneFrameSnapshotRenderer.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ThreeDPhoneFrameSnapshotRenderer.swift)
+
+Confirmed capabilities:
+
+- 2D frame catalog spans Apple TV, Apple Watch, iMac, iPad, iPhone, MacBook, and related families.
+- 3D frame catalog contains 33 definitions under `topLevelGroup: "3D Frames"`.
+- 3D definitions point at USDZ model names through `threeDModelName`.
+- 3D assets are present under `Bzls/3DiPhone/` and thumbnails under asset catalogs.
+- Frame overlays can store screenshots, videos, asset IDs, clean status bar settings, touch cues, shadows, reflections, 2D transforms, 3D state, emphasis areas, and animation.
+- iOS/iPadOS supports AR viewing for 3D frames.
+- Current iOS editor limits each canvas to three 3D frames.
+
+Current 3D frame families:
+
+- iPhone Air.
+- iPhone 17, 17e, 17 Pro, 17 Pro Max.
+- iPad Air M3, iPad A16, iPad mini.
+- MacBook Air, MacBook Neo, MacBook Pro.
+- iMac 24.
+- Studio Display and Studio Display XDR.
+- Apple Watch Series 11 and Ultra 3.
+
+## 7. Clean Status Bar, Reflections, Touch Cues, and Emphasis
+
+Primary files:
+
+- [Utils/DynamicIslandStatusBarNormalizer.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/Utils/DynamicIslandStatusBarNormalizer.swift)
+- [Overlays/FrameOverlay.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/Overlays/FrameOverlay.swift)
+- [FrameTouchCue.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/FrameTouchCue.swift)
+- [Control Sheets/FrameEditSheet.swift](</Users/parthantala/Code/Swift/Bzls/Bzls/Control Sheets/FrameEditSheet.swift>)
+
+Confirmed capabilities:
+
+- Clean Status Bar replaces supported captured status bars with a clean Apple-style treatment.
+- The state is part of the frame overlay and participates in preview and export.
+- Frame reflections mirror rendered frame content below the device and expose blur, opacity, fade, and surface shadow controls.
+- Touch cues can show tap/drag/pointer-style interaction moments.
+- Emphasis areas support callout/highlight behavior inside frame content.
+
+## 8. Backgrounds, Patterns, Lighting, Text, and Images
+
+Primary files:
+
+- [BackgroundStyles.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/BackgroundStyles.swift)
+- [BackgroundPatterns.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/BackgroundPatterns.swift)
+- [CanvasModels.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasModels.swift)
+- [Overlays/TextOverlay.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/Overlays/TextOverlay.swift)
+- [Overlays/ImageOverlay.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/Overlays/ImageOverlay.swift)
+- [ImageBackgroundRemoval.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ImageBackgroundRemoval.swift)
+- [ImageGeneration.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ImageGeneration.swift)
+
+Confirmed capabilities:
+
+- Canvas sizes include story, portrait, square, and landscape presets.
+- Background styles include themes, custom/photo backgrounds, transparent backgrounds, and emoji/pattern systems.
+- Pattern catalog is broad and includes animated/motion-capable styles.
+- Lighting catalog includes glows, beams, vignettes, window shadows, cloud/dapple effects, edge glow, and more.
+- Text overlays support rich styling, custom fonts, shadows, gradients, stroke, glass-style presentation, and animation.
+- Image overlays support import, transform, rotation, background removal, and sticker-like output.
+- Image Playground can generate sticker assets.
+
+## 9. Motion and Export
+
+Primary files:
+
+- [CanvasExportView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasExportView.swift)
+- [CanvasVideoOverlayView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasVideoOverlayView.swift)
+- [CanvasVideoMaskView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasVideoMaskView.swift)
+- [ExportLiveActivitySupport.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ExportLiveActivitySupport.swift)
+- [BzlsMac/Services/MacCanvasVideoExporter.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Services/MacCanvasVideoExporter.swift)
+- [BzlsMac/Services/MacGPUCanvasVideoExporter.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Services/MacGPUCanvasVideoExporter.swift)
+
+Confirmed capabilities:
+
+- Still-image export.
+- Video export when canvas motion, overlay motion, or frame video requires it.
+- Current canvas or all canvases.
+- Share, file, and photo-library oriented output.
+- Background export continuation on iOS/iPadOS.
+- Live Activity export progress.
+- Export-credit checks.
+- Mac GPU-first video export through Metal/Core Image, with fallback.
+- 3D frame snapshot/render support for export.
+- Clean Status Bar and reflection preservation in supported export paths.
+
+## 10. Same-Project Localizations
+
+Primary files:
+
+- [CanvasModels.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasModels.swift)
+- [ProjectEditorView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ProjectEditorView.swift)
+- [BzlsMac/Stores/MacProjectStore.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Stores/MacProjectStore.swift)
+- [BzlsMac/Views/MacEditorView.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Views/MacEditorView.swift)
+- [BzlsMac/Support/MacTranslationSupport.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Support/MacTranslationSupport.swift)
+
+Current model:
+
+```text
+ProjectLocalizationState
+  -> baseLanguageID
+  -> defaultLanguageID
+  -> [ProjectLocalizationSet]
+
+ProjectLocalizationSet
+  -> languageID
+  -> localized canvases
+  -> selected canvas
+  -> source text hashes by overlay ID
+```
+
+Confirmed user actions:
+
+- Add localization.
+- Select localization.
+- Update translation.
+- Update all localizations.
+- Copy base layout to one localization.
+- Copy base layout to all localizations.
+- Set localization as default.
+- Delete localization.
+- Export the active localization.
+
+The feature uses Apple Translation and NaturalLanguage. It is project-level screenshot-text localization, not evidence of full app UI localization.
+
+## 11. AI, Shortcuts, Visual Intelligence, and Automation
+
+Primary files:
+
+- [CanvasAIAssistant.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasAIAssistant.swift)
+- [GeminiLiveClient.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/GeminiLiveClient.swift)
+- [CanvasSpeechController.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CanvasSpeechController.swift)
+- [QuickMockupDefaults.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/QuickMockupDefaults.swift)
+- [QuickMockupSettingsView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/QuickMockupSettingsView.swift)
+- [QuickMockupEditorView.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/QuickMockupEditorView.swift)
+- [ShortcutMockupIntent.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/ShortcutMockupIntent.swift)
+- [VisualIntelligenceMockupIntent.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/VisualIntelligenceMockupIntent.swift)
+
+Confirmed capabilities:
+
+- BezelAI builds a structured canvas context and applies typed edit plans.
+- Gemini client powers natural-language canvas edit planning.
+- Speech-driven AI mode exists behind platform and premium gating.
+- Quick Mockup presets wrap reusable canvas states.
+- App Intents/Shortcuts can render image or movie input through a preset.
+- Visual Intelligence integration can render mockup candidates from semantic content where the framework is available.
+
+## 12. Codex MCP
+
+Primary files:
+
+- [CODEX_MCP.md](/Users/parthantala/Code/Swift/Bzls/CODEX_MCP.md)
+- [CodexMCPServer.swift](/Users/parthantala/Code/Swift/Bzls/Bzls/CodexMCPServer.swift)
+- [BzlsMac/Services/MacCodexMCPServer.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Services/MacCodexMCPServer.swift)
+- [BzlsMac/Services/MacCodexMCPCanvasBuilder.swift](/Users/parthantala/Code/Swift/Bzls/BzlsMac/Services/MacCodexMCPCanvasBuilder.swift)
+
+Current contract:
+
+- Endpoint: `http://127.0.0.1:29471/mcp`.
+- Transport: streamable HTTP JSON-RPC over `POST /mcp`.
+- Auth: bearer token from Bezel Studio settings.
+- Loopback-only.
+- iOS/iPadOS and native Mac have separate server implementations.
+- Only one running app can bind the port at a time.
+
+Current tools:
+
+- `app_status`
+- `list_projects`
+- `canvas_capabilities`
+- `create_canvas_project`
+- `update_canvas_project`
+- `render_canvas_previews`
+- `export_project_screenshots`
+- `new_project`
+- `open_project`
+- `quick_mockup`
+- `show_settings`
+
+The Mac MCP builder supports native Mac canvases, backgrounds, patterns, lighting, 2D/3D frames, screenshots, videos, text, images, layer order, animations, touch cues, emphasis callouts, reflections, and 3D frame tuning.
+
+## 13. Monetization and Export Credits
+
+Confirmed source areas:
+
+- `SubscriptionManager.swift` and paywall files on iOS/iPadOS.
+- `MacRevenueCatConfiguration`, `MacSubscriptionStore`, `MacPaywallView`, and Mac export-credit checks on Mac.
+- Export credits are refreshed at launch and checked before exports that require credits.
+
+Safe technical conclusion: Bezel Studio has RevenueCat-backed premium state and export-credit gating across current app surfaces. Exact prices and package names should be taken from live App Store / RevenueCat state, not from this report.
+
+## 14. Website-Relevant Technical Conclusions
+
+The website docs and homepage should now treat the following as source-backed:
+
+- Native Mac app exists and is meaningful.
+- 3D frames are a broad USDZ catalog, not one prototype template.
+- Same-project localization is a real model and workflow.
+- Quick Mockups now include both iOS Shortcuts/App Intents and a native Mac menu bar/helper workflow.
+- Codex MCP is a real local automation surface on iOS/iPadOS and Mac.
+- Export includes stills, videos, export credits, background progress, Live Activity, 3D rendering paths, and Mac GPU-first video export.
+
+The website should still avoid these claims unless separately verified:
+
+- Full feature parity across iPhone, iPad, and Mac.
+- App UI localization.
+- Official Apple-provided 3D assets.
+- Fully offline AI.
+- App Store Connect upload automation.
+- Exact App Store availability, prices, and OS support.

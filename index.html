@@ -69,7 +69,7 @@
 </head>
 
 <body
-  class="font-sans bg-zinc-50 dark:bg-[#0A0A0A] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+  class="home-page font-sans bg-zinc-50 dark:bg-[#0A0A0A] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
 
   <svg aria-hidden="true" class="icon-sprite" xmlns="http://www.w3.org/2000/svg">
     <symbol id="icon-folder-plus" viewBox="0 0 24 24">
@@ -271,41 +271,38 @@
   <main class="app-shell relative z-10">
 
     <!-- HERO SECTION -->
-    <section class="hero-section pt-32 pb-12 md:pt-40 md:pb-16 px-6 md:px-12">
+    <section class="hero-section hero-section--minimal pt-32 pb-12 md:pt-40 md:pb-16 px-6 md:px-12">
       <div class="hero-layout">
         <div class="hero-copy">
 
 
           <!-- MOBILE IMAGE -->
           <div data-reveal-delay="110ms" class="flex lg:hidden w-full items-center justify-center mb-6 reveal">
-            <img src="/assets/hero/hero-homepage-2.webp" alt="Bezel Studio preview" 
-                 class="w-auto h-auto max-w-[90%] max-h-[32vh] object-contain drop-shadow-2xl translate-x-3">
+            <img src="/assets/hero/hero-homepage-2026.webp" alt="Bezel Studio preview on Mac, iPhone, and iPad"
+              width="1920" height="1080" class="hero-visual-image w-full max-w-[34rem] object-contain">
           </div>
 
           <h1 data-reveal-delay="140ms"
             class="hero-title text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-zinc-900 dark:text-white max-w-4xl leading-[1.05] mb-4 sm:mb-6 reveal [text-wrap:balance]">
-            Design App Store screenshots <br>
-            <span
-              class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">on
-              iPhone and iPad.</span>
+            Design App Store screenshots for iPhone, iPad, and Mac.
           </h1>
 
           <p data-reveal-delay="180ms"
             class="hero-lead text-base md:text-lg text-zinc-600 dark:text-zinc-400 max-w-3xl mb-4 sm:mb-6 font-medium leading-relaxed reveal">
-            Bezel Studio keeps mockups, typography, localization, motion, and export inside one native Apple-first
-            workspace, so finished launch assets do not need three different tools.
+            Bezel Studio keeps realistic frames, localized screenshot sets, motion, and export inside one native
+            Apple-first workspace.
           </p>
 
-          <div data-reveal-delay="320ms" class="hero-actions flex flex-col sm:flex-row sm:flex-wrap gap-4 mb-6 reveal">
+          <div data-reveal-delay="260ms" class="hero-actions flex flex-col sm:flex-row gap-4 mb-6 reveal">
             <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"
               data-track-label="homepage hero app store primary"
               class="cta-button cta-button--primary flex items-center justify-center gap-2 px-8 py-4 bg-zinc-900/90 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black rounded-full font-bold text-lg transition-transform hover:scale-105 active:scale-95">
               <img src="/assets/brand/app-store-logo.svg" alt="App Store" class="w-5 h-5 dark:invert filter">
-              Download for iPhone and iPad
+              Download Bezel Studio
             </a>
             <a href="/features/device-frames.html" data-track-label="homepage hero iphone mockup generator feature"
               class="flex items-center justify-center gap-2 px-8 py-4 border border-zinc-300/80 dark:border-zinc-700 bg-white/75 dark:bg-white/[0.05] hover:bg-white dark:hover:bg-white/[0.09] text-zinc-900 dark:text-white rounded-full font-semibold text-lg transition-transform hover:scale-[1.02] active:scale-95">
-              Explore the iPhone mockup generator
+              Explore device frames
             </a>
             <a href="/features/bezel-ai-shortcuts.html" data-track-label="homepage hero bezelai feature"
               class="flex items-center justify-center gap-2 px-8 py-4 border border-blue-200/90 bg-blue-50/80 text-blue-900 hover:bg-white dark:border-blue-400/25 dark:bg-blue-400/[0.08] dark:text-blue-100 dark:hover:bg-blue-400/[0.12] rounded-full font-semibold text-lg transition-transform hover:scale-[1.02] active:scale-95">
@@ -313,33 +310,25 @@
             </a>
           </div>
 
-          <a href="https://www.saashub.com/bezel-studio-app?utm_source=badge&utm_campaign=badge&utm_content=bezel-studio-app&badge_variant=color&badge_kind=approved"
-            target="_blank" rel="noopener noreferrer" data-track-label="homepage hero saashub approved badge"
-            aria-label="Bezel Studio.app approved badge on SaaSHub"
-            class="reveal mb-5 inline-flex justify-center transition-opacity hover:opacity-90">
-            <img src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1" alt="Bezel Studio.app badge"
-              class="h-auto w-[150px]">
-          </a>
-
-          <div data-reveal-delay="340ms"
-            class="reveal flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mb-5 max-w-3xl">
+          <div data-reveal-delay="310ms"
+            class="hero-link-row reveal flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mb-5 max-w-3xl">
             <a href="/features/bezel-ai-shortcuts.html" data-track-label="homepage hero commercial path bezelai"
-              class="inline-flex items-center rounded-full border border-zinc-200/80 bg-white/80 px-4 py-2 text-sm font-semibold text-zinc-900 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:border-blue-400/60 dark:hover:bg-white/[0.08]">BezelAI screenshot refinement</a>
+              class="hero-text-link">BezelAI</a>
             <a href="/features/device-frames.html" data-track-label="homepage hero commercial path device frames"
-              class="inline-flex items-center rounded-full border border-zinc-200/80 bg-white/80 px-4 py-2 text-sm font-semibold text-zinc-900 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:border-blue-400/60 dark:hover:bg-white/[0.08]">iPhone mockup generator</a>
+              class="hero-text-link">3D frames</a>
             <a href="/features/projects-presets.html" data-track-label="homepage hero commercial path templates"
-              class="inline-flex items-center rounded-full border border-zinc-200/80 bg-white/80 px-4 py-2 text-sm font-semibold text-zinc-900 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:border-blue-400/60 dark:hover:bg-white/[0.08]">App screenshot templates</a>
+              class="hero-text-link">Projects</a>
             <a href="/features/translation.html" data-track-label="homepage hero commercial path localization"
-              class="inline-flex items-center rounded-full border border-zinc-200/80 bg-white/80 px-4 py-2 text-sm font-semibold text-zinc-900 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:border-blue-400/60 dark:hover:bg-white/[0.08]">Localization workflows</a>
+              class="hero-text-link">Localization</a>
             <a href="/features/canvas-motion.html" data-track-label="homepage hero commercial path preview videos"
-              class="inline-flex items-center rounded-full border border-zinc-200/80 bg-white/80 px-4 py-2 text-sm font-semibold text-zinc-900 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:border-blue-400/60 dark:hover:bg-white/[0.08]">App preview video maker</a>
+              class="hero-text-link">Motion</a>
             <a href="/features/export-share.html" data-track-label="homepage hero commercial path export"
-              class="inline-flex items-center rounded-full border border-zinc-200/80 bg-white/80 px-4 py-2 text-sm font-semibold text-zinc-900 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:border-blue-400/60 dark:hover:bg-white/[0.08]">Batch export workflow</a>
+              class="hero-text-link">Export</a>
             <a href="/guides/create-first-app-store-screenshot-project.html" data-track-label="homepage hero first screenshot guide"
-              class="inline-flex items-center rounded-full border border-zinc-200/80 bg-white/80 px-4 py-2 text-sm font-semibold text-zinc-900 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:border-blue-400/60 dark:hover:bg-white/[0.08]">First screenshot guide</a>
+              class="hero-text-link">First guide</a>
           </div>
 
-          <div data-reveal-delay="350ms" class="flex flex-row items-center justify-center lg:justify-start gap-3 mb-4 reveal">
+          <div data-reveal-delay="350ms" class="hidden flex-row items-center justify-center lg:justify-start gap-3 mb-4 reveal">
             <div class="flex -space-x-2 shrink-0">
               <img class="w-8 h-8 rounded-full border-2 border-zinc-50 dark:border-[#0A0A0A]"
                 src="https://i.pravatar.cc/100?img=33" alt="User avatar">
@@ -385,7 +374,7 @@
           </div>
 
           <div data-reveal-delay="390ms"
-            class="hero-offer-note reveal inline-flex flex-col sm:flex-row items-center gap-1.5 px-3 py-1.5 mt-1 rounded-full border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-white/[0.02] text-[11px] text-zinc-500 dark:text-zinc-400 backdrop-blur-md shadow-sm">
+            class="hidden hero-offer-note reveal flex-col sm:flex-row items-center gap-1.5 px-3 py-1.5 mt-1 rounded-full border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-white/[0.02] text-[11px] text-zinc-500 dark:text-zinc-400 backdrop-blur-md shadow-sm">
             <span>Lifetime plan is currently <strong class="text-zinc-800 dark:text-zinc-200 font-semibold">50%
                 off</strong> with code</span>
             <span
@@ -394,9 +383,10 @@
         </div>
 
         <div data-reveal-delay="220ms"
-          class="reveal relative hidden w-full lg:flex items-center justify-center lg:justify-end mt-12 lg:mt-0">
-          <img src="/assets/hero/hero-homepage-2.webp" alt="Bezel Studio hero preview"
-            class="w-full lg:w-[115%] max-w-none h-auto origin-center lg:origin-top-left transform lg:translate-x-6 xl:translate-x-10 object-contain">
+          class="hero-visual reveal relative hidden w-full lg:flex items-center justify-center lg:justify-end mt-12 lg:mt-0">
+          <img src="/assets/hero/hero-homepage-2026.webp" alt="Bezel Studio hero preview on Mac, iPhone, and iPad"
+            width="1920" height="1080" fetchpriority="high" decoding="async"
+            class="hero-visual-image w-full max-w-[58rem] h-auto object-contain">
         </div>
       </div>
     </section>
@@ -435,23 +425,11 @@
                     <p class="text-zinc-600 dark:text-zinc-400 text-lg max-w-md">Build iPhone mockups, iPad screenshots,
                       Apple Watch layouts, and multi-device campaign visuals with screenshots or screen recordings
                       placed directly inside precise Apple bezels.</p>
-                    <a href="./features/device-frames.html"
-                      class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue-600 transition-colors hover:text-blue-500 dark:text-blue-300 dark:hover:text-blue-200">
-                      Open the iPhone mockup generator
-                      <span aria-hidden="true">→</span>
-                    </a>
                   </div>
                   <div class="feature-stack feature-stack--frames mt-auto w-full flex-grow px-6 md:px-8 pb-8 pt-4">
-                    <img src="/assets/devices/bezels/imac.webp" alt="iMac bezel placeholder"
-                      class="feature-stack__device feature-stack__device--imac">
-                    <img src="/assets/devices/bezels/macbook.webp" alt="MacBook bezel placeholder"
-                      class="feature-stack__device feature-stack__device--macbook">
-                    <img src="/assets/devices/bezels/ipad.webp" alt="iPad bezel placeholder"
-                      class="feature-stack__device feature-stack__device--ipad">
-                    <img src="/assets/devices/bezels/iphone.webp" alt="iPhone bezel placeholder"
-                      class="feature-stack__device feature-stack__device--iphone">
-                    <img src="/assets/devices/bezels/apple-watch.webp" alt="Apple Watch bezel placeholder"
-                      class="feature-stack__device feature-stack__device--watch">
+                    <img src="/assets/feature-covers/realistic-frames.webp"
+                      alt="Realistic Apple device frames for iPhone, iPad, MacBook, and Apple Watch"
+                      class="feature-stack__single-image" loading="lazy" decoding="async" width="1080" height="1920">
                   </div>
                 </article>
 
@@ -491,11 +469,6 @@
                     <p class="text-zinc-600 dark:text-zinc-400 text-lg">Translate the current canvas or an entire
                       screenshot project with Apple Translate so localized App Store assets stop being a manual rebuild.
                     </p>
-                    <a href="./features/translation.html"
-                      class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-amber-600 transition-colors hover:text-amber-500 dark:text-amber-300 dark:hover:text-amber-200">
-                      Open the screenshot localization workflow
-                      <span aria-hidden="true">→</span>
-                    </a>
                   </div>
                   <div
                     class="feature-translation-scene w-full mt-auto h-[15rem] md:h-[16rem] flex items-end justify-center px-6 pb-8 overflow-visible">
@@ -581,323 +554,36 @@
 
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- PREMIUM STICKY SHOWCASE CAROUSEL -->
-    <section id="showcase" class="relative">
-      <div id="showcase-height" class="h-[500vh]">
-        <div class="showcase-shell sticky top-0 h-screen overflow-hidden">
-          <div class="showcase-header max-w-7xl mx-auto w-full px-6 md:px-12">
-            <div class="reveal showcase-header-card text-center">
-              <div class="showcase-header-copy mx-auto">
-                <h2 class="text-4xl md:text-6xl font-black text-zinc-900 dark:text-white tracking-tight mb-4">See the
-                  full Bezel Studio workflow in motion.</h2>
-
-                <div data-showcase-copy="iphone" class="showcase-copy is-active">
-                  <p class="text-lg text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto">Create multi-canvas projects,
-                    style backgrounds, place screenshots or videos in frames, add captions and stickers, and export
-                    polished App Store creatives directly on iPhone.</p>
-                  <p class="text-3xl md:text-4xl font-handwritten text-indigo-600 dark:text-indigo-400 mt-6 -rotate-2">
-                    fast, native, and made for launch day</p>
-                </div>
-
-                <div data-showcase-copy="ipad" class="showcase-copy text-center">
-                  <p class="text-lg text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto">On iPad, the same project
-                    expands into a wider workspace for layer control, grid review, motion edits, translation passes, and
-                    detailed multi-device compositions.</p>
-                  <p class="text-3xl md:text-4xl font-handwritten text-sky-600 dark:text-sky-400 mt-6 rotate-1">more
-                    room for serious campaigns</p>
-                </div>
+            <div class="features-scroll-controls power-scroll-controls" aria-label="Feature card navigation">
+              <button type="button" class="power-scroll-arrow" data-feature-nav="prev"
+                aria-label="Previous feature card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="m15 18-6-6 6-6"></path>
+                </svg>
+              </button>
+              <div class="power-scroll-pagination" role="tablist" aria-label="Feature cards">
+                <button type="button" class="power-scroll-dot is-active" data-feature-dot="0" role="tab"
+                  aria-selected="true" aria-label="Go to Photorealistic Frames" tabindex="0"></button>
+                <button type="button" class="power-scroll-dot" data-feature-dot="1" role="tab" aria-selected="false"
+                  aria-label="Go to Pro Typography" tabindex="-1"></button>
+                <button type="button" class="power-scroll-dot" data-feature-dot="2" role="tab" aria-selected="false"
+                  aria-label="Go to Global Translation" tabindex="-1"></button>
+                <button type="button" class="power-scroll-dot" data-feature-dot="3" role="tab" aria-selected="false"
+                  aria-label="Go to Stickers and Cutouts" tabindex="-1"></button>
+                <button type="button" class="power-scroll-dot" data-feature-dot="4" role="tab" aria-selected="false"
+                  aria-label="Go to Draw and Annotate" tabindex="-1"></button>
+                <button type="button" class="power-scroll-dot" data-feature-dot="5" role="tab" aria-selected="false"
+                  aria-label="Go to Layer Precision" tabindex="-1"></button>
               </div>
-
-              <div class="showcase-toggle-wrap flex justify-center">
-                <div class="device-toggle" data-showcase-toggle role="tablist" aria-label="Choose showcase device">
-                  <span class="device-toggle__pill" aria-hidden="true"></span>
-                  <button type="button" class="device-toggle__button is-active" data-device-trigger="iphone" role="tab"
-                    aria-selected="true" aria-controls="showcase-panel-iphone" id="showcase-tab-iphone" tabindex="0">
-                    iPhone
-                  </button>
-                  <button type="button" class="device-toggle__button" data-device-trigger="ipad" role="tab"
-                    aria-selected="false" aria-controls="showcase-panel-ipad" id="showcase-tab-ipad" tabindex="-1">
-                    iPad
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="showcase-content relative w-full">
-            <div class="showcase-stage">
-              <div id="showcase-panel-iphone" class="showcase-panel is-active" data-showcase-panel="iphone"
-                role="tabpanel" aria-labelledby="showcase-tab-iphone">
-                <div id="showcase-carousel"
-                  class="showcase-track flex gap-6 px-6 md:px-[max(1.5rem,calc((100vw-80rem)/2))] overflow-x-hidden cursor-default">
-                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal">
-                    <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
-                      <img src="/assets/showcase/iphone/icloud-sync.webp" alt="iCloud Sync"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">iCloud continuity</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Keep projects, canvases, and creative progress in sync across your Apple workflow.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
-                    style="animation-delay: 100ms;">
-                    <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
-                      <img src="/assets/showcase/iphone/custom-backgrounds.webp" alt="Backgrounds"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Custom backgrounds</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Themes, transparent canvases, gradients, emoji patterns, textures, and lighting in one editor.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
-                    style="animation-delay: 200ms;">
-                    <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
-                      <img src="/assets/showcase/iphone/bezel-ai.webp" alt="Bezel AI"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Bezel AI</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Describe layout changes, background edits, or animation ideas in natural language.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
-                    style="animation-delay: 300ms;">
-                    <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
-                      <img src="/assets/showcase/iphone/canvas-management.webp" alt="Canvas Management"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Project workspace</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Manage many canvases inside one project instead of rebuilding every screen from scratch.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
-                    style="animation-delay: 400ms;">
-                    <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
-                      <img src="/assets/showcase/iphone/image-playground.webp" alt="Image Playground"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Apple Intelligence</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Generate custom stickers, save assets for reuse, and build stronger visual callouts.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
-                    style="animation-delay: 500ms;">
-                    <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
-                      <img src="/assets/showcase/iphone/precision-layers.webp" alt="Layers"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Precision layers</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Reorder frames, text, drawings, and images with a real editable layer stack.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
-                    style="animation-delay: 600ms;">
-                    <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
-                      <img src="/assets/showcase/iphone/pro-layouts.webp" alt="Pro Layouts"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Ecosystem frames</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Mix iPhone, iPad, Apple Watch, and desktop hardware in the same campaign canvas.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
-                    style="animation-delay: 700ms;">
-                    <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
-                      <img src="/assets/showcase/iphone/canvas-motion.webp" alt="Canvas Motion"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Motion & Keyframes</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Animate position, scale, rotation, opacity, and timing for video-ready App Store previews.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
-                    style="animation-delay: 800ms;">
-                    <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
-                      <img src="/assets/showcase/iphone/typography.webp" alt="Typography"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Elite Typography</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Create conversion-focused captions with gradients, shadows, strokes, and glass text treatments.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[160px] md:w-[280px] flex flex-col gap-4 reveal"
-                    style="animation-delay: 900ms;">
-                    <div class="relative w-fit h-auto rounded-2xl overflow-hidden shadow-xl">
-                      <img src="/assets/showcase/iphone/translation.webp" alt="Translate"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Global Translation</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Translate the current canvas or a full project for faster App Store localization.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="showcase-panel-ipad" class="showcase-panel" data-showcase-panel="ipad" role="tabpanel"
-                aria-labelledby="showcase-tab-ipad" aria-hidden="true">
-                <div id="showcase-ipad-carousel"
-                  class="showcase-track flex gap-6 px-6 md:px-[max(1.5rem,calc((100vw-80rem)/2))] overflow-x-hidden cursor-default">
-                  <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
-                    <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl">
-                      <img src="/assets/showcase/ipad/icloud-sync.webp" alt="iPad iCloud Sync"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1 text-left md:text-right">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Desktop-class workspace</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Review bigger layouts, longer copy, and multi-device scenes with more room to refine.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
-                    <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl">
-                      <img src="/assets/showcase/ipad/custom-backgrounds.webp" alt="iPad Backgrounds"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1 text-left md:text-right">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Infinite canvas backdrops</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Build branded canvases with gradients, patterns, emojis, images, and layered light.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
-                    <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl">
-                      <img src="/assets/showcase/ipad/bezel-ai.webp" alt="iPad Bezel AI"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1 text-left md:text-right">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Conversational AI</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Ask for design changes, new copy, motion edits, or layout adjustments without manual hunting.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
-                    <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl">
-                      <img src="/assets/showcase/ipad/image-playground.webp" alt="iPad Image Playground"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1 text-left md:text-right">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Apple Intelligence</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Use Image Playground and cutout tools to generate reusable sticker assets faster.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
-                    <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl">
-                      <img src="/assets/showcase/ipad/precision-layers.webp" alt="iPad Layers"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1 text-left md:text-right">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Pro layer stack</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Control depth, order, and transforms across complex canvases without flattening your work.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
-                    <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl">
-                      <img src="/assets/showcase/ipad/pro-layouts.webp" alt="iPad Pro Layouts"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1 text-left md:text-right">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Multi-device ecosystem</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Present the whole product story with multiple Apple devices in one polished composition.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
-                    <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl">
-                      <img src="/assets/showcase/ipad/typography.webp" alt="iPad Typography"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1 text-left md:text-right">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Premium typography</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Dial in fonts, gradients, strokes, shadows, and captions built for marketing clarity.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
-                    <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl">
-                      <img src="/assets/showcase/ipad/translation.webp" alt="iPad Translate"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1 text-left md:text-right">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Global localization</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Batch-translate project copy and keep exporting from the same workspace.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-shrink-0 w-[450px] md:w-[800px] flex flex-col gap-4 reveal">
-                    <div class="relative w-fit h-auto rounded-3xl overflow-hidden shadow-2xl">
-                      <img src="/assets/showcase/ipad/canvas-motion.webp" alt="iPad Canvas Motion"
-                        class="w-full h-auto object-contain">
-                    </div>
-                    <div class="px-1 text-left md:text-right">
-                      <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-1">Motion & Keyframes</h3>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                        Preview and export motion-rich App Store assets with per-item timing and easing.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <button type="button" class="power-scroll-arrow" data-feature-nav="next"
+                aria-label="Next feature card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -909,7 +595,7 @@
         <div class="power-scroll-shell">
           <div class="power-scroll-frame w-full">
             <div class="power-scroll-intro-shell max-w-7xl mx-auto w-full px-6 md:px-12">
-              <div class="power-scroll-intro power-scroll-intro--center reveal">
+              <div class="power-scroll-intro power-scroll-intro--center">
                 <div class="power-scroll-copy">
                   <p
                     class="section-tag text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 mb-4">
@@ -926,28 +612,8 @@
                       class="power-scroll-title-line">usually hide behind workarounds.</span>
                   </h2>
                   <p class="power-scroll-lead text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed"><span
-                      class="power-scroll-lead-line">These are the features that make Bezel Studio feel like a real
-                      Apple creative workspace instead of a template wrapper.</span><span
-                      class="power-scroll-lead-line">They matter because they reduce rebuilds, preserve editability, and
-                      keep launch assets connected across the full workflow.</span></p>
-                </div>
-                <div class="power-scroll-topbar">
-                  <div class="power-carousel__toggle-wrap">
-                    <div class="device-toggle power-device-toggle" data-power-toggle role="tablist"
-                      aria-label="Choose power feature preview device">
-                      <span class="device-toggle__pill" aria-hidden="true"></span>
-                      <button type="button" class="device-toggle__button is-active" data-power-device-trigger="iphone"
-                        role="tab" aria-selected="true" aria-controls="power-features-viewport"
-                        id="power-features-tab-iphone" tabindex="0">
-                        iPhone
-                      </button>
-                      <button type="button" class="device-toggle__button" data-power-device-trigger="ipad" role="tab"
-                        aria-selected="false" aria-controls="power-features-viewport" id="power-features-tab-ipad"
-                        tabindex="-1">
-                        iPad
-                      </button>
-                    </div>
-                  </div>
+                      class="power-scroll-lead-line">Create, localize, animate, and export App Store creatives from one
+                      native Apple-first workspace.</span></p>
                 </div>
               </div>
             </div>
@@ -955,233 +621,55 @@
             <div id="power-features-viewport" class="power-scroll-viewport no-scrollbar" tabindex="0"
               aria-label="Power features carousel">
               <div class="power-scroll-track">
-                <article class="power-feature" data-power-slide>
+                <article id="showcase" class="power-feature power-feature--showcase" data-power-slide>
                   <div class="power-feature__copy">
                     <div class="content-card-header">
-                      <div class="symbol-badge symbol-violet symbol-badge--compact" aria-hidden="true">
+                      <div class="symbol-badge symbol-blue symbol-badge--compact" aria-hidden="true">
                         <svg class="symbol-icon">
-                          <use href="#icon-bolt"></use>
+                          <use href="#icon-cloud-sync"></use>
                         </svg>
                       </div>
                       <div class="content-card-header__body">
-                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">Canvas motion</h3>
+                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">iCloud continuity</h3>
                       </div>
                     </div>
-                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">Add
-                      keyframes to individual items, then animate position, scale, rotation, opacity, and visibility so
-                      the same canvas can become a polished preview sequence or a motion-rich marketing visual.</p>
-                    <ul class="power-feature__points">
-                      <li>Build motion directly on the canvas with independent timing, easing, and show or hide
-                        transitions per element.</li>
-                      <li>Preview the motion in place and export the same animation data as rendered video for launch
-                        assets.</li>
-                    </ul>
-                    <a href="./features/canvas-motion.html" class="power-feature__cta">
-                      See Canvas Motion for App Store preview videos
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                      </svg>
-                    </a>
+                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">Keep projects, canvases, and creative progress in sync across your Apple workflow.</p>
                   </div>
                   <div class="power-feature__media" data-power-media>
-                    <img src="/assets/power-features/iphone/canvas-motion.webp" data-power-image
-                      data-iphone-src="/assets/power-features/iphone/canvas-motion.webp"
-                      data-ipad-src="/assets/power-features/ipad/canvas-motion.webp" alt="" aria-hidden="true"
-                      class="power-feature__image">
+                    <img src="/assets/showcase/icloudflow.webp" data-power-image data-iphone-src="/assets/showcase/icloudflow.webp"
+                      data-ipad-src="/assets/showcase/icloudflow.webp" data-mac-src="/assets/showcase/icloudflow.webp" alt="iCloud continuity flow in Bezel Studio" class="power-feature__image power-feature__image--showcase"
+                      loading="lazy" decoding="async" width="1200" height="1600">
                   </div>
                 </article>
 
-                <article class="power-feature" data-power-slide>
+                <article class="power-feature power-feature--showcase" data-power-slide>
                   <div class="power-feature__copy">
                     <div class="content-card-header">
-                      <div class="symbol-badge symbol-indigo symbol-badge--compact" aria-hidden="true">
+                      <div class="symbol-badge symbol-emerald symbol-badge--compact" aria-hidden="true">
                         <svg class="symbol-icon">
-                          <use href="#icon-cube"></use>
+                          <use href="#icon-image"></use>
                         </svg>
                       </div>
                       <div class="content-card-header__body">
-                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">3-axis transforms</h3>
+                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">Custom backgrounds</h3>
                       </div>
                     </div>
-                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">
-                      Beyond normal drag, pinch, and rotate gestures, every element can be tilted and positioned across
-                      all three axes for dimensional App Store compositions.</p>
-                    <ul class="power-feature__points">
-                      <li>Rotate frames, captions, stickers, and imported images on X, Y, and Z for depth-driven
-                        layouts.</li>
-                      <li>Blend perspective moves with scaling and motion edits instead of faking dimension in another
-                        tool.</li>
-                    </ul>
-                    <a href="./features/transforms-3-axis.html" class="power-feature__cta">
-                      Explore 3-axis transforms for dimensional layouts
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                      </svg>
-                    </a>
+                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">Themes, transparent canvases, gradients, emoji patterns, textures, and lighting in one editor.</p>
+                    <div class="power-media-device-switch" aria-label="Choose preview device">
+                      <button type="button" class="power-media-device-button is-active" data-power-media-device="iphone" aria-label="Show iPhone preview" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="3" width="8" height="18" rx="2.4"></rect><path d="M11 18h2"></path></svg></button>
+                      <button type="button" class="power-media-device-button" data-power-media-device="ipad" aria-label="Show iPad preview" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2.5"></rect><path d="M11 16h2"></path></svg></button>
+                      <button type="button" class="power-media-device-button" data-power-media-device="mac" aria-label="Show Mac preview" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="11" rx="1.8"></rect><path d="M9 20h6"></path><path d="M12 16v4"></path></svg></button>
+                    </div>
                   </div>
                   <div class="power-feature__media" data-power-media>
-                    <img src="/assets/power-features/iphone/transforms-3-axis.webp" data-power-image
-                      data-iphone-src="/assets/power-features/iphone/transforms-3-axis.webp"
-                      data-ipad-src="/assets/power-features/ipad/transforms-3-axis.webp" alt="" aria-hidden="true"
-                      class="power-feature__image">
+                    <img src="/assets/showcase/background-iphone-flow.webp" data-power-image data-iphone-src="/assets/showcase/background-iphone-flow.webp"
+                      data-ipad-src="/assets/showcase/background-ipad-flow.webp" data-mac-src="/assets/showcase/background-mac-flow.webp" alt="Custom App Store screenshot backgrounds" class="power-feature__image power-feature__image--showcase"
+                      loading="lazy" decoding="async" width="1200" height="1600">
                   </div>
                 </article>
 
-                <article class="power-feature" data-power-slide>
-                  <div class="power-feature__copy">
-                    <div class="content-card-header">
-                      <div class="symbol-badge symbol-violet symbol-badge--compact" aria-hidden="true">
-                        <svg class="symbol-icon">
-                          <use href="#icon-copy"></use>
-                        </svg>
-                      </div>
-                      <div class="content-card-header__body">
-                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">Copy and paste across projects</h3>
-                      </div>
-                    </div>
-                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">Move
-                      a single item or a full canvas between projects so proven layouts, captions, and frame stacks can
-                      be reused instead of rebuilt.</p>
-                    <ul class="power-feature__points">
-                      <li>Copy reusable launch patterns across localizations, updates, and seasonal campaigns.</li>
-                      <li>Paste a layer, grouped composition, or full canvas into a different project without starting
-                        over.</li>
-                    </ul>
-                    <a href="./features/copy-paste-projects.html" class="power-feature__cta">
-                      See reusable App Store screenshot layout workflows
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                      </svg>
-                    </a>
-                  </div>
-                  <div class="power-feature__media" data-power-media>
-                    <img src="/assets/power-features/iphone/copy-paste-projects.webp" data-power-image
-                      data-iphone-src="/assets/power-features/iphone/copy-paste-projects.webp"
-                      data-ipad-src="/assets/power-features/ipad/copy-paste-projects.webp" alt="" aria-hidden="true"
-                      class="power-feature__image">
-                  </div>
-                </article>
 
-                <article class="power-feature" data-power-slide>
-                  <div class="power-feature__copy">
-                    <div class="content-card-header">
-                      <div class="symbol-badge symbol-slate symbol-badge--compact" aria-hidden="true">
-                        <svg class="symbol-icon">
-                          <use href="#icon-undo"></use>
-                        </svg>
-                      </div>
-                      <div class="content-card-header__body">
-                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">Undo and redo everywhere</h3>
-                      </div>
-                    </div>
-                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">Deep
-                      editing only works when experimentation is safe. Undo and redo support the constant refinement
-                      expected in launch work.</p>
-                    <ul class="power-feature__points">
-                      <li>Try aggressive composition, type, layer, and motion changes without destructive risk.</li>
-                      <li>Keep the entire workflow iterative, from background styling to animation timing and export
-                        polish.</li>
-                    </ul>
-                    <a href="./features/undo-redo.html" class="power-feature__cta">
-                      Explore undo and redo for safe launch iteration
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                      </svg>
-                    </a>
-                  </div>
-                  <div class="power-feature__media" data-power-media>
-                    <img src="/assets/power-features/iphone/undo-redo.webp" data-power-image
-                      data-iphone-src="/assets/power-features/iphone/undo-redo.webp"
-                      data-ipad-src="/assets/power-features/ipad/undo-redo.webp" alt="" aria-hidden="true"
-                      class="power-feature__image">
-                  </div>
-                </article>
-
-                <article class="power-feature" data-power-slide>
-                  <div class="power-feature__copy">
-                    <div class="content-card-header">
-                      <div class="symbol-badge symbol-indigo symbol-badge--compact" aria-hidden="true">
-                        <svg class="symbol-icon">
-                          <use href="#icon-text"></use>
-                        </svg>
-                      </div>
-                      <div class="content-card-header__body">
-                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">Glass-backed caption styling</h3>
-                      </div>
-                    </div>
-                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">Text
-                      overlays can be pushed beyond standard captions with gradients, shadows, borders, custom fonts,
-                      and glass treatments designed for App Store marketing layouts.</p>
-                    <ul class="power-feature__points">
-                      <li>Fine-tune readability and contrast with blurred glass panels behind conversion-focused text.
-                      </li>
-                      <li>Style each headline with solid or gradient fills, direction control, strokes, and depth
-                        effects.</li>
-                    </ul>
-                    <a href="./features/typography.html" class="power-feature__cta">
-                      See caption styling for App Store screenshots
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                      </svg>
-                    </a>
-                  </div>
-                  <div class="power-feature__media" data-power-media>
-                    <img src="/assets/power-features/iphone/glass-caption-styling.webp" data-power-image
-                      data-iphone-src="/assets/power-features/iphone/glass-caption-styling.webp"
-                      data-ipad-src="/assets/power-features/ipad/glass-caption-styling.webp" alt="" aria-hidden="true"
-                      class="power-feature__image">
-                  </div>
-                </article>
-
-                <article class="power-feature" data-power-slide>
-                  <div class="power-feature__copy">
-                    <div class="content-card-header">
-                      <div class="symbol-badge symbol-pink symbol-badge--compact" aria-hidden="true">
-                        <svg class="symbol-icon">
-                          <use href="#icon-sparkles"></use>
-                        </svg>
-                      </div>
-                      <div class="content-card-header__body">
-                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">Animated patterns and lighting</h3>
-                      </div>
-                    </div>
-                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">
-                      Background systems are not limited to flat fills. Patterns, emoji layouts, lighting, movement, and
-                      color changes can all make screenshots feel more premium.</p>
-                    <ul class="power-feature__points">
-                      <li>Combine gradients, textures, emoji patterns, spacing controls, opacity, and motion in the same
-                        canvas.</li>
-                      <li>Adjust ambient lighting and animated color behavior to keep static layouts from feeling
-                        generic.</li>
-                    </ul>
-                    <a href="./features/canvas-styling.html" class="power-feature__cta">
-                      Explore App Store screenshot background styling
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                      </svg>
-                    </a>
-                  </div>
-                  <div class="power-feature__media" data-power-media>
-                    <img src="/assets/power-features/iphone/animated-patterns-lighting.webp" data-power-image
-                      data-iphone-src="/assets/power-features/iphone/animated-patterns-lighting.webp"
-                      data-ipad-src="/assets/power-features/ipad/animated-patterns-lighting.webp" alt=""
-                      aria-hidden="true" class="power-feature__image">
-                  </div>
-                </article>
-
-                <article class="power-feature" data-power-slide>
+                <article class="power-feature power-feature--showcase" data-power-slide>
                   <div class="power-feature__copy">
                     <div class="content-card-header">
                       <div class="symbol-badge symbol-amber symbol-badge--compact" aria-hidden="true">
@@ -1190,32 +678,202 @@
                         </svg>
                       </div>
                       <div class="content-card-header__body">
-                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">BezelAI and Shortcuts</h3>
+                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">Apple Intelligence</h3>
                       </div>
                     </div>
-                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">
-                      Natural-language edits and Quick Mockup App Intents extend the same creative system into AI
-                      workflows and one-tap automation.</p>
-                    <ul class="power-feature__points">
-                      <li>Describe what to add, change, or animate in a canvas and let BezelAI apply the creative
-                        intent.</li>
-                      <li>Run Quick Mockups from Shortcuts or the share sheet to turn screenshots into ready-to-save
-                        visuals fast.</li>
-                    </ul>
-                    <a href="./features/bezel-ai-shortcuts.html" class="power-feature__cta">
-                      See BezelAI mockup automation and shortcuts
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                      </svg>
-                    </a>
+                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">Generate custom stickers, save assets for reuse, and build stronger visual callouts.</p>
+                    <div class="power-media-device-switch" aria-label="Choose preview device">
+                      <button type="button" class="power-media-device-button is-active" data-power-media-device="iphone" aria-label="Show iPhone preview" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="3" width="8" height="18" rx="2.4"></rect><path d="M11 18h2"></path></svg></button>
+                      <button type="button" class="power-media-device-button" data-power-media-device="ipad" aria-label="Show iPad preview" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2.5"></rect><path d="M11 16h2"></path></svg></button>
+                      <button type="button" class="power-media-device-button" data-power-media-device="mac" aria-label="Show Mac preview" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="11" rx="1.8"></rect><path d="M9 20h6"></path><path d="M12 16v4"></path></svg></button>
+                    </div>
                   </div>
                   <div class="power-feature__media" data-power-media>
-                    <img src="/assets/power-features/iphone/bezel-ai-shortcuts.webp" data-power-image
-                      data-iphone-src="/assets/power-features/iphone/bezel-ai-shortcuts.webp"
-                      data-ipad-src="/assets/power-features/ipad/bezel-ai-shortcuts.webp" alt="" aria-hidden="true"
-                      class="power-feature__image">
+                    <img src="/assets/showcase/apple-intelligence-iphone-flow.webp" data-power-image data-iphone-src="/assets/showcase/apple-intelligence-iphone-flow.webp"
+                      data-ipad-src="/assets/showcase/apple-intelligence-ipad-flow.webp" data-mac-src="/assets/showcase/apple-intelligence-mac-flow.webp" alt="Apple Intelligence sticker asset workflow" class="power-feature__image power-feature__image--showcase"
+                      loading="lazy" decoding="async" width="1200" height="1600">
+                  </div>
+                </article>
+
+                <article class="power-feature power-feature--showcase" data-power-slide>
+                  <div class="power-feature__copy">
+                    <div class="content-card-header">
+                      <div class="symbol-badge symbol-indigo symbol-badge--compact" aria-hidden="true">
+                        <svg class="symbol-icon">
+                          <use href="#icon-layers"></use>
+                        </svg>
+                      </div>
+                      <div class="content-card-header__body">
+                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">Precision layers</h3>
+                      </div>
+                    </div>
+                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">Reorder frames, text, drawings, and images with a real editable layer stack.</p>
+                    <div class="power-media-device-switch" aria-label="Choose preview device">
+                      <button type="button" class="power-media-device-button is-active" data-power-media-device="iphone" aria-label="Show iPhone preview" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="3" width="8" height="18" rx="2.4"></rect><path d="M11 18h2"></path></svg></button>
+                      <button type="button" class="power-media-device-button" data-power-media-device="ipad" aria-label="Show iPad preview" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2.5"></rect><path d="M11 16h2"></path></svg></button>
+                      <button type="button" class="power-media-device-button" data-power-media-device="mac" aria-label="Show Mac preview" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="11" rx="1.8"></rect><path d="M9 20h6"></path><path d="M12 16v4"></path></svg></button>
+                    </div>
+                  </div>
+                  <div class="power-feature__media" data-power-media>
+                    <img src="/assets/showcase/layers-iphone-flow.webp" data-power-image data-iphone-src="/assets/showcase/layers-iphone-flow.webp"
+                      data-ipad-src="/assets/showcase/layers-ipad-flow.webp" data-mac-src="/assets/showcase/layers-mac-flow.webp" alt="Precision layers in Bezel Studio" class="power-feature__image power-feature__image--showcase"
+                      loading="lazy" decoding="async" width="1200" height="1600">
+                  </div>
+                </article>
+
+
+                <article class="power-feature power-feature--showcase" data-power-slide>
+                  <div class="power-feature__copy">
+                    <div class="content-card-header">
+                      <div class="symbol-badge symbol-violet symbol-badge--compact" aria-hidden="true">
+                        <svg class="symbol-icon">
+                          <use href="#icon-video"></use>
+                        </svg>
+                      </div>
+                      <div class="content-card-header__body">
+                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">Motion & Keyframes</h3>
+                      </div>
+                    </div>
+                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">Animate position, scale, rotation, opacity, and timing for video-ready App Store previews.</p>
+                    <div class="power-media-device-switch" aria-label="Choose preview device">
+                      <button type="button" class="power-media-device-button is-active" data-power-media-device="iphone" aria-label="Show iPhone preview" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="3" width="8" height="18" rx="2.4"></rect><path d="M11 18h2"></path></svg></button>
+                      <button type="button" class="power-media-device-button" data-power-media-device="ipad" aria-label="Show iPad preview" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2.5"></rect><path d="M11 16h2"></path></svg></button>
+                      <button type="button" class="power-media-device-button" data-power-media-device="mac" aria-label="Show Mac preview" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="11" rx="1.8"></rect><path d="M9 20h6"></path><path d="M12 16v4"></path></svg></button>
+                    </div>
+                  </div>
+                  <div class="power-feature__media" data-power-media>
+                    <img src="/assets/showcase/canvas-motion-iphone-flow.webp" data-power-image data-iphone-src="/assets/showcase/canvas-motion-iphone-flow.webp"
+                      data-ipad-src="/assets/showcase/canvas-motion-ipad-flow.webp" data-mac-src="/assets/showcase/canvas-motion-mac-flow.webp" alt="Canvas Motion keyframe editor" class="power-feature__image power-feature__image--showcase"
+                      loading="lazy" decoding="async" width="1200" height="1600">
+                  </div>
+                </article>
+
+
+                <article class="power-feature power-feature--showcase" data-power-slide>
+                  <div class="power-feature__copy">
+                    <div class="content-card-header">
+                      <div class="symbol-badge symbol-blue symbol-badge--compact" aria-hidden="true">
+                        <svg class="symbol-icon">
+                          <use href="#icon-globe"></use>
+                        </svg>
+                      </div>
+                      <div class="content-card-header__body">
+                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">Global Translation</h3>
+                      </div>
+                    </div>
+                    <p class="power-feature__description text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">Translate the current canvas or a full project for faster App Store localization.</p>
+                    <div class="power-media-device-switch" aria-label="Choose preview device">
+                      <button type="button" class="power-media-device-button is-active" data-power-media-device="iphone" aria-label="Show iPhone preview" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="3" width="8" height="18" rx="2.4"></rect><path d="M11 18h2"></path></svg></button>
+                      <button type="button" class="power-media-device-button" data-power-media-device="ipad" aria-label="Show iPad preview" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2.5"></rect><path d="M11 16h2"></path></svg></button>
+                      <button type="button" class="power-media-device-button" data-power-media-device="mac" aria-label="Show Mac preview" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="11" rx="1.8"></rect><path d="M9 20h6"></path><path d="M12 16v4"></path></svg></button>
+                    </div>
+                  </div>
+                  <div class="power-feature__media" data-power-media>
+                    <img src="/assets/showcase/localize-iphone-flow.webp" data-power-image data-iphone-src="/assets/showcase/localize-iphone-flow.webp"
+                      data-ipad-src="/assets/showcase/localize-ipad-flow.webp" data-mac-src="/assets/showcase/localize-mac-flow.webp" alt="Global translation workflow for screenshot sets" class="power-feature__image power-feature__image--showcase"
+                      loading="lazy" decoding="async" width="1200" height="1600">
+                  </div>
+                </article>
+
+
+                <article class="power-feature power-feature--text-grid" data-power-slide>
+                  <div class="power-feature-grid" aria-label="Additional Bezel Studio workflow features">
+                    <div class="power-feature-grid__pair" data-power-mobile-slide>
+                      <section class="power-feature-grid__item">
+                        <div class="power-feature-grid__title">
+                          <div class="symbol-badge symbol-indigo symbol-badge--compact" aria-hidden="true">
+                            <svg class="symbol-icon">
+                              <use href="#icon-cube"></use>
+                            </svg>
+                          </div>
+                          <h3>3-axis transforms</h3>
+                        </div>
+                        <p>Tilt and position frames, text, stickers, and images across X, Y, and Z axes.</p>
+                        <ul>
+                          <li>Create depth-driven layouts without flattening the canvas.</li>
+                        </ul>
+                        <a href="./features/transforms-3-axis.html">Explore 3-axis transforms</a>
+                      </section>
+                      <section class="power-feature-grid__item">
+                        <div class="power-feature-grid__title">
+                          <div class="symbol-badge symbol-violet symbol-badge--compact" aria-hidden="true">
+                            <svg class="symbol-icon">
+                              <use href="#icon-copy"></use>
+                            </svg>
+                          </div>
+                          <h3>Copy and paste across projects</h3>
+                        </div>
+                        <p>Move layers or full canvases between projects instead of rebuilding proven layouts.</p>
+                        <ul>
+                          <li>Reuse launch patterns across localizations and updates.</li>
+                        </ul>
+                        <a href="./features/copy-paste-projects.html">See copy and paste workflows</a>
+                      </section>
+                    </div>
+                    <div class="power-feature-grid__pair" data-power-mobile-slide>
+                      <section class="power-feature-grid__item">
+                        <div class="power-feature-grid__title">
+                          <div class="symbol-badge symbol-slate symbol-badge--compact" aria-hidden="true">
+                            <svg class="symbol-icon">
+                              <use href="#icon-undo"></use>
+                            </svg>
+                          </div>
+                          <h3>Undo and redo everywhere</h3>
+                        </div>
+                        <p>Experiment freely while refining composition, type, layers, and motion.</p>
+                        <ul>
+                          <li>Step backward or forward without losing the edit flow.</li>
+                        </ul>
+                        <a href="./features/undo-redo.html">Explore undo and redo</a>
+                      </section>
+                      <section class="power-feature-grid__item">
+                        <div class="power-feature-grid__title">
+                          <div class="symbol-badge symbol-indigo symbol-badge--compact" aria-hidden="true">
+                            <svg class="symbol-icon">
+                              <use href="#icon-text"></use>
+                            </svg>
+                          </div>
+                          <h3>Glass-backed caption styling</h3>
+                        </div>
+                        <p>Style captions with glass, gradients, borders, shadows, and custom fonts.</p>
+                        <ul>
+                          <li>Keep marketing text readable over busy screenshot scenes.</li>
+                        </ul>
+                        <a href="./features/typography.html">See caption styling</a>
+                      </section>
+                    </div>
+                    <div class="power-feature-grid__pair" data-power-mobile-slide>
+                      <section class="power-feature-grid__item">
+                        <div class="power-feature-grid__title">
+                          <div class="symbol-badge symbol-pink symbol-badge--compact" aria-hidden="true">
+                            <svg class="symbol-icon">
+                              <use href="#icon-sparkles"></use>
+                            </svg>
+                          </div>
+                          <h3>Animated patterns and lighting</h3>
+                        </div>
+                        <p>Build richer backdrops with gradients, textures, emoji patterns, lighting, and motion.</p>
+                        <ul>
+                          <li>Control spacing, opacity, color behavior, and animated polish.</li>
+                        </ul>
+                        <a href="./features/canvas-styling.html">Explore background styling</a>
+                      </section>
+                      <section class="power-feature-grid__item">
+                        <div class="power-feature-grid__title">
+                          <div class="symbol-badge symbol-amber symbol-badge--compact" aria-hidden="true">
+                            <svg class="symbol-icon">
+                              <use href="#icon-wand"></use>
+                            </svg>
+                          </div>
+                          <h3>BezelAI and Shortcuts</h3>
+                        </div>
+                        <p>Use BezelAI for canvas edits and Shortcuts for one-tap mockup automation.</p>
+                        <ul>
+                          <li>Turn screenshots into ready-to-save visuals from the share sheet.</li>
+                        </ul>
+                        <a href="./features/bezel-ai-shortcuts.html">See BezelAI and Shortcuts</a>
+                      </section>
+                    </div>
                   </div>
                 </article>
               </div>
@@ -1230,20 +888,24 @@
                 </svg>
               </button>
               <div class="power-scroll-pagination" role="tablist" aria-label="Power feature pages">
-                <button type="button" class="power-scroll-dot is-active" data-power-dot="0" role="tab"
-                  aria-selected="true" aria-label="Go to Canvas motion" tabindex="0"></button>
+                <button type="button" class="power-scroll-dot is-active" data-power-dot="0" role="tab" aria-selected="true"
+                  aria-label="Go to iCloud continuity" tabindex="0"></button>
                 <button type="button" class="power-scroll-dot" data-power-dot="1" role="tab" aria-selected="false"
-                  aria-label="Go to 3-axis transforms" tabindex="-1"></button>
+                  aria-label="Go to Custom backgrounds" tabindex="-1"></button>
                 <button type="button" class="power-scroll-dot" data-power-dot="2" role="tab" aria-selected="false"
-                  aria-label="Go to Copy and paste across projects" tabindex="-1"></button>
+                  aria-label="Go to Apple Intelligence" tabindex="-1"></button>
                 <button type="button" class="power-scroll-dot" data-power-dot="3" role="tab" aria-selected="false"
-                  aria-label="Go to Undo and redo everywhere" tabindex="-1"></button>
+                  aria-label="Go to Precision layers" tabindex="-1"></button>
                 <button type="button" class="power-scroll-dot" data-power-dot="4" role="tab" aria-selected="false"
-                  aria-label="Go to Glass-backed caption styling" tabindex="-1"></button>
+                  aria-label="Go to Motion and Keyframes" tabindex="-1"></button>
                 <button type="button" class="power-scroll-dot" data-power-dot="5" role="tab" aria-selected="false"
-                  aria-label="Go to Animated patterns and lighting" tabindex="-1"></button>
+                  aria-label="Go to Global Translation" tabindex="-1"></button>
                 <button type="button" class="power-scroll-dot" data-power-dot="6" role="tab" aria-selected="false"
-                  aria-label="Go to BezelAI and Shortcuts" tabindex="-1"></button>
+                  aria-label="Go to additional workflow features" tabindex="-1"></button>
+                <button type="button" class="power-scroll-dot" data-power-dot="7" data-power-mobile-only role="tab"
+                  aria-selected="false" aria-label="Go to more workflow features" tabindex="-1"></button>
+                <button type="button" class="power-scroll-dot" data-power-dot="8" data-power-mobile-only role="tab"
+                  aria-selected="false" aria-label="Go to more workflow automation features" tabindex="-1"></button>
               </div>
               <button type="button" class="power-scroll-arrow" data-power-nav="next" aria-label="Next power feature">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
