@@ -4227,6 +4227,16 @@ html[data-runtime="live"] .guide-shot-placeholder {
   .power-scroll-controls {
     bottom: 0.55rem;
   }
+
+  .features-frame h2,
+  #workflow h2,
+  #editor-depth h2,
+  #testimonials h2,
+  #faq h2,
+  .developer-note__title {
+    font-size: clamp(2rem, 2.8vw, 3.05rem);
+    line-height: 0.98;
+  }
 }
 
 @media (min-width: 1280px) and (max-width: 1599px) {
@@ -4446,6 +4456,16 @@ html[data-runtime="live"] .guide-shot-placeholder {
 
   .power-scroll-title {
     font-size: clamp(1.65rem, 2.4vw, 2.1rem);
+  }
+
+  .features-frame h2,
+  #workflow h2,
+  #editor-depth h2,
+  #testimonials h2,
+  #faq h2,
+  .developer-note__title {
+    font-size: clamp(1.65rem, 2.4vw, 2.1rem);
+    line-height: 0.98;
   }
 
   .power-scroll-lead {
@@ -7056,6 +7076,41 @@ html[data-runtime="live"] .guide-shot-placeholder {
 
   .hero-section.hero-section--minimal .hero-lead {
     font-size: 0.92rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .features-frame h2,
+  #workflow h2,
+  #editor-depth h2,
+  #testimonials h2,
+  #faq h2,
+  .developer-note__title {
+    font-size: clamp(1.95rem, 3.4vw, 2.55rem);
+    line-height: 0.98;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) and (max-height: 900px) {
+  .features-frame h2,
+  #workflow h2,
+  #editor-depth h2,
+  #testimonials h2,
+  #faq h2,
+  .developer-note__title {
+    font-size: clamp(1.55rem, 2.2vw, 2rem);
+    line-height: 1;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1599px) {
+  .features-frame h2 {
+    font-size: clamp(1.65rem, 2.4vw, 2.1rem);
+    line-height: 0.98;
+  }
+
+  #features {
+    margin-bottom: clamp(2.5rem, 6vh, 4.5rem);
   }
 }
 
