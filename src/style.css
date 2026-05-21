@@ -5889,6 +5889,106 @@ html[data-runtime="live"] .guide-shot-placeholder {
   }
 }
 
+@media (min-width: 900px) and (max-width: 1099px) and (orientation: portrait) {
+  .features-track {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .features-track>.feature-card--frames,
+  .features-track>.feature-card--translation,
+  .features-track>.feature-card--draw,
+  .features-track>.feature-card--typography,
+  .features-track>.feature-card--layers,
+  .features-track>.feature-card--stickers {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .features-track>.feature-card h3 {
+    font-size: clamp(1.15rem, 2.15vw, 1.55rem) !important;
+  }
+
+  .features-track>.feature-card p {
+    font-size: clamp(0.78rem, 1.18vw, 0.92rem) !important;
+  }
+
+  .features-track>.feature-card--frames .feature-stack__single-image {
+    object-fit: cover;
+    object-position: center;
+    transform: none;
+  }
+
+  .motion-card:hover .feature-stack__single-image {
+    transform: translateY(0) scale(1.02);
+  }
+
+  .features-track>.feature-card--translation .feature-translation-scene__center,
+  .features-track>.feature-card--draw .feature-draw-scene__art,
+  .features-track>.feature-card--typography .feature-typography-scene__art,
+  .features-track>.feature-card--layers .feature-layers-scene__art {
+    transform: translateY(0);
+  }
+
+  .features-track>.feature-card--translation .feature-translation-scene__center {
+    top: 58%;
+  }
+
+  .features-track>.feature-card--draw .feature-draw-scene,
+  .features-track>.feature-card--typography .feature-typography-scene,
+  .features-track>.feature-card--layers .feature-layers-scene {
+    align-items: center;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker-stack--spread {
+    inset: 0;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker {
+    width: clamp(8rem, 12vw, 13rem);
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--hello,
+  .features-track>.feature-card--stickers .feature-sticker--dog {
+    width: clamp(7.2rem, 10.8vw, 11.6rem);
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--xcode,
+  .features-track>.feature-card--stickers .feature-sticker--applepark {
+    width: clamp(8.4rem, 12.4vw, 13.4rem);
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--swift {
+    top: 46%;
+    left: 5%;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--hello {
+    top: 42%;
+    right: 4%;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--xcode {
+    top: 58%;
+    left: 19%;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--applepark {
+    top: 58%;
+    right: 8%;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--mac {
+    right: 7%;
+    bottom: 11%;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--dog {
+    left: 8%;
+    bottom: 10%;
+  }
+}
+
 @media (min-width: 1100px) and (max-height: 820px) {
   .features-frame h2 {
     font-size: clamp(1.45rem, 2.5vw, 2.45rem);
@@ -7135,6 +7235,8 @@ html[data-runtime="live"] .guide-shot-placeholder {
   }
 
   .power-feature__cta {
+    align-self: center !important;
+    margin-inline: auto;
     margin-top: 0.4rem;
     padding: 0.5rem 0.8rem;
     font-size: 0.74rem;
@@ -7646,5 +7748,102 @@ body.feature-page .guide-page-cover {
 @media (min-width: 768px) and (max-width: 1279px) and (max-height: 900px) {
   #features {
     margin-bottom: clamp(3rem, 9vh, 5rem);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+  .power-feature .power-feature__copy {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .power-feature .power-feature__cta {
+    align-self: center !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media (max-width: 1099px) and (orientation: portrait) {
+  .features-track>.feature-card .feature-stack--frames,
+  .features-track>.feature-card .feature-translation-scene,
+  .features-track>.feature-card .feature-draw-scene,
+  .features-track>.feature-card .feature-typography-scene,
+  .features-track>.feature-card .feature-layers-scene,
+  .features-track>.feature-card .feature-sticker-stack--spread {
+    inset: 0 !important;
+  }
+
+  .features-track>.feature-card--frames .feature-stack__single-image {
+    object-position: center center !important;
+    transform: none !important;
+  }
+
+  .features-track>.feature-card--translation .feature-translation-scene__center {
+    top: 70% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .features-track>.feature-card--draw .feature-draw-scene,
+  .features-track>.feature-card--typography .feature-typography-scene,
+  .features-track>.feature-card--layers .feature-layers-scene {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .features-track>.feature-card--draw .feature-draw-scene__art,
+  .features-track>.feature-card--typography .feature-typography-scene__art,
+  .features-track>.feature-card--layers .feature-layers-scene__art {
+    transform: translateY(20%) !important;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker-stack--spread {
+    inset: 0 !important;
+    transform: none !important;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker {
+    width: clamp(9rem, 17vw, 16rem) !important;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--hello,
+  .features-track>.feature-card--stickers .feature-sticker--dog {
+    width: clamp(8rem, 15vw, 14rem) !important;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--xcode,
+  .features-track>.feature-card--stickers .feature-sticker--applepark {
+    width: clamp(9.5rem, 18vw, 17rem) !important;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--swift {
+    top: 24% !important;
+    left: -10% !important;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--hello {
+    top: 18% !important;
+    right: -12% !important;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--xcode {
+    top: 48% !important;
+    left: -6% !important;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--applepark {
+    top: 48% !important;
+    right: -10% !important;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--mac {
+    right: -13% !important;
+    bottom: 4% !important;
+  }
+
+  .features-track>.feature-card--stickers .feature-sticker--dog {
+    left: -12% !important;
+    bottom: 3% !important;
   }
 }
