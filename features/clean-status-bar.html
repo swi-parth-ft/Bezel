@@ -11,7 +11,7 @@
     gtag('config', 'G-4H5EW5KWZC');
   </script>
   <title>Clean Status Bar for App Screenshots | Bezel Studio</title>
-  <meta name="description" content="Replace messy captured status bars in supported framed screenshots and screen recordings with a clean Apple-style 9:41 status bar treatment.">
+  <meta name="description" content="Clean up messy captured status bars, recording indicators, time, battery, and signal clutter with an Apple-style 9:41 status bar in Bezel Studio.">
   <meta name="keywords" content="clean status bar, app screenshot status bar, 9:41 status bar, iPhone screenshot mockup, app preview status bar">
   <link rel="canonical" href="https://bezelstudio.app/features/clean-status-bar.html">
   <meta name="apple-itunes-app" content="app-id=6758039031">
@@ -19,30 +19,98 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
   <link rel="stylesheet" href="/src/style.css">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Bezel Studio">
+  <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Clean Status Bar for App Screenshots | Bezel Studio">
-  <meta property="og:description" content="Give supported framed screenshots and screen recordings a clean Apple-style 9:41 status bar treatment.">
+  <meta property="og:description" content="Replace recording indicators and messy captured status bars with a clean Apple-style 9:41 status bar.">
   <meta property="og:url" content="https://bezelstudio.app/features/clean-status-bar.html">
-  <meta property="og:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/device-frames.webp">
+  <meta property="og:image" content="https://bezelstudio.app/assets/feature-pages/clean-status-bar-feature.webp">
+  <meta property="og:image:alt" content="Clean Status Bar cleanup in Bezel Studio">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Clean Status Bar for App Screenshots | Bezel Studio">
-  <meta name="twitter:description" content="Give supported framed screenshots and screen recordings a clean Apple-style 9:41 status bar treatment.">
-  <meta name="twitter:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/device-frames.webp">
-  <meta name="twitter:image:alt" content="Clean Status Bar for framed app screenshots in Bezel Studio">
+  <meta name="twitter:description" content="Replace recording indicators and messy captured status bars with a clean Apple-style 9:41 status bar.">
+  <meta name="twitter:image" content="https://bezelstudio.app/assets/feature-pages/clean-status-bar-feature.webp">
+  <meta name="twitter:image:alt" content="Clean Status Bar cleanup in Bezel Studio">
+  <meta name="color-scheme" content="light dark">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Clean Status Bar for App Screenshots | Bezel Studio",
-      "description": "Replace messy captured status bars in supported framed screenshots and screen recordings with a clean Apple-style 9:41 status bar treatment.",
+      "description": "Clean up messy captured status bars, recording indicators, time, battery, and signal clutter with an Apple-style 9:41 status bar in Bezel Studio.",
       "url": "https://bezelstudio.app/features/clean-status-bar.html",
       "isPartOf": {"@type": "WebSite", "name": "Bezel Studio", "url": "https://bezelstudio.app/"},
-      "about": {"@type": "SoftwareApplication", "name": "Bezel Studio", "applicationCategory": "DesignApplication", "operatingSystem": "iOS, iPadOS"}
+      "about": {"@type": "SoftwareApplication", "name": "Bezel Studio", "applicationCategory": "DesignApplication", "operatingSystem": "iOS, iPadOS", "downloadUrl": "https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031"}
     }
   </script>
+  <script>
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      document.documentElement.classList.toggle('dark', event.matches);
+    });
+  </script>
+  <style>
+    .feature-page-shell {
+      position: relative;
+      width: min(100%, 78rem);
+      padding-inline: 1rem;
+    }
+    .feature-visual-stage {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: min(100%, 70rem);
+      height: clamp(25rem, 48vw, 42rem);
+      margin: 0 auto 4rem;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .feature-status-feature-art {
+      width: min(72%, 34rem);
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 30px 70px rgba(15, 23, 42, 0.18));
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    @media (max-width: 1024px) {
+      .feature-visual-stage {
+        height: clamp(27rem, 54svh, 38rem);
+        margin-bottom: 2rem;
+      }
+      .feature-status-feature-art {
+        width: min(86%, 31rem);
+      }
+    }
+    @media (max-width: 767px) {
+      main.feature-main {
+        padding-top: 5.75rem;
+      }
+      .feature-page-shell {
+        margin-bottom: 3rem;
+      }
+      .feature-visual-stage {
+        height: clamp(20rem, 46svh, 27rem);
+        margin-bottom: 1rem;
+      }
+      .feature-status-feature-art {
+        width: min(92%, 25rem);
+      }
+    }
+  </style>
 </head>
 <body class="font-sans bg-zinc-50 dark:bg-[#0A0A0A] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300 feature-page">
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute top-[-20%] left-[20%] w-[60%] h-[50%] rounded-[100%] bg-blue-600/10 dark:bg-blue-600/20 blur-[150px]"></div>
+    <div class="absolute bottom-[-10%] right-[10%] w-[40%] h-[40%] rounded-[100%] bg-purple-600/10 dark:bg-purple-600/20 blur-[150px]"></div>
+  </div>
+
   <div class="site-chrome relative z-10 w-full flex justify-center pt-0 md:pt-8">
     <header class="site-header flex items-center justify-between px-5 md:px-6 py-3 bg-transparent rounded-none md:rounded-full w-full md:w-[90%] max-w-5xl shadow-md md:shadow-xl dark:shadow-lg dark:md:shadow-2xl">
       <a href="/" class="flex items-center gap-3">
@@ -77,46 +145,96 @@
     </div>
   </div>
 
-  <main class="guide-page-main">
-    <article class="guide-page-shell">
-      <section class="guide-page-hero reveal">
-        <p class="guide-page-eyebrow">Device Frame Feature</p>
-        <h1 class="guide-page-title">Clean Status Bar for framed screenshots and recordings.</h1>
-        <p class="guide-page-lead">Clean Status Bar replaces messy captured status bar content in supported iPhone frame media with a clean Apple-style 9:41 treatment, so screenshots and app preview clips feel presentation-ready before export.</p>
-        <div class="guide-page-meta">
-          <span class="guide-chip">9:41 polish</span>
-          <span class="guide-chip">Screenshots</span>
-          <span class="guide-chip">Screen recordings</span>
-        </div>
-        <div class="guide-page-cover">
-          <img src="/assets/feature-platforms/ipad/device-frames.webp" alt="Clean Status Bar for framed app screenshots in Bezel Studio">
+  <main class="feature-main relative z-10 pt-32 pb-24 flex flex-col items-center">
+    <div class="feature-page-shell mb-24">
+      <section class="relative z-10 max-w-5xl w-[90%] mx-auto text-center mb-10 reveal">
+        <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-8 text-transparent bg-clip-text bg-gradient-to-b from-zinc-900 to-zinc-500 dark:from-white dark:to-zinc-500 [text-wrap:balance]">
+          Clean Status Bar
+        </h1>
+        <p class="text-xl md:text-2xl font-light text-zinc-600 dark:text-zinc-300 max-w-3xl mx-auto leading-relaxed mb-12 [text-wrap:balance]">
+          Replace recording indicators, messy time, battery, and signal clutter with a clean Apple-style 9:41 status bar.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+          <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/25 hover:-translate-y-1">
+            <img src="/assets/brand/app-store-logo.svg" alt="App Store" class="w-5 h-5 brightness-0 invert">
+            Start building for free
+          </a>
         </div>
       </section>
 
-      <section class="guide-steps reveal">
-        <article class="guide-step"><p class="guide-step__index">Why It Matters</p><h2 class="guide-step__title">Raw captures often carry messy, inconsistent status bars.</h2><p class="guide-step__body">App Store screenshots need to look intentional. When the frame media is supported, Bezel Studio can clean the status area inside the mockup instead of making you retouch every screenshot or video elsewhere.</p></article>
-        <article class="guide-step"><p class="guide-step__index">How It Works</p><h2 class="guide-step__title">The cleanup belongs to the frame, not a flattened export.</h2><p class="guide-step__body">Clean Status Bar is stored with the frame overlay. It can be reflected in live preview, still export, video export, and `.bezel` project movement.</p></article>
-        <article class="guide-step"><p class="guide-step__index">Best Use</p><h2 class="guide-step__title">Use it when raw screenshots or recordings already sit inside iPhone frames.</h2><p class="guide-step__body">It pairs with device frames, captions, Canvas Motion, and batch export for cleaner launch visuals.</p></article>
+      <div class="feature-visual-stage reveal" style="animation-delay: 200ms;" aria-hidden="true">
+        <img class="feature-status-feature-art" src="/assets/feature-pages/clean-status-bar-feature.webp" alt="" width="1200" height="1600">
+      </div>
+
+      <section class="feature-detail-section relative z-10 reveal" style="animation-delay: 300ms;">
+        <div class="feature-detail-intro">
+          <div>
+            <p class="feature-detail-label">Inside Clean Status Bar</p>
+            <h2 class="feature-detail-title">Make raw captures look presentation-ready.</h2>
+          </div>
+          <div class="feature-detail-copy">
+            <p>Recorded demos and raw screenshots often capture red recording indicators, inconsistent time, noisy battery states, and carrier clutter. Clean Status Bar keeps the frame polished before export.</p>
+          </div>
+        </div>
+
+        <section class="feature-detail-group" aria-label="Clean status bar workflow">
+          <h3 class="feature-use-heading">Status Bar Polish</h3>
+          <div class="feature-detail-grid">
+            <article class="feature-detail-card"><strong>Recording Indicator Cleanup:</strong><p>Remove screen-recording badges and capture noise from supported framed media.</p></article>
+            <article class="feature-detail-card"><strong>Apple-Style 9:41:</strong><p>Standardize the time, signal, Wi-Fi, and battery into the clean presentation users expect from App Store screenshots.</p></article>
+            <article class="feature-detail-card"><strong>Screenshots and Recordings:</strong><p>Keep still exports and preview videos visually consistent without retouching each asset.</p></article>
+            <article class="feature-detail-card"><strong>Frame-Aware Editing:</strong><p>The cleanup stays inside the Bezel Studio frame workflow, so it remains editable before final export.</p></article>
+          </div>
+        </section>
       </section>
 
-      <section class="guide-related reveal">
-        <p class="guide-related__eyebrow">Next Pages</p>
-        <h2 class="guide-related__heading">Keep polishing the device-frame workflow.</h2>
-        <div class="guide-related__grid">
-          <a href="/guides/clean-status-bars-in-device-frames.html" class="guide-related__card"><span>Guide</span><strong>Clean status bars in framed screenshots and recordings</strong><p>Step through when to enable the cleanup and how to verify the export.</p></a>
-          <a href="/features/frame-reflections.html" class="guide-related__card"><span>Feature</span><strong>Frame Reflections</strong><p>Add mirrored depth after the status bar is clean.</p></a>
-          <a href="/features/device-frames.html" class="guide-related__card"><span>Feature</span><strong>Device Frames</strong><p>Return to the core iPhone mockup generator workflow.</p></a>
+      <section class="relative z-10 w-full max-w-5xl px-6 mx-auto mt-20 reveal" style="animation-delay: 360ms;">
+        <div class="rounded-[2rem] border border-zinc-200/80 bg-white/85 px-6 py-8 shadow-[0_30px_80px_-50px_rgba(15,23,42,0.35)] backdrop-blur dark:border-white/10 dark:bg-white/5 md:px-8">
+          <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div class="max-w-2xl">
+              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-300">Keep Exploring</p>
+              <h2 class="mt-3 text-3xl font-black tracking-tight text-zinc-900 dark:text-white">Related guides for this feature</h2>
+              <p class="mt-3 text-base leading-7 text-zinc-600 dark:text-zinc-300">Use Clean Status Bar with device frames, motion, and export workflows for polished launch assets.</p>
+            </div>
+            <a href="/guides/" class="inline-flex items-center gap-2 text-sm font-semibold text-zinc-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-300">
+              Browse all guides
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+          <div class="mt-8 grid gap-4 md:grid-cols-3">
+            <a href="/guides/clean-status-bars-in-device-frames.html" class="block rounded-[1.5rem] border border-zinc-200/80 bg-zinc-50/90 px-5 py-5 transition-all hover:-translate-y-1 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-zinc-950/40 dark:hover:border-blue-400/60 dark:hover:bg-zinc-950/70">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">Guide</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">Clean status bars in framed screenshots and recordings.</h3>
+            </a>
+            <a href="/features/device-frames.html" class="block rounded-[1.5rem] border border-zinc-200/80 bg-zinc-50/90 px-5 py-5 transition-all hover:-translate-y-1 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-zinc-950/40 dark:hover:border-blue-400/60 dark:hover:bg-zinc-950/70">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">Feature</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">Photorealistic Device Frames.</h3>
+            </a>
+            <a href="/features/canvas-motion.html" class="block rounded-[1.5rem] border border-zinc-200/80 bg-zinc-50/90 px-5 py-5 transition-all hover:-translate-y-1 hover:border-blue-300 hover:bg-white dark:border-white/10 dark:bg-zinc-950/40 dark:hover:border-blue-400/60 dark:hover:bg-zinc-950/70">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">Feature</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">Canvas Motion and Keyframes.</h3>
+            </a>
+          </div>
         </div>
       </section>
-      <section class="guide-page-cta reveal">
-        <p class="guide-page-cta__copy">Try Clean Status Bar inside the native Bezel Studio frame workflow.</p>
-        <div class="guide-page-cta__row">
-          <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="guides-home-cta">Download Bezel Studio</a>
-          <a href="/guides/clean-status-bars-in-device-frames.html" class="guides-home-cta">Follow the Clean Status Bar guide</a>
-        </div>
-      </section>
-    </article>
+    </div>
   </main>
+
+  <footer class="border-t border-zinc-200 dark:border-white/10 pt-16 pb-12 px-6 md:px-12 bg-zinc-50 dark:bg-[#020202] mt-24">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex items-center gap-4">
+        <img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio">
+        <span class="text-zinc-900 dark:text-white font-semibold flex items-center gap-2">Bezel Studio</span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hover:text-black dark:hover:text-white transition-colors">App Store</a>
+        <a href="/" class="hover:text-black dark:hover:text-white transition-colors">Home</a>
+        <a href="/guides/" class="hover:text-black dark:hover:text-white transition-colors">Guides</a>
+        <a href="/privacy.html" class="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>
