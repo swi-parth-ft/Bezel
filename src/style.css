@@ -7353,6 +7353,8 @@ body.feature-page .feature-detail-card {
 @supports (backdrop-filter: blur(1px)) {
   .site-header,
   .site-header.is-scrolled,
+  .site-header__menu-panel,
+  .site-header__menu-toggle,
   .features-track>.feature-card .p-7,
   .features-track>.feature-card .p-8,
   .features-track>.feature-card .p-7.md\:p-8,
@@ -7369,6 +7371,8 @@ body.feature-page .feature-detail-card {
 @supports (-webkit-backdrop-filter: blur(1px)) {
   .site-header,
   .site-header.is-scrolled,
+  .site-header__menu-panel,
+  .site-header__menu-toggle,
   .features-track>.feature-card .p-7,
   .features-track>.feature-card .p-8,
   .features-track>.feature-card .p-7.md\:p-8,
