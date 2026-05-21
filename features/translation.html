@@ -154,6 +154,42 @@
       opacity: 0.98;
       transform: rotate(-8deg);
     }
+    .feature-visual-stage--translation-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+    .feature-visual-stage--translation-card .feature-translation-scene {
+      position: relative;
+      width: min(100%, 42rem);
+      height: min(100%, 24rem);
+      min-height: 18rem;
+      overflow: visible;
+    }
+    .feature-visual-stage--translation-card .feature-translation-scene__center {
+      width: clamp(8rem, 13vw, 12rem);
+      top: 53%;
+    }
+    .feature-visual-stage--translation-card .feature-lang-pill--top-left {
+      top: 22%;
+      left: 13%;
+    }
+    .feature-visual-stage--translation-card .feature-lang-pill--top-right {
+      top: 20%;
+      right: 13%;
+    }
+    .feature-visual-stage--translation-card .feature-lang-pill--bottom-left {
+      bottom: 18%;
+      left: 14%;
+    }
+    .feature-visual-stage--translation-card .feature-lang-pill--bottom-right {
+      bottom: 18%;
+      right: 13%;
+    }
+    .feature-visual-stage--translation-card .feature-lang-pill--center-bottom {
+      bottom: 8%;
+    }
     /* Premium markdown overrides for generated body content */
     .premium-content h2 {
       font-size: 2.5rem;
@@ -252,7 +288,7 @@
   </style>
 </head>
 
-<body class="font-sans bg-white dark:bg-[#050505] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+<body class="font-sans bg-white dark:bg-[#050505] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300 feature-page">
   
   <!-- Premium ambient glow -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -260,22 +296,38 @@
     <div class="absolute bottom-[-10%] right-[10%] w-[40%] h-[40%] rounded-[100%] bg-purple-600/10 dark:bg-purple-600/20 blur-[150px]"></div>
   </div>
 
-  <div class="relative z-10 w-full flex justify-center pt-8 reveal">
-    <header class="flex items-center justify-between px-6 py-3 bg-black/5 dark:bg-white/5 glass-blur border border-black/5 dark:border-white/10 rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
+  <div class="site-chrome relative z-10 w-full flex justify-center pt-0 md:pt-8">
+    <header class="site-header flex items-center justify-between px-5 md:px-6 py-3 bg-transparent rounded-none md:rounded-full w-full md:w-[90%] max-w-5xl shadow-md md:shadow-xl dark:shadow-lg dark:md:shadow-2xl">
       <a href="/" class="flex items-center gap-3">
-        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Logo">
-        <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio logo">
+        <span class="site-header__brand-text text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="/#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
-        <a href="/guides/" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
-        <a href="/#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
-        <a href="/#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
-      </nav>
-      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hidden sm:flex items-center justify-center px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
-        Get the App
-      </a>
+      <div class="site-header__expanded hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav class="flex items-center gap-8">
+          <a href="/#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
+          <a href="/guides/" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
+          <a href="/#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
+          <a href="/#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+        </nav>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="cta-button cta-button--nav hidden sm:flex items-center justify-center px-4 py-2 bg-zinc-900/90 dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">Get the App</a>
+      </div>
+      <button type="button" class="site-header__menu-toggle" data-header-menu-toggle aria-label="Open navigation" aria-expanded="false" aria-controls="site-header-menu">
+        <svg class="symbol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
     </header>
+    <div id="site-header-menu" class="site-header__menu-panel" data-header-menu-panel aria-hidden="true">
+      <nav class="site-header__menu-links">
+        <a href="/#features">Features</a>
+        <a href="/guides/">Guides</a>
+        <a href="/#workflow">Workflow</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="site-header__menu-cta">Get the App</a>
+    </div>
   </div>
 
   <main class="relative z-10 pt-32 pb-24 flex flex-col items-center">
@@ -298,72 +350,51 @@
       </div>
     </section>
 
-      <div class="feature-visual-stage reveal" style="animation-delay: 200ms;" aria-hidden="true">
-        <img class="feature-visual-stage__device feature-visual-stage__device--iphone" src="/assets/feature-platforms/iphone/translation.webp" alt="Localized iPhone App Store screenshot workflow in Bezel Studio">
-        <img class="feature-visual-stage__device feature-visual-stage__device--ipad" src="/assets/feature-platforms/ipad/translation.webp" alt="Localized iPad App Store screenshot workflow in Bezel Studio">
+      <div class="feature-visual-stage feature-visual-stage--translation-card reveal" style="animation-delay: 200ms;">
+        <div class="feature-translation-scene" aria-label="Global Translation artwork from Bezel Studio">
+          <img src="/assets/stickers/translate.png" alt="Translate sticker" class="feature-translation-scene__center">
+          <span class="feature-lang-pill feature-lang-pill--top-left feature-lang-pill--es">Hola</span>
+          <span class="feature-lang-pill feature-lang-pill--top-right feature-lang-pill--fr">Bonjour</span>
+          <span class="feature-lang-pill feature-lang-pill--bottom-left feature-lang-pill--jp">こんにちは</span>
+          <span class="feature-lang-pill feature-lang-pill--bottom-right feature-lang-pill--it">Ciao</span>
+          <span class="feature-lang-pill feature-lang-pill--center-bottom feature-lang-pill--hi">नमस्ते</span>
+        </div>
       </div>
 
     
-    <section class="relative z-10 w-full max-w-5xl px-6 mx-auto mt-12 reveal" style="animation-delay: 340ms;">
-      <div class="rounded-[2rem] border border-zinc-200/80 bg-blue-50/80 px-6 py-8 shadow-[0_30px_80px_-50px_rgba(37,99,235,0.35)] backdrop-blur dark:border-blue-400/20 dark:bg-blue-500/[0.08] md:px-8">
-        <div class="max-w-3xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 dark:text-blue-300">Install The Workflow</p>
-          <h2 class="mt-3 text-3xl font-black tracking-tight text-zinc-900 dark:text-white">Install the localization workflow before the next translated launch slips.</h2>
-          <p class="mt-3 text-base leading-7 text-zinc-700 dark:text-zinc-300">This page is most useful when it leads straight into the app. Keep translation, text fitting, and export inside one native project instead of splitting the process across multiple tools.</p>
-        </div>
-        <div class="mt-6 grid gap-3 md:grid-cols-3">
-          
-            <div class="rounded-[1.25rem] border border-blue-200/70 bg-white/90 px-4 py-4 text-sm font-medium leading-6 text-zinc-700 shadow-sm dark:border-blue-300/15 dark:bg-zinc-950/60 dark:text-zinc-200">
-              Translate the current canvas or the full screenshot project on-device
-            </div>
-          
-            <div class="rounded-[1.25rem] border border-blue-200/70 bg-white/90 px-4 py-4 text-sm font-medium leading-6 text-zinc-700 shadow-sm dark:border-blue-300/15 dark:bg-zinc-950/60 dark:text-zinc-200">
-              Keep typography, spacing, and device frames aligned across every locale
-            </div>
-          
-            <div class="rounded-[1.25rem] border border-blue-200/70 bg-white/90 px-4 py-4 text-sm font-medium leading-6 text-zinc-700 shadow-sm dark:border-blue-300/15 dark:bg-zinc-950/60 dark:text-zinc-200">
-              Batch-export localized screenshots and preview assets from one source of truth
-            </div>
-          
-        </div>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="inline-flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-6 py-3 text-base font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200">
-            <img src="/assets/brand/app-store-logo.svg" alt="App Store" class="h-5 w-5 dark:invert">
-            Download Bezel Studio for localization workflows
-          </a>
-          <a href="/guides/localize-screenshot-sets-apple-translate.html" class="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-300/80 bg-white/85 px-6 py-3 text-base font-semibold text-zinc-900 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white dark:border-white/15 dark:bg-white/[0.04] dark:text-white dark:hover:border-blue-400/60 dark:hover:bg-white/[0.08]">
-            Follow the App Store localization guide
-          </a>
-        </div>
-      </div>
-    </section>
+
   
 
     <!-- Seamless Content Layout -->
-    <section class="relative z-10 w-full max-w-3xl px-6 mx-auto premium-content reveal" style="animation-delay: 300ms;">
-      <div class="prose prose-lg dark:prose-invert max-w-none text-zinc-900 dark:text-white">
-        
-      <h2 class="text-3xl font-bold mb-6 text-zinc-900 dark:text-white tracking-tight">Ship Globally with Localized Screenshots</h2>
-      <p class="mb-6">
-        Expanding your app's reach requires speaking the user's language. Bezel Studio offers <strong>automatic screenshot generation</strong> for multiple locales. Instantly translate your English captions into Spanish, French, Japanese, and more, creating fully <strong>localized screenshots</strong> in seconds.
-      </p>
-      <p class="mb-6">
-        App Store screenshot localization is more than translated copy. It also means preserving hierarchy, spacing, and typography when one language runs longer than another. Bezel Studio keeps translation, layout edits, and export in the same project so the localized campaign stays consistent instead of splintering into manual rebuilds.
-      </p>
-      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Frictionless ASO Localization</h3>
-      <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
-        <li><strong>On-Device Translation:</strong> Secure, native translation that processes entirely on your iPhone or iPad.</li>
-        <li><strong>Batch Canvas Updates:</strong> Translate every single canvas in your project with one tap.</li>
-        <li><strong>Auto-Resizing Text:</strong> Our typography engine automatically adjusts font sizes to accommodate longer translated phrases.</li>
-      </ul>
-      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">What a localization workflow should protect</h3>
-      <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
-        <li><strong>Visual consistency:</strong> Keep device frames, gradients, and callout systems aligned across every language.</li>
-        <li><strong>Readable copy:</strong> Adapt captions for German, French, Japanese, and other longer or denser strings without losing balance.</li>
-        <li><strong>Fast iteration:</strong> Review one locale, adjust the template, then push the improvement across the project instead of editing every canvas separately.</li>
-      </ul>
-    
+    <section class="feature-detail-section relative z-10 reveal" style="animation-delay: 300ms;">
+      <div class="feature-detail-intro">
+        <div>
+          <p class="feature-detail-label">Inside Translation</p>
+          <h2 class="feature-detail-title">Ship Globally with Localized Screenshots</h2>
+        </div>
+        <div class="feature-detail-copy">
+          <p>Expanding your app's reach requires speaking the user's language. Bezel Studio offers <strong>automatic screenshot generation</strong> for multiple locales. Instantly translate your English captions into Spanish, French, Japanese, and more, creating fully <strong>localized screenshots</strong> in seconds.</p>
+          <p>App Store screenshot localization is more than translated copy. It also means preserving hierarchy, spacing, and typography when one language runs longer than another. Bezel Studio keeps translation, layout edits, and export in the same project so the localized campaign stays consistent instead of splintering into manual rebuilds.</p>
+        </div>
       </div>
+
+      <section class="feature-detail-group" aria-label="Frictionless ASO Localization">
+        <h3 class="feature-use-heading">Frictionless ASO Localization</h3>
+        <div class="feature-detail-grid">
+          <article class="feature-detail-card"><strong>On-Device Translation:</strong><p>Secure, native translation that processes entirely on your iPhone or iPad.</p></article>
+          <article class="feature-detail-card"><strong>Batch Canvas Updates:</strong><p>Translate every single canvas in your project with one tap.</p></article>
+          <article class="feature-detail-card"><strong>Auto-Resizing Text:</strong><p>Our typography engine automatically adjusts font sizes to accommodate longer translated phrases.</p></article>
+        </div>
+      </section>
+
+      <section class="feature-detail-group" aria-label="What a localization workflow should protect">
+        <h3 class="feature-use-heading">What a localization workflow should protect</h3>
+        <div class="feature-detail-grid">
+          <article class="feature-detail-card"><strong>Visual consistency:</strong><p>Keep device frames, gradients, and callout systems aligned across every language.</p></article>
+          <article class="feature-detail-card"><strong>Readable copy:</strong><p>Adapt captions for German, French, Japanese, and other longer or denser strings without losing balance.</p></article>
+          <article class="feature-detail-card"><strong>Fast iteration:</strong><p>Review one locale, adjust the template, then push the improvement across the project instead of editing every canvas separately.</p></article>
+        </div>
+      </section>
     </section>
     
     <section class="relative z-10 w-full max-w-5xl px-6 mx-auto mt-20 reveal" style="animation-delay: 360ms;">
@@ -442,7 +473,6 @@
         <img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio">
         <span class="text-zinc-900 dark:text-white font-semibold flex items-center gap-2">
           Bezel Studio
-          <span class="text-xs bg-black/5 dark:bg-white/10 text-zinc-600 dark:text-white/70 px-2 py-0.5 rounded uppercase tracking-wider">iOS App</span>
         </span>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">

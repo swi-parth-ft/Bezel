@@ -154,6 +154,32 @@
       opacity: 0.98;
       transform: rotate(-8deg);
     }
+    .feature-visual-stage--draw-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+    .feature-visual-stage--draw-card .feature-draw-scene {
+      width: min(100%, 42rem);
+      height: min(100%, 24rem);
+      min-height: 18rem;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .feature-visual-stage--draw-card .feature-draw-scene__art {
+      width: min(82%, 30rem);
+      max-height: 100%;
+      filter: drop-shadow(0 26px 44px rgba(15, 23, 42, 0.18));
+    }
+    .feature-visual-stage--draw-card .feature-draw-scene__wide-art {
+      width: min(100%, 44rem);
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 26px 44px rgba(15, 23, 42, 0.18));
+    }
     /* Premium markdown overrides for generated body content */
     .premium-content h2 {
       font-size: 2.5rem;
@@ -252,7 +278,7 @@
   </style>
 </head>
 
-<body class="font-sans bg-white dark:bg-[#050505] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+<body class="font-sans bg-white dark:bg-[#050505] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300 feature-page">
   
   <!-- Premium ambient glow -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -260,22 +286,38 @@
     <div class="absolute bottom-[-10%] right-[10%] w-[40%] h-[40%] rounded-[100%] bg-purple-600/10 dark:bg-purple-600/20 blur-[150px]"></div>
   </div>
 
-  <div class="relative z-10 w-full flex justify-center pt-8 reveal">
-    <header class="flex items-center justify-between px-6 py-3 bg-black/5 dark:bg-white/5 glass-blur border border-black/5 dark:border-white/10 rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
+  <div class="site-chrome relative z-10 w-full flex justify-center pt-0 md:pt-8">
+    <header class="site-header flex items-center justify-between px-5 md:px-6 py-3 bg-transparent rounded-none md:rounded-full w-full md:w-[90%] max-w-5xl shadow-md md:shadow-xl dark:shadow-lg dark:md:shadow-2xl">
       <a href="/" class="flex items-center gap-3">
-        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Logo">
-        <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio logo">
+        <span class="site-header__brand-text text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="/#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
-        <a href="/guides/" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
-        <a href="/#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
-        <a href="/#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
-      </nav>
-      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hidden sm:flex items-center justify-center px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
-        Get the App
-      </a>
+      <div class="site-header__expanded hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav class="flex items-center gap-8">
+          <a href="/#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
+          <a href="/guides/" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
+          <a href="/#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
+          <a href="/#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+        </nav>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="cta-button cta-button--nav hidden sm:flex items-center justify-center px-4 py-2 bg-zinc-900/90 dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">Get the App</a>
+      </div>
+      <button type="button" class="site-header__menu-toggle" data-header-menu-toggle aria-label="Open navigation" aria-expanded="false" aria-controls="site-header-menu">
+        <svg class="symbol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
     </header>
+    <div id="site-header-menu" class="site-header__menu-panel" data-header-menu-panel aria-hidden="true">
+      <nav class="site-header__menu-links">
+        <a href="/#features">Features</a>
+        <a href="/guides/">Guides</a>
+        <a href="/#workflow">Workflow</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="site-header__menu-cta">Get the App</a>
+    </div>
   </div>
 
   <main class="relative z-10 pt-32 pb-24 flex flex-col items-center">
@@ -298,29 +340,37 @@
       </div>
     </section>
 
-      <div class="feature-visual-stage reveal" style="animation-delay: 200ms;" aria-hidden="true">
-        <img class="feature-visual-stage__device feature-visual-stage__device--iphone" src="/assets/feature-platforms/iphone/images-stickers.webp" alt="">
-        <img class="feature-visual-stage__device feature-visual-stage__device--ipad" src="/assets/feature-platforms/ipad/images-stickers.webp" alt="">
+      <div class="feature-visual-stage feature-visual-stage--draw-card reveal" style="animation-delay: 200ms;">
+        <div class="feature-draw-scene" aria-label="Draw and annotate artwork from Bezel Studio">
+          <picture>
+            <source media="(min-width: 768px)" srcset="/assets/feature-pages/draw-feature.webp">
+            <img src="/assets/stickers/draw.png" alt="Draw and annotate tools" class="feature-draw-scene__art feature-draw-scene__wide-art" width="1609" height="577">
+          </picture>
+        </div>
       </div>
 
     
 
     <!-- Seamless Content Layout -->
-    <section class="relative z-10 w-full max-w-3xl px-6 mx-auto premium-content reveal" style="animation-delay: 300ms;">
-      <div class="prose prose-lg dark:prose-invert max-w-none text-zinc-900 dark:text-white">
-        
-      <h2 class="text-3xl font-bold mb-6 text-zinc-900 dark:text-white tracking-tight">Handcrafted Annotations</h2>
-      <p class="mb-6">
-        Bring a personal, handcrafted touch to your marketing. With native PencilKit integration, Bezel Studio lets you draw directly onto your canvases. It's the perfect way to <strong>annotate app screenshots</strong> or highlight hidden features with organic arrows and circles.
-      </p>
-      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Pencil-Ready Creative</h3>
-      <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
-        <li><strong>Native PencilKit:</strong> Fluid, responsive drawing utilizing Apple's native rendering engine.</li>
-        <li><strong>Layered Drawings:</strong> Every sketch acts as an independent layer that can be scaled, rotated, or ordered.</li>
-        <li><strong>Organic Annotations:</strong> Break away from rigid corporate templates with custom, hand-drawn highlights.</li>
-      </ul>
-    
+    <section class="feature-detail-section relative z-10 reveal" style="animation-delay: 300ms;">
+      <div class="feature-detail-intro">
+        <div>
+          <p class="feature-detail-label">Inside Drawing</p>
+          <h2 class="feature-detail-title">Handcrafted Annotations</h2>
+        </div>
+        <div class="feature-detail-copy">
+          <p>Bring a personal, handcrafted touch to your marketing. With native PencilKit integration, Bezel Studio lets you draw directly onto your canvases. It's the perfect way to <strong>annotate app screenshots</strong> or highlight hidden features with organic arrows and circles.</p>
+        </div>
       </div>
+
+      <section class="feature-detail-group" aria-label="Pencil-Ready Creative">
+        <h3 class="feature-use-heading">Pencil-Ready Creative</h3>
+        <div class="feature-detail-grid">
+          <article class="feature-detail-card"><strong>Native PencilKit:</strong><p>Fluid, responsive drawing utilizing Apple's native rendering engine.</p></article>
+          <article class="feature-detail-card"><strong>Layered Drawings:</strong><p>Every sketch acts as an independent layer that can be scaled, rotated, or ordered.</p></article>
+          <article class="feature-detail-card"><strong>Organic Annotations:</strong><p>Break away from rigid corporate templates with custom, hand-drawn highlights.</p></article>
+        </div>
+      </section>
     </section>
     
     <section class="relative z-10 w-full max-w-5xl px-6 mx-auto mt-20 reveal" style="animation-delay: 360ms;">
@@ -365,7 +415,6 @@
         <img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio">
         <span class="text-zinc-900 dark:text-white font-semibold flex items-center gap-2">
           Bezel Studio
-          <span class="text-xs bg-black/5 dark:bg-white/10 text-zinc-600 dark:text-white/70 px-2 py-0.5 rounded uppercase tracking-wider">iOS App</span>
         </span>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">

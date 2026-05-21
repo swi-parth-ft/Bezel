@@ -45,6 +45,7 @@ export default defineConfig({
         'guides/clean-status-bars-in-device-frames': resolve(__dirname, 'guides/clean-status-bars-in-device-frames.html'),
         'guides/add-frame-reflections-to-device-mockups': resolve(__dirname, 'guides/add-frame-reflections-to-device-mockups.html'),
         'features/device-frames': resolve(__dirname, 'features/device-frames.html'),
+        'features/icloud-continuity': resolve(__dirname, 'features/icloud-continuity.html'),
         'features/clean-status-bar': resolve(__dirname, 'features/clean-status-bar.html'),
         'features/frame-reflections': resolve(__dirname, 'features/frame-reflections.html'),
         'features/canvas-styling': resolve(__dirname, 'features/canvas-styling.html'),

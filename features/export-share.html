@@ -252,7 +252,7 @@
   </style>
 </head>
 
-<body class="font-sans bg-white dark:bg-[#050505] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+<body class="font-sans bg-white dark:bg-[#050505] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300 feature-page">
   
   <!-- Premium ambient glow -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -260,22 +260,38 @@
     <div class="absolute bottom-[-10%] right-[10%] w-[40%] h-[40%] rounded-[100%] bg-purple-600/10 dark:bg-purple-600/20 blur-[150px]"></div>
   </div>
 
-  <div class="relative z-10 w-full flex justify-center pt-8 reveal">
-    <header class="flex items-center justify-between px-6 py-3 bg-black/5 dark:bg-white/5 glass-blur border border-black/5 dark:border-white/10 rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
+  <div class="site-chrome relative z-10 w-full flex justify-center pt-0 md:pt-8">
+    <header class="site-header flex items-center justify-between px-5 md:px-6 py-3 bg-transparent rounded-none md:rounded-full w-full md:w-[90%] max-w-5xl shadow-md md:shadow-xl dark:shadow-lg dark:md:shadow-2xl">
       <a href="/" class="flex items-center gap-3">
-        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Logo">
-        <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio logo">
+        <span class="site-header__brand-text text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="/#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
-        <a href="/guides/" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
-        <a href="/#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
-        <a href="/#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
-      </nav>
-      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hidden sm:flex items-center justify-center px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
-        Get the App
-      </a>
+      <div class="site-header__expanded hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav class="flex items-center gap-8">
+          <a href="/#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
+          <a href="/guides/" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
+          <a href="/#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
+          <a href="/#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+        </nav>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="cta-button cta-button--nav hidden sm:flex items-center justify-center px-4 py-2 bg-zinc-900/90 dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">Get the App</a>
+      </div>
+      <button type="button" class="site-header__menu-toggle" data-header-menu-toggle aria-label="Open navigation" aria-expanded="false" aria-controls="site-header-menu">
+        <svg class="symbol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
     </header>
+    <div id="site-header-menu" class="site-header__menu-panel" data-header-menu-panel aria-hidden="true">
+      <nav class="site-header__menu-links">
+        <a href="/#features">Features</a>
+        <a href="/guides/">Guides</a>
+        <a href="/#workflow">Workflow</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="site-header__menu-cta">Get the App</a>
+    </div>
   </div>
 
   <main class="relative z-10 pt-32 pb-24 flex flex-col items-center">
@@ -304,66 +320,39 @@
       </div>
 
     
-    <section class="relative z-10 w-full max-w-5xl px-6 mx-auto mt-12 reveal" style="animation-delay: 340ms;">
-      <div class="rounded-[2rem] border border-zinc-200/80 bg-blue-50/80 px-6 py-8 shadow-[0_30px_80px_-50px_rgba(37,99,235,0.35)] backdrop-blur dark:border-blue-400/20 dark:bg-blue-500/[0.08] md:px-8">
-        <div class="max-w-3xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 dark:text-blue-300">Install The Workflow</p>
-          <h2 class="mt-3 text-3xl font-black tracking-tight text-zinc-900 dark:text-white">Export the whole launch package from the same project.</h2>
-          <p class="mt-3 text-base leading-7 text-zinc-700 dark:text-zinc-300">When visitors reach export, they are already close to action. Give them the native iPhone and iPad workflow that keeps screenshots, localization, and preview videos ready for App Store Connect.</p>
-        </div>
-        <div class="mt-6 grid gap-3 md:grid-cols-3">
-          
-            <div class="rounded-[1.25rem] border border-blue-200/70 bg-white/90 px-4 py-4 text-sm font-medium leading-6 text-zinc-700 shadow-sm dark:border-blue-300/15 dark:bg-zinc-950/60 dark:text-zinc-200">
-              Batch-export still screenshots, localized sets, and preview videos together
-            </div>
-          
-            <div class="rounded-[1.25rem] border border-blue-200/70 bg-white/90 px-4 py-4 text-sm font-medium leading-6 text-zinc-700 shadow-sm dark:border-blue-300/15 dark:bg-zinc-950/60 dark:text-zinc-200">
-              Keep App Store Connect delivery tied to the editable source project
-            </div>
-          
-            <div class="rounded-[1.25rem] border border-blue-200/70 bg-white/90 px-4 py-4 text-sm font-medium leading-6 text-zinc-700 shadow-sm dark:border-blue-300/15 dark:bg-zinc-950/60 dark:text-zinc-200">
-              Share to Photos, Files, or AirDrop without rebuilding the launch assets
-            </div>
-          
-        </div>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="inline-flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-6 py-3 text-base font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200">
-            <img src="/assets/brand/app-store-logo.svg" alt="App Store" class="h-5 w-5 dark:invert">
-            Download Bezel Studio for batch exports
-          </a>
-          <a href="/guides/build-full-app-store-screenshot-set.html" class="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-300/80 bg-white/85 px-6 py-3 text-base font-semibold text-zinc-900 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white dark:border-white/15 dark:bg-white/[0.04] dark:text-white dark:hover:border-blue-400/60 dark:hover:bg-white/[0.08]">
-            See the full screenshot set workflow
-          </a>
-        </div>
-      </div>
-    </section>
+
   
 
     <!-- Seamless Content Layout -->
-    <section class="relative z-10 w-full max-w-3xl px-6 mx-auto premium-content reveal" style="animation-delay: 300ms;">
-      <div class="prose prose-lg dark:prose-invert max-w-none text-zinc-900 dark:text-white">
-        
-      <h2 class="text-3xl font-bold mb-6 text-zinc-900 dark:text-white tracking-tight">From Canvas to App Store Connect in Seconds</h2>
-      <p class="mb-6">
-        The final step is the most important. Bezel Studio's rendering engine allows you to <strong>export app screenshots</strong> in massive, high-fidelity batches. Whether you need static images or '.mp4' video previews, everything is generated instantly, radically streamlining your upload to <strong>App Store Connect</strong>.
-      </p>
-      <p class="mb-6">
-        That means the same project can hold the launch screenshots, localized variants, and motion-ready preview visuals until you are ready to render the whole campaign. Instead of rebuilding assets for every output type, you export from one source of truth.
-      </p>
-      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Frictionless Delivery</h3>
-      <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
-        <li><strong>Batch Rendering:</strong> Export all your different localized screenshot sets simultaneously.</li>
-        <li><strong>High-Fidelity Output:</strong> Guaranteed razor-sharp text and assets that meet all of Apple's strict resolution guidelines.</li>
-        <li><strong>Native Share Sheet:</strong> Save directly to your iOS Photos app, Files app, or AirDrop instantly to your Mac.</li>
-      </ul>
-      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">What batch export solves</h3>
-      <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
-        <li><strong>Store-ready stills:</strong> Export the full screenshot set in one pass when copy, frames, and styling are locked.</li>
-        <li><strong>Preview-video delivery:</strong> Render motion pieces from the same project that already holds the static screenshots.</li>
-        <li><strong>Localization handoff:</strong> Keep every locale inside the same delivery workflow so App Store Connect upload stops being a manual scramble.</li>
-      </ul>
-    
+    <section class="feature-detail-section relative z-10 reveal" style="animation-delay: 300ms;">
+      <div class="feature-detail-intro">
+        <div>
+          <p class="feature-detail-label">Inside Export</p>
+          <h2 class="feature-detail-title">From Canvas to App Store Connect in Seconds</h2>
+        </div>
+        <div class="feature-detail-copy">
+          <p>The final step is the most important. Bezel Studio's rendering engine allows you to <strong>export app screenshots</strong> in massive, high-fidelity batches. Whether you need static images or '.mp4' video previews, everything is generated instantly, radically streamlining your upload to <strong>App Store Connect</strong>.</p>
+          <p>That means the same project can hold the launch screenshots, localized variants, and motion-ready preview visuals until you are ready to render the whole campaign. Instead of rebuilding assets for every output type, you export from one source of truth.</p>
+        </div>
       </div>
+
+      <section class="feature-detail-group" aria-label="Frictionless Delivery">
+        <h3 class="feature-use-heading">Frictionless Delivery</h3>
+        <div class="feature-detail-grid">
+          <article class="feature-detail-card"><strong>Batch Rendering:</strong><p>Export all your different localized screenshot sets simultaneously.</p></article>
+          <article class="feature-detail-card"><strong>High-Fidelity Output:</strong><p>Guaranteed razor-sharp text and assets that meet all of Apple's strict resolution guidelines.</p></article>
+          <article class="feature-detail-card"><strong>Native Share Sheet:</strong><p>Save directly to your iOS Photos app, Files app, or AirDrop instantly to your Mac.</p></article>
+        </div>
+      </section>
+
+      <section class="feature-detail-group" aria-label="What batch export solves">
+        <h3 class="feature-use-heading">What batch export solves</h3>
+        <div class="feature-detail-grid">
+          <article class="feature-detail-card"><strong>Store-ready stills:</strong><p>Export the full screenshot set in one pass when copy, frames, and styling are locked.</p></article>
+          <article class="feature-detail-card"><strong>Preview-video delivery:</strong><p>Render motion pieces from the same project that already holds the static screenshots.</p></article>
+          <article class="feature-detail-card"><strong>Localization handoff:</strong><p>Keep every locale inside the same delivery workflow so App Store Connect upload stops being a manual scramble.</p></article>
+        </div>
+      </section>
     </section>
     
     <section class="relative z-10 w-full max-w-5xl px-6 mx-auto mt-20 reveal" style="animation-delay: 360ms;">
@@ -442,7 +431,6 @@
         <img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio">
         <span class="text-zinc-900 dark:text-white font-semibold flex items-center gap-2">
           Bezel Studio
-          <span class="text-xs bg-black/5 dark:bg-white/10 text-zinc-600 dark:text-white/70 px-2 py-0.5 rounded uppercase tracking-wider">iOS App</span>
         </span>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">

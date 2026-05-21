@@ -11,8 +11,8 @@
     gtag('config', 'G-4H5EW5KWZC');
   </script>
   <title>App Screenshot Backgrounds & Canvas Styling | Bezel Studio</title>
-  <meta name="description" content="Enhance your App Store optimization (ASO) with custom screenshot backgrounds, gradients, and intense lighting effects.">
-  <meta name="keywords" content="app store screenshot design, custom app screenshots, app store optimization screenshots, screenshot backgrounds">
+  <meta name="description" content="Design App Store screenshot backgrounds with gradients, emoji patterns, blurred frame media, pattern animation, and color flow animation.">
+  <meta name="keywords" content="app store screenshot design, custom app screenshots, emoji pattern background, blurred media background, color flow animation">
   <link rel="canonical" href="https://bezelstudio.app/features/canvas-styling.html">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,14 +26,14 @@
   <meta property="og:site_name" content="Bezel Studio">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="App Screenshot Backgrounds & Canvas Styling | Bezel Studio">
-  <meta property="og:description" content="Enhance your App Store optimization (ASO) with custom screenshot backgrounds, gradients, and intense lighting effects.">
+  <meta property="og:description" content="Design App Store screenshot backgrounds with gradients, emoji patterns, blurred frame media, pattern animation, and color flow animation.">
   <meta property="og:url" content="https://bezelstudio.app/features/canvas-styling.html">
-  <meta property="og:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/animated-patterns-lighting.webp">
+  <meta property="og:image" content="https://bezelstudio.app/assets/feature-pages/canvas-feature.webp">
   <meta property="og:image:alt" content="Dynamic Canvas Styling on iPad">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="App Screenshot Backgrounds & Canvas Styling | Bezel Studio">
-  <meta name="twitter:description" content="Enhance your App Store optimization (ASO) with custom screenshot backgrounds, gradients, and intense lighting effects.">
-  <meta name="twitter:image" content="https://bezelstudio.app/assets/feature-platforms/ipad/animated-patterns-lighting.webp">
+  <meta name="twitter:description" content="Design App Store screenshot backgrounds with gradients, emoji patterns, blurred frame media, pattern animation, and color flow animation.">
+  <meta name="twitter:image" content="https://bezelstudio.app/assets/feature-pages/canvas-feature.webp">
   <meta name="twitter:image:alt" content="Dynamic Canvas Styling on iPad">
   <meta name="color-scheme" content="light dark">
   <script type="application/ld+json">
@@ -41,7 +41,7 @@
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "App Screenshot Backgrounds & Canvas Styling | Bezel Studio",
-      "description": "Enhance your App Store optimization (ASO) with custom screenshot backgrounds, gradients, and intense lighting effects.",
+      "description": "Design App Store screenshot backgrounds with gradients, emoji patterns, blurred frame media, pattern animation, and color flow animation.",
       "url": "https://bezelstudio.app/features/canvas-styling.html",
       "isPartOf": {
         "@type": "WebSite",
@@ -154,6 +154,20 @@
       opacity: 0.98;
       transform: rotate(-8deg);
     }
+    .feature-visual-stage--canvas-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+    .feature-visual-stage--canvas-card .feature-canvas-feature-art {
+      width: min(92%, 44rem);
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 26px 44px rgba(15, 23, 42, 0.18));
+      user-select: none;
+      -webkit-user-drag: none;
+    }
     /* Premium markdown overrides for generated body content */
     .premium-content h2 {
       font-size: 2.5rem;
@@ -252,7 +266,7 @@
   </style>
 </head>
 
-<body class="font-sans bg-white dark:bg-[#050505] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+<body class="font-sans bg-white dark:bg-[#050505] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300 feature-page">
   
   <!-- Premium ambient glow -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -260,22 +274,38 @@
     <div class="absolute bottom-[-10%] right-[10%] w-[40%] h-[40%] rounded-[100%] bg-purple-600/10 dark:bg-purple-600/20 blur-[150px]"></div>
   </div>
 
-  <div class="relative z-10 w-full flex justify-center pt-8 reveal">
-    <header class="flex items-center justify-between px-6 py-3 bg-black/5 dark:bg-white/5 glass-blur border border-black/5 dark:border-white/10 rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
+  <div class="site-chrome relative z-10 w-full flex justify-center pt-0 md:pt-8">
+    <header class="site-header flex items-center justify-between px-5 md:px-6 py-3 bg-transparent rounded-none md:rounded-full w-full md:w-[90%] max-w-5xl shadow-md md:shadow-xl dark:shadow-lg dark:md:shadow-2xl">
       <a href="/" class="flex items-center gap-3">
-        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Logo">
-        <span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio logo">
+        <span class="site-header__brand-text text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="/#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
-        <a href="/guides/" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
-        <a href="/#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
-        <a href="/#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
-      </nav>
-      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hidden sm:flex items-center justify-center px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
-        Get the App
-      </a>
+      <div class="site-header__expanded hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav class="flex items-center gap-8">
+          <a href="/#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
+          <a href="/guides/" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
+          <a href="/#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
+          <a href="/#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+        </nav>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="cta-button cta-button--nav hidden sm:flex items-center justify-center px-4 py-2 bg-zinc-900/90 dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">Get the App</a>
+      </div>
+      <button type="button" class="site-header__menu-toggle" data-header-menu-toggle aria-label="Open navigation" aria-expanded="false" aria-controls="site-header-menu">
+        <svg class="symbol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
     </header>
+    <div id="site-header-menu" class="site-header__menu-panel" data-header-menu-panel aria-hidden="true">
+      <nav class="site-header__menu-links">
+        <a href="/#features">Features</a>
+        <a href="/guides/">Guides</a>
+        <a href="/#workflow">Workflow</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="site-header__menu-cta">Get the App</a>
+    </div>
   </div>
 
   <main class="relative z-10 pt-32 pb-24 flex flex-col items-center">
@@ -286,7 +316,7 @@
         Dynamic Canvas Styling
       </h1>
       <p class="text-xl md:text-2xl font-light text-zinc-600 dark:text-zinc-300 max-w-3xl mx-auto leading-relaxed mb-12 [text-wrap:balance]">
-        Enhance your App Store optimization (ASO) with custom screenshot backgrounds, gradients, and intense lighting effects.
+        Build expressive App Store screenshot backgrounds with emoji patterns, blurred frame media, pattern animation, and color flow animation.
       </p>
       
       <!-- Call to action cluster in hero -->
@@ -298,29 +328,35 @@
       </div>
     </section>
 
-      <div class="feature-visual-stage reveal" style="animation-delay: 200ms;" aria-hidden="true">
-        <img class="feature-visual-stage__device feature-visual-stage__device--iphone" src="/assets/feature-platforms/iphone/animated-patterns-lighting.webp" alt="">
-        <img class="feature-visual-stage__device feature-visual-stage__device--ipad" src="/assets/feature-platforms/ipad/animated-patterns-lighting.webp" alt="">
+      <div class="feature-visual-stage feature-visual-stage--canvas-card reveal" style="animation-delay: 200ms;" aria-hidden="true">
+        <img class="feature-canvas-feature-art" src="/assets/feature-pages/canvas-feature.webp" alt="" width="3840" height="2560">
       </div>
 
     
 
     <!-- Seamless Content Layout -->
-    <section class="relative z-10 w-full max-w-3xl px-6 mx-auto premium-content reveal" style="animation-delay: 300ms;">
-      <div class="prose prose-lg dark:prose-invert max-w-none text-zinc-900 dark:text-white">
-        
-      <h2 class="text-3xl font-bold mb-6 text-zinc-900 dark:text-white tracking-tight">Design High-Converting App Previews</h2>
-      <p class="mb-6">
-        Great <strong>app store screenshot design</strong> relies on context and atmosphere. Our canvas styling tools allow you to seamlessly inject brand colors, dynamic gradients, and sophisticated lighting effects directly into your <strong>app store screenshots</strong>.
-      </p>
-      <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Atmosphere That Sells</h3>
-      <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
-        <li><strong>Custom Gradients:</strong> Build multi-stop gradient backgrounds to match your brand identity.</li>
-        <li><strong>Lighting FX:</strong> Apply soft spotlights or dramatic edge lighting to make your app UI pop.</li>
-        <li><strong>Pattern Overlays:</strong> Use subtle geometric or noise patterns to add premium texture to your iOS app mockups.</li>
-      </ul>
-    
+    <section class="feature-detail-section relative z-10 reveal" style="animation-delay: 300ms;">
+      <div class="feature-detail-intro">
+        <div>
+          <p class="feature-detail-label">Inside Backgrounds</p>
+          <h2 class="feature-detail-title">Design Background Systems, Not Static Fills</h2>
+        </div>
+        <div class="feature-detail-copy">
+          <p>Great <strong>app store screenshot design</strong> relies on context and atmosphere. Bezel Studio lets every frame inherit branded gradients, emoji pattern backgrounds, blurred media from the frame, animated patterns, and color flow animation without leaving the screenshot project.</p>
+        </div>
       </div>
+
+      <section class="feature-detail-group" aria-label="Atmosphere That Sells">
+        <h3 class="feature-use-heading">Atmosphere That Sells</h3>
+        <div class="feature-detail-grid">
+          <article class="feature-detail-card"><strong>Emoji Pattern Backgrounds:</strong><p>Repeat emoji, symbols, and branded motifs behind frames for launch-specific App Store creatives.</p></article>
+          <article class="feature-detail-card"><strong>Blurred Frame Media:</strong><p>Use the screenshot or video inside a frame as a soft blurred background that stays visually connected to the product.</p></article>
+          <article class="feature-detail-card"><strong>Pattern Animation:</strong><p>Add motion to background patterns so preview videos feel alive without rebuilding the canvas.</p></article>
+          <article class="feature-detail-card"><strong>Color Flow Animation:</strong><p>Animate gradient color movement for polished App Store preview clips and social exports.</p></article>
+          <article class="feature-detail-card"><strong>Custom Gradients:</strong><p>Build multi-stop gradient backgrounds that match your app identity and campaign palette.</p></article>
+          <article class="feature-detail-card"><strong>Lighting FX:</strong><p>Apply soft spotlights, glow, and ambient lighting to make framed app UI pop.</p></article>
+        </div>
+      </section>
     </section>
     
     <section class="relative z-10 w-full max-w-5xl px-6 mx-auto mt-20 reveal" style="animation-delay: 360ms;">
@@ -365,7 +401,6 @@
         <img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio">
         <span class="text-zinc-900 dark:text-white font-semibold flex items-center gap-2">
           Bezel Studio
-          <span class="text-xs bg-black/5 dark:bg-white/10 text-zinc-600 dark:text-white/70 px-2 py-0.5 rounded uppercase tracking-wider">iOS App</span>
         </span>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">

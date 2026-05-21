@@ -238,22 +238,43 @@
     }
   </style>
 </head>
-<body class="font-sans bg-white dark:bg-[#050505] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+<body class="font-sans bg-white dark:bg-[#050505] selection:bg-blue-500/30 overflow-x-hidden text-zinc-600 dark:text-zinc-400 transition-colors duration-300 feature-page">
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
     <div class="absolute top-[-20%] left-[20%] w-[60%] h-[50%] rounded-[100%] bg-blue-600/10 dark:bg-blue-600/20 blur-[150px]"></div>
     <div class="absolute bottom-[-10%] right-[10%] w-[40%] h-[40%] rounded-[100%] bg-purple-600/10 dark:bg-purple-600/20 blur-[150px]"></div>
   </div>
-  <div class="relative z-10 w-full flex justify-center pt-8 reveal">
-    <header class="flex items-center justify-between px-6 py-3 bg-black/5 dark:bg-white/5 glass-blur border border-black/5 dark:border-white/10 rounded-full w-[90%] max-w-5xl shadow-xl dark:shadow-2xl">
-      <a href="../" class="flex items-center gap-3"><img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Logo"><span class="text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span></a>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="../#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
-        <a href="/guides/" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
-        <a href="../#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
-        <a href="../#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
-      </nav>
-      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hidden sm:flex items-center justify-center px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">Get the App</a>
+  <div class="site-chrome relative z-10 w-full flex justify-center pt-0 md:pt-8">
+    <header class="site-header flex items-center justify-between px-5 md:px-6 py-3 bg-transparent rounded-none md:rounded-full w-full md:w-[90%] max-w-5xl shadow-md md:shadow-xl dark:shadow-lg dark:md:shadow-2xl">
+      <a href="/" class="flex items-center gap-3">
+        <img class="w-8 h-8 rounded-[8px] object-cover shadow-sm" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio logo">
+        <span class="site-header__brand-text text-zinc-900 dark:text-white font-semibold text-sm tracking-tight">Bezel Studio</span>
+      </a>
+      <div class="site-header__expanded hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav class="flex items-center gap-8">
+          <a href="/#features" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Features</a>
+          <a href="/guides/" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Guides</a>
+          <a href="/#workflow" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">Workflow</a>
+          <a href="/#faq" class="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+        </nav>
+        <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="cta-button cta-button--nav hidden sm:flex items-center justify-center px-4 py-2 bg-zinc-900/90 dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">Get the App</a>
+      </div>
+      <button type="button" class="site-header__menu-toggle" data-header-menu-toggle aria-label="Open navigation" aria-expanded="false" aria-controls="site-header-menu">
+        <svg class="symbol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
     </header>
+    <div id="site-header-menu" class="site-header__menu-panel" data-header-menu-panel aria-hidden="true">
+      <nav class="site-header__menu-links">
+        <a href="/#features">Features</a>
+        <a href="/guides/">Guides</a>
+        <a href="/#workflow">Workflow</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="site-header__menu-cta">Get the App</a>
+    </div>
   </div>
   <main class="relative z-10 pt-32 pb-24 flex flex-col items-center">
     <div class="feature-page-shell mb-24">
@@ -269,34 +290,47 @@
         <img class="feature-visual-stage__device feature-visual-stage__device--iphone" src="/assets/feature-platforms/iphone/copy-paste-projects.webp" alt="Reusable iPhone screenshot layout in Bezel Studio">
         <img class="feature-visual-stage__device feature-visual-stage__device--ipad" src="/assets/feature-platforms/ipad/copy-paste-projects.webp" alt="Reusable iPad screenshot layout in Bezel Studio">
       </div>
-
-      <section class="relative z-10 w-full max-w-3xl px-6 mx-auto premium-content reveal" style="animation-delay: 300ms;">
-      <div class="prose prose-lg dark:prose-invert max-w-none text-zinc-900 dark:text-white">
-        <h2 class="text-3xl font-bold mb-6 text-zinc-900 dark:text-white tracking-tight">Treat each finished scene as reusable production material.</h2>
-        <p class="mb-6">Copy and paste across projects lets you move one overlay, a grouped composition, or a full canvas into another project without losing the structure you already built. It is the fastest way to carry a good idea into a new variant.</p>
-        <p class="mb-6">Because the canvas model stays intact, copied content keeps its layers, edits, and styling relationships instead of flattening into a dead export.</p>
-        <p class="mb-6">That makes the feature practical as a system for <strong>reusable app screenshot layouts</strong>. One approved scene can become the starting point for the next update, the next seasonal campaign, or the next localized store listing without recreating the structure from scratch.</p>
-        <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">How to use it</h3>
-        <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
-          <li><strong>Select a target:</strong> Copy a single item, a grouped stack, or the full canvas.</li>
-          <li><strong>Switch projects:</strong> Open the destination project or canvas you want to continue working in.</li>
-          <li><strong>Paste and align:</strong> Drop the content into place and adjust the scale or position if needed.</li>
-          <li><strong>Reuse the pattern:</strong> Iterate on localizations, seasonal updates, or launch variants without starting from zero.</li>
-          <li><strong>Keep edits connected:</strong> Continue refining text, motion, and styling in the new project just like the original.</li>
-        </ul>
-        <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Best for</h3>
-        <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
-          <li>Campaign families that share the same visual structure.</li>
-          <li>Localized screenshots with repeated layout logic.</li>
-          <li>Saving time on updates when only a few details change.</li>
-        </ul>
-        <h3 class="text-2xl font-semibold mb-4 text-zinc-900 dark:text-white">Why reusable layouts outperform manual rebuilds</h3>
-        <ul class="list-disc pl-6 space-y-3 mb-8 text-zinc-600 dark:text-zinc-300">
-          <li><strong>Approved structure stays intact:</strong> Keep the frame, copy hierarchy, and spacing decisions that already worked.</li>
-          <li><strong>Template reuse gets faster:</strong> Move a whole layout into a fresh project before you change captions, devices, or locale-specific details.</li>
-          <li><strong>Launch polish compounds:</strong> Improvements made to one scene can roll into the next campaign instead of being rebuilt by hand.</li>
-        </ul>
+    <section class="feature-detail-section relative z-10 reveal" style="animation-delay: 300ms;">
+      <div class="feature-detail-intro">
+        <div>
+          <p class="feature-detail-label">Inside Reuse</p>
+          <h2 class="feature-detail-title">Treat each finished scene as reusable production material.</h2>
+        </div>
+        <div class="feature-detail-copy">
+          <p>Copy and paste across projects lets you move one overlay, a grouped composition, or a full canvas into another project without losing the structure you already built. It is the fastest way to carry a good idea into a new variant.</p>
+          <p>Because the canvas model stays intact, copied content keeps its layers, edits, and styling relationships instead of flattening into a dead export.</p>
+          <p>That makes the feature practical as a system for <strong>reusable app screenshot layouts</strong>. One approved scene can become the starting point for the next update, the next seasonal campaign, or the next localized store listing without recreating the structure from scratch.</p>
+        </div>
       </div>
+
+      <section class="feature-detail-group" aria-label="How to use it">
+        <h3 class="feature-use-heading">How to use it</h3>
+        <div class="feature-detail-grid">
+          <article class="feature-detail-card"><strong>Select a target:</strong><p>Copy a single item, a grouped stack, or the full canvas.</p></article>
+          <article class="feature-detail-card"><strong>Switch projects:</strong><p>Open the destination project or canvas you want to continue working in.</p></article>
+          <article class="feature-detail-card"><strong>Paste and align:</strong><p>Drop the content into place and adjust the scale or position if needed.</p></article>
+          <article class="feature-detail-card"><strong>Reuse the pattern:</strong><p>Iterate on localizations, seasonal updates, or launch variants without starting from zero.</p></article>
+          <article class="feature-detail-card"><strong>Keep edits connected:</strong><p>Continue refining text, motion, and styling in the new project just like the original.</p></article>
+        </div>
+      </section>
+
+      <section class="feature-detail-group" aria-label="Best for">
+        <h3 class="feature-use-heading">Best for</h3>
+        <div class="feature-detail-grid">
+          <article class="feature-detail-card"><p>Campaign families that share the same visual structure.</p></article>
+          <article class="feature-detail-card"><p>Localized screenshots with repeated layout logic.</p></article>
+          <article class="feature-detail-card"><p>Saving time on updates when only a few details change.</p></article>
+        </div>
+      </section>
+
+      <section class="feature-detail-group" aria-label="Why reusable layouts outperform manual rebuilds">
+        <h3 class="feature-use-heading">Why reusable layouts outperform manual rebuilds</h3>
+        <div class="feature-detail-grid">
+          <article class="feature-detail-card"><strong>Approved structure stays intact:</strong><p>Keep the frame, copy hierarchy, and spacing decisions that already worked.</p></article>
+          <article class="feature-detail-card"><strong>Template reuse gets faster:</strong><p>Move a whole layout into a fresh project before you change captions, devices, or locale-specific details.</p></article>
+          <article class="feature-detail-card"><strong>Launch polish compounds:</strong><p>Improvements made to one scene can roll into the next campaign instead of being rebuilt by hand.</p></article>
+        </div>
+      </section>
     </section>
     <section class="relative z-10 w-full max-w-5xl px-6 mx-auto mt-20 reveal" style="animation-delay: 360ms;">
       <div class="rounded-[2rem] border border-zinc-200/80 bg-white/85 px-6 py-8 shadow-[0_30px_80px_-50px_rgba(15,23,42,0.35)] backdrop-blur dark:border-white/10 dark:bg-white/5 md:px-8">
@@ -369,7 +403,7 @@
   </main>
   <footer class="border-t border-zinc-200 dark:border-white/10 pt-16 pb-12 px-6 md:px-12 bg-zinc-50 dark:bg-[#020202] mt-24">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-      <div class="flex items-center gap-4"><img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio"><span class="text-zinc-900 dark:text-white font-semibold flex items-center gap-2">Bezel Studio<span class="text-xs bg-black/5 dark:bg-white/10 text-zinc-600 dark:text-white/70 px-2 py-0.5 rounded uppercase tracking-wider">iOS App</span></span></div>
+      <div class="flex items-center gap-4"><img class="w-8 h-8 rounded-lg" src="/assets/brand/bezel-studio-logo.webp" alt="Bezel Studio"><span class="text-zinc-900 dark:text-white font-semibold flex items-center gap-2">Bezel Studio</span></div>
       <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-zinc-500">
         <a href="https://apps.apple.com/in/app/app-screenshot-studio-bezel/id6758039031" class="hover:text-black dark:hover:text-white transition-colors">App Store</a>
         <a href="../" class="hover:text-black dark:hover:text-white transition-colors">Home</a>
