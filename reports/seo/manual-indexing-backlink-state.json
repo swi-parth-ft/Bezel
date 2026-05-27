@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-08",
+  "updated_at": "2026-05-27",
   "seo_operator_context": {
-    "mode": "measurement_repair",
+    "mode": "conversion_path_optimization",
     "support_operator_directive": "follow_up_only",
-    "reason": "App Store installs are unavailable, so app_store_click is only a proxy. It fell to 5 while feature_cta_click and feature_download_click improved to 3 each, but guide_cta_click and guide_download_click remain 0. This run repaired reporting by adding event-source rows.",
-    "manual_queue_decision": "No new indexing or backlink queue this run. Follow up on existing submissions only.",
-    "latest_run_note": "2026-05-08 refresh after live GA4/GSC pull: app_store_click=5, home_download_click=2, feature_page_click=5, feature_cta_click=3, feature_download_click=3, guide_cta_click=0, guide_download_click=0. Added source-page reporting for download and CTA events; current App Store clicks are from /features/device-frames.html (3) and / (2), with no guide-originated App Store clicks. Deep audit scored 80/100; PageSpeed failed in the audit environment. Keep follow_up_only and do not open a new manual queue."
+    "reason": "App Store installs are unavailable, so app_store_click is only a proxy. The proxy rose to 25, but 23 App Store clicks came from the homepage, homepage traffic remains above 70% of tracked page views, and feature/guide download depth is still weak.",
+    "manual_queue_decision": "No new indexing or backlink queue this run. Follow up on existing URL Inspection requests and submitted backlinks only.",
+    "latest_run_note": "2026-05-27 refresh after live GA4/GSC pull: app_store_click=25, home_download_click=23, feature_page_click=62, feature_cta_click=2, feature_download_click=2, guide_cta_click=6, guide_download_click=0. Shipped commercial feature SERP snippet work for /features/bezel-ai-shortcuts.html and fixed the /features/images-stickers.html title-length issue. Deep audit scored 80/100; PageSpeed failed in the audit environment. Keep follow_up_only and do not open a new manual queue."
   },
   "gsc_context": {
     "source": "user report on 2026-04-15 plus prior screenshots",

@@ -44,6 +44,8 @@ Update 2026-05-06 (SEO operator run): primary mode stayed `conversion_path_optim
 
 Update 2026-05-08 (SEO operator run): primary mode switched to `measurement_repair`. Live GA4/GSC refresh shows `app_store_click=5`, `home_download_click=2`, `feature_page_click=5`, `feature_cta_click=3`, `feature_download_click=3`, `guide_cta_click=0`, and `guide_download_click=0`; homepage owns `19/31` tracked page views. This run added event-source reporting and confirmed current App Store clicks are from `/features/device-frames.html` (`3`) and `/` (`2`), with no guide-originated App Store clicks. Manual queue stays unchanged. Keep `follow_up_only`; the 2026-04-15 URL Inspection and backlink submissions need outcome follow-up, not new requests.
 
+Update 2026-05-27 (SEO operator run): primary mode stayed `conversion_path_optimization`. Live GA4/GSC refresh shows `app_store_click=25`, `home_download_click=23`, `feature_page_click=62`, `feature_cta_click=2`, `feature_download_click=2`, `guide_cta_click=6`, and `guide_download_click=0`; homepage owns `388/513` tracked page views. This run improved SERP snippets for `/features/bezel-ai-shortcuts.html` and fixed the title-length issue on `/features/images-stickers.html`. Manual queue stays unchanged. Keep `follow_up_only`; existing URL Inspection requests and submitted backlinks still need outcome checks before any new indexing or backlink queue.
+
 ## URL Inspection Queue
 
 | Priority | URL | Page type | Known GSC status | Last crawled | Manual action | Date requested | Next action | Notes |
